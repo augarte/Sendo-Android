@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="action_settings">Ajustes</string>
+    <string name="exercise_list">Lista de ejercicios</string>
+    <string name="home">Inicio</string>
+    <string name="measurement">Medida</string>
+    <string name="measurements">Medidas</string>
+    <string name="profile">Perfil</string>
+    <string name="settings">Ajustes</string>
+    <string name="search">Buscar</string>
+</resources>

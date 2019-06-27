@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="action_settings">Ezarpenak</string>
+    <string name="exercise_list">Ariketa zerrenda</string>
+    <string name="home">Hasiera</string>
+    <string name="measurement">Neurketa</string>
+    <string name="measurements">Neurketak</string>
+    <string name="profile">Profila</string>
+    <string name="settings">Ezarpenak</string>
+    <string name="search">Bilatu</string>
+</resources>
