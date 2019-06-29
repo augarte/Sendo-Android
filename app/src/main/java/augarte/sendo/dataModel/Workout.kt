@@ -1,4 +1,4 @@
-package augarte.sendo.DataModel
+package augarte.sendo.dataModel
 
 import java.sql.Blob
 import java.sql.Date

@@ -1,4 +1,4 @@
-package augarte.sendo.Connection
+package augarte.sendo.connection
 
 import android.content.ContentValues
 import android.content.Context
@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
 import augarte.sendo.Constants
-import augarte.sendo.DataModel.Workout
+import augarte.sendo.dataModel.Workout
 import java.text.SimpleDateFormat
 import java.util.*
 
