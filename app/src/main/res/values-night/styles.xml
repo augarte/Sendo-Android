@@ -9,11 +9,12 @@
         <item name="actionBarStyle">@style/DarkTheme.ActionBarStyle</item>
     </style>
 
-    <!-- ActionBar styles -->
     <style name="DarkTheme.ActionBarStyle" parent="Widget.AppCompat.ActionBar">
+        <item name="android:titleTextStyle">@color/colorPrimary</item>
         <item name="background">@color/colorPrimary</item>
         <item name="elevation">0dp</item>
     </style>
+
 
     <style name="DarkTheme.NoActionBar">
         <item name="windowActionBar">false</item>
@@ -22,5 +23,18 @@
 
     <style name="DarkTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
     <style name="DarkTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+
+    <!-- LIGHT THEME -->
+    <style name="LightTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="LightTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
 
 </resources>

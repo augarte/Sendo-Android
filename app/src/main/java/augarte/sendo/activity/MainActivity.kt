@@ -4,11 +4,9 @@ import android.os.Bundle
 import com.google.android.material.navigation.NavigationView
 import androidx.fragment.app.Fragment
 import androidx.core.view.GravityCompat
-import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
 import augarte.sendo.connection.DatabaseHandler
 import augarte.sendo.fragment.ExerciseListFragment
 import augarte.sendo.fragment.HomeFragment
@@ -29,10 +27,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         //init db
         dbHandler = DatabaseHandler(this)
 
-
-
         nav_view.setNavigationItemSelectedListener(this)
-        nav_view.bringToFront();
+        nav_view.bringToFront()
+
+
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.main_frame, HomeFragment.newInstance(), "Home")
+        transaction.commit()
     }
 
     override fun onBackPressed() {
@@ -43,14 +44,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.option_menu, menu)
-        return true
-    }
-
     override fun onNavigationItemSelected(menuItem: MenuItem): Boolean {
-        Toast.makeText(this, "Home", Toast.LENGTH_SHORT).show()
-
         var fragment: Fragment? = null
 
         when (menuItem.itemId) {
