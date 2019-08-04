@@ -3,7 +3,10 @@ package augarte.sendo.fragment
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.RecyclerView
 import augarte.sendo.R
+import augarte.sendo.adapter.WorkoutAdapter
+import augarte.sendo.adapter.WorkoutRVAdapter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class HomeFragment : Fragment(){
@@ -16,6 +19,9 @@ class HomeFragment : Fragment(){
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         var view = inflater.inflate(R.layout.fragment_home, container, false)
+
+        val rv : RecyclerView = view.findViewById(R.id.rv)
+        workout_rv.adapter = WorkoutAdapter
 
 
         val fab : FloatingActionButton = view.findViewById(R.id.fab_add)

@@ -27,7 +27,6 @@ class LineChart @JvmOverloads constructor(context: Context, attrs: AttributeSet?
     private var mMaxY: Float = 0.toFloat()
 
     init {
-
         val scale = context.resources.displayMetrics.density
 
         mCircleSize = scale * CIRCLE_SIZE
@@ -40,10 +39,6 @@ class LineChart @JvmOverloads constructor(context: Context, attrs: AttributeSet?
         mPaint.strokeWidth = mStrokeSize
 
         mPath = Path()
-
-        setData(arrayOf(PointF(15f, 39f), // {x, y}
-                PointF(20f, 21f), PointF(28f, 9f), PointF(37f, 21f), PointF(40f, 25f), PointF(50f, 31f), PointF(62f, 24f), PointF(80f, 28f)))
-
     }
 
     fun setNoCircle(){

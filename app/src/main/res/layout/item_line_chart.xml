@@ -1,18 +1,22 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="200dp"
+    android:orientation="vertical"
+    android:gravity="center">
 
-    <LinearLayout
+    <augarte.sendo.view.LineChart
+        android:id="@+id/chart"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white" />
+
+    <TextView
+        android:id="@+id/chart_no_data"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/padding_medium_small"
-        android:orientation="vertical" >
-
-        <augarte.sendo.view.LineChart
-            android:id="@+id/smoothChart"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:background="@color/white" />
-    </LinearLayout>
-</ScrollView>
+        android:gravity="center"
+        android:text="No data"
+        android:textAllCaps="true"
+        android:visibility="gone"/>
+</LinearLayout>
