@@ -6,9 +6,11 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
 import augarte.sendo.Constants
+import augarte.sendo.dataModel.User
 import augarte.sendo.dataModel.Workout
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
 class DatabaseHandler(context: Context) : SQLiteOpenHelper(context, Constants.DB_NAME, null, Constants.DB_VERSION) {
 
@@ -62,26 +64,33 @@ class DatabaseHandler(context: Context) : SQLiteOpenHelper(context, Constants.DB
         return (Integer.parseInt("$success") != -1)
     }
 
+    fun getWorkoutsForUser(user: User): ArrayList<Workout> {
+        val workouts: ArrayList<Workout> = ArrayList()
+
+
+        return workouts
+    }
+
     //get all users
     fun getAllUsers(): String {
-//        var allUser: String = "";
-//        val db = readableDatabase
-//        val selectALLQuery = "SELECT * FROM $TABLE_NAME"
-//        val cursor = db.rawQuery(selectALLQuery, null)
-//        if (cursor != null) {
-//            if (cursor.moveToFirst()) {
-//                do {
-//                    var id = cursor.getString(cursor.getColumnIndex(ID))
-//                    var firstName = cursor.getString(cursor.getColumnIndex(FIRST_NAME))
-//                    var lastName = cursor.getString(cursor.getColumnIndex(LAST_NAME))
-//
-//                    allUser = "$allUser\n$id $firstName $lastName"
-//                } while (cursor.moveToNext())
-//            }
-//        }
-//        cursor.close()
-//        db.close()
-//        return allUser
+/*        var allUser: String = "";
+        val db = readableDatabase
+        val selectALLQuery = "SELECT * FROM $TABLE_NAME"
+        val cursor = db.rawQuery(selectALLQuery, null)
+        if (cursor != null) {
+            if (cursor.moveToFirst()) {
+                do {
+                    var id = cursor.getString(cursor.getColumnIndex(ID))
+                    var firstName = cursor.getString(cursor.getColumnIndex(FIRST_NAME))
+                    var lastName = cursor.getString(cursor.getColumnIndex(LAST_NAME))
+
+                    allUser = "$allUser\n$id $firstName $lastName"
+                } while (cursor.moveToNext())
+            }
+        }
+        cursor.close()
+        db.close()
+        return allUser*/
         return ""
     }
 }

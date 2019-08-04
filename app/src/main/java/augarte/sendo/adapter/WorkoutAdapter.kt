@@ -1,39 +1,40 @@
 package augarte.sendo.adapter
 
-import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
 import augarte.sendo.R
 import augarte.sendo.dataModel.Workout
-import kotlinx.android.synthetic.main.item_workout_card.view.*
 
-class WorkoutAdapter(val items : ArrayList<Workout>, val context: Context) : RecyclerView.Adapter<ViewHolder>() {
-
+class WorkoutAdapter(val items : ArrayList<Workout>) : RecyclerView.Adapter<ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(LayoutInflater.from(context).inflate(R.layout.item_workout_card, parent, false))
+        val inflater = LayoutInflater.from(parent.context)
+        return ViewHolder(inflater, parent)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-
-        holder?.titleTV?.text = items.get(position).name
-        holder?.workoutCV?.background = items.get(position).image
+        holder.bind(items[position])
     }
 
     override fun getItemCount(): Int {
         return items.size
     }
-
-
-
 }
 
+class ViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
+        RecyclerView.ViewHolder(inflater.inflate(R.layout.item_workout_card, parent, false)) {
 
-class ViewHolder (view: View) : RecyclerView.ViewHolder(view) {
-    val workoutCV = view.workout_card
-    val titleTV = view.card_text
+    private var titleTV: TextView? = null
+
+    init {
+        titleTV = itemView.findViewById(R.id.card_text)
+    }
+
+    fun bind(workout: Workout) {
+        titleTV?.text = workout.name
+    }
 }
 

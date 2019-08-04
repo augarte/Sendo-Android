@@ -3,11 +3,12 @@ package augarte.sendo.fragment
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.LinearLayoutManager
 import augarte.sendo.R
 import augarte.sendo.adapter.WorkoutAdapter
-import augarte.sendo.adapter.WorkoutRVAdapter
+import augarte.sendo.dataModel.Workout
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeFragment : Fragment(){
 
@@ -18,11 +19,18 @@ class HomeFragment : Fragment(){
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        var view = inflater.inflate(R.layout.fragment_home, container, false)
+        return inflater.inflate(R.layout.fragment_home, container, false)
+    }
 
-        val rv : RecyclerView = view.findViewById(R.id.rv)
-        workout_rv.adapter = WorkoutAdapter
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
+        val workoutList : ArrayList<Workout> = ArrayList()
+        val w = Workout()
+        w.name = "Workout"
+        workoutList.add(w)
+        workout_rv.layoutManager = LinearLayoutManager(context)
+        workout_rv.adapter = WorkoutAdapter(workoutList)
 
         val fab : FloatingActionButton = view.findViewById(R.id.fab_add)
         fab.setOnClickListener {
@@ -30,15 +38,10 @@ class HomeFragment : Fragment(){
         }
 
         setHasOptionsMenu(true)
-
-        return view
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         super.onCreateOptionsMenu(menu, inflater)
         activity?.menuInflater?.inflate(R.menu.option_menu, menu)
-
     }
-
-
 }

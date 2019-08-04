@@ -22,8 +22,6 @@
     </style>
 
     <style name="AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-    <style name="PopupOverlay" parent="ThemeOverlay.AppCompat.Dark">
-        <item name="android:itemBackground">@color/colorAccent</item>
-    </style>
+    <style name="PopupOverlay" parent="ThemeOverlay.AppCompat.Dark"/>
 
 </resources>
