@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#424242</color>
-    <color name="colorPrimaryDark">#1b1b1b</color>
-    <color name="colorPrimaryLight">#6d6d6d</color>
+    <!--MAIN-->
+    <color name="colorPrimary">#525E54</color>
+    <color name="colorPrimaryDark">#29342b</color>
+    <color name="colorPrimaryLight">#7e8b80</color>
     <color name="colorAccent">#1de9b6</color>
     <color name="colorAccentDark">#00b686</color>
     <color name="colorAccentLight">#6effe8</color>
 
+    <!--ICONS-->
+    <color name="fabIcon">@color/black</color>
+    <color name="toolbarIcon">@color/white</color>
 
+    <!--BASIC-->
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
     <color name="transparent">#00ffffff</color>

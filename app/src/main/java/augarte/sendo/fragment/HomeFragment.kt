@@ -32,9 +32,8 @@ class HomeFragment : Fragment(){
         workout_rv.layoutManager = LinearLayoutManager(context)
         workout_rv.adapter = WorkoutAdapter(workoutList)
 
-        val fab : FloatingActionButton = view.findViewById(R.id.fab_add)
-        fab.setOnClickListener {
-            fab.animate().rotation(if (fab.rotation==0f) fab.rotation+45 else fab.rotation-45).start()
+        fab_add.setOnClickListener {
+            fab_add.animate().rotation(if (fab_add.rotation==0f) fab_add.rotation+45 else fab_add.rotation-45).start()
         }
 
         setHasOptionsMenu(true)
@@ -43,5 +42,7 @@ class HomeFragment : Fragment(){
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         super.onCreateOptionsMenu(menu, inflater)
         activity?.menuInflater?.inflate(R.menu.option_menu, menu)
+        menu?.findItem(R.id.search)?.isVisible = true
+
     }
 }

@@ -13,4 +13,6 @@
     <string name="settings">Settings</string>
     <string name="profile">Profile</string>
     <string name="measurements">Measurements</string>
+    <string name="category">Category</string>
+    <string name="group">Group</string>
 </resources>
