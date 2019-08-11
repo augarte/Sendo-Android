@@ -13,7 +13,11 @@ import augarte.sendo.view.LineChart
 class MeasurementsFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        var view = inflater.inflate(R.layout.fragment_measurements, container, false)
+        return inflater.inflate(R.layout.fragment_measurements, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         var chart : LineChart = view.findViewById(R.id.chart)
         if (true) {
@@ -22,7 +26,5 @@ class MeasurementsFragment : Fragment() {
             chart.visibility = View.GONE
             view.findViewById<TextView>(R.id.chart_no_data)?.visibility = View.VISIBLE
         }
-
-        return view
     }
 }

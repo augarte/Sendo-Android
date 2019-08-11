@@ -1,5 +1,6 @@
 package augarte.sendo.connection
 
+import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
@@ -12,7 +13,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
-class DatabaseHandler(context: Context) : SQLiteOpenHelper(context, Constants.DB_NAME, null, Constants.DB_VERSION) {
+class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, Constants.DB_NAME, null, Constants.DB_VERSION) {
 
     override fun onCreate(db: SQLiteDatabase?) {
         val CREATE_TABLE_USER = "CREATE TABLE ${Constants.TABLE_USER} " +
@@ -42,6 +43,7 @@ class DatabaseHandler(context: Context) : SQLiteOpenHelper(context, Constants.DB
     }
 
     //Inserting (Creating) data
+    @SuppressLint("SimpleDateFormat")
     fun addWorkout(workout: Workout): Boolean {
         //Create and/or open a database that will be used for reading and writing.
         val db = this.writableDatabase

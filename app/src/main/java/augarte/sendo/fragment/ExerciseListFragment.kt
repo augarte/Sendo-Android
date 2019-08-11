@@ -29,4 +29,11 @@ class ExerciseListFragment : Fragment() {
         activity?.menuInflater?.inflate(R.menu.option_menu, menu)
         menu?.findItem(R.id.group)?.isVisible = true
     }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        return when (item?.itemId){
+            R.id.group -> true
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
 }

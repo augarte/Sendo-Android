@@ -1,40 +1,49 @@
 package augarte.sendo.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 
 import augarte.sendo.R
 import augarte.sendo.dataModel.Workout
+import kotlinx.android.synthetic.main.item_workout_card.view.*
 
-class WorkoutAdapter(val items : ArrayList<Workout>) : RecyclerView.Adapter<ViewHolder>() {
+class WorkoutAdapter(val items : ArrayList<Workout>) : RecyclerView.Adapter<WorkoutAdapter.ViewHolder>() {
+
+    var onItemClick: ((Pair<Workout, View>) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        return ViewHolder(inflater, parent)
+        val view = inflater.inflate(R.layout.item_workout_card, parent, false)
+        return ViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(items[position])
+        val item = items[position]
+
+        holder.titleTV?.text = item.name
+        holder.card.setOnClickListener { onItemClick?.invoke(Pair<Workout, View>(item, holder.card)) }
     }
 
     override fun getItemCount(): Int {
         return items.size
     }
-}
 
-class ViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
-        RecyclerView.ViewHolder(inflater.inflate(R.layout.item_workout_card, parent, false)) {
 
-    private var titleTV: TextView? = null
+    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-    init {
-        titleTV = itemView.findViewById(R.id.card_text)
-    }
+        val titleTV : TextView? = view.card_text
+        val backgroundIV : ImageView? = view.card_image
+        val card : CardView = view.workout_card
 
-    fun bind(workout: Workout) {
-        titleTV?.text = workout.name
+        init {
+
+        }
     }
 }
+
 

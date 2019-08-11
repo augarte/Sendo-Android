@@ -8,6 +8,9 @@
     <color name="colorAccentDark">#00b686</color>
     <color name="colorAccentLight">#6effe8</color>
 
+    <color name="primaryText">@color/black</color>
+    <color name="secondaryText">@color/white</color>
+
     <!--ICONS-->
     <color name="fabIcon">@color/black</color>
     <color name="toolbarIcon">@color/white</color>

@@ -15,4 +15,6 @@
     <string name="measurements">Measurements</string>
     <string name="category">Category</string>
     <string name="group">Group</string>
+    <string name="list">List</string>
+    <string name="no_data">No data</string>
 </resources>
