@@ -21,7 +21,7 @@
 
         <include layout="@layout/item_workout_card" />
 
-        <augarte.sendo.view.DatePickerView
+        <augarte.sendo.view.DatePicker
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 

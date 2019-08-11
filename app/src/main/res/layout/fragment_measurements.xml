@@ -4,11 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingStart="@dimen/padding_large"
-    android:paddingEnd="@dimen/padding_large"
-    android:paddingBottom="@dimen/padding_medium"
-    android:paddingTop="@dimen/padding_medium"
-    android:orientation="vertical">
+    android:paddingTop="@dimen/padding_large">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,27 +13,57 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <Button
+            android:layout_height="@dimen/view_medium"
+            android:orientation="horizontal"
+            android:weightSum="2">
+            <TextView
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="MeasureType"/>
-            <Button
+                android:text="MeasureType"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="@color/colorPrimaryLight"
+                android:foreground="?attr/selectableItemBackground"/>
+            <TextView
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="DateRange"/>
+                android:text="DateRange"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="@color/colorPrimaryLight"
+                android:foreground="?attr/selectableItemBackground"/>
         </LinearLayout>
 
-
-        <androidx.cardview.widget.CardView
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/padding_large"
+            android:paddingEnd="@dimen/padding_large"
+            android:paddingBottom="@dimen/padding_large"
+            android:paddingTop="@dimen/padding_large">
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardElevation="5dp">
 
-            <include layout="@layout/item_line_chart" />
-        </androidx.cardview.widget.CardView>
+                <include layout="@layout/item_line_chart" />
+
+            </androidx.cardview.widget.CardView>
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/measureValuesRV"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimaryLight">
+
+        </androidx.recyclerview.widget.RecyclerView>
 
     </LinearLayout>
 

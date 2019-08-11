@@ -27,6 +27,7 @@
         android:textStyle="bold"
         android:gravity="center"
         android:clickable="true"
+        android:focusable="true"
         android:background="@color/colorPrimaryLight"
         android:foreground="?attr/selectableItemBackground"/>
 

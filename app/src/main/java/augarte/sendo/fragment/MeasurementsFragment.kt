@@ -8,7 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import augarte.sendo.R
+import augarte.sendo.view.CustomDialog
 import augarte.sendo.view.LineChart
+import kotlinx.android.synthetic.main.fragment_home.*
 
 class MeasurementsFragment : Fragment() {
 
@@ -25,6 +27,12 @@ class MeasurementsFragment : Fragment() {
         }else {
             chart.visibility = View.GONE
             view.findViewById<TextView>(R.id.chart_no_data)?.visibility = View.VISIBLE
+        }
+
+        fab_add.setOnClickListener {
+            var dialog = CustomDialog()
+            dialog.show(fragmentManager, "MeassurementDialog")
+            fab_add.animate().rotation(if (fab_add.rotation==0f) fab_add.rotation+45 else fab_add.rotation-45).start()
         }
     }
 }
