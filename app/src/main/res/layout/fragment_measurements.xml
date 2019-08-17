@@ -21,6 +21,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="MeasureType"
+                android:textColor="@color/primaryText"
                 android:textStyle="bold"
                 android:gravity="center"
                 android:clickable="true"
@@ -32,6 +33,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="DateRange"
+                android:textColor="@color/primaryText"
                 android:textStyle="bold"
                 android:gravity="center"
                 android:clickable="true"
@@ -57,11 +59,15 @@
             </androidx.cardview.widget.CardView>
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorPrimaryDark"/>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/measureValuesRV"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/colorPrimaryLight">
+            android:layout_height="wrap_content">
 
         </androidx.recyclerview.widget.RecyclerView>
 

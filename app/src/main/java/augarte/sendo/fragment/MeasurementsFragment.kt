@@ -7,10 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.recyclerview.widget.LinearLayoutManager
 import augarte.sendo.R
+import augarte.sendo.adapter.MeasurementAdapter
+import augarte.sendo.dataModel.Measurement
 import augarte.sendo.view.CustomDialog
 import augarte.sendo.view.LineChart
-import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.fragment_measurements.*
 
 class MeasurementsFragment : Fragment() {
 
@@ -28,6 +31,15 @@ class MeasurementsFragment : Fragment() {
             chart.visibility = View.GONE
             view.findViewById<TextView>(R.id.chart_no_data)?.visibility = View.VISIBLE
         }
+
+
+        var measurements : ArrayList<Measurement> = ArrayList()
+        var m = Measurement()
+        m.value = 70
+        measurements.add(m)
+
+        measureValuesRV.layoutManager = LinearLayoutManager(context)
+        measureValuesRV.adapter = MeasurementAdapter(measurements)
 
         fab_add.setOnClickListener {
             var dialog = CustomDialog()

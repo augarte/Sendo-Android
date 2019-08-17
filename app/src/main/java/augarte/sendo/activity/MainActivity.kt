@@ -7,7 +7,7 @@ import androidx.core.view.GravityCompat
 import androidx.appcompat.app.AppCompatActivity
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
-import augarte.sendo.connection.DatabaseHandler
+import augarte.sendo.database.DatabaseHandler
 import augarte.sendo.fragment.ExerciseListFragment
 import augarte.sendo.fragment.HomeFragment
 import augarte.sendo.fragment.MeasurementsFragment

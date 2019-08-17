@@ -12,7 +12,7 @@ import augarte.sendo.R
 import augarte.sendo.dataModel.Workout
 import kotlinx.android.synthetic.main.item_workout_card.view.*
 
-class WorkoutAdapter(val items : ArrayList<Workout>) : RecyclerView.Adapter<WorkoutAdapter.ViewHolder>() {
+class WorkoutAdapter(private val items : ArrayList<Workout>) : RecyclerView.Adapter<WorkoutAdapter.ViewHolder>() {
 
     var onItemClick: ((Pair<Workout, View>) -> Unit)? = null
 

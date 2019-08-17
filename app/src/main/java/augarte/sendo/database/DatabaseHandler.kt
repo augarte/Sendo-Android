@@ -1,4 +1,4 @@
-package augarte.sendo.connection
+package augarte.sendo.database
 
 import android.annotation.SuppressLint
 import android.content.ContentValues
@@ -66,12 +66,14 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, Constants.D
         return (Integer.parseInt("$success") != -1)
     }
 
+/*
     fun getWorkoutsForUser(user: User): ArrayList<Workout> {
         val workouts: ArrayList<Workout> = ArrayList()
 
 
         return workouts
     }
+*/
 
     //get all users
     fun getAllUsers(): String {
