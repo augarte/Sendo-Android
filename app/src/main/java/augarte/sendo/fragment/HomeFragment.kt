@@ -14,6 +14,8 @@ import augarte.sendo.dataModel.Workout
 import kotlinx.android.synthetic.main.fragment_home.*
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.content.res.ResourcesCompat
+import augarte.sendo.activity.CreateWorkoutActivity
+import augarte.sendo.activity.SearchWorkoutActivity
 import com.leinardi.android.speeddial.SpeedDialActionItem
 import com.leinardi.android.speeddial.SpeedDialView
 
@@ -58,8 +60,6 @@ class HomeFragment : Fragment(){
             else {
                 startActivity(intent)
             }
-
-
         }
 
         speedDial.addActionItem(
@@ -83,14 +83,17 @@ class HomeFragment : Fragment(){
                     .setLabelClickable(false)
                     .create()
         )
-
         speedDial.setOnActionSelectedListener { speedDialActionItem ->
             when (speedDialActionItem.id) {
                 R.id.fab_new -> {
+                    val intent = Intent(activity, CreateWorkoutActivity::class.java)
+                    startActivity(intent)
                     Log.d("tag","Link action clicked!")
                     false // true to keep the Speed Dial open
                 }
                 R.id.fab_search -> {
+                    val intent = Intent(activity, SearchWorkoutActivity::class.java)
+                    startActivity(intent)
                     Log.d("tag","Link action clicked!")
                     false // true to keep the Speed Dial open
                 }

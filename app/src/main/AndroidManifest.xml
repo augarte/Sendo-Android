@@ -44,6 +44,28 @@
                 <action android:name="android.intent.action.VIEW" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".activity.CreateWorkoutActivity"
+            android:label="Create Workout"
+            android:theme="@style/DarkTheme.NoActionBar"
+            android:parentActivityName=".activity.MainActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.SearchWorkoutActivity"
+            android:label="Search Workour"
+            android:theme="@style/DarkTheme.NoActionBar"
+            android:parentActivityName=".activity.MainActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
