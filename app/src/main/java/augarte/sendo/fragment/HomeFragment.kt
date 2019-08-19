@@ -5,6 +5,7 @@ import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import augarte.sendo.R
@@ -46,11 +47,8 @@ class HomeFragment : Fragment(){
         workoutList.add(w)
         workoutList.add(w)
 
-        val adapter = WorkoutAdapter(workoutList)
-        var layoutManager = LinearLayoutManager(context)
-        workout_rv.layoutManager = layoutManager
-        workout_rv.adapter = adapter
-        adapter.onItemClick = { pair ->
+        val workoutAdapter = WorkoutAdapter(workoutList)
+        workoutAdapter.onItemClick = { pair ->
             val intent = Intent(activity, WorkoutActivity::class.java)
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 intent.putExtra("workout", pair.first.id)
@@ -60,6 +58,10 @@ class HomeFragment : Fragment(){
             else {
                 startActivity(intent)
             }
+        }
+        workout_rv.apply {
+            layoutManager = LinearLayoutManager(context, LinearLayout.HORIZONTAL, false)
+            adapter = workoutAdapter
         }
 
         speedDial.addActionItem(

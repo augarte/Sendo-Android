@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
@@ -12,5 +13,46 @@
         layout="@layout/app_bar_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:padding="@dimen/padding_xlarge"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Day number"
+            android:textColor="@color/primaryText"
+            android:padding="@dimen/padding_medium"
+            android:gravity="center_horizontal"
+            android:textSize="@dimen/text_large"
+            android:textStyle="bold"/>
+
+        <com.shawnlin.numberpicker.NumberPicker
+            android:id="@+id/number_picker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_small"
+            android:layout_marginBottom="@dimen/margin_medium"
+            android:layout_gravity="center_horizontal"
+            app:np_orientation="horizontal"
+            app:np_dividerColor="@color/colorAccentLight"
+            app:np_selectedTextColor="@color/colorAccentDark"
+            app:np_selectedTextSize="@dimen/text_xlarge"
+            app:np_textColor="@color/colorAccentLight"
+            app:np_textSize="@dimen/text_small"
+            app:np_value="3"
+            app:np_max="7"
+            app:np_min="1"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/day_rv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
 
 </RelativeLayout>

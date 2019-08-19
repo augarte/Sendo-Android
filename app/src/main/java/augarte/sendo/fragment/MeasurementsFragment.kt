@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import augarte.sendo.R
@@ -38,8 +39,10 @@ class MeasurementsFragment : Fragment() {
         m.value = 70
         measurements.add(m)
 
-        measureValuesRV.layoutManager = LinearLayoutManager(context)
-        measureValuesRV.adapter = MeasurementAdapter(measurements)
+        measureValuesRV.apply {
+            layoutManager = LinearLayoutManager(context, LinearLayout.HORIZONTAL, false)
+            adapter = MeasurementAdapter(measurements)
+        }
 
         fab_add.setOnClickListener {
             var dialog = CustomDialog()

@@ -11,4 +11,13 @@ class Day{
     var createdBy: User? = null
     var createDate: Date? = null
     var modifyDate: Date? = null
+
+
+    fun getExercises() : ArrayList<Exercise> {
+        val exercises = ArrayList<Exercise>()
+        val e = Exercise()
+        e.name = "Exercise 1\nExercise 2\nExercise 3\nExercise 4"
+        exercises.add(e)
+       return exercises
+    }
 }
