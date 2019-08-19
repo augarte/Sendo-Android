@@ -27,7 +27,6 @@ class CreateWorkoutActivity : AppCompatActivity() {
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-
         var dayList : ArrayList<Day> = ArrayList()
         for (i in 0 until initialDayNum) {
             var day = Day()
@@ -55,12 +54,12 @@ class CreateWorkoutActivity : AppCompatActivity() {
                     //dayList.removeAt(pos)
                     //workoutAdapter.notifyItemChanged(pos)
                         val anim = AnimationUtils.loadAnimation(this, android.R.anim.slide_out_right)
-                        anim.duration = 200
                         if (!anim.hasStarted() || anim.hasEnded()) {
                             val pos = dayList.size - 1
+                            anim.duration = 200
                             day_rv.findViewHolderForAdapterPosition(pos)?.itemView?.startAnimation(anim)
 
-                            anim.setAnimationListener(object : AnimationListener {
+                            /*anim.setAnimationListener(object : AnimationListener {
                                 override fun onAnimationStart(animation: Animation) {
 
                                 }
@@ -73,12 +72,12 @@ class CreateWorkoutActivity : AppCompatActivity() {
                                 override fun onAnimationRepeat(animation: Animation) {
 
                                 }
-                            })
+                            })*/
 
-                    /*        Handler().postDelayed({
+                            Handler().postDelayed({
                                 dayList.removeAt(pos)
                                 workoutAdapter.notifyDataSetChanged()
-                            }, anim.duration)*/
+                            }, anim.duration)
                         }
                 }
                 else {
