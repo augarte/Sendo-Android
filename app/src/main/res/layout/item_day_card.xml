@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/card"
     android:layout_width="match_parent"
-    android:layout_height="75dp"
+    android:layout_height="80dp"
     android:layout_marginTop="@dimen/margin_small"
     android:layout_marginBottom="@dimen/margin_small"
     app:cardCornerRadius="5dp">
@@ -15,7 +15,7 @@
             <TextView
                 android:id="@+id/card_title"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:gravity="center_horizontal"
                 android:padding="@dimen/padding_medium"
                 android:text="DAY 1"
@@ -29,23 +29,26 @@
                 android:id="@+id/exercise_list"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:paddingStart="@dimen/padding_medium_small"
-                android:paddingEnd="@dimen/padding_medium_small"
+                android:paddingStart="@dimen/padding_medium"
+                android:paddingEnd="@dimen/padding_medium"
                 app:layout_constraintTop_toBottomOf="@id/card_title"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/drop_arrow"/>
 
-<!--            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/day_exercise_rv"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:paddingStart="@dimen/padding_medium_small"
-                android:paddingEnd="@dimen/padding_medium_small"
-                app:layout_constraintTop_toBottomOf="@id/card_title"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/drop_arrow"/>-->
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/edit"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:elevation="5dp"
+                android:padding="@dimen/padding_medium"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_edit"
+                android:scaleType="fitCenter"
+                app:layout_constraintTop_toTopOf="@id/card_title"
+                app:layout_constraintBottom_toBottomOf="@id/card_title"
+                app:layout_constraintStart_toStartOf="@id/drop_arrow"
+                app:layout_constraintEnd_toEndOf="@id/drop_arrow"/>
 
             <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/drop_arrow"

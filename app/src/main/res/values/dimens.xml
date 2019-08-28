@@ -27,6 +27,7 @@
     <dimen name="pading_1dp">1dp</dimen>
 
     <!--MARGINS-->
+    <dimen name="margin_xsmall">5dp</dimen>
     <dimen name="margin_small">10dp</dimen>
     <dimen name="margin_small_plus">15dp</dimen>
     <dimen name="margin_small_medium">20dp</dimen>

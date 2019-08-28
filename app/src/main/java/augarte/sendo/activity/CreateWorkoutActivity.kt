@@ -1,18 +1,17 @@
 package augarte.sendo.activity
 
 import android.os.Bundle
-import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
-import augarte.sendo.R
 import kotlinx.android.synthetic.main.app_bar_main.*
 import android.util.Log
-import android.view.animation.AnimationUtils
 import androidx.recyclerview.widget.LinearLayoutManager
 import augarte.sendo.adapter.CreateWorkoutAdapter
 import augarte.sendo.dataModel.Day
 import kotlinx.android.synthetic.main.activity_create_workout.*
-import android.view.animation.Animation.AnimationListener
-import android.view.animation.Animation
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.DefaultItemAnimator
+import android.view.animation.AnimationUtils.loadAnimation
+import augarte.sendo.R
 
 
 class CreateWorkoutActivity : AppCompatActivity() {
@@ -21,7 +20,7 @@ class CreateWorkoutActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_create_workout)
+        setContentView(augarte.sendo.R.layout.activity_create_workout)
 
         setSupportActionBar(toolbar)
 
@@ -34,61 +33,36 @@ class CreateWorkoutActivity : AppCompatActivity() {
             dayList.add(day)
         }
 
-        val workoutAdapter = CreateWorkoutAdapter(dayList)
+        val lManager = LinearLayoutManager(applicationContext)
+        val workoutAdapter = CreateWorkoutAdapter(dayList, day_rv)
+        val animator = object : DefaultItemAnimator() {
+            override fun canReuseUpdatedViewHolder(viewHolder: RecyclerView.ViewHolder): Boolean {
+                return true
+            }
+        }
         day_rv.apply {
-            layoutManager = LinearLayoutManager(context)
+            itemAnimator = animator
+            layoutManager = lManager
             adapter = workoutAdapter
         }
 
         number_picker.value = initialDayNum
         number_picker.setOnClickListener { Log.d("tag", "Click on current value") }
-        number_picker.setOnValueChangedListener { picker, oldVal, newVal ->
-            var changes = newVal - oldVal
-            var negative = false
-            if (changes < 0) {
-                negative = true
-                changes *= -1
+        number_picker.setOnValueChangedListener { _, oldVal, newVal ->
+            if (newVal - oldVal > 0) {
+                val d = Day()
+                d.name = "DAY $newVal"
+                //dayList.add(oldVal, d)
+                day_rv.post{workoutAdapter.addItem(oldVal, d)}
             }
-            for (i in 0 until changes) {
-                if (negative) {
-                    //dayList.removeAt(pos)
-                    //workoutAdapter.notifyItemChanged(pos)
-                        val anim = AnimationUtils.loadAnimation(this, android.R.anim.slide_out_right)
-                        if (!anim.hasStarted() || anim.hasEnded()) {
-                            val pos = dayList.size - 1
-                            anim.duration = 200
-                            day_rv.findViewHolderForAdapterPosition(pos)?.itemView?.startAnimation(anim)
-
-                            /*anim.setAnimationListener(object : AnimationListener {
-                                override fun onAnimationStart(animation: Animation) {
-
-                                }
-
-                                override fun onAnimationEnd(animation: Animation) {
-                                    dayList.removeAt(pos)
-                                    workoutAdapter.notifyDataSetChanged()
-                                }
-
-                                override fun onAnimationRepeat(animation: Animation) {
-
-                                }
-                            })*/
-
-                            Handler().postDelayed({
-                                dayList.removeAt(pos)
-                                workoutAdapter.notifyDataSetChanged()
-                            }, anim.duration)
-                        }
-                }
-                else {
-                    val pos = dayList.size
-                    val d = Day()
-                    d.name = "DAY " + (pos+1)
-                    dayList.add(d)
-                    workoutAdapter.notifyItemChanged(pos)
-                }
+            else if (newVal - oldVal < 0) {
+                //dayList.removeAt(newVal)
+                day_rv.post{workoutAdapter.deleteItem(newVal)}
             }
-
         }
+
+        val shake = loadAnimation(this, R.anim.hovering)
+        create_workout_button.startAnimation(shake)
+
     }
 }
