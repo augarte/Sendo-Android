@@ -20,4 +20,17 @@
     <color name="black">#000000</color>
     <color name="transparent">#00ffffff</color>
 
+    <!--SHADOWS-->
+    <color name="blackshadow10">#1A000000</color>
+    <color name="blackshadow20">#33000000</color>
+    <color name="blackshadow40">#66000000</color>
+    <color name="blackshadow60">#99000000</color>
+    <color name="blackshadow80">#CC000000</color>
+
+    <color name="whiteshadow10">#1AFFFFFF</color>
+    <color name="whiteshadow20">#33FFFFFF</color>
+    <color name="whiteshadow40">#66FFFFFF</color>
+    <color name="whiteshadow60">#99FFFFFF</color>
+    <color name="whiteshadow80">#CCFFFFFF</color>
+
 </resources>

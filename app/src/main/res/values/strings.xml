@@ -17,4 +17,7 @@
     <string name="group">Group</string>
     <string name="list">List</string>
     <string name="no_data">No data</string>
+    <string name="create">Create</string>
+    <string name="workout_num">Workout %1$d</string>
+    <string name="day_number">Day number</string>
 </resources>

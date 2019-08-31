@@ -1,6 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/border_round_blackshadow">
+
+    <ImageButton
+        android:id="@+id/button_down"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/padding_small"
+        android:src="@drawable/ic_arrow_down"
+        android:tint="@color/blackshadow10"
+        android:background="?attr/selectableItemBackgroundBorderless"/>
+
+    <TextView
+        android:id="@+id/picker_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/padding_small"
+        android:layout_gravity="center"
+        android:text="3"
+        android:textColor="@color/primaryText"/>
+
+    <ImageButton
+        android:id="@+id/button_up"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/padding_small"
+        android:src="@drawable/ic_arrow_down"
+        android:rotation="180"
+        android:tint="@color/blackshadow10"
+        android:background="?attr/selectableItemBackgroundBorderless"/>
 
 </LinearLayout>

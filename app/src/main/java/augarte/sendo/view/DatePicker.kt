@@ -14,8 +14,6 @@ import java.text.SimpleDateFormat
 class DatePicker @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : LinearLayout(context, attrs, defStyleAttr), DatePickerDialog.OnDateSetListener{
 
     private var dateFormat: SimpleDateFormat = SimpleDateFormat("yyyy/MM/dd")
-
-
     private val today = Calendar.getInstance()
     private val c = Calendar.getInstance()
     private var year = c.get(Calendar.YEAR)

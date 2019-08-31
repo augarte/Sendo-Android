@@ -17,13 +17,13 @@
 
 
     <!--PADDINGS-->
-    <dimen name="padding_xlarge">32dp</dimen>
-    <dimen name="padding_large">16dp</dimen>
-    <dimen name="padding_medium_lage">12dp</dimen>
-    <dimen name="padding_medium">8dp</dimen>
-    <dimen name="padding_medium_small">6dp</dimen>
-    <dimen name="padding_small">4dp</dimen>
-    <dimen name="padding_xsmall">2dp</dimen>
+    <dimen name="padding_xlarge">40dp</dimen>
+    <dimen name="padding_large">20dp</dimen>
+    <dimen name="padding_medium_lage">15dp</dimen>
+    <dimen name="padding_medium">10dp</dimen>
+    <dimen name="padding_medium_small">7.5dp</dimen>
+    <dimen name="padding_small">5dp</dimen>
+    <dimen name="padding_xsmall">2.5dp</dimen>
     <dimen name="pading_1dp">1dp</dimen>
 
     <!--MARGINS-->

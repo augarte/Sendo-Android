@@ -24,14 +24,14 @@ class ExerciseListFragment : Fragment() {
     }
 
 
-    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         activity?.menuInflater?.inflate(R.menu.option_menu, menu)
-        menu?.findItem(R.id.group)?.isVisible = true
+        menu.findItem(R.id.group)?.isVisible = true
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        return when (item?.itemId){
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId){
             R.id.group -> true
             else -> super.onOptionsItemSelected(item)
         }

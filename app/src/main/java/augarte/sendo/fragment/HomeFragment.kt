@@ -15,6 +15,7 @@ import augarte.sendo.dataModel.Workout
 import kotlinx.android.synthetic.main.fragment_home.*
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.content.res.ResourcesCompat
+import androidx.recyclerview.widget.RecyclerView
 import augarte.sendo.activity.CreateWorkoutActivity
 import augarte.sendo.activity.SearchWorkoutActivity
 import com.leinardi.android.speeddial.SpeedDialActionItem
@@ -60,7 +61,7 @@ class HomeFragment : Fragment(){
             }
         }
         workout_rv.apply {
-            layoutManager = LinearLayoutManager(context, LinearLayout.HORIZONTAL, false)
+            layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
             adapter = workoutAdapter
         }
 
@@ -122,10 +123,10 @@ class HomeFragment : Fragment(){
         setHasOptionsMenu(true)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         activity?.menuInflater?.inflate(R.menu.option_menu, menu)
-        menu?.findItem(R.id.search)?.isVisible = true
+        menu.findItem(R.id.search)?.isVisible = true
 
     }
 }
