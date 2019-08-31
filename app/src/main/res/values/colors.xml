@@ -8,8 +8,14 @@
     <color name="colorAccentDark">#00b686</color>
     <color name="colorAccentLight">#6effe8</color>
 
+    <!--TEXT-->
     <color name="primaryText">@color/colorPrimaryDark</color>
     <color name="secondaryText">@color/colorPrimaryLight</color>
+
+    <!--VIEWS-->
+    <color name="bottom_sheet_fragment_background">@color/colorPrimaryLight</color>
+    <color name="bottom_sheet_background">@color/colorPrimaryDark</color>
+
 
     <!--ICONS-->
     <color name="fabIcon">@color/black</color>

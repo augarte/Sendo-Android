@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import augarte.sendo.*
 import augarte.sendo.dataModel.Day
 import augarte.sendo.dataModel.Exercise
+import augarte.sendo.dataModel.Workout
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -21,6 +22,8 @@ import kotlinx.android.synthetic.main.item_day_card.view.*
 import java.util.zip.Inflater
 
 class CreateWorkoutAdapter(private val items : ArrayList<Day>, val rv : RecyclerView) : RecyclerView.Adapter<CreateWorkoutAdapter.ViewHolder>() {
+
+    var onDayEdit: ((title: String) -> Unit)? = null
 
     private lateinit var inflater: LayoutInflater
     private lateinit var context: Context
@@ -59,18 +62,7 @@ class CreateWorkoutAdapter(private val items : ArrayList<Day>, val rv : Recycler
         holder.arrow.setOnClickListener(listener)
 
         holder.edit.setOnClickListener{
-
-
-/*            btBottomSheet.setOnClickListener(View.OnClickListener {
-                expandCloseSheet()
-            })
-
-            btBottomSheetDialog.setOnClickListener(View.OnClickListener {
-                val view = layoutInflater.inflate(R.layout.bottom_sheet_dialog, null)
-                val dialog = BottomSheetDialog(this)
-                dialog.setContentView(view)
-                dialog.show()
-            })*/
+            onDayEdit?.invoke(item.name.toString())
         }
 
         if (position!=0 && !newItem)  {

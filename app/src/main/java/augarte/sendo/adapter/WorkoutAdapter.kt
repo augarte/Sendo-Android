@@ -39,10 +39,6 @@ class WorkoutAdapter(private val items : ArrayList<Workout>) : RecyclerView.Adap
         val titleTV : TextView? = view.card_text
         val backgroundIV : ImageView? = view.card_image
         val card : CardView = view.workout_card
-
-        init {
-
-        }
     }
 }
 

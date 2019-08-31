@@ -1,7 +1,5 @@
 package augarte.sendo.activity
 
-import android.animation.ValueAnimator
-import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -39,6 +37,26 @@ class CreateWorkoutActivity : AppCompatActivity() {
 
         val lManager = LinearLayoutManager(applicationContext)
         val workoutAdapter = CreateWorkoutAdapter(dayList, day_rv)
+        workoutAdapter.onDayEdit = { title ->
+            /*bottomsheet.setBottomSheetListener(object : BottomSheetBehavior.BottomSheetCallback() {
+                override fun onStateChanged(bottomSheet: View, newState: Int) {
+
+                    when (newState) {
+                        BottomSheetBehavior.STATE_DRAGGING -> Log.e("Bottom Sheet Behaviour", "STATE_DRAGGING")
+                        BottomSheetBehavior.STATE_SETTLING -> Log.e("Bottom Sheet Behaviour", "STATE_SETTLING")
+                        BottomSheetBehavior.STATE_EXPANDED ->{}
+                        BottomSheetBehavior.STATE_COLLAPSED -> Log.e("Bottom Sheet Behaviour", "STATE_COLLAPSED")
+                        BottomSheetBehavior.STATE_HIDDEN -> Log.e("Bottom Sheet Behaviour", "STATE_HIDDEN")
+                        BottomSheetBehavior.STATE_HALF_EXPANDED -> Log.e("Bottom Sheet Behaviour", "STATE_SETTLING")
+                    }
+                }
+
+                override fun onSlide(bottomSheet: View, slideOffset: Float) {
+
+                }
+            })*/
+            bottomsheet.setFragment(ExerciseChooserFragment(title))
+        }
         val animator = object : DefaultItemAnimator() {
             override fun canReuseUpdatedViewHolder(viewHolder: RecyclerView.ViewHolder): Boolean {
                 return true
@@ -72,25 +90,7 @@ class CreateWorkoutActivity : AppCompatActivity() {
         create_workout_button.startAnimation(shake)
 
         create_workout_button.setOnClickListener{
-            bottomsheet.setBottomSheetListener(object : BottomSheetBehavior.BottomSheetCallback() {
-                override fun onStateChanged(bottomSheet: View, newState: Int) {
-                    when (newState) {
-                        BottomSheetBehavior.STATE_COLLAPSED -> Log.e("Bottom Sheet Behaviour", "STATE_COLLAPSED")
-                        BottomSheetBehavior.STATE_DRAGGING -> Log.e("Bottom Sheet Behaviour", "STATE_DRAGGING")
-                        BottomSheetBehavior.STATE_EXPANDED ->{
 
-                        }
-                        BottomSheetBehavior.STATE_HIDDEN -> Log.e("Bottom Sheet Behaviour", "STATE_HIDDEN")
-                        BottomSheetBehavior.STATE_SETTLING -> Log.e("Bottom Sheet Behaviour", "STATE_SETTLING")
-                        BottomSheetBehavior.STATE_HALF_EXPANDED -> Log.e("Bottom Sheet Behaviour", "STATE_SETTLING")
-                    }
-                }
-
-                override fun onSlide(bottomSheet: View, slideOffset: Float) {
-
-                }
-            })
-            bottomsheet.setFragment(ExerciseChooserFragment())
         }
     }
 }

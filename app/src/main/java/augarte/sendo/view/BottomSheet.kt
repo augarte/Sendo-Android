@@ -27,6 +27,7 @@ class BottomSheet @JvmOverloads constructor(context: Context, attrs: AttributeSe
             override fun onStateChanged(bottomSheet: View, newState: Int) {
                 if (newState != BottomSheetBehavior.STATE_EXPANDED){
                     bottomSheetLayout.setBackgroundResource(R.drawable.bottomsheet_border)
+                    close.visibility = View.GONE
                 }
 
                 when (newState) {
@@ -34,6 +35,7 @@ class BottomSheet @JvmOverloads constructor(context: Context, attrs: AttributeSe
                     BottomSheetBehavior.STATE_DRAGGING -> Log.e("Bottom Sheet Behaviour", "STATE_DRAGGING")
                     BottomSheetBehavior.STATE_EXPANDED ->{
                         bottomSheetLayout.setBackgroundResource(R.drawable.bottomsheet_full)
+                        close.visibility  = View.VISIBLE
                     }
                     BottomSheetBehavior.STATE_HIDDEN -> Log.e("Bottom Sheet Behaviour", "STATE_HIDDEN")
                     BottomSheetBehavior.STATE_SETTLING -> Log.e("Bottom Sheet Behaviour", "STATE_SETTLING")
@@ -42,9 +44,13 @@ class BottomSheet @JvmOverloads constructor(context: Context, attrs: AttributeSe
             }
 
             override fun onSlide(bottomSheet: View, slideOffset: Float) {
-
+                bottomsheet_background.alpha = slideOffset
             }
         })
+
+        close.setOnClickListener{
+            setState(BottomSheetBehavior.STATE_HIDDEN)
+        }
     }
 
     fun setBottomSheetListener(listener: BottomSheetBehavior.BottomSheetCallback){

@@ -18,9 +18,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="?attr/actionBarSize"
-        android:paddingTop="@dimen/padding_medium"
-        android:paddingStart="@dimen/padding_xlarge"
-        android:paddingEnd="@dimen/padding_xlarge"
+        android:paddingTop="@dimen/padding_medium_small"
+        android:paddingStart="@dimen/padding_medium_lage"
+        android:paddingEnd="@dimen/padding_medium_lage"
         android:clipToPadding="false"
         android:orientation="vertical">
 

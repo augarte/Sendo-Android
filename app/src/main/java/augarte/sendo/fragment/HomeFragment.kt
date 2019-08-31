@@ -61,7 +61,7 @@ class HomeFragment : Fragment(){
             }
         }
         workout_rv.apply {
-            layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+            layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
             adapter = workoutAdapter
         }
 
