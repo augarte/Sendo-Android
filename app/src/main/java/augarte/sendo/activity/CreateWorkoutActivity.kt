@@ -1,6 +1,7 @@
 package augarte.sendo.activity
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
@@ -157,7 +158,9 @@ class CreateWorkoutActivity : AppCompatActivity() {
         if (image != null) {
             workout_image.setImageURI(image)
             val fadeAnim = loadAnimation(this, R.anim.fade_in)
+            fadeAnim.duration = 400
             fadeAnim.startOffset = 500
+            fadeAnim.fillAfter = true
             workout_image.startAnimation(fadeAnim)
 
             title_layout.background = ContextCompat.getDrawable(this, R.drawable.background_rounded_white)
@@ -172,13 +175,15 @@ class CreateWorkoutActivity : AppCompatActivity() {
         }
         else{
             val fadeAnim = loadAnimation(this, R.anim.fade_out)
+            fadeAnim.duration = 400
+            fadeAnim.fillAfter = true
             workout_image.startAnimation(fadeAnim)
+            var color = ContextCompat.getColor(this, R.color.colorAccentDark)
             fadeAnim.setAnimationListener(object: Animation.AnimationListener{
-                override fun onAnimationRepeat(p0: Animation?) {
-                    workout_image.setImageURI(image)
+                override fun onAnimationRepeat(p0: Animation?) {}
+                override fun onAnimationEnd(p0: Animation?) {
+                    workout_image.setBackgroundColor(color)
                 }
-
-                override fun onAnimationEnd(p0: Animation?) {}
                 override fun onAnimationStart(p0: Animation?) {}
             })
 

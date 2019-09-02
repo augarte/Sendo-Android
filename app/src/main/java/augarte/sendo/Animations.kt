@@ -1,6 +1,5 @@
 package augarte.sendo
 
-import android.animation.Animator
 import android.animation.ValueAnimator
 import android.view.View
 import android.view.ViewGroup
@@ -58,6 +57,7 @@ class Animations {
                     RELATIVE_TO_SELF, 0.5f,
                     RELATIVE_TO_SELF, 0.5f)
             anim.duration = 200
+
             anim.setAnimationListener(object : Animation.AnimationListener {
                 override fun onAnimationEnd(p0: Animation?) {
                     view.visibility = View.VISIBLE
