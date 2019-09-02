@@ -158,7 +158,7 @@ class CreateWorkoutActivity : AppCompatActivity() {
         if (image != null) {
             workout_image.setImageURI(image)
             val fadeAnim = loadAnimation(this, R.anim.fade_in)
-            fadeAnim.duration = 400
+            fadeAnim.duration = 300
             fadeAnim.startOffset = 500
             fadeAnim.fillAfter = true
             workout_image.startAnimation(fadeAnim)
@@ -175,17 +175,9 @@ class CreateWorkoutActivity : AppCompatActivity() {
         }
         else{
             val fadeAnim = loadAnimation(this, R.anim.fade_out)
-            fadeAnim.duration = 400
+            fadeAnim.duration = 300
             fadeAnim.fillAfter = true
             workout_image.startAnimation(fadeAnim)
-            var color = ContextCompat.getColor(this, R.color.colorAccentDark)
-            fadeAnim.setAnimationListener(object: Animation.AnimationListener{
-                override fun onAnimationRepeat(p0: Animation?) {}
-                override fun onAnimationEnd(p0: Animation?) {
-                    workout_image.setBackgroundColor(color)
-                }
-                override fun onAnimationStart(p0: Animation?) {}
-            })
 
             title_layout.background = null
             day_layout.background = null
