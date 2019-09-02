@@ -18,7 +18,7 @@
         android:layout_height="match_parent"
         android:background="@drawable/bottomsheet_border"
         app:behavior_hideable="true"
-        app:behavior_peekHeight="500dp"
+        app:behavior_peekHeight="0dp"
         app:layout_behavior="@string/bottom_sheet_behavior">
 
         <FrameLayout
@@ -40,7 +40,5 @@
             android:layout_alignParentEnd="true"
             android:visibility="gone"/>
     </RelativeLayout>
-
-
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

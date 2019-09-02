@@ -41,12 +41,6 @@ class HomeFragment : Fragment(){
         w.name = "Workout"
         workoutList.add(w)
         workoutList.add(w)
-        workoutList.add(w)
-        workoutList.add(w)
-        workoutList.add(w)
-        workoutList.add(w)
-        workoutList.add(w)
-        workoutList.add(w)
 
         val workoutAdapter = WorkoutAdapter(workoutList)
         workoutAdapter.onItemClick = { pair ->
@@ -66,7 +60,7 @@ class HomeFragment : Fragment(){
         }
 
         speedDial.addActionItem(
-            SpeedDialActionItem.Builder(R.id.fab_new, R.drawable.ic_add_black)
+            SpeedDialActionItem.Builder(R.id.fab_new, R.drawable.ic_dumbbell_add)
                     .setFabBackgroundColor(ResourcesCompat.getColor(resources, R.color.colorAccentLight, null))
                     .setFabImageTintColor(ResourcesCompat.getColor(resources, R.color.black, null))
                     .setLabel("New")
@@ -77,7 +71,7 @@ class HomeFragment : Fragment(){
         )
 
         speedDial.addActionItem(
-            SpeedDialActionItem.Builder(R.id.fab_search, R.drawable.ic_add_black)
+            SpeedDialActionItem.Builder(R.id.fab_search, R.drawable.ic_dumbbell_search)
                     .setFabBackgroundColor(ResourcesCompat.getColor(resources, R.color.colorAccentLight, null))
                     .setFabImageTintColor(ResourcesCompat.getColor(resources, R.color.black, null))
                     .setLabel("Search")
