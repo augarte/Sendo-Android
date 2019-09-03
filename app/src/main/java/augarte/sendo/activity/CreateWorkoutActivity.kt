@@ -1,14 +1,12 @@
 package augarte.sendo.activity
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.view.View
-import android.view.animation.Animation
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.app_bar_main.*
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -23,14 +21,16 @@ import androidx.core.app.ActivityOptionsCompat
 import augarte.sendo.R
 import augarte.sendo.fragment.ExerciseChooserFragment
 import androidx.core.content.ContextCompat
-import augarte.sendo.Animations
+import augarte.sendo.utils.Animations
 import augarte.sendo.dataModel.Workout
-
+import android.provider.MediaStore
+import augarte.sendo.database.DatabaseHandler
 
 class CreateWorkoutActivity : AppCompatActivity() {
 
     private val initialDayNum = 3
     private var thisWorkout: Workout = Workout()
+
     companion object {
         private const val IMAGE_PICK_CODE = 1000 //image pick code
         private const val PERMISSION_CODE = 1001 //Permission code
@@ -44,15 +44,14 @@ class CreateWorkoutActivity : AppCompatActivity() {
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        val dayList : ArrayList<Day> = ArrayList()
         for (i in 0 until initialDayNum) {
             val day = Day()
             day.name = "DAY " + (i+1)
-            dayList.add(day)
+            thisWorkout.dayList!!.add(day)
         }
 
         val lManager = LinearLayoutManager(applicationContext)
-        val workoutAdapter = CreateWorkoutAdapter(dayList, day_rv)
+        val workoutAdapter = CreateWorkoutAdapter(thisWorkout.dayList!!, day_rv)
         workoutAdapter.onDayEdit = { title ->
             bottomsheet.setFragment(ExerciseChooserFragment(title))
         }
@@ -74,12 +73,12 @@ class CreateWorkoutActivity : AppCompatActivity() {
             if (newVal - oldVal > 0) {
                 val d = Day()
                 d.name = "DAY $newVal"
-                dayList.add(oldVal, d)
+                thisWorkout.dayList!!.add(oldVal, d)
                 workoutAdapter.newItem = true
                 workoutAdapter.notifyItemInserted(oldVal)
             }
             else if (newVal - oldVal < 0) {
-                dayList.removeAt(newVal)
+                thisWorkout.dayList!!.removeAt(newVal)
                 workoutAdapter.deleteItem(newVal)
                 workoutAdapter.notifyItemRemoved(newVal)
             }
@@ -90,11 +89,12 @@ class CreateWorkoutActivity : AppCompatActivity() {
 
         create_workout_button.setOnClickListener{
             thisWorkout.name = workout_title.text.toString()
+            MainActivity.dbHandler?.insertWorkout(thisWorkout)
 
             val intent = Intent(this, WorkoutActivity::class.java)
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                //intent.putExtra("workout", pair.first.id)
-                workoutName.visibility = View.VISIBLE
+                intent.putExtra("workout", thisWorkout)
+                //orkoutName.visibility = View.VISIBLE
                 val translation1 = androidx.core.util.Pair<View, String>(workout_card, "workoutCard")
                 val translation2 = androidx.core.util.Pair<View?, String?>(workoutName, "workoutName")
                 val options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, translation1, translation2)
@@ -111,6 +111,7 @@ class CreateWorkoutActivity : AppCompatActivity() {
         }
 
         delete_image.setOnClickListener {
+            thisWorkout.image = null
             addImage(null)
         }
     }
@@ -150,7 +151,11 @@ class CreateWorkoutActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK && requestCode == IMAGE_PICK_CODE) {
-            addImage(data?.data)
+            val imageUri = data?.data
+            val bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, imageUri)
+            thisWorkout.image = bitmap
+
+            addImage(imageUri)
         }
     }
 

@@ -1,4 +1,4 @@
-package augarte.sendo
+package augarte.sendo.utils
 
 
 class Constants{

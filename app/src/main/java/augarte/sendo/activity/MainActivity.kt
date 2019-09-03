@@ -18,7 +18,9 @@ import kotlinx.android.synthetic.main.app_bar_main.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
-    var dbHandler: DatabaseHandler? = null
+    companion object {
+        var dbHandler: DatabaseHandler? = null
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

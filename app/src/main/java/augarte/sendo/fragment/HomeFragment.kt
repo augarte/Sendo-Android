@@ -17,6 +17,7 @@ import androidx.core.app.ActivityOptionsCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
 import augarte.sendo.activity.CreateWorkoutActivity
+import augarte.sendo.activity.MainActivity
 import augarte.sendo.activity.SearchWorkoutActivity
 import com.leinardi.android.speeddial.SpeedDialActionItem
 import com.leinardi.android.speeddial.SpeedDialView
@@ -36,12 +37,7 @@ class HomeFragment : Fragment(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val workoutList : ArrayList<Workout> = ArrayList()
-        val w = Workout()
-        w.name = "Workout"
-        workoutList.add(w)
-        workoutList.add(w)
-
+        val workoutList : ArrayList<Workout> = MainActivity.dbHandler!!.getAllWorkouts()
         val workoutAdapter = WorkoutAdapter(workoutList)
         workoutAdapter.onItemClick = { pair ->
             val intent = Intent(activity, WorkoutActivity::class.java)

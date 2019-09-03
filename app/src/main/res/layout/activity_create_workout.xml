@@ -59,7 +59,7 @@
                         android:text="@string/workout_num"
                         android:textSize="@dimen/text_xlarge"
                         android:textColor="@color/primaryText"
-                        android:visibility="gone"
+                        android:visibility="visible"
                         app:layout_constraintTop_toTopOf="@id/workout_title"
                         app:layout_constraintBottom_toBottomOf="@id/workout_title"
                         app:layout_constraintStart_toStartOf="@id/workout_title"

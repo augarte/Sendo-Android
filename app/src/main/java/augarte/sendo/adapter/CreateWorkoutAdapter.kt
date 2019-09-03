@@ -1,9 +1,6 @@
 package augarte.sendo.adapter
 
-import android.animation.Animator
 import android.content.Context
-import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,13 +10,10 @@ import androidx.recyclerview.widget.RecyclerView
 import augarte.sendo.*
 import augarte.sendo.dataModel.Day
 import augarte.sendo.dataModel.Exercise
-import augarte.sendo.dataModel.Workout
-import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import kotlinx.android.synthetic.main.activity_create_workout.*
+import augarte.sendo.utils.Animations
+import augarte.sendo.utils.toPx
+import augarte.sendo.utils.toPxF
 import kotlinx.android.synthetic.main.item_day_card.view.*
-import java.util.zip.Inflater
 
 class CreateWorkoutAdapter(private val items : ArrayList<Day>, val rv : RecyclerView) : RecyclerView.Adapter<CreateWorkoutAdapter.ViewHolder>() {
 

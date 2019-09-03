@@ -1,4 +1,4 @@
-package augarte.sendo
+package augarte.sendo.utils
 
 import android.animation.ValueAnimator
 import android.view.View
