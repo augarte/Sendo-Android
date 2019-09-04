@@ -3,19 +3,18 @@ package augarte.sendo.dataModel
 import android.graphics.Bitmap
 import android.os.Parcel
 import android.os.Parcelable
-import augarte.sendo.utils.Constants
-import java.io.Serializable
-import java.sql.Date
+import java.util.*
+import kotlin.collections.ArrayList
 
-class Workout() : Parcelable{
+class Workout(): Parcelable{
 
     var id: Int? = null
     var name: String? = null
     var description: String? = null
     var dayList: ArrayList<Day>? = ArrayList()
     var image: Bitmap? = null
-    var lastOpen: String? = null
     var createdBy: User? = null
+    var lastOpen: Date? = null
     var createDate: Date? = null
     var modifyDate: Date? = null
 
@@ -24,7 +23,6 @@ class Workout() : Parcelable{
         name = parcel.readString()
         description = parcel.readString()
         image = parcel.readParcelable(Bitmap::class.java.classLoader)
-        lastOpen = parcel.readString()
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
@@ -32,7 +30,6 @@ class Workout() : Parcelable{
         parcel.writeString(name)
         parcel.writeString(description)
         parcel.writeParcelable(image, flags)
-        parcel.writeString(lastOpen)
     }
 
     override fun describeContents(): Int {
@@ -48,6 +45,4 @@ class Workout() : Parcelable{
             return arrayOfNulls(size)
         }
     }
-
-
 }

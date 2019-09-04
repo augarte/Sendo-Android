@@ -92,8 +92,8 @@ class CreateWorkoutActivity : AppCompatActivity() {
             MainActivity.dbHandler?.insertWorkout(thisWorkout)
 
             val intent = Intent(this, WorkoutActivity::class.java)
+            intent.putExtra("workout", thisWorkout)
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                intent.putExtra("workout", thisWorkout)
                 //orkoutName.visibility = View.VISIBLE
                 val translation1 = androidx.core.util.Pair<View, String>(workout_card, "workoutCard")
                 val translation2 = androidx.core.util.Pair<View?, String?>(workoutName, "workoutName")

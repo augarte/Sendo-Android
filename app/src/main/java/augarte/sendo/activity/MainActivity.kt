@@ -28,6 +28,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         //init db
         dbHandler = DatabaseHandler(this)
+        //MainActivity.dbHandler?.deleteAllTables()
 
         setSupportActionBar(toolbar)
 

@@ -41,8 +41,8 @@ class HomeFragment : Fragment(){
         val workoutAdapter = WorkoutAdapter(workoutList)
         workoutAdapter.onItemClick = { pair ->
             val intent = Intent(activity, WorkoutActivity::class.java)
+            intent.putExtra("workout", pair.first)
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                intent.putExtra("workout", pair.first.id)
                 val options = ActivityOptionsCompat.makeSceneTransitionAnimation(requireActivity(), pair.second, "workoutCard")
                 startActivity(intent, options.toBundle())
             }
