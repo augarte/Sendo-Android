@@ -20,4 +20,5 @@
     <string name="create">Create</string>
     <string name="workout_num">Workout %1$d</string>
     <string name="day_number">Day number</string>
+    <string name="delete">Delete</string>
 </resources>

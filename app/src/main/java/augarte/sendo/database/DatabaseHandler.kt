@@ -51,7 +51,6 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, Constants.D
         val db = this.writableDatabase
         val values = ContentValues()
 
-
         val unixTime = Utils.getUnixSeconds()
 
         values.put(Constants.TABLE_WORKOUT_NAME, workout.name)
@@ -112,6 +111,11 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, Constants.D
         db.close()
 
         return workouts
+    }
+
+    fun deleteWorkoutById(workoutId: Int) {
+        val db = this.writableDatabase
+        db.delete(Constants.TABLE_WORKOUT, "${Constants.TABLE_WORKOUT_ID} = ?", arrayOf(workoutId.toString()))
     }
 
     fun getUserByUserId(userId: Int): User {

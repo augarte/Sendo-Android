@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import augarte.sendo.R
 import augarte.sendo.adapter.MeasurementAdapter
 import augarte.sendo.dataModel.Measurement
@@ -33,14 +34,13 @@ class MeasurementsFragment : Fragment() {
             view.findViewById<TextView>(R.id.chart_no_data)?.visibility = View.VISIBLE
         }
 
-
         var measurements : ArrayList<Measurement> = ArrayList()
         var m = Measurement()
         m.value = 70
         measurements.add(m)
 
         measureValuesRV.apply {
-            layoutManager = LinearLayoutManager(context, LinearLayout.HORIZONTAL, false)
+            layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
             adapter = MeasurementAdapter(measurements)
         }
 

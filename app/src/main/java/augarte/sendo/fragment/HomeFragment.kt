@@ -19,6 +19,8 @@ import androidx.recyclerview.widget.RecyclerView
 import augarte.sendo.activity.CreateWorkoutActivity
 import augarte.sendo.activity.MainActivity
 import augarte.sendo.activity.SearchWorkoutActivity
+import com.getkeepsafe.taptargetview.TapTarget
+import com.getkeepsafe.taptargetview.TapTargetView
 import com.leinardi.android.speeddial.SpeedDialActionItem
 import com.leinardi.android.speeddial.SpeedDialView
 
@@ -38,22 +40,29 @@ class HomeFragment : Fragment(){
         super.onViewCreated(view, savedInstanceState)
 
         val workoutList : ArrayList<Workout> = MainActivity.dbHandler!!.getAllWorkouts()
-        val workoutAdapter = WorkoutAdapter(workoutList)
-        workoutAdapter.onItemClick = { pair ->
-            val intent = Intent(activity, WorkoutActivity::class.java)
-            intent.putExtra("workout", pair.first)
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                val options = ActivityOptionsCompat.makeSceneTransitionAnimation(requireActivity(), pair.second, "workoutCard")
-                startActivity(intent, options.toBundle())
+
+        if (workoutList.size > 0) {
+            val workoutAdapter = WorkoutAdapter(workoutList)
+            workoutAdapter.onItemClick = { pair ->
+                val intent = Intent(activity, WorkoutActivity::class.java)
+                intent.putExtra("workout", pair.first)
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    val options = ActivityOptionsCompat.makeSceneTransitionAnimation(requireActivity(), pair.second, "workoutCard")
+                    startActivity(intent, options.toBundle())
+                } else {
+                    startActivity(intent)
+                }
             }
-            else {
-                startActivity(intent)
+            workout_rv.apply {
+                layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+                adapter = workoutAdapter
             }
+        } else{
+            workout_rv.visibility = View.GONE
+            if (activity is MainActivity) (activity as MainActivity).showTapTarget()
+            //no_workout.visibility = View.VISIBLE
         }
-        workout_rv.apply {
-            layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-            adapter = workoutAdapter
-        }
+
 
         speedDial.addActionItem(
             SpeedDialActionItem.Builder(R.id.fab_new, R.drawable.ic_dumbbell_add)
@@ -117,6 +126,5 @@ class HomeFragment : Fragment(){
         super.onCreateOptionsMenu(menu, inflater)
         activity?.menuInflater?.inflate(R.menu.option_menu, menu)
         menu.findItem(R.id.search)?.isVisible = true
-
     }
 }
