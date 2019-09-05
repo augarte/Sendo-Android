@@ -15,7 +15,8 @@
     <!--VIEWS-->
     <color name="bottom_sheet_fragment_background">@color/colorPrimaryLight</color>
     <color name="bottom_sheet_background">@color/colorPrimaryDark</color>
-
+    <color name="tapTargetOuterCircle">@color/colorPrimaryLight</color>
+    <color name="tapTargetInnerCircle">#FF9CA99E</color>
 
     <!--ICONS-->
     <color name="fabIcon">@color/black</color>

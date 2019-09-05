@@ -39,7 +39,7 @@ class Animations {
                     RELATIVE_TO_SELF, 0.5f)
             anim.duration = 200
 
-            anim.setAnimationListener(object : Animation.AnimationListener {
+            anim.setAnimationListener(object: Animation.AnimationListener {
                 override fun onAnimationEnd(p0: Animation?) {
                     view.visibility = View.GONE
                 }
@@ -58,7 +58,7 @@ class Animations {
                     RELATIVE_TO_SELF, 0.5f)
             anim.duration = 200
 
-            anim.setAnimationListener(object : Animation.AnimationListener {
+            anim.setAnimationListener(object: Animation.AnimationListener {
                 override fun onAnimationEnd(p0: Animation?) {
                     view.visibility = View.VISIBLE
                 }

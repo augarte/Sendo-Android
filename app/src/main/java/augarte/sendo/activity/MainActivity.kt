@@ -13,6 +13,7 @@ import augarte.sendo.fragment.HomeFragment
 import augarte.sendo.fragment.MeasurementsFragment
 import augarte.sendo.fragment.SettingsFragment
 import augarte.sendo.R
+import augarte.sendo.view.CustomTapTargetView
 import com.getkeepsafe.taptargetview.TapTarget
 import com.getkeepsafe.taptargetview.TapTargetView
 import kotlinx.android.synthetic.main.activity_home.*
@@ -28,7 +29,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
-
         //init db
         dbHandler = DatabaseHandler(this)
         //MainActivity.dbHandler?.deleteAllTables()
@@ -83,30 +83,5 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
-    }
-
-    fun showTapTarget() {
-        TapTargetView.showFor(this,
-            TapTarget.forView(speedDial, "This is a target", "We have the best targets, believe me")
-                    // All options below are optional
-                    .outerCircleColor(R.color.colorPrimaryLight)      // Specify a color for the outer circle
-                    .outerCircleAlpha(0.96f)            // Specify the alpha amount for the outer circle
-                    .targetCircleColor(R.color.white)   // Specify a color for the target circle
-                    .titleTextSize(28)                  // Specify the size (in sp) of the title text
-                    .titleTextColor(R.color.primaryText)      // Specify the color of the title text
-                    .descriptionTextSize(18)            // Specify the size (in sp) of the description text
-                    .descriptionTextColor(R.color.black)  // Specify the color of the description text
-                    .textColor(R.color.primaryText)            // Specify a color for both the title and description text
-                    //.textTypeface(Typeface.SANS_SERIF)  // Specify a typeface for the text
-                    .dimColor(R.color.black)            // If set, will dim behind the view with 30% opacity of the given color
-                    .drawShadow(true)                   // Whether to draw a drop shadow or not
-                    .cancelable(true)                  // Whether tapping outside the outer circle dismisses the view
-                    .tintTarget(false)                   // Whether to tint the target view's color
-                    .transparentTarget(false)           // Specify whether the target is transparent (displays the content underneath)
-                    //.icon(Drawable)                     // Specify a custom drawable to draw as the target
-                    .targetRadius(60),                  // Specify the target radius (in dp)
-            object: TapTargetView.Listener(){         // The listener can listen for regular clicks, long clicks or cancels
-            }
-        )
     }
 }

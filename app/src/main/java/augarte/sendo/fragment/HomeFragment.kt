@@ -5,6 +5,7 @@ import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.view.animation.Animation
 import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView
 import augarte.sendo.activity.CreateWorkoutActivity
 import augarte.sendo.activity.MainActivity
 import augarte.sendo.activity.SearchWorkoutActivity
+import augarte.sendo.view.CustomTapTargetView
 import com.getkeepsafe.taptargetview.TapTarget
 import com.getkeepsafe.taptargetview.TapTargetView
 import com.leinardi.android.speeddial.SpeedDialActionItem
@@ -59,7 +61,7 @@ class HomeFragment : Fragment(){
             }
         } else{
             workout_rv.visibility = View.GONE
-            if (activity is MainActivity) (activity as MainActivity).showTapTarget()
+            showTapTarget()
             //no_workout.visibility = View.VISIBLE
         }
 
@@ -126,5 +128,15 @@ class HomeFragment : Fragment(){
         super.onCreateOptionsMenu(menu, inflater)
         activity?.menuInflater?.inflate(R.menu.option_menu, menu)
         menu.findItem(R.id.search)?.isVisible = true
+    }
+
+    private fun showTapTarget() {
+        val listener = object : TapTargetView.Listener() {
+            override fun onTargetClick(view: TapTargetView) {
+                super.onTargetClick(view)
+                speedDial.open()
+            }
+        }
+       CustomTapTargetView.showCustomTapTarget(requireActivity(), speedDial, "Add new workout", "Click the button to add your first workout", listener)
     }
 }
