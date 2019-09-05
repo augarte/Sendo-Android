@@ -16,13 +16,13 @@
     </style>
 
     <style name="AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" >
-        <item name="android:textColorPrimary">@color/white</item>
-        <item name="android:textColorSecondary">@color/white</item>
+        <item name="android:textColorPrimary">@color/appbar_icons</item>
+        <item name="android:textColorSecondary">@color/appbar_text</item>
     </style>
 
     <style name="PopupOverlay" parent="ThemeOverlay.AppCompat.Light">
-        <item name="android:colorBackground">@color/colorPrimaryLight</item>
-        <item name="android:textColor">@color/secondaryText</item>
+        <item name="android:colorBackground">@color/toolbar_icons</item>
+        <item name="android:textColor">@color/toolbar_text</item>
     </style>
 
 </resources>

@@ -13,8 +13,15 @@
     <color name="secondaryText">@color/colorPrimaryLight</color>
 
     <!--VIEWS-->
+    <color name="appbar_icons">@color/white</color>
+    <color name="appbar_text">@color/white</color>
+
+    <color name="toolbar_icons">@color/colorPrimaryLight</color>
+    <color name="toolbar_text">@color/colorPrimaryDark</color>
+
     <color name="bottom_sheet_fragment_background">@color/colorPrimaryLight</color>
     <color name="bottom_sheet_background">@color/colorPrimaryDark</color>
+
     <color name="tapTargetOuterCircle">@color/colorPrimaryLight</color>
     <color name="tapTargetInnerCircle">#FF9CA99E</color>
 

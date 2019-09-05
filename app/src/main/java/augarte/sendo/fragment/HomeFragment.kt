@@ -117,7 +117,7 @@ class HomeFragment : Fragment(){
             }
         })
 
-      /*  fab_add.setOnClickListener {
+        /*fab_add.setOnClickListener {
             fab_add.animate().rotation(if (fab_add.rotation==0f) fab_add.rotation+45 else fab_add.rotation-45).start()
         }*/
 
