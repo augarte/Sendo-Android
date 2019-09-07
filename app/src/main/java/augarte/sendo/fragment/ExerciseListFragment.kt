@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import augarte.sendo.R
+import augarte.sendo.activity.MainActivity
 import augarte.sendo.adapter.ExerciseListAdapter
 import augarte.sendo.dataModel.Exercise
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -22,11 +23,7 @@ class ExerciseListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val exe = Exercise()
-        exe.name = "Exercise 1"
-        val exe2 = Exercise()
-        exe2.name = "Exercise 2"
-        val exerciseList = mutableListOf(exe, exe2)
+        val exerciseList : MutableList<Exercise> = MainActivity.dbHandler!!.getAllExercises().toMutableList()
 
         val exerciseAdapter = ExerciseListAdapter(exerciseList)
         exercise_list.apply {

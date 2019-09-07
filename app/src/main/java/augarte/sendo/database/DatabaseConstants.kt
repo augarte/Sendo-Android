@@ -8,6 +8,7 @@ class DatabaseConstants {
 
         const val TABLE_EXERCISE = "exercise"
         const val TABLE_DAY = "day"
+        const val TABLE_EXERCISEDAY = "exercise_day"
         const val TABLE_MEASUREMENT = "measurement"
         const val TABLE_WORKOUT = "workout"
         const val TABLE_SERIE = "serie"
@@ -16,7 +17,6 @@ class DatabaseConstants {
         const val TABLE_DATETYPE = "dateType"
 
         const val TABLE_EXERCISE_ID = "id"
-        const val TABLE_EXERCISE_DAYID = "dayId"
         const val TABLE_EXERCISE_NAME = "name"
         const val TABLE_EXERCISE_DESCRIPTION = "description"
         const val TABLE_EXERCISE_IMAGE = "image"
@@ -30,6 +30,10 @@ class DatabaseConstants {
         const val TABLE_DAY_CREATEDBY = "createdBy"
         const val TABLE_DAY_CREATEDATE = "createDate"
         const val TABLE_DAY_MODIFYDATE = "modifyDate"
+
+        const val TABLE_EXERCISEDAY_ID = "id"
+        const val TABLE_EXERCISEDAY_EXERCISEID = "exerciseId"
+        const val TABLE_EXERCISEDAY_DAYID = "dayId"
 
         const val TABLE_MEASUREMENT_ID = "id"
         const val TABLE_MEASUREMENT_TYPE = "type"

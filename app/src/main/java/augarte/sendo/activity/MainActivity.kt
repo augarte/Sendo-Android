@@ -13,12 +13,8 @@ import augarte.sendo.fragment.HomeFragment
 import augarte.sendo.fragment.MeasurementsFragment
 import augarte.sendo.fragment.SettingsFragment
 import augarte.sendo.R
-import augarte.sendo.view.CustomTapTargetView
-import com.getkeepsafe.taptargetview.TapTarget
-import com.getkeepsafe.taptargetview.TapTargetView
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.app_bar_main.*
-import kotlinx.android.synthetic.main.fragment_home.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -31,7 +27,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         setContentView(R.layout.activity_home)
         //init db
         dbHandler = DatabaseHandler(this)
-        //MainActivity.dbHandler?.deleteAllTables()
+        dbHandler!!.deleteAllTables()
 
         setSupportActionBar(toolbar)
 

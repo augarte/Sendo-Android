@@ -5,8 +5,6 @@ import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import android.view.animation.Animation
-import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import augarte.sendo.R
@@ -21,7 +19,6 @@ import augarte.sendo.activity.CreateWorkoutActivity
 import augarte.sendo.activity.MainActivity
 import augarte.sendo.activity.SearchWorkoutActivity
 import augarte.sendo.view.CustomTapTargetView
-import com.getkeepsafe.taptargetview.TapTarget
 import com.getkeepsafe.taptargetview.TapTargetView
 import com.leinardi.android.speeddial.SpeedDialActionItem
 import com.leinardi.android.speeddial.SpeedDialView
@@ -61,10 +58,9 @@ class HomeFragment : Fragment(){
             }
         } else{
             workout_rv.visibility = View.GONE
+            new_workokut_layout.visibility = View.VISIBLE
             showTapTarget()
-            //no_workout.visibility = View.VISIBLE
         }
-
 
         speedDial.addActionItem(
             SpeedDialActionItem.Builder(R.id.fab_new, R.drawable.ic_dumbbell_add)
@@ -117,10 +113,6 @@ class HomeFragment : Fragment(){
             }
         })
 
-        /*fab_add.setOnClickListener {
-            fab_add.animate().rotation(if (fab_add.rotation==0f) fab_add.rotation+45 else fab_add.rotation-45).start()
-        }*/
-
         setHasOptionsMenu(true)
     }
 
@@ -137,6 +129,6 @@ class HomeFragment : Fragment(){
                 speedDial.open()
             }
         }
-       CustomTapTargetView.showCustomTapTarget(requireActivity(), speedDial, "Add new workout", "Click the button to add your first workout", listener)
+       CustomTapTargetView.showCustomTapTarget(requireActivity(), speedDial, "Add a new workout", "Click the button to add your first workout", listener)
     }
 }

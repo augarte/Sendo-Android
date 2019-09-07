@@ -3,7 +3,11 @@ package augarte.sendo.fragment
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import augarte.sendo.R
+import augarte.sendo.activity.MainActivity
+import augarte.sendo.adapter.ExerciseChooseAdapter
 import kotlinx.android.synthetic.main.botttomsheet_choose_exercise.*
 
 class ExerciseChooserFragment(var title: String) : Fragment() {
@@ -16,5 +20,13 @@ class ExerciseChooserFragment(var title: String) : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         day_title.text = title
+
+        val exerciseList = MainActivity.dbHandler!!.getAllExercises()
+
+        val exerciseAdapter = ExerciseChooseAdapter(exerciseList)
+        exercise_list.apply {
+            layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+            adapter = exerciseAdapter
+        }
     }
 }

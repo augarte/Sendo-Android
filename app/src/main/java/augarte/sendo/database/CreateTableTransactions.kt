@@ -33,12 +33,16 @@ class CreateTableTransactions {
         const val CREATE_TABLE_EXERCISE = "CREATE TABLE IF NOT EXISTS ${DatabaseConstants.TABLE_EXERCISE} " +
                 "(${DatabaseConstants.TABLE_EXERCISE_ID} Integer PRIMARY KEY AUTOINCREMENT, " +
                 "${DatabaseConstants.TABLE_EXERCISE_NAME} TEXT NOT NULL, " +
-                "${DatabaseConstants.TABLE_EXERCISE_DAYID} Integer, " +
                 "${DatabaseConstants.TABLE_EXERCISE_DESCRIPTION} TEXT, " +
                 "${DatabaseConstants.TABLE_EXERCISE_IMAGE} TEXT, " +
                 "${DatabaseConstants.TABLE_EXERCISE_CREATEDBY} TEXT, " +
                 "${DatabaseConstants.TABLE_EXERCISE_CREATEDATE} Integer, " +
                 "${DatabaseConstants.TABLE_EXERCISE_MODIFYDATE} Integer)"
+
+        const val CREATE_TABLE_EXERCISEDAY = "CREATE TABLE IF NOT EXISTS ${DatabaseConstants.TABLE_EXERCISEDAY} " +
+                "(${DatabaseConstants.TABLE_EXERCISEDAY_ID} Integer PRIMARY KEY AUTOINCREMENT, " +
+                "${DatabaseConstants.TABLE_EXERCISEDAY_DAYID} Integer, " +
+                "${DatabaseConstants.TABLE_EXERCISEDAY_EXERCISEID} Integer)"
 
         const val CREATE_TABLE_SERIE = "CREATE TABLE IF NOT EXISTS ${DatabaseConstants.TABLE_SERIE} " +
                 "(${DatabaseConstants.TABLE_SERIE_ID} Integer PRIMARY KEY AUTOINCREMENT, " +

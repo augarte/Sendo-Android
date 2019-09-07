@@ -11,7 +11,6 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kotlinx.android.synthetic.main.item_bottomsheet.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import augarte.sendo.fragment.ExerciseChooserFragment
 
 
 class BottomSheet @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : CoordinatorLayout(context, attrs, defStyleAttr){
@@ -53,12 +52,16 @@ class BottomSheet @JvmOverloads constructor(context: Context, attrs: AttributeSe
         }
     }
 
-    fun setBottomSheetListener(listener: BottomSheetBehavior.BottomSheetCallback){
-        bottomSheetBehaviour.setBottomSheetCallback(listener)
+    private fun setBottomSheetListener(listener: BottomSheetBehavior.BottomSheetCallback){
+        bottomSheetBehaviour.bottomSheetCallback = listener
     }
 
     fun setState(state: Int){
         bottomSheetBehaviour.state = state
+    }
+
+    fun getState(): Int {
+        return bottomSheetBehaviour.state
     }
 
     fun setFragment(fragment: Fragment){

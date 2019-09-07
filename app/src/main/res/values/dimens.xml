@@ -48,4 +48,5 @@
     <dimen name="text_medium">16sp</dimen>
     <dimen name="text_large">18sp</dimen>
     <dimen name="text_xlarge">20sp</dimen>
+    <dimen name="text_xxlarge">24sp</dimen>
 </resources>

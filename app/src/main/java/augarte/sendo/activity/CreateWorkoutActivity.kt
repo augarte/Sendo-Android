@@ -24,7 +24,7 @@ import androidx.core.content.ContextCompat
 import augarte.sendo.utils.Animations
 import augarte.sendo.dataModel.Workout
 import android.provider.MediaStore
-import augarte.sendo.database.DatabaseHandler
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 
 class CreateWorkoutActivity : AppCompatActivity() {
 
@@ -32,7 +32,7 @@ class CreateWorkoutActivity : AppCompatActivity() {
     private var thisWorkout: Workout = Workout()
 
     companion object {
-        private const val IMAGE_PICK_CODE = 1000 //image pick code
+        private const val IMAGE_PICK_CODE = 1000 //Image pick code
         private const val PERMISSION_CODE = 1001 //Permission code
     }
 
@@ -89,12 +89,12 @@ class CreateWorkoutActivity : AppCompatActivity() {
 
         create_workout_button.setOnClickListener{
             thisWorkout.name = workout_title.text.toString()
-            MainActivity.dbHandler?.insertWorkout(thisWorkout)
+            MainActivity.dbHandler!!.insertWorkout(thisWorkout)
 
             val intent = Intent(this, WorkoutActivity::class.java)
             intent.putExtra("workout", thisWorkout)
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                //orkoutName.visibility = View.VISIBLE
+                //workoutName.visibility = View.VISIBLE
                 val translation1 = androidx.core.util.Pair<View, String>(workout_card, "workoutCard")
                 val translation2 = androidx.core.util.Pair<View?, String?>(workoutName, "workoutName")
                 val options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, translation1, translation2)
@@ -193,5 +193,12 @@ class CreateWorkoutActivity : AppCompatActivity() {
             delete_image.startAnimation(anim1)
             add_image.startAnimation(anim2)
         }
+    }
+
+    override fun onBackPressed() {
+        if (bottomsheet.getState() == BottomSheetBehavior.STATE_EXPANDED) bottomsheet.setState(BottomSheetBehavior.STATE_HALF_EXPANDED)
+        else if (bottomsheet.getState() == BottomSheetBehavior.STATE_HALF_EXPANDED) bottomsheet.setState(BottomSheetBehavior.STATE_COLLAPSED)
+        else super.onBackPressed()
+
     }
 }

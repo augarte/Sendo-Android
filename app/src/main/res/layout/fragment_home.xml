@@ -10,49 +10,34 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
-    <!--<androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/no_workout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
+
+    <LinearLayout
+        android:id="@+id/new_workokut_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
         android:visibility="gone">
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.25"/>
-
-        <TextView
-            android:id="@+id/no_workout_titleTV"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="No workouts"
-            android:textSize="25sp"
-            app:layout_constraintTop_toTopOf="@id/guideline"/>
-
-        <TextView
-            android:id="@+id/no_workout_descriptionTV"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_small_medium"
-            android:gravity="center"
-            android:text="Add a new workout"
-            android:textSize="18sp"
-            app:layout_constraintTop_toBottomOf="@id/no_workout_titleTV"/>
 
         <ImageView
             android:id="@+id/no_workout_icon"
-            android:layout_width="@dimen/view_medium_large"
-            android:layout_height="@dimen/view_medium_large"
-            android:layout_marginTop="@dimen/margin_medium"
+            android:layout_width="@dimen/view_large"
+            android:layout_height="@dimen/view_large"
+            android:layout_marginTop="100dp"
+            android:layout_gravity="center_horizontal"
             android:src="@drawable/ic_weightlifting"
-            app:layout_constraintTop_toBottomOf="@id/no_workout_descriptionTV"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
-    </androidx.constraintlayout.widget.ConstraintLayout>-->
+            android:tint="@color/colorPrimaryDark"
+            android:elevation="200dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_small_medium"
+            android:text="Add your first workout!"
+            android:textSize="@dimen/text_xxlarge"
+            android:textColor="@color/primaryText"
+            android:textStyle="bold"/>
+    </LinearLayout>
 
     <com.leinardi.android.speeddial.SpeedDialView
         android:id="@+id/speedDial"

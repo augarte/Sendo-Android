@@ -8,9 +8,10 @@ import androidx.recyclerview.widget.RecyclerView
 import augarte.sendo.R
 import augarte.sendo.dataModel.Exercise
 import com.google.android.material.snackbar.Snackbar
+import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView
 import kotlinx.android.synthetic.main.item_exercise.view.*
 
-class ExerciseListAdapter(private val items : MutableList<Exercise>) : RecyclerView.Adapter<ExerciseListAdapter.MainViewHolder>() {
+class ExerciseListAdapter(private val items : MutableList<Exercise>) : RecyclerView.Adapter<ExerciseListAdapter.MainViewHolder>(), FastScrollRecyclerView.SectionedAdapter {
 
     var onItemClick: ((Pair<Exercise, View>) -> Unit)? = null
 
@@ -31,6 +32,12 @@ class ExerciseListAdapter(private val items : MutableList<Exercise>) : RecyclerV
 
     override fun getItemCount(): Int {
         return items.size
+    }
+
+    override fun getSectionName(position: Int): String {
+        val item = items[position]
+        return if (item.name!!.trim().isNotEmpty()) item.name!![0] +""
+        else ""
     }
 
     fun removeWithSwipe(viewHolder: RecyclerView.ViewHolder) {
