@@ -18,10 +18,17 @@
         android:textSize="@dimen/text_xlarge"
         android:textColor="@color/primaryText"/>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/exercise_list"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_small_medium" />
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/margin_small_medium" >
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/exercise_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </androidx.core.widget.NestedScrollView>
+
+
 
 </LinearLayout>
