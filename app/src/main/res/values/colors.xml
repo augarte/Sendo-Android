@@ -7,12 +7,21 @@
     <color name="colorAccent">#1de9b6</color>
     <color name="colorAccentDark">#00b686</color>
     <color name="colorAccentLight">#6effe8</color>
+<!--    <color name="colorAccent">#F9AA33</color>
+    <color name="colorAccentDark">#F48226</color>
+    <color name="colorAccentLight">#FFF07B</color>-->
+
+    <color name="red">#f94733</color>
+    <color name="green">#00ee81</color>
 
     <!--TEXT-->
     <color name="primaryText">@color/colorPrimaryDark</color>
     <color name="secondaryText">@color/colorPrimaryLight</color>
 
     <!--VIEWS-->
+    <color name="fabChild">@color/colorAccent</color>
+    <color name="fab">@color/colorAccentDark</color>
+
     <color name="appbar_icons">@color/white</color>
     <color name="appbar_text">@color/white</color>
 

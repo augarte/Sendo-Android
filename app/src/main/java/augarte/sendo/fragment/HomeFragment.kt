@@ -62,24 +62,26 @@ class HomeFragment : Fragment(){
             showTapTarget()
         }
 
+        speedDial.mainFabOpenedBackgroundColor = ResourcesCompat.getColor(resources, R.color.fab, null)
+        speedDial.mainFabClosedBackgroundColor = ResourcesCompat.getColor(resources, R.color.fab, null)
         speedDial.addActionItem(
             SpeedDialActionItem.Builder(R.id.fab_new, R.drawable.ic_dumbbell_add)
-                    .setFabBackgroundColor(ResourcesCompat.getColor(resources, R.color.colorAccentLight, null))
+                    .setFabBackgroundColor(ResourcesCompat.getColor(resources, R.color.fabChild, null))
                     .setFabImageTintColor(ResourcesCompat.getColor(resources, R.color.black, null))
                     .setLabel("New")
                     .setLabelColor(ResourcesCompat.getColor(resources, R.color.black, null))
-                    .setLabelBackgroundColor(ResourcesCompat.getColor(resources, R.color.colorAccentLight, null))
+                    .setLabelBackgroundColor(ResourcesCompat.getColor(resources, R.color.fabChild, null))
                     .setLabelClickable(false)
                     .create()
         )
 
         speedDial.addActionItem(
             SpeedDialActionItem.Builder(R.id.fab_search, R.drawable.ic_dumbbell_search)
-                    .setFabBackgroundColor(ResourcesCompat.getColor(resources, R.color.colorAccentLight, null))
+                    .setFabBackgroundColor(ResourcesCompat.getColor(resources, R.color.fabChild, null))
                     .setFabImageTintColor(ResourcesCompat.getColor(resources, R.color.black, null))
                     .setLabel("Search")
                     .setLabelColor(ResourcesCompat.getColor(resources, R.color.black, null))
-                    .setLabelBackgroundColor(ResourcesCompat.getColor(resources, R.color.colorAccentLight, null))
+                    .setLabelBackgroundColor(ResourcesCompat.getColor(resources, R.color.fabChild, null))
                     .setLabelClickable(false)
                     .create()
         )
