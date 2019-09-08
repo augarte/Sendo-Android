@@ -20,6 +20,9 @@
 
             <item android:id="@+id/category"
                 android:title="@string/category"/>
+
+            <item android:id="@+id/archived"
+                android:title="@string/archived"/>
         </menu>
     </item>
     <item

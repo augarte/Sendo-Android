@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         setContentView(R.layout.activity_home)
         //init db
         dbHandler = DatabaseHandler(this)
-        dbHandler!!.deleteAllTables()
+        //dbHandler!!.deleteAllTables()
 
         setSupportActionBar(toolbar)
 

@@ -61,32 +61,6 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
      /********** WORKOUTS **********/
     /******************************/
 
-    fun insertWorkout(workout: Workout): Long {
-        val db = this.writableDatabase
-        val values = ContentValues()
-
-        val unixTime = Utils.getUnixSeconds()
-
-        values.put(DatabaseConstants.TABLE_WORKOUT_NAME, workout.name)
-        if (workout.image!=null) values.put(DatabaseConstants.TABLE_WORKOUT_IMAGE, Utils.getBiteArrayFromBitmap(workout.image!!))
-        values.put(DatabaseConstants.TABLE_WORKOUT_DESCRIPTION, workout.name)
-        values.put(DatabaseConstants.TABLE_WORKOUT_CREATEDBY, 0)
-        values.put(DatabaseConstants.TABLE_WORKOUT_LASTOPEN, unixTime)
-        values.put(DatabaseConstants.TABLE_WORKOUT_CREATEDATE, unixTime)
-        values.put(DatabaseConstants.TABLE_WORKOUT_MODIFYDATE, unixTime)
-
-        var id : Long = -1
-        try {
-            id = db.insert(DatabaseConstants.TABLE_WORKOUT, null, values)
-        } catch (e: Exception) {
-            Log.e("DB ERROR", e.toString())
-            e.printStackTrace()
-        }
-
-        db.close()
-        return id
-    }
-
     fun getAllWorkouts(): ArrayList<Workout> {
         val workouts = ArrayList<Workout>()
 
@@ -125,6 +99,32 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
         db.close()
 
         return workouts
+    }
+
+    fun insertWorkout(workout: Workout): Long {
+        val db = this.writableDatabase
+        val values = ContentValues()
+
+        val unixTime = Utils.getUnixSeconds()
+
+        values.put(DatabaseConstants.TABLE_WORKOUT_NAME, workout.name)
+        if (workout.image!=null) values.put(DatabaseConstants.TABLE_WORKOUT_IMAGE, Utils.getBiteArrayFromBitmap(workout.image!!))
+        values.put(DatabaseConstants.TABLE_WORKOUT_DESCRIPTION, workout.name)
+        values.put(DatabaseConstants.TABLE_WORKOUT_CREATEDBY, 0)
+        values.put(DatabaseConstants.TABLE_WORKOUT_LASTOPEN, unixTime)
+        values.put(DatabaseConstants.TABLE_WORKOUT_CREATEDATE, unixTime)
+        values.put(DatabaseConstants.TABLE_WORKOUT_MODIFYDATE, unixTime)
+
+        var id : Long = -1
+        try {
+            id = db.insert(DatabaseConstants.TABLE_WORKOUT, null, values)
+        } catch (e: Exception) {
+            Log.e("DB ERROR", e.toString())
+            e.printStackTrace()
+        }
+
+        db.close()
+        return id
     }
 
     fun deleteWorkoutById(workoutId: Int) {
