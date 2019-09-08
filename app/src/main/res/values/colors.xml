@@ -4,15 +4,14 @@
     <color name="colorPrimary">#525E54</color>
     <color name="colorPrimaryDark">#29342b</color>
     <color name="colorPrimaryLight">#7e8b80</color>
-    <color name="colorAccent">#1de9b6</color>
-    <color name="colorAccentDark">#00b686</color>
-    <color name="colorAccentLight">#6effe8</color>
+    <color name="colorAccent">#00E676</color>
+    <color name="colorAccentDark">#00C853</color>
+    <color name="colorAccentLight">#69F0AE</color>
 <!--    <color name="colorAccent">#F9AA33</color>
     <color name="colorAccentDark">#F48226</color>
     <color name="colorAccentLight">#FFF07B</color>-->
 
     <color name="red">#f4564e</color>
-    <color name="green">#00ee81</color>
 
     <!--TEXT-->
     <color name="primaryText">@color/colorPrimaryDark</color>
@@ -33,6 +32,9 @@
 
     <color name="tapTargetOuterCircle">@color/colorPrimaryLight</color>
     <color name="tapTargetInnerCircle">#FF9CA99E</color>
+
+    <color name="ExerciseArchiveBackground">#64b2ff</color>
+    <color name="ExerciseArchiveIcon">@color/black</color>
 
     <!--ICONS-->
     <color name="fabIcon">@color/black</color>

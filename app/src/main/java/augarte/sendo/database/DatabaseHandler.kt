@@ -3,14 +3,12 @@ package augarte.sendo.database
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-import augarte.sendo.dataModel.Workout
 import android.content.ContentValues
+import android.database.Cursor
 import android.util.Log
 import android.graphics.BitmapFactory
 import android.graphics.Bitmap
-import augarte.sendo.dataModel.Day
-import augarte.sendo.dataModel.Exercise
-import augarte.sendo.dataModel.User
+import augarte.sendo.dataModel.*
 import augarte.sendo.utils.Utils
 import kotlin.collections.ArrayList
 import java.util.*
@@ -22,6 +20,7 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
         db?.execSQL(CreateTableTransactions.CREATE_TABLE_USER)
         db?.execSQL(CreateTableTransactions.CREATE_TABLE_WORKOUT)
         db?.execSQL(CreateTableTransactions.CREATE_TABLE_DAY)
+        db?.execSQL(CreateTableTransactions.CREATE_TABLE_EXERCISETYPE)
         db?.execSQL(CreateTableTransactions.CREATE_TABLE_EXERCISE)
         db?.execSQL(CreateTableTransactions.CREATE_TABLE_EXERCISEDAY)
         db?.execSQL(CreateTableTransactions.CREATE_TABLE_SERIE)
@@ -45,13 +44,28 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
         db.execSQL("DROP TABLE IF EXISTS " + DatabaseConstants.TABLE_MEASUREMENT)
         db.execSQL("DROP TABLE IF EXISTS " + DatabaseConstants.TABLE_MEASUREMENT_TYPE)
         db.execSQL("DROP TABLE IF EXISTS " + DatabaseConstants.TABLE_DATETYPE)
+        db.execSQL("DROP TABLE IF EXISTS " + DatabaseConstants.TABLE_EXERCISETYPE)
         onCreate(db)
     }
 
-    fun insertInitialData() {
+    private fun insertInitialData() {
+        var exerciseType = ExerciseType()
+        for ((i, type) in DatabaseConstants.LIST_EXERCISETYPES.withIndex()){
+            exerciseType = ExerciseType()
+            exerciseType.id = i
+            exerciseType.code = type.first
+            exerciseType.name = type.second
+            insertExerciseType(exerciseType)
+        }
+
         for (i in 0..50) {
             val exercise = Exercise()
             exercise.name = "Press"
+            exercise.type = exerciseType
+            exercise.description = "Description"
+            val user = User()
+            user.id = 0
+            exercise.createdBy = user
             insertExercise(exercise)
         }
     }
@@ -65,7 +79,7 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
         val workouts = ArrayList<Workout>()
 
         val db = this.writableDatabase
-        val cursor = db.rawQuery(SelectTransactions.SELECT_ALL_WORKOUT, null)
+        val cursor = db.rawQuery(SelectTransactions.SELECT_ALL_WORKOUT_ORDER_NAME, null)
 
         if (cursor.moveToFirst()) {
             do {
@@ -137,16 +151,22 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
      /********** EXERCISES **********/
     /*******************************/
 
-    fun getAllExercises(): ArrayList<Exercise> {
+    fun getExercise(query: String): ArrayList<Exercise> {
         val exercises = ArrayList<Exercise>()
 
         val db = this.writableDatabase
-        val cursor = db.rawQuery(SelectTransactions.SELECT_ALL_EXERCISE, null)
+        val cursor : Cursor
+        cursor = db.rawQuery(query, null)
 
         if (cursor.moveToFirst()) {
             do {
                 val exercise = Exercise()
                 val id = cursor.getInt(cursor.getColumnIndex(DatabaseConstants.TABLE_EXERCISE_ID))
+                val exerciseTypeId = cursor.getString(cursor.getColumnIndex(DatabaseConstants.TABLE_EXERCISE_TYPE))
+                val exerciseType = if (getExerciseType(SelectTransactions.SELECT_EXERCISETYPE_BY_ID, arrayOf(exerciseTypeId))!!.size >= 1){
+                    getExerciseType(SelectTransactions.SELECT_EXERCISETYPE_BY_ID, arrayOf(exerciseTypeId))!![0]
+                }
+                else null
                 val blob = cursor.getBlob(cursor.getColumnIndex(DatabaseConstants.TABLE_EXERCISE_IMAGE))
                 var image: Bitmap?
                 image = if (blob!= null) BitmapFactory.decodeByteArray(blob, 0, blob.size)
@@ -159,6 +179,7 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
                 exercise.name = cursor.getString(cursor.getColumnIndex(DatabaseConstants.TABLE_EXERCISE_NAME))
                 exercise.description = cursor.getString(cursor.getColumnIndex(DatabaseConstants.TABLE_EXERCISE_DESCRIPTION))
                 exercise.image = image
+                exercise.type = exerciseType
                 exercise.createdBy = getUserByUserId(userId)
                 exercise.createDate = Date((createDateUnixSeconds * 1000))
                 exercise.modifyDate = Date((modifyDateUnixSeconds * 1000))
@@ -175,6 +196,7 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
         return exercises
     }
 
+
     fun insertExercise(exercise: Exercise): Long {
         val db = this.writableDatabase
         val values = ContentValues()
@@ -184,8 +206,9 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
         values.put(DatabaseConstants.TABLE_EXERCISE_NAME, exercise.name)
         if (exercise.image!=null) values.put(DatabaseConstants.TABLE_EXERCISE_IMAGE, Utils.getBiteArrayFromBitmap(exercise.image!!))
         values.put(DatabaseConstants.TABLE_EXERCISE_DESCRIPTION, exercise.description)
-        values.put(DatabaseConstants.TABLE_EXERCISE_DESCRIPTION, exercise.name)
-        values.put(DatabaseConstants.TABLE_EXERCISE_CREATEDBY, 0)
+        values.put(DatabaseConstants.TABLE_EXERCISE_TYPE, exercise.type?.id)
+        values.put(DatabaseConstants.TABLE_EXERCISE_STATE, exercise.state)
+        values.put(DatabaseConstants.TABLE_EXERCISE_CREATEDBY, exercise.createdBy?.id)
         values.put(DatabaseConstants.TABLE_EXERCISE_CREATEDATE, unixTime)
         values.put(DatabaseConstants.TABLE_EXERCISE_MODIFYDATE, unixTime)
 
@@ -201,6 +224,61 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
         return id
     }
 
+
+      /************************************/
+     /********** EXERCISE TYPES **********/
+    /************************************/
+
+    private fun getExerciseType(query: String, array: Array<String>): ArrayList<ExerciseType>? {
+        val db = this.writableDatabase
+        val cursor : Cursor
+        cursor = db.rawQuery(query, array)
+
+        val list = ArrayList<ExerciseType>()
+        if (cursor.moveToFirst()) {
+            do {
+                val exerciseType = ExerciseType()
+                val createDateUnixSeconds = cursor.getLong(cursor.getColumnIndex(DatabaseConstants.TABLE_EXERCISETYPE_CREATEDATE))
+                val modifyDateUnixSeconds = cursor.getLong(cursor.getColumnIndex(DatabaseConstants.TABLE_EXERCISETYPE_MODIFYDATE))
+
+                exerciseType.id = cursor.getInt(cursor.getColumnIndex(DatabaseConstants.TABLE_EXERCISETYPE_ID))
+                exerciseType.name = cursor.getString(cursor.getColumnIndex(DatabaseConstants.TABLE_EXERCISETYPE_NAME))
+                exerciseType.code = cursor.getString(cursor.getColumnIndex(DatabaseConstants.TABLE_EXERCISETYPE_CODE))
+                exerciseType.createDate = Date((createDateUnixSeconds * 1000))
+                exerciseType.modifyDate = Date((modifyDateUnixSeconds * 1000))
+                list.add(exerciseType)
+            } while (cursor.moveToNext())
+        }
+
+        cursor.close()
+        db.close()
+
+        return list
+    }
+
+    private fun insertExerciseType(exerciseType: ExerciseType): Long {
+        val db = this.writableDatabase
+        val values = ContentValues()
+
+        val unixTime = Utils.getUnixSeconds()
+
+        values.put(DatabaseConstants.TABLE_EXERCISETYPE_ID, exerciseType.id)
+        values.put(DatabaseConstants.TABLE_EXERCISETYPE_CODE, exerciseType.code)
+        values.put(DatabaseConstants.TABLE_EXERCISETYPE_NAME, exerciseType.name)
+        values.put(DatabaseConstants.TABLE_EXERCISETYPE_CREATEDATE, unixTime)
+        values.put(DatabaseConstants.TABLE_EXERCISETYPE_MODIFYDATE, unixTime)
+
+        var id : Long = -1
+        try {
+            id = db.insert(DatabaseConstants.TABLE_EXERCISETYPE, null, values)
+        } catch (e: Exception) {
+            Log.e("DB ERROR", e.toString())
+            e.printStackTrace()
+        }
+
+        db.close()
+        return id
+    }
 
       /***************************/
      /********** USERS **********/

@@ -15,11 +15,14 @@ class DatabaseConstants {
         const val TABLE_USER = "user"
         const val TABLE_MEASURETYPE = "measureType"
         const val TABLE_DATETYPE = "dateType"
+        const val TABLE_EXERCISETYPE = "exerciseType"
 
         const val TABLE_EXERCISE_ID = "id"
         const val TABLE_EXERCISE_NAME = "name"
         const val TABLE_EXERCISE_DESCRIPTION = "description"
         const val TABLE_EXERCISE_IMAGE = "image"
+        const val TABLE_EXERCISE_TYPE = "type"
+        const val TABLE_EXERCISE_STATE = "state"
         const val TABLE_EXERCISE_CREATEDBY = "createdBy"
         const val TABLE_EXERCISE_CREATEDATE = "createDate"
         const val TABLE_EXERCISE_MODIFYDATE = "modifyDate"
@@ -34,6 +37,14 @@ class DatabaseConstants {
         const val TABLE_EXERCISEDAY_ID = "id"
         const val TABLE_EXERCISEDAY_EXERCISEID = "exerciseId"
         const val TABLE_EXERCISEDAY_DAYID = "dayId"
+        const val TABLE_EXERCISEDAY_CREATEDATE = "createDate"
+        const val TABLE_EXERCISEDAY_MODIFYDATE = "modifydate"
+
+        const val TABLE_EXERCISETYPE_ID = "id"
+        const val TABLE_EXERCISETYPE_CODE = "code"
+        const val TABLE_EXERCISETYPE_NAME = "name"
+        const val TABLE_EXERCISETYPE_CREATEDATE = "createDate"
+        const val TABLE_EXERCISETYPE_MODIFYDATE = "modifydate"
 
         const val TABLE_MEASUREMENT_ID = "id"
         const val TABLE_MEASUREMENT_TYPE = "type"
@@ -79,5 +90,12 @@ class DatabaseConstants {
         const val TABLE_MEASURETYPE_CODE = "username"
         const val TABLE_MEASURETYPE_CREATEDATE = "createDate"
         const val TABLE_MEASURETYPE_MODIFYDATE = "modifydate"
+
+        const val STATE_DELETED = 0
+        const val STATE_ACTIVE = 1
+        const val STATE_ARCHIVED = 2
+
+        val LIST_EXERCISETYPES = listOf(Pair("ABS","Abs"), Pair("BCK","Back"), Pair("BCP","Biceps"), Pair("CLV","Calves"), Pair("CHT","Chest"), Pair("DLT","Deltoids"), Pair("FRA","Forearms"),
+                Pair("GLT","Glutes"), Pair("HMS","Hamstrings"), Pair("NCK","Neck"), Pair("OBL","Oblique"), Pair("TRP","Traps"), Pair("TRC","Triceps"), Pair("QDS","Quads"))
     }
 }

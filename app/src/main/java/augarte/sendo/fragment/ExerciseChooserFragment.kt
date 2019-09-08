@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import augarte.sendo.R
 import augarte.sendo.activity.MainActivity
 import augarte.sendo.adapter.ExerciseChooseAdapter
+import augarte.sendo.database.SelectTransactions
+import augarte.sendo.utils.Constants
 import kotlinx.android.synthetic.main.botttomsheet_choose_exercise.*
 
 class ExerciseChooserFragment(var title: String) : Fragment() {
@@ -21,7 +23,7 @@ class ExerciseChooserFragment(var title: String) : Fragment() {
 
         day_title.text = title
 
-        val exerciseList = MainActivity.dbHandler!!.getAllExercises()
+        val exerciseList = MainActivity.dbHandler!!.getExercise(SelectTransactions.SELECT_ALL_EXERCISE_ORDER_NAME)
 
         val exerciseAdapter = ExerciseChooseAdapter(exerciseList)
         exercise_list.apply {

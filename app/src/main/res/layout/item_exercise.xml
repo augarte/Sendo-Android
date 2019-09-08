@@ -5,14 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="@dimen/padding_medium_small"
-    android:background="@color/colorPrimaryLight">
-
+    android:background="@drawable/background_exercise_noswipe">
 
     <androidx.cardview.widget.CardView
         android:layout_width="50dp"
         android:layout_height="50dp"
         app:cardCornerRadius="25dp">
-
         <ImageView
             android:id="@+id/exercise_image"
             android:layout_width="match_parent"
