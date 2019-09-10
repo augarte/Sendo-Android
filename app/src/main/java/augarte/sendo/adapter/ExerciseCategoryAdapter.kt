@@ -51,7 +51,7 @@ class ExerciseCategoryAdapter(private val items : MutableList<Exercise>) : Recyc
 
     override fun getSectionName(position: Int): String {
         val item = items[position]
-        return if (item.name!!.trim().isNotEmpty()) item.name!![0] +""
+        return if (item.type!!.name!!.trim().isNotEmpty()) item.type!!.name!!.substring(0,3).toUpperCase()
         else ""
     }
 

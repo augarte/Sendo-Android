@@ -57,33 +57,36 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
     }
 
     private fun insertInitialData() {
-        var dateType: DateType
         for (type in DatabaseConstants.LIST_DATETYPES){
-            dateType = DateType()
+            var dateType = DateType()
             dateType.code = type.first
             dateType.name = type.second
             insertDateType(dateType)
         }
 
-        var measureType: MeasureType
         for (type in DatabaseConstants.LIST_MEASURETYPES){
-            measureType = MeasureType()
+            var measureType = MeasureType()
             measureType.code = type.first
             measureType.name = type.second
             insertMeasureType(measureType)
         }
 
-        var weightType: WeightType
+        for (type in DatabaseConstants.LIST_EXERCISETYPES) {
+            var exerciseType = ExerciseType()
+            exerciseType.code = type.first
+            exerciseType.name = type.second
+            insertExerciseType(exerciseType)
+        }
+
         for (type in DatabaseConstants.LIST_WEIGHTTYPE){
-            weightType = WeightType()
+            var weightType = WeightType()
             weightType.code = type.first
             weightType.name = type.second
             insertWeightType(weightType)
         }
 
-        var lengthType: LengthType
         for (type in DatabaseConstants.LIST_LENGTHTYPE){
-            lengthType = LengthType()
+            var lengthType = LengthType()
             lengthType.code = type.first
             lengthType.name = type.second
             insertLenghtType(lengthType)
