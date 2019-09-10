@@ -2,7 +2,7 @@ package augarte.sendo.dataModel
 
 import java.util.*
 
-class ExerciseType{
+class LengthType {
 
     var id: Int? = null
     var code: String? = null

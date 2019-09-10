@@ -34,6 +34,7 @@
     <color name="tapTargetInnerCircle">#FF9CA99E</color>
 
     <color name="ExerciseArchiveBackground">#64b2ff</color>
+    <color name="ExerciseUnarchiveBackground">#81C784</color>
     <color name="ExerciseArchiveIcon">@color/black</color>
 
     <!--ICONS-->

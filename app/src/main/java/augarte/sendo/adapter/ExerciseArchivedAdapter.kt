@@ -6,7 +6,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import augarte.sendo.R
+import augarte.sendo.activity.MainActivity
 import augarte.sendo.dataModel.Exercise
+import augarte.sendo.database.DatabaseConstants
 import com.google.android.material.snackbar.Snackbar
 import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView
 import kotlinx.android.synthetic.main.item_exercise.view.*
@@ -40,16 +42,20 @@ class ExerciseArchivedAdapter(private val items : MutableList<Exercise>) : Recyc
         else ""
     }
 
-    fun removeWithSwipe(viewHolder: RecyclerView.ViewHolder) {
-        removedPosition = viewHolder.adapterPosition
-        removedItem = items[viewHolder.adapterPosition]
-        items.removeAt(viewHolder.adapterPosition)
-        notifyItemRemoved(viewHolder.adapterPosition)
+    fun removeWithSwipe(position: Int) {
+        removedPosition = position
+        removedItem = items[position]
+        removedItem.state = DatabaseConstants.STATE_ACTIVE
+        MainActivity.dbHandler!!.updateExerciseState(removedItem)
+        items.removeAt(position)
+        notifyItemRemoved(position)
 
-        Snackbar.make(viewHolder.itemView, "$removedItem.name deleted.", Snackbar.LENGTH_LONG).setAction("UNDO") {
+        /*Snackbar.make(viewHolder.itemView, "${removedItem.name} deleted.", Snackbar.LENGTH_LONG).setAction("UNDO") {
+            removedItem.state = DatabaseConstants.STATE_ARCHIVED
+            MainActivity.dbHandler!!.updateExerciseState(removedItem)
             items.add(removedPosition, removedItem)
             notifyItemInserted(removedPosition)
-        }.show()
+        }.show()*/
     }
 
     class MainViewHolder(view: View) : RecyclerView.ViewHolder(view) {
