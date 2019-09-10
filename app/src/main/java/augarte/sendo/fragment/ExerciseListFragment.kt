@@ -20,6 +20,7 @@ import augarte.sendo.adapter.ExerciseListAdapter
 import augarte.sendo.dataModel.Exercise
 import augarte.sendo.database.SelectTransactions
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.simplecityapps.recyclerview_fastscroll.utils.Utils
 import kotlinx.android.synthetic.main.fragment_exercise_list.*
 
 class ExerciseListFragment : Fragment() {
@@ -65,18 +66,21 @@ class ExerciseListFragment : Fragment() {
         when (item.itemId){
             R.id.list -> {
                 exerciseList = MainActivity.dbHandler!!.getExercise(SelectTransactions.SELECT_ALL_EXERCISE_ORDER_NAME).toMutableList()
+                exercise_list.setPopupTextSize(Utils.toScreenPixels(resources, 44f))
                 exerciseAdapter = ExerciseListAdapter(exerciseList)
                 exercise_list.adapter = exerciseAdapter as ExerciseListAdapter
                 true
             }
             R.id.category -> {
                 exerciseList = MainActivity.dbHandler!!.getExercise(SelectTransactions.SELECT_ALL_EXERCISE_ORDER_TYPE).toMutableList()
+                exercise_list.setPopupTextSize(Utils.toScreenPixels(resources, 20f))
                 exerciseAdapter = ExerciseCategoryAdapter(exerciseList)
                 exercise_list.adapter = exerciseAdapter as ExerciseCategoryAdapter
                 true
             }
             R.id.archived -> {
                 exerciseList = MainActivity.dbHandler!!.getExercise(SelectTransactions.SELECT_ARCHIVED_EXERCISES_ORDER_NAME).toMutableList()
+                exercise_list.setPopupTextSize(Utils.toScreenPixels(resources, 44f))
                 exerciseAdapter = ExerciseArchivedAdapter(exerciseList)
                 exercise_list.adapter = exerciseAdapter as ExerciseArchivedAdapter
                 true

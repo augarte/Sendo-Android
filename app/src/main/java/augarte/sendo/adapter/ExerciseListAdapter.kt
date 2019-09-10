@@ -39,7 +39,7 @@ class ExerciseListAdapter(private val items : MutableList<Exercise>) : RecyclerV
 
     override fun getSectionName(position: Int): String {
         val item = items[position]
-        return if (item.name!!.trim().isNotEmpty()) item.name!![0] +""
+        return if (item.name!!.trim().isNotEmpty()) item.name!![0].toString().toUpperCase()
         else ""
     }
 
