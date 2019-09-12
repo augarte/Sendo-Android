@@ -5,8 +5,10 @@ import java.util.*
 class LengthType {
 
     var id: Int? = null
-    var code: String? = null
-    var name: String? = null
+    var code: String = ""
+    var name: String = ""
+    var selected: String = ""
+    var choosed: Boolean = false
     var createDate: Date? = null
     var modifyDate: Date? = null
 }

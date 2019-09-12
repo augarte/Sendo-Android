@@ -92,6 +92,7 @@ class CreateTableTransactions {
                 "(${DatabaseConstants.TABLE_WEIGHTTYPE_ID} INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "${DatabaseConstants.TABLE_WEIGHTTYPE_NAME} TEXT NOT NULL, " +
                 "${DatabaseConstants.TABLE_WEIGHTTYPE_CODE} TEXT NOT NULL, " +
+                "${DatabaseConstants.TABLE_WEIGHTTYPE_CHOOSED} INTEGER NOT NULL, " +
                 "${DatabaseConstants.TABLE_WEIGHTTYPE_CREATEDATE} INTEGER NOT NULL, " +
                 "${DatabaseConstants.TABLE_WEIGHTTYPE_MODIFYDATE} INTEGER NOT NULL)"
 
@@ -100,6 +101,7 @@ class CreateTableTransactions {
                 "(${DatabaseConstants.TABLE_LENGTHTYPE_ID} INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "${DatabaseConstants.TABLE_LENGTHTYPE_NAME} TEXT NOT NULL, " +
                 "${DatabaseConstants.TABLE_LENGTHTYPE_CODE} TEXT NOT NULL, " +
+                "${DatabaseConstants.TABLE_LENGTHTYPE_CHOOSED} INTEGER NOT NULL, " +
                 "${DatabaseConstants.TABLE_LENGTHTYPE_CREATEDATE} INTEGER NOT NULL, " +
                 "${DatabaseConstants.TABLE_LENGTHTYPE_MODIFYDATE} INTEGER NOT NULL)"
     }

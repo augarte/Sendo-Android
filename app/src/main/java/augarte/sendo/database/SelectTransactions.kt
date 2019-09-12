@@ -17,5 +17,11 @@ class SelectTransactions {
 
         const val SELECT_ALL_DATETYPE = "SELECT * FROM ${DatabaseConstants.TABLE_DATETYPE}"
         const val SELECT_ALL_MEASURETYPE = "SELECT * FROM ${DatabaseConstants.TABLE_MEASURETYPE}"
+
+        const val SELECT_ALL_WEIGHTTYPE = "SELECT * FROM ${DatabaseConstants.TABLE_WEIGHTTYPE}"
+        const val SELECT_WEIGHTTYPE_BY_CHOOSED = "SELECT * FROM ${DatabaseConstants.TABLE_WEIGHTTYPE} WHERE ${DatabaseConstants.TABLE_WEIGHTTYPE_CHOOSED} = 1"
+
+        const val SELECT_ALL_LENGTHTYPE = "SELECT * FROM ${DatabaseConstants.TABLE_LENGTHTYPE}"
+        const val SELECT_LENGTHTYPE_BY_CHOOSED = "SELECT * FROM ${DatabaseConstants.TABLE_LENGTHTYPE} WHERE ${DatabaseConstants.TABLE_LENGTHTYPE_CHOOSED} = 1"
     }
 }

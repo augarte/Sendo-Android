@@ -5,26 +5,108 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="@dimen/padding_medium"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".activity.MainActivity">
 
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/margin_medium"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/button_layout">
         <LinearLayout
-            android:id="@+id/button_layout"
-            android:layout_width="wrap_content"
+            android:id="@+id/layout_weight"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toTopOf="@id/version_code"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
-            <ImageButton
-                android:id="@+id/github_button"
+            android:layout_marginTop="@dimen/margin_small"
+            android:layout_marginBottom="@dimen/margin_small"
+            android:orientation="horizontal">
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/padding_medium"
-                android:src="@drawable/ic_github"
-                android:tint="@color/primaryText"
-                android:background="?attr/selectableItemBackgroundBorderless"/>
+                android:padding="@dimen/padding_medium_small"
+                android:text="Weight"
+                android:textSize="@dimen/text_large"
+                android:textStyle="bold"/>
+            <LinearLayout
+                android:id="@+id/weight_type_choose"
+                android:layout_width="60dp"
+                android:layout_height="match_parent"
+                android:padding="5dp"
+                android:layout_marginStart="@dimen/margin_small_medium"
+                android:background="@drawable/background_border_primarydark"
+                android:gravity="center">
+                <TextView
+                    android:id="@+id/weight_type_chooseTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="KG"
+                    android:textStyle="bold"/>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_arrow_down"
+                    android:tint="@color/primaryText"/>
+            </LinearLayout>
         </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_length"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_small"
+            android:layout_marginBottom="@dimen/margin_small"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/padding_medium_small"
+                android:text="Length"
+                android:textSize="@dimen/text_large"
+                android:textStyle="bold"/>
+            <LinearLayout
+                android:id="@+id/lenght_type_choose"
+                android:layout_width="60dp"
+                android:layout_height="match_parent"
+                android:padding="5dp"
+                android:layout_marginStart="@dimen/margin_small_medium"
+                android:background="@drawable/background_border_primarydark"
+                android:gravity="center">
+                <TextView
+                    android:id="@+id/lenght_type_chooseTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="CM"
+                    android:textStyle="bold"/>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_arrow_down"
+                    android:tint="@color/primaryText"/>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/button_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@id/version_code"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+        <ImageButton
+            android:id="@+id/github_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_medium"
+            android:src="@drawable/ic_github"
+            android:tint="@color/primaryText"
+            android:background="?attr/selectableItemBackgroundBorderless"/>
+    </LinearLayout>
 
     <TextView
         android:id="@+id/version_code"

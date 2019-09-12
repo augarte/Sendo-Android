@@ -82,6 +82,7 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
             var weightType = WeightType()
             weightType.code = type.first
             weightType.name = type.second
+            weightType.choosed = type == DatabaseConstants.LIST_WEIGHTTYPE[0]
             insertWeightType(weightType)
         }
 
@@ -89,6 +90,7 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
             var lengthType = LengthType()
             lengthType.code = type.first
             lengthType.name = type.second
+            lengthType.choosed = type == DatabaseConstants.LIST_LENGTHTYPE[0]
             insertLenghtType(lengthType)
         }
 
@@ -418,6 +420,7 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
                 weightType.id = cursor.getInt(cursor.getColumnIndex(DatabaseConstants.TABLE_WEIGHTTYPE_ID))
                 weightType.name = cursor.getString(cursor.getColumnIndex(DatabaseConstants.TABLE_WEIGHTTYPE_NAME))
                 weightType.code = cursor.getString(cursor.getColumnIndex(DatabaseConstants.TABLE_WEIGHTTYPE_CODE))
+                weightType.choosed = cursor.getInt(cursor.getColumnIndex(DatabaseConstants.TABLE_WEIGHTTYPE_CHOOSED)) == 1
                 weightType.createDate = Date((createDateUnixSeconds * 1000))
                 weightType.modifyDate = Date((modifyDateUnixSeconds * 1000))
 
@@ -431,6 +434,25 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
         return weightTypeList
     }
 
+    fun updateWeightTypeChoosed(weightType: WeightType): Int {
+        val db = this.writableDatabase
+        val values = ContentValues()
+
+        values.put(DatabaseConstants.TABLE_WEIGHTTYPE_CHOOSED, if (weightType.choosed) 0 else 1)
+
+        var id : Int = -1
+        try {
+            id = db.update(DatabaseConstants.TABLE_WEIGHTTYPE, values, "${DatabaseConstants.TABLE_WEIGHTTYPE_ID}=?", arrayOf(weightType.id.toString()))
+        } catch (e: Exception) {
+            Log.e("DB ERROR", e.toString())
+            e.printStackTrace()
+        }
+
+        db.close()
+
+        return id
+    }
+
     private fun insertWeightType(weightType: WeightType): Long {
         val db = this.writableDatabase
         val values = ContentValues()
@@ -439,6 +461,7 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
 
         values.put(DatabaseConstants.TABLE_WEIGHTTYPE_CODE, weightType.code)
         values.put(DatabaseConstants.TABLE_WEIGHTTYPE_NAME, weightType.name)
+        values.put(DatabaseConstants.TABLE_WEIGHTTYPE_CHOOSED, if (weightType.choosed) 1 else 0)
         values.put(DatabaseConstants.TABLE_WEIGHTTYPE_CREATEDATE, unixTime)
         values.put(DatabaseConstants.TABLE_MEASURETYPE_MODIFYDATE, unixTime)
 
@@ -458,7 +481,7 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
      /********** LENGTH TYPES **********/
     /**********************************/
 
-    fun getLenghtType(query: String, array: Array<String>?): ArrayList<LengthType>? {
+    fun getLengthType(query: String, array: Array<String>?): ArrayList<LengthType>? {
         val db = this.writableDatabase
         val cursor : Cursor
         cursor = db.rawQuery(query, array)
@@ -473,6 +496,7 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
                 lengthType.id = cursor.getInt(cursor.getColumnIndex(DatabaseConstants.TABLE_LENGTHTYPE_ID))
                 lengthType.name = cursor.getString(cursor.getColumnIndex(DatabaseConstants.TABLE_LENGTHTYPE_NAME))
                 lengthType.code = cursor.getString(cursor.getColumnIndex(DatabaseConstants.TABLE_LENGTHTYPE_CODE))
+                lengthType.choosed = cursor.getInt(cursor.getColumnIndex(DatabaseConstants.TABLE_LENGTHTYPE_CHOOSED)) == 1
                 lengthType.createDate = Date((createDateUnixSeconds * 1000))
                 lengthType.modifyDate = Date((modifyDateUnixSeconds * 1000))
 
@@ -486,6 +510,25 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
         return lengthTypeList
     }
 
+    fun updateLengthTypeChoosed(lengthType: LengthType): Int {
+        val db = this.writableDatabase
+        val values = ContentValues()
+
+        values.put(DatabaseConstants.TABLE_LENGTHTYPE_CHOOSED, if (lengthType.choosed) 0 else 1)
+
+        var id : Int = -1
+        try {
+            id = db.update(DatabaseConstants.TABLE_LENGTHTYPE, values, "${DatabaseConstants.TABLE_LENGTHTYPE_ID}=?", arrayOf(lengthType.id.toString()))
+        } catch (e: Exception) {
+            Log.e("DB ERROR", e.toString())
+            e.printStackTrace()
+        }
+
+        db.close()
+
+        return id
+    }
+
     private fun insertLenghtType(lengthType: LengthType): Long {
         val db = this.writableDatabase
         val values = ContentValues()
@@ -494,6 +537,7 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
 
         values.put(DatabaseConstants.TABLE_LENGTHTYPE_CODE, lengthType.code)
         values.put(DatabaseConstants.TABLE_LENGTHTYPE_NAME, lengthType.name)
+        values.put(DatabaseConstants.TABLE_LENGTHTYPE_CHOOSED, if (lengthType.choosed) 1 else 0)
         values.put(DatabaseConstants.TABLE_LENGTHTYPE_CREATEDATE, unixTime)
         values.put(DatabaseConstants.TABLE_LENGTHTYPE_MODIFYDATE, unixTime)
 

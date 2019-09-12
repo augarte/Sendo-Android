@@ -96,12 +96,14 @@ class DatabaseConstants {
         const val TABLE_WEIGHTTYPE_ID = "_id"
         const val TABLE_WEIGHTTYPE_NAME = "name"
         const val TABLE_WEIGHTTYPE_CODE = "code"
+        const val TABLE_WEIGHTTYPE_CHOOSED = "choosed"
         const val TABLE_WEIGHTTYPE_CREATEDATE = "createDate"
         const val TABLE_WEIGHTTYPE_MODIFYDATE = "modifydate"
 
         const val TABLE_LENGTHTYPE_ID = "_id"
         const val TABLE_LENGTHTYPE_NAME = "name"
         const val TABLE_LENGTHTYPE_CODE = "code"
+        const val TABLE_LENGTHTYPE_CHOOSED = "choosed"
         const val TABLE_LENGTHTYPE_CREATEDATE = "createDate"
         const val TABLE_LENGTHTYPE_MODIFYDATE = "modifydate"
 

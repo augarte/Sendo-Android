@@ -12,6 +12,7 @@
     <color name="colorAccentLight">#FFF07B</color>-->
 
     <color name="red">#f4564e</color>
+    <color name="rippleEfect">#42ffffff</color>
 
     <!--TEXT-->
     <color name="primaryText">@color/colorPrimaryDark</color>
