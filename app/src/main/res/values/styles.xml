@@ -25,4 +25,8 @@
         <item name="android:textColor">@color/toolbar_text</item>
     </style>
 
+    <style name="CustomDialog" parent="@style/Theme.AppCompat.Light.Dialog">
+        <item name="android:windowNoTitle">false</item>
+    </style>
+
 </resources>

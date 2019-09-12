@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import augarte.sendo.R
@@ -86,9 +87,11 @@ class MeasurementsFragment : Fragment() {
             adapter = MeasurementAdapter(measurements)
         }
 
+
+        val addMeasureDialog = AddMeasureDialogFragment()
+        addMeasureDialog.setStyle(DialogFragment.STYLE_NORMAL, R.style.CustomDialog)
         fab_add.setOnClickListener {
-            val dialog = CustomDialog()
-            dialog.show(fragmentManager!!, "MeassurementDialog")
+            addMeasureDialog.show(fragmentManager!!, addMeasureDialog.tag)
             fab_add.animate().rotation(if (fab_add.rotation==0f) fab_add.rotation+45 else fab_add.rotation-45).start()
         }
     }

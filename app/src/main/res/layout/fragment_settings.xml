@@ -43,6 +43,7 @@
                     android:id="@+id/weight_type_chooseTV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:padding="@dimen/padding_small"
                     android:text="KG"
                     android:textStyle="bold"/>
                 <ImageView
@@ -79,6 +80,7 @@
                     android:id="@+id/lenght_type_chooseTV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:padding="@dimen/padding_small"
                     android:text="CM"
                     android:textStyle="bold"/>
                 <ImageView
