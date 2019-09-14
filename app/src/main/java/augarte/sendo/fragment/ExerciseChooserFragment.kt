@@ -23,7 +23,7 @@ class ExerciseChooserFragment(var title: String) : Fragment() {
 
         day_title.text = title
 
-        val exerciseList = MainActivity.dbHandler!!.getExercise(SelectTransactions.SELECT_ALL_EXERCISE_ORDER_NAME)
+        val exerciseList = MainActivity.dbHandler!!.getExercise(SelectTransactions.SELECT_ALL_EXERCISE_ORDER_NAME, null)
 
         val exerciseAdapter = ExerciseChooseAdapter(exerciseList)
         exercise_list.apply {

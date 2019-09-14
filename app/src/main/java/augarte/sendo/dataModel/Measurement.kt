@@ -1,13 +1,12 @@
 package augarte.sendo.dataModel
 
-import java.sql.Blob
-import java.sql.Date
+import java.util.*
 
 class Measurement {
     var id: Int? = null
-    var type: Int? = null
+    var type: MeasureType? = null
     var value: Int? = null
-    var date: Blob? = null
+    var date: Date? = null
     var createdBy: User? = null
     var createDate: Date? = null
     var modifyDate: Date? = null

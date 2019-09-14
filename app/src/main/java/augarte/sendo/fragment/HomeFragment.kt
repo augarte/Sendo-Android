@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView
 import augarte.sendo.activity.CreateWorkoutActivity
 import augarte.sendo.activity.MainActivity
 import augarte.sendo.activity.SearchWorkoutActivity
+import augarte.sendo.database.SelectTransactions
 import augarte.sendo.view.CustomTapTargetView
 import com.getkeepsafe.taptargetview.TapTargetView
 import com.leinardi.android.speeddial.SpeedDialActionItem
@@ -38,7 +39,7 @@ class HomeFragment : Fragment(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val workoutList : ArrayList<Workout> = MainActivity.dbHandler!!.getAllWorkouts()
+        val workoutList : ArrayList<Workout> = MainActivity.dbHandler!!.getWorkouts(SelectTransactions.SELECT_ALL_WORKOUT_ORDER_NAME, null)
 
         if (workoutList.size > 0) {
             val workoutAdapter = WorkoutAdapter(workoutList)

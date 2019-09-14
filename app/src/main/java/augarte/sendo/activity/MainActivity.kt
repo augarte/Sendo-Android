@@ -22,12 +22,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         var dbHandler: DatabaseHandler? = null
     }
 
+    private var fragment: Fragment? = HomeFragment()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
         //init db
         dbHandler = DatabaseHandler(this)
-        dbHandler!!.deleteAllTables()
+        //dbHandler!!.deleteAllTables()
 
         setSupportActionBar(toolbar)
 
@@ -51,29 +53,41 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     override fun onNavigationItemSelected(menuItem: MenuItem): Boolean {
-        var fragment: Fragment? = null
+        var replace = false
 
         when (menuItem.itemId) {
             R.id.nav_home -> {
-                fragment = HomeFragment()
+                if (fragment !is HomeFragment){
+                    fragment = HomeFragment()
+                    replace = true
+                }
             }
 
             R.id.nav_measurement -> {
-                fragment = MeasurementsFragment()
+                if (fragment !is MeasurementsFragment){
+                    fragment = MeasurementsFragment()
+                    replace = true
+                }
             }
 
             R.id.nav_exercise_list -> {
-                fragment = ExerciseListFragment()
+                if (fragment !is ExerciseListFragment){
+                    fragment = ExerciseListFragment()
+                    replace = true
+                }
             }
 
             R.id.nav_settings -> {
-                fragment = SettingsFragment()
+                if (fragment !is SettingsFragment){
+                    fragment = SettingsFragment()
+                    replace = true
+                }
             }
         }
 
-        if (fragment != null)  {
+        if (fragment != null && replace)  {
             val transaction = supportFragmentManager.beginTransaction()
-            transaction.replace(R.id.main_frame, fragment)
+            transaction.replace(R.id.main_frame, fragment!!)
             transaction.commit()
         }
 

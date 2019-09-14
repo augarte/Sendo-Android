@@ -15,8 +15,12 @@ class SelectTransactions {
         const val SELECT_ALL_EXERCISETYPE = "SELECT * FROM ${DatabaseConstants.TABLE_EXERCISETYPE}"
         const val SELECT_EXERCISETYPE_BY_ID = "SELECT * FROM ${DatabaseConstants.TABLE_EXERCISETYPE} WHERE ${DatabaseConstants.TABLE_EXERCISETYPE_ID} = ?"
 
+        const val SELECT_MEASUREMENT_BY_TYPE = "SELECT * FROM ${DatabaseConstants.TABLE_MEASUREMENT} WHERE ${DatabaseConstants.TABLE_MEASUREMENT_TYPE} = ?"
+
         const val SELECT_ALL_DATETYPE = "SELECT * FROM ${DatabaseConstants.TABLE_DATETYPE}"
+
         const val SELECT_ALL_MEASURETYPE = "SELECT * FROM ${DatabaseConstants.TABLE_MEASURETYPE}"
+        const val SELECT_MEASURETYPE_BY_ID = "SELECT * FROM ${DatabaseConstants.TABLE_MEASURETYPE} WHERE ${DatabaseConstants.TABLE_MEASURETYPE_ID} = ?"
 
         const val SELECT_ALL_WEIGHTTYPE = "SELECT * FROM ${DatabaseConstants.TABLE_WEIGHTTYPE}"
         const val SELECT_WEIGHTTYPE_BY_CHOOSED = "SELECT * FROM ${DatabaseConstants.TABLE_WEIGHTTYPE} WHERE ${DatabaseConstants.TABLE_WEIGHTTYPE_CHOOSED} = 1"

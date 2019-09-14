@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.widget.DatePicker
 import android.widget.LinearLayout
 import augarte.sendo.R
+import augarte.sendo.utils.Utils
 import kotlinx.android.synthetic.main.item_date_picker.view.*
 import java.util.*
 import java.text.SimpleDateFormat
@@ -44,9 +45,8 @@ class DatePicker @JvmOverloads constructor(context: Context, attrs: AttributeSet
         year = p1
         month = p2
         day = p3
-        val dateString = "$year/$month/$day"
 
-        c.time = dateFormat.parse(dateString)
+        c.time = Utils.partseDatePickerValues(year, month, day)
 
         setDate()
     }

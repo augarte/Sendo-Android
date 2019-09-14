@@ -22,4 +22,7 @@
     <string name="day_number">Day number</string>
     <string name="delete">Delete</string>
     <string name="archived">Archived</string>
+    <string name="tomorrow">Tomorrow</string>
+    <string name="yesterday">Yesterday</string>
+    <string name="today">Today</string>
 </resources>

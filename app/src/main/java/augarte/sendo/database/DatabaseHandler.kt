@@ -112,26 +112,24 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
      /********** WORKOUTS **********/
     /******************************/
 
-    fun getAllWorkouts(): ArrayList<Workout> {
+    fun getWorkouts(query: String, array: Array<String>?): ArrayList<Workout> {
         val workouts = ArrayList<Workout>()
 
         val db = this.writableDatabase
-        val cursor = db.rawQuery(SelectTransactions.SELECT_ALL_WORKOUT_ORDER_NAME, null)
+        val cursor = db.rawQuery(query, array)
 
         if (cursor.moveToFirst()) {
             do {
                 val workout = Workout()
-                val id = cursor.getInt(cursor.getColumnIndex(DatabaseConstants.TABLE_WORKOUT_ID))
                 val blob = cursor.getBlob(cursor.getColumnIndex(DatabaseConstants.TABLE_WORKOUT_IMAGE))
                 var image: Bitmap?
-                image = if (blob!= null) BitmapFactory.decodeByteArray(blob, 0, blob.size)
-                else null
+                image = if (blob!= null) BitmapFactory.decodeByteArray(blob, 0, blob.size) else null
                 val userId = cursor.getInt(cursor.getColumnIndex(DatabaseConstants.TABLE_WORKOUT_CREATEDBY))
                 val lastOpenUnixSeconds =  cursor.getLong(cursor.getColumnIndex(DatabaseConstants.TABLE_WORKOUT_LASTOPEN))
                 val createDateUnixSeconds = cursor.getLong(cursor.getColumnIndex(DatabaseConstants.TABLE_WORKOUT_CREATEDATE))
                 val modifyDateUnixSeconds = cursor.getLong(cursor.getColumnIndex(DatabaseConstants.TABLE_WORKOUT_MODIFYDATE))
 
-                workout.id = id
+                workout.id = cursor.getInt(cursor.getColumnIndex(DatabaseConstants.TABLE_WORKOUT_ID))
                 workout.name = cursor.getString(cursor.getColumnIndex(DatabaseConstants.TABLE_WORKOUT_NAME))
                 workout.image = image
                 workout.description = cursor.getString(cursor.getColumnIndex(DatabaseConstants.TABLE_WORKOUT_DESCRIPTION))
@@ -188,32 +186,27 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
      /********** EXERCISES **********/
     /*******************************/
 
-    fun getExercise(query: String): ArrayList<Exercise> {
+    fun getExercise(query: String, array: Array<String>?): ArrayList<Exercise> {
         val exercises = ArrayList<Exercise>()
 
         val db = this.writableDatabase
         val cursor : Cursor
-        cursor = db.rawQuery(query, null)
+        cursor = db.rawQuery(query, array)
 
         if (cursor.moveToFirst()) {
             do {
                 val exercise = Exercise()
-                val id = cursor.getInt(cursor.getColumnIndex(DatabaseConstants.TABLE_EXERCISE_ID))
                 val exerciseTypeId = cursor.getString(cursor.getColumnIndex(DatabaseConstants.TABLE_EXERCISE_TYPE))
                 val exerciseTypeList = getExerciseType(SelectTransactions.SELECT_EXERCISETYPE_BY_ID, arrayOf(exerciseTypeId))
-                val exerciseType = if (exerciseTypeList!!.size >= 1){
-                    exerciseTypeList[0]
-                }
-                else null
+                val exerciseType = if (exerciseTypeList!!.size >= 1) exerciseTypeList[0] else null
                 val blob = cursor.getBlob(cursor.getColumnIndex(DatabaseConstants.TABLE_EXERCISE_IMAGE))
                 var image: Bitmap?
-                image = if (blob!= null) BitmapFactory.decodeByteArray(blob, 0, blob.size)
-                else null
+                image = if (blob!= null) BitmapFactory.decodeByteArray(blob, 0, blob.size) else null
                 val userId = cursor.getInt(cursor.getColumnIndex(DatabaseConstants.TABLE_EXERCISE_CREATEDBY))
                 val createDateUnixSeconds = cursor.getLong(cursor.getColumnIndex(DatabaseConstants.TABLE_EXERCISE_CREATEDATE))
                 val modifyDateUnixSeconds = cursor.getLong(cursor.getColumnIndex(DatabaseConstants.TABLE_EXERCISE_MODIFYDATE))
 
-                exercise.id = id
+                exercise.id = cursor.getInt(cursor.getColumnIndex(DatabaseConstants.TABLE_EXERCISE_ID))
                 exercise.name = cursor.getString(cursor.getColumnIndex(DatabaseConstants.TABLE_EXERCISE_NAME))
                 exercise.description = cursor.getString(cursor.getColumnIndex(DatabaseConstants.TABLE_EXERCISE_DESCRIPTION))
                 exercise.image = image
@@ -233,7 +226,6 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
 
         return exercises
     }
-
 
     fun insertExercise(exercise: Exercise): Long {
         val db = this.writableDatabase
@@ -261,6 +253,7 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
         db.close()
         return id
     }
+
     fun updateExerciseState(exercise: Exercise){
         val db = this.writableDatabase
         var values = ContentValues()
@@ -269,6 +262,73 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
         db.update(DatabaseConstants.TABLE_EXERCISE, values, "${DatabaseConstants.TABLE_EXERCISE_ID} = ${exercise.id}", null)
         db.close()
     }
+
+
+      /*********************************/
+     /********** MEASUREMENT **********/
+    /*********************************/
+
+    fun getMeasurement(query: String, array: Array<String>?): ArrayList<Measurement> {
+        val measurements = ArrayList<Measurement>()
+
+        val db = this.writableDatabase
+        val cursor : Cursor
+        cursor = db.rawQuery(query, array)
+
+        if (cursor.moveToFirst()) {
+            do {
+                val measurement = Measurement()
+                val measureTypeId = cursor.getString(cursor.getColumnIndex(DatabaseConstants.TABLE_MEASUREMENT_TYPE))
+                val measureTypeList = getMeasureType(SelectTransactions.SELECT_MEASURETYPE_BY_ID, arrayOf(measureTypeId))
+                val measureType = if (measureTypeList!!.size >= 1) measureTypeList[0] else null
+                val valueDate = cursor.getLong(cursor.getColumnIndex(DatabaseConstants.TABLE_MEASUREMENT_DATE))
+                val userId = cursor.getInt(cursor.getColumnIndex(DatabaseConstants.TABLE_MEASUREMENT_CREATEDBY))
+                val createDateUnixSeconds = cursor.getLong(cursor.getColumnIndex(DatabaseConstants.TABLE_MEASUREMENT_CREATEDATE))
+                val modifyDateUnixSeconds = cursor.getLong(cursor.getColumnIndex(DatabaseConstants.TABLE_MEASUREMENT_MODIFYDATE))
+
+                measurement.id = cursor.getInt(cursor.getColumnIndex(DatabaseConstants.TABLE_MEASUREMENT_ID))
+                measurement.type = measureType
+                measurement.value = cursor.getInt(cursor.getColumnIndex(DatabaseConstants.TABLE_MEASUREMENT_VALUE))
+                measurement.date = Date((valueDate * 1000))
+                measurement.createdBy = getUserByUserId(userId)
+                measurement.createDate = Date((createDateUnixSeconds * 1000))
+                measurement.modifyDate = Date((modifyDateUnixSeconds * 1000))
+
+                measurements.add(measurement)
+            } while (cursor.moveToNext())
+        }
+
+        cursor.close()
+        db.close()
+
+        return measurements
+    }
+
+    fun insertMeasurement(measurement: Measurement): Long {
+        val db = this.writableDatabase
+        val values = ContentValues()
+
+        val unixTime = Utils.getUnixSeconds()
+
+        values.put(DatabaseConstants.TABLE_MEASUREMENT_TYPE, measurement.type!!.id)
+        values.put(DatabaseConstants.TABLE_MEASUREMENT_VALUE, measurement.value)
+        values.put(DatabaseConstants.TABLE_MEASUREMENT_DATE, measurement.date!!.time)
+        values.put(DatabaseConstants.TABLE_MEASUREMENT_CREATEDBY, measurement.createdBy?.id)
+        values.put(DatabaseConstants.TABLE_MEASUREMENT_CREATEDATE, unixTime)
+        values.put(DatabaseConstants.TABLE_MEASUREMENT_MODIFYDATE, unixTime)
+
+        var id : Long = -1
+        try {
+            id = db.insert(DatabaseConstants.TABLE_MEASUREMENT, null, values)
+        } catch (e: Exception) {
+            Log.e("DB ERROR", e.toString())
+            e.printStackTrace()
+        }
+
+        db.close()
+        return id
+    }
+
 
       /************************************/
      /********** EXERCISE TYPES **********/

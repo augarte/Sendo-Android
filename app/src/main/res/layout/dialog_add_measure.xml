@@ -1,66 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingStart="@dimen/margin_small_medium_plus"
+    android:paddingTop="@dimen/margin_small_plus"
+    android:paddingBottom="@dimen/margin_small_plus"
+    android:paddingStart="@dimen/margin_small_medium"
     android:paddingEnd="@dimen/margin_small_medium_plus">
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/measureTypeTV"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:paddingTop="@dimen/padding_medium"
-        android:paddingBottom="@dimen/padding_medium"
-        android:paddingStart="@dimen/padding_small"
-        android:paddingEnd="@dimen/padding_small">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Measure type"
-            android:textSize="@dimen/text_medium"/>
+        android:layout_marginTop="@dimen/margin_small_medium_plus"
+        android:layout_marginEnd="@dimen/margin_small_plus"
+        android:text="Measure type"
+        android:textSize="@dimen/text_medium"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/guideline"
+        app:layout_constraintStart_toStartOf="parent"/>
 
-        <Spinner
-            android:id="@+id/measureTypeSpiner"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_small_medium_plus" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/valueTV"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:padding="@dimen/padding_small">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Insert value"
-            android:textSize="@dimen/text_medium"/>
+        android:layout_marginTop="@dimen/margin_small_medium_plus"
+        android:layout_marginEnd="@dimen/margin_small_plus"
+        android:text="Insert value"
+        android:textSize="@dimen/text_medium"
+        app:layout_constraintTop_toBottomOf="@id/measureTypeTV"
+        app:layout_constraintEnd_toStartOf="@id/guideline"
+        app:layout_constraintStart_toStartOf="parent"/>
 
-        <EditText
-            android:id="@+id/valueET"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_small_medium_plus"
-            android:textSize="@dimen/text_medium" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/dateTV"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:paddingTop="@dimen/padding_medium"
-        android:paddingBottom="@dimen/padding_medium"
-        android:paddingStart="@dimen/padding_small"
-        android:paddingEnd="@dimen/padding_small">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Date"
-            android:textSize="@dimen/text_medium"/>
-        <TextView
-            android:id="@+id/dateTV"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_small_medium_plus" />
-    </LinearLayout>
+        android:layout_marginTop="@dimen/margin_small_medium_plus"
+        android:layout_marginEnd="@dimen/margin_small_plus"
+        android:text="Date"
+        android:textSize="@dimen/text_medium"
+        app:layout_constraintTop_toBottomOf="@id/valueTV"
+        app:layout_constraintEnd_toStartOf="@id/guideline"
+        app:layout_constraintStart_toStartOf="parent"/>
 
-</LinearLayout>
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5"/>
+
+    <Spinner
+        android:id="@+id/measureTypeSpiner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/measureTypeTV"
+        app:layout_constraintBottom_toBottomOf="@id/measureTypeTV"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <EditText
+        android:id="@+id/valueET"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxLength="4"
+        android:inputType="number"
+        android:textSize="@dimen/text_medium"
+        app:layout_constraintTop_toTopOf="@id/valueTV"
+        app:layout_constraintBottom_toBottomOf="@id/valueTV"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <EditText
+        android:id="@+id/dateValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Today"
+        android:textSize="@dimen/text_medium"
+        android:clickable="true"
+        android:focusable="false"
+        app:layout_constraintTop_toTopOf="@id/dateTV"
+        app:layout_constraintBottom_toBottomOf="@id/dateTV"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
