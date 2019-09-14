@@ -3,6 +3,7 @@ package augarte.sendo.fragment
 import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.app.Dialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.DatePicker
@@ -62,7 +63,7 @@ class AddMeasureDialogFragment(private val listener: MeasurementsFragment.OnDial
                     }
                 }
                 .setNegativeButton("Cancel") { _, _ ->
-                    listener.onDialogCancel(this)
+                    dismiss()
                 }
                 .setView(view)
                 .create()
@@ -84,5 +85,10 @@ class AddMeasureDialogFragment(private val listener: MeasurementsFragment.OnDial
             c.get(Calendar.DATE) - today.get(Calendar.DATE) == 1 -> dateValue.text = getString(R.string.tomorrow)
             else -> dateValue.text = dateFormat.format(c.time)
         }
+    }
+
+    override fun onDismiss(dialog: DialogInterface) {
+        super.onDismiss(dialog)
+        listener.onDialogDismiss()
     }
 }

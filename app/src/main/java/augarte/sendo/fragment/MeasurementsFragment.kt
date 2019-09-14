@@ -1,6 +1,7 @@
 package augarte.sendo.fragment
 
 import android.app.AlertDialog
+import android.content.DialogInterface
 import android.graphics.PointF
 import android.os.Bundle
 import android.os.Handler
@@ -80,8 +81,8 @@ class MeasurementsFragment : Fragment() {
                 refreshData()
                 dialog.dismiss()
             }
-            override fun onDialogCancel(dialog: DialogFragment) {
-                dialog.dismiss()
+            override fun onDialogDismiss() {
+                fab_add.animate().rotation(if (fab_add.rotation==0f) fab_add.rotation+45 else fab_add.rotation-45).start()
             }
         }
 
@@ -106,16 +107,13 @@ class MeasurementsFragment : Fragment() {
 
     private fun createChart(){
         if (measurements.size>0) {
-
             var array = Array(measurements.size) {PointF(0f,0f)}
             for ((i, m) in measurements.withIndex())  {
                 array[i] = PointF(m.id!!.toFloat(), m.value!!.toFloat())
             }
             chart.setData(array)
-/*
-            chart.setData(arrayOf(PointF(15f, 39f), PointF(20f, 21f), PointF(28f, 9f), PointF(37f, 21f), PointF(40f, 25f), PointF(50f, 31f), PointF(62f, 24f), PointF(80f, 28f)))
-*/
-        }else {
+            /*chart.setData(arrayOf(PointF(15f, 39f), PointF(20f, 21f), PointF(28f, 9f), PointF(37f, 21f), PointF(40f, 25f), PointF(50f, 31f), PointF(62f, 24f), PointF(80f, 28f)))*/
+        } else {
             chart.visibility = View.GONE
             chart_no_data.visibility = View.VISIBLE
         }
@@ -123,6 +121,6 @@ class MeasurementsFragment : Fragment() {
 
     interface OnDialogClickListener {
         fun onDialogAccept(dialog: DialogFragment)
-        fun onDialogCancel(dialog: DialogFragment)
+        fun onDialogDismiss()
     }
 }

@@ -122,6 +122,5 @@ class CreateWorkoutAdapter(private val items : ArrayList<Day>, val rv : Recycler
         val exercise_list : TextView = view.exercise_list
         val arrow : ImageButton = view.drop_arrow
         val edit : ImageButton = view.edit
-
     }
 }
