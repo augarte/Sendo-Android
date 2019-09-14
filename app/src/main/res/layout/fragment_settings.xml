@@ -29,29 +29,34 @@
                 android:layout_height="wrap_content"
                 android:padding="@dimen/padding_medium_small"
                 android:text="Weight"
+                android:textColor="@color/primaryText"
                 android:textSize="@dimen/text_large"
                 android:textStyle="bold"/>
-            <LinearLayout
+            <androidx.coordinatorlayout.widget.CoordinatorLayout
                 android:id="@+id/weight_type_choose"
-                android:layout_width="60dp"
+                android:layout_width="@dimen/view_medium_large"
                 android:layout_height="match_parent"
                 android:padding="5dp"
                 android:layout_marginStart="@dimen/margin_small_medium"
-                android:background="@drawable/background_border_primarydark"
-                android:gravity="center">
+                android:background="@drawable/selectable_background_border_primary"
+                android:gravity="center_vertical">
                 <TextView
                     android:id="@+id/weight_type_chooseTV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|start"
                     android:padding="@dimen/padding_small"
                     android:text="KG"
+                    android:maxLength="4"
+                    android:textColor="@color/primaryText"
                     android:textStyle="bold"/>
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|end"
                     android:src="@drawable/ic_arrow_down"
                     android:tint="@color/primaryText"/>
-            </LinearLayout>
+            </androidx.coordinatorlayout.widget.CoordinatorLayout>
         </LinearLayout>
 
         <LinearLayout
@@ -66,29 +71,34 @@
                 android:layout_height="wrap_content"
                 android:padding="@dimen/padding_medium_small"
                 android:text="Length"
+                android:textColor="@color/primaryText"
                 android:textSize="@dimen/text_large"
                 android:textStyle="bold"/>
-            <LinearLayout
+            <androidx.coordinatorlayout.widget.CoordinatorLayout
                 android:id="@+id/lenght_type_choose"
-                android:layout_width="60dp"
+                android:layout_width="@dimen/view_medium_large"
                 android:layout_height="match_parent"
                 android:padding="5dp"
                 android:layout_marginStart="@dimen/margin_small_medium"
-                android:background="@drawable/background_border_primarydark"
+                android:background="@drawable/selectable_background_border_primary"
                 android:gravity="center">
                 <TextView
                     android:id="@+id/lenght_type_chooseTV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|start"
                     android:padding="@dimen/padding_small"
                     android:text="CM"
+                    android:maxLength="4"
+                    android:textColor="@color/primaryText"
                     android:textStyle="bold"/>
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|end"
                     android:src="@drawable/ic_arrow_down"
                     android:tint="@color/primaryText"/>
-            </LinearLayout>
+            </androidx.coordinatorlayout.widget.CoordinatorLayout>
         </LinearLayout>
     </LinearLayout>
 
