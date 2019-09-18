@@ -13,4 +13,6 @@ class Exercise{
     var createdBy: User? = null
     var createDate: Date? = null
     var modifyDate: Date? = null
+
+    var selected: Boolean = false
 }

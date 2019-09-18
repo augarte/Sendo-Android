@@ -15,9 +15,9 @@ import augarte.sendo.utils.toPx
 import augarte.sendo.utils.toPxF
 import kotlinx.android.synthetic.main.item_day_card.view.*
 
-class CreateWorkoutAdapter(private val items : ArrayList<Day>, val rv : RecyclerView) : RecyclerView.Adapter<CreateWorkoutAdapter.ViewHolder>() {
+class CreateWorkoutAdapter(private val items : ArrayList<Day>, private val rv : RecyclerView) : RecyclerView.Adapter<CreateWorkoutAdapter.ViewHolder>() {
 
-    var onDayEdit: ((title: String) -> Unit)? = null
+    var onDayEdit: ((title: String, selectedExercises: ArrayList<Exercise>, listener: OnExerciseSelectedListener) -> Unit)? = null
 
     private lateinit var inflater: LayoutInflater
     private lateinit var context: Context
@@ -34,9 +34,9 @@ class CreateWorkoutAdapter(private val items : ArrayList<Day>, val rv : Recycler
         val item = items[position]
 
         holder.card_title.text = item.name.toString()
-        holder.exercise_list.text = createExerciseList(item.getExercises())
+        holder.exercise_list.text = createExerciseList(item.exercises)
 
-        var listener = View.OnClickListener {
+        val listener = View.OnClickListener {
             if (holder.arrow.rotation == 0f) {
                 Animations.rotate(holder.arrow, 180f)
                 Animations.toggleCardBody(holder.card, 80.toPx, 180.toPx)
@@ -55,8 +55,23 @@ class CreateWorkoutAdapter(private val items : ArrayList<Day>, val rv : Recycler
         }
         holder.arrow.setOnClickListener(listener)
 
+
+        val exerciseSelectedListener = object: OnExerciseSelectedListener {
+            override fun onSelect(exercise: Exercise) {
+                item.exercises.add(exercise)
+                holder.exercise_list.text = createExerciseList(item.exercises)
+            }
+
+            override fun onDeselected(exercise: Exercise) {
+                val e = item.exercises.find { x -> x.id == exercise.id }
+                if (e!=null) {
+                    item.exercises.add(e)
+                    holder.exercise_list.text = createExerciseList(item.exercises)
+                }
+            }
+        }
         holder.edit.setOnClickListener{
-            onDayEdit?.invoke(item.name.toString())
+            onDayEdit?.invoke(item.name.toString(), item.exercises, exerciseSelectedListener)
         }
 
         if (position!=0 && !newItem)  {
@@ -116,11 +131,15 @@ class CreateWorkoutAdapter(private val items : ArrayList<Day>, val rv : Recycler
     }
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-
         val card : CardView = view.card
         val card_title : TextView = view.card_title
         val exercise_list : TextView = view.exercise_list
         val arrow : ImageButton = view.drop_arrow
         val edit : ImageButton = view.edit
+    }
+
+    interface OnExerciseSelectedListener {
+        fun onSelect(exercise: Exercise)
+        fun onDeselected(exercise: Exercise)
     }
 }

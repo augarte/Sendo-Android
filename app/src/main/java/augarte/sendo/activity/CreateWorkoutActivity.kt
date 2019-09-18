@@ -24,6 +24,7 @@ import androidx.core.content.ContextCompat
 import augarte.sendo.utils.Animations
 import augarte.sendo.dataModel.Workout
 import android.provider.MediaStore
+import augarte.sendo.dataModel.Exercise
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 
 class CreateWorkoutActivity : AppCompatActivity() {
@@ -52,8 +53,9 @@ class CreateWorkoutActivity : AppCompatActivity() {
 
         val lManager = LinearLayoutManager(applicationContext)
         val workoutAdapter = CreateWorkoutAdapter(thisWorkout.dayList!!, day_rv)
-        workoutAdapter.onDayEdit = { title ->
-            bottomsheet.setFragment(ExerciseChooserFragment(title))
+
+        workoutAdapter.onDayEdit = { title, selectedExercises, listener ->
+            bottomsheet.setFragment(ExerciseChooserFragment(title, selectedExercises,  listener))
         }
         val animator = object : DefaultItemAnimator() {
             override fun canReuseUpdatedViewHolder(viewHolder: RecyclerView.ViewHolder): Boolean {
@@ -134,8 +136,7 @@ class CreateWorkoutActivity : AppCompatActivity() {
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         when(requestCode){
             PERMISSION_CODE -> {
-                if (grantResults.isNotEmpty() && grantResults[0] ==
-                        PackageManager.PERMISSION_GRANTED){
+                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED){
                     //permission from popup granted
                     pickImageFromGallery()
                 }
@@ -171,8 +172,8 @@ class CreateWorkoutActivity : AppCompatActivity() {
             title_layout.background = ContextCompat.getDrawable(this, R.drawable.background_rounded_white)
             day_layout.background = ContextCompat.getDrawable(this, R.drawable.background_rounded_white)
 
-            var anim1 = Animations.compress(add_image)
-            var anim2 = Animations.expand(delete_image)
+            val anim1 = Animations.compress(add_image)
+            val anim2 = Animations.expand(delete_image)
             anim1.startOffset = 500
             anim2.startOffset = 600
             add_image.startAnimation(anim1)
@@ -187,8 +188,8 @@ class CreateWorkoutActivity : AppCompatActivity() {
             title_layout.background = null
             day_layout.background = null
 
-            var anim1 = Animations.compress(delete_image)
-            var anim2 = Animations.expand(add_image)
+            val anim1 = Animations.compress(delete_image)
+            val anim2 = Animations.expand(add_image)
             anim2.startOffset = 100
             delete_image.startAnimation(anim1)
             add_image.startAnimation(anim2)
@@ -196,9 +197,11 @@ class CreateWorkoutActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        if (bottomsheet.getState() == BottomSheetBehavior.STATE_EXPANDED) bottomsheet.setState(BottomSheetBehavior.STATE_HALF_EXPANDED)
-        else if (bottomsheet.getState() == BottomSheetBehavior.STATE_HALF_EXPANDED) bottomsheet.setState(BottomSheetBehavior.STATE_COLLAPSED)
-        else super.onBackPressed()
-
+        when {
+            bottomsheet.getState() == BottomSheetBehavior.STATE_EXPANDED -> bottomsheet.setState(BottomSheetBehavior.STATE_COLLAPSED)
+            bottomsheet.getState() == BottomSheetBehavior.STATE_HALF_EXPANDED -> bottomsheet.setState(BottomSheetBehavior.STATE_COLLAPSED)
+            bottomsheet.getState() == BottomSheetBehavior.STATE_COLLAPSED -> bottomsheet.setState(BottomSheetBehavior.STATE_HIDDEN)
+            else -> super.onBackPressed()
+        }
     }
 }

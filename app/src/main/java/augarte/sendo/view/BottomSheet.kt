@@ -70,7 +70,8 @@ class BottomSheet @JvmOverloads constructor(context: Context, attrs: AttributeSe
                 .replace(R.id.frame, fragment, fragment.tag)
                 .addToBackStack(null)
                 .commit()
+        fm.executePendingTransactions()
 
-        setState(BottomSheetBehavior.STATE_HALF_EXPANDED)
+        setState(BottomSheetBehavior.STATE_COLLAPSED)
     }
 }

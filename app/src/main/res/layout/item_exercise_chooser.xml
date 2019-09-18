@@ -4,15 +4,17 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="@dimen/padding_medium_small"
+    android:paddingTop="@dimen/padding_medium_small"
+    android:paddingBottom="@dimen/padding_medium_small"
+    android:paddingStart="@dimen/padding_large"
+    android:paddingEnd="@dimen/padding_large"
     android:background="@color/colorPrimaryLight">
 
-
     <androidx.cardview.widget.CardView
+        android:id="@+id/imageCard"
         android:layout_width="50dp"
         android:layout_height="50dp"
         app:cardCornerRadius="25dp">
-
         <ImageView
             android:id="@+id/exercise_image"
             android:layout_width="match_parent"
@@ -24,7 +26,6 @@
             android:layout_height="match_parent"
             android:src="@drawable/ic_check"
             android:visibility="gone"/>
-
     </androidx.cardview.widget.CardView>
 
     <TextView
