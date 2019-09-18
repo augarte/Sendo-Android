@@ -1,21 +1,25 @@
 package augarte.sendo.activity
 
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityOptionsCompat
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
-import augarte.sendo.R
+import androidx.fragment.app.Fragment
 import augarte.sendo.dataModel.Workout
-import kotlinx.android.synthetic.main.activity_create_workout.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.item_workout_card.*
 import kotlinx.android.synthetic.main.item_workout_card.workout_card
+import augarte.sendo.R
+import augarte.sendo.adapter.WorkoutPagerAdapter
+import augarte.sendo.fragment.WorkoutPagerProgressFragment
+import augarte.sendo.fragment.WorkoutPagerTimerFragment
+import augarte.sendo.fragment.WorkoutPagerWorkoutFragment
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import kotlinx.android.synthetic.main.activity_workout.*
+
 
 class WorkoutActivity : AppCompatActivity() {
 
@@ -35,9 +39,34 @@ class WorkoutActivity : AppCompatActivity() {
         supportActionBar?.title = workout.name
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        card_text.text = workout.name
+        val pageAdapter = WorkoutPagerAdapter(supportFragmentManager)
+        pageAdapter.addFragment(WorkoutPagerWorkoutFragment())
+        pageAdapter.addFragment(WorkoutPagerProgressFragment())
+        pageAdapter.addFragment(WorkoutPagerTimerFragment())
+        viewPager.adapter = pageAdapter
+
+        bottomNavigation.setOnNavigationItemSelectedListener(BottomNavigationView.OnNavigationItemSelectedListener {item->
+            when(item.itemId){
+                R.id.workout ->{
+                    viewPager.currentItem = 0
+                    return@OnNavigationItemSelectedListener true
+                }
+                R.id.progress ->{
+                    viewPager.currentItem = 1
+                    return@OnNavigationItemSelectedListener true
+                }
+                R.id.timer ->{
+                    viewPager.currentItem = 2
+                    return@OnNavigationItemSelectedListener true
+                } else -> viewPager.currentItem = 1
+            }
+            false
+        })
+        bottomNavigation.selectedItemId = R.id.workout
+
+        /*card_text.text = workout.name
         //card_image.setImageBitmap(workout.image)
-        workout_card.isClickable = false
+        workout_card.isClickable = false*/
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

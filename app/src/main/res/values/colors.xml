@@ -38,6 +38,9 @@
     <color name="ExerciseUnarchiveBackground">#81C784</color>
     <color name="ExerciseArchiveIcon">@color/black</color>
 
+    <color name="pagerSelectedIcon">@color/white</color>
+    <color name="pagerUnSelectedIcon">@color/colorPrimaryLight</color>
+
     <!--ICONS-->
     <color name="fabIcon">@color/black</color>
     <color name="toolbarIcon">@color/white</color>
