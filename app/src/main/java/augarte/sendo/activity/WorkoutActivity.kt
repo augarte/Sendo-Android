@@ -5,13 +5,11 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
-import androidx.fragment.app.Fragment
 import augarte.sendo.dataModel.Workout
 import kotlinx.android.synthetic.main.app_bar_main.*
-import kotlinx.android.synthetic.main.item_workout_card.*
-import kotlinx.android.synthetic.main.item_workout_card.workout_card
 import augarte.sendo.R
 import augarte.sendo.adapter.WorkoutPagerAdapter
 import augarte.sendo.fragment.WorkoutPagerProgressFragment
@@ -27,6 +25,7 @@ class WorkoutActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        ActivityCompat.postponeEnterTransition(this)
         setContentView(R.layout.activity_workout)
 
         workout = if (savedInstanceState == null) {
@@ -67,15 +66,6 @@ class WorkoutActivity : AppCompatActivity() {
         /*card_text.text = workout.name
         //card_image.setImageBitmap(workout.image)
         workout_card.isClickable = false*/
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.option_menu, menu)
-        menu!!.findItem(R.id.delete).isVisible = true
-        menu.findItem(R.id.delete).icon.let {
-            DrawableCompat.setTint(ContextCompat.getDrawable(this, R.drawable.ic_delete)!!, ContextCompat.getColor(this, R.color.white))
-        }
-        return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {

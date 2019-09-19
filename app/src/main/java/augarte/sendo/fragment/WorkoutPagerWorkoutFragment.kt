@@ -1,12 +1,13 @@
 package augarte.sendo.fragment
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import augarte.sendo.R
-import kotlinx.android.synthetic.main.item_workout_card.*
+import augarte.sendo.utils.Animations
+import kotlinx.android.synthetic.main.item_workout_card.workout_card
+
 
 class WorkoutPagerWorkoutFragment : Fragment() {
 
@@ -18,5 +19,14 @@ class WorkoutPagerWorkoutFragment : Fragment() {
 
 
         workout_card.isClickable = false
+        ActivityCompat.startPostponedEnterTransition(requireActivity())
+
+        setHasOptionsMenu(true)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.option_menu, menu)
+        menu.findItem(R.id.delete).isVisible = true
     }
 }
