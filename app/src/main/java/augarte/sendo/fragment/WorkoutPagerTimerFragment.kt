@@ -41,7 +41,7 @@ class WorkoutPagerTimerFragment : Fragment() {
 
     private fun updateTimer(){
         timerTime++
-        timer_time.text = secondsToMinutes(timerTime)
+        if(timer_time!=null) timer_time.text = secondsToMinutes(timerTime)
     }
 
     private fun secondsToMinutes(s: Int): String {

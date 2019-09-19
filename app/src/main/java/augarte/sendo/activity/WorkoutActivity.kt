@@ -2,12 +2,10 @@ package augarte.sendo.activity
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
-import androidx.core.graphics.drawable.DrawableCompat
+import androidx.viewpager.widget.ViewPager
 import augarte.sendo.dataModel.Workout
 import kotlinx.android.synthetic.main.app_bar_main.*
 import augarte.sendo.R
@@ -39,10 +37,23 @@ class WorkoutActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val pageAdapter = WorkoutPagerAdapter(supportFragmentManager)
-        pageAdapter.addFragment(WorkoutPagerWorkoutFragment())
+        pageAdapter.addFragment(WorkoutPagerWorkoutFragment(workout))
         pageAdapter.addFragment(WorkoutPagerProgressFragment())
         pageAdapter.addFragment(WorkoutPagerTimerFragment())
         viewPager.adapter = pageAdapter
+
+        viewPager.addOnPageChangeListener(object: ViewPager.OnPageChangeListener{
+            override fun onPageScrollStateChanged(state: Int) {
+            }
+
+            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+            }
+
+            override fun onPageSelected(position: Int) {
+                bottomNavigation.menu.getItem(position).isChecked = true
+            }
+
+        })
 
         bottomNavigation.setOnNavigationItemSelectedListener(BottomNavigationView.OnNavigationItemSelectedListener {item->
             when(item.itemId){
@@ -62,10 +73,6 @@ class WorkoutActivity : AppCompatActivity() {
             false
         })
         bottomNavigation.selectedItemId = R.id.workout
-
-        /*card_text.text = workout.name
-        //card_image.setImageBitmap(workout.image)
-        workout_card.isClickable = false*/
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
