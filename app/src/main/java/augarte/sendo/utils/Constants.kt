@@ -7,5 +7,9 @@ class Constants{
 
         const val EXERCISE_ORDER_NAME = 1
         const val EXERCISE_ORDER_TYPE = 2
+
+        /* SHARED PREFERENCES */
+        const val SHARED_PREFERENCES = "mySharedPreferences"
+        const val SHARED_TIMER = "timer"
     }
 }
