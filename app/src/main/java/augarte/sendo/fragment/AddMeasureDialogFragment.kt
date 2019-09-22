@@ -25,7 +25,7 @@ class AddMeasureDialogFragment(private val listener: MeasurementsFragment.OnDial
     private val today = Calendar.getInstance()
     private val c = Calendar.getInstance()
     private var year = c.get(Calendar.YEAR)
-    private var month = c.get(Calendar.MONTH)
+    private var month = c.get(Calendar.MONTH)+1
     private var day = c.get(Calendar.DAY_OF_MONTH)
 
     private lateinit var dateValue: TextView
@@ -42,7 +42,8 @@ class AddMeasureDialogFragment(private val listener: MeasurementsFragment.OnDial
 
         dateValue = view.dateValue
         dateValue.setOnClickListener {
-            val datePickerDialog = DatePickerDialog(context!!, this, year, month, day)
+            val datePickerDialog = DatePickerDialog(context!!, this, year, month-1, day)
+            datePickerDialog.datePicker.maxDate = today.timeInMillis
             datePickerDialog.show()
         }
         setDate()

@@ -6,7 +6,7 @@ import com.robinhood.spark.SparkAdapter
 class LineChartAdapter(private val measurements: ArrayList<Measurement>): SparkAdapter() {
 
     override fun getX(index: Int): Float {
-        return measurements[index].date!!.time.toFloat()
+        return (measurements[index].date!!.time/86400000).toFloat()
     }
 
     override fun getY(index: Int): Float {

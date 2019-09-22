@@ -74,7 +74,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="No data"
+                    android:text="No enough data"
                     android:textColor="@color/primaryText"
                     android:textStyle="bold"
                     android:visibility="gone"/>

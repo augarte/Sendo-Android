@@ -115,8 +115,8 @@ class DatabaseConstants {
                                                                 Pair("DLT","Deltoids"), Pair("FRA","Forearms"), Pair("GLT","Glutes"), Pair("HMS","Hamstrings"),
                                                                 Pair("NCK","Neck"), Pair("OBL","Oblique"), Pair("TRP","Traps"), Pair("TRC","Triceps"), Pair("QDS","Quads"))
 
-        val LIST_DATETYPES = listOf(Pair("1WE","1 Week"), Pair("3WE","3 Weeks"), Pair("1MO","1 Month"), Pair("2MO","2 Months"), Pair("3MO","3 Month"),
-                                                            Pair("6MO","6 Months"), Pair("1YR","1 Year"), Pair("ALL","All"))
+        val LIST_DATETYPES = listOf(Pair("ALL","All"), Pair("1WE","1 Week"), Pair("3WE","3 Weeks"), Pair("1MO","1 Month"), Pair("2MO","2 Months"), Pair("3MO","3 Month"),
+                                                            Pair("6MO","6 Months"), Pair("1YR","1 Year"))
 
         val LIST_MEASURETYPES = listOf(Pair("WGT","Weight"), Pair("WST","Waist"), Pair("HPS","Hips"), Pair("CHT","Chest"), Pair("NCK","Neck"),
                                                                 Pair("ARM","Arms"), Pair("LEG","Legs"))

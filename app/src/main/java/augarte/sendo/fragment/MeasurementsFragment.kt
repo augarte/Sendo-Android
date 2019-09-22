@@ -42,7 +42,7 @@ class MeasurementsFragment : Fragment() {
 
         measurementTypeList = MainActivity.dbHandler!!.getMeasureType(SelectTransactions.SELECT_ALL_MEASURETYPE, null)!!
         val items1 = Array(measurementTypeList.size) { i -> measurementTypeList[i].name!!}
-        measureType.text = items1[0]
+        measureType.text = items1[selectedMeasureType]
         measureType.setOnClickListener {
             AlertDialog.Builder(context)
                 .setTitle("Meassurements")
@@ -57,7 +57,7 @@ class MeasurementsFragment : Fragment() {
 
         dateTypeList = MainActivity.dbHandler!!.getDateType(SelectTransactions.SELECT_ALL_DATETYPE, null)!!
         val items2 = Array(dateTypeList.size) { i -> dateTypeList[i].name!!}
-        dateRange.text = items2[0]
+        dateRange.text = items2[selectedDateType]
         dateRange.setOnClickListener {
             AlertDialog.Builder(context)
                 .setTitle("Period")
@@ -120,6 +120,10 @@ class MeasurementsFragment : Fragment() {
             measureValuesRV.visibility = View.GONE
             no_data.visibility = View.VISIBLE
             no_measure.visibility = View.VISIBLE
+        } else if (measurements.size == 1) {
+            no_data.visibility = View.VISIBLE
+            no_measure.visibility = View.GONE
+            measureValuesRV.visibility = View.VISIBLE
         } else {
             no_data.visibility = View.GONE
             no_measure.visibility = View.GONE
