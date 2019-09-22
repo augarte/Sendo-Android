@@ -12,7 +12,8 @@ class Utils {
 
     companion object{
 
-        private var dateFormat: SimpleDateFormat = SimpleDateFormat("yyyy/MM/dd")
+        private const val pattern = "yyyy/MM/dd"
+        private val dateFormat: SimpleDateFormat = SimpleDateFormat(pattern)
 
         fun unixTimeSecondsToDate(unixTimeSecond: Int): Date {
             val date = Date((unixTimeSecond * 1000).toLong())
@@ -33,6 +34,10 @@ class Utils {
         fun partseDatePickerValues(year: Int, month: Int, day: Int): Date {
             val dateString = "$year/$month/$day"
             return dateFormat.parse(dateString)
+        }
+
+        fun dateToString(date: Date?): String {
+            return dateFormat.format(date)
         }
     }
 }

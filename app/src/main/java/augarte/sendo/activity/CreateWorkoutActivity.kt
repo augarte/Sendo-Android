@@ -93,19 +93,8 @@ class CreateWorkoutActivity : AppCompatActivity() {
             thisWorkout.name = workout_title.text.toString()
             MainActivity.dbHandler!!.insertWorkout(thisWorkout)
 
-            val intent = Intent(this, WorkoutActivity::class.java)
-            intent.putExtra("workout", thisWorkout)
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                //workoutName.visibility = View.VISIBLE
-                val translation1 = androidx.core.util.Pair<View, String>(workout_card, "workoutCard")
-                val translation2 = androidx.core.util.Pair<View?, String?>(workoutName, "workoutName")
-                val options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, translation1, translation2)
-
-                startActivity(intent, options.toBundle())
-            }
-            else {
-                startActivity(intent)
-            }
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
         }
 
         add_image.setOnClickListener{

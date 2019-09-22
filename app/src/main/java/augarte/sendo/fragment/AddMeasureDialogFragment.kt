@@ -71,7 +71,7 @@ class AddMeasureDialogFragment(private val listener: MeasurementsFragment.OnDial
 
     override fun onDateSet(p0: DatePicker?, p1: Int, p2: Int, p3: Int) {
         year = p1
-        month = p2
+        month = p2+1
         day = p3
 
         c.time = Utils.partseDatePickerValues(year, month, day)

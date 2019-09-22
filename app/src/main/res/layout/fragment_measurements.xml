@@ -58,7 +58,40 @@
                 android:layout_height="wrap_content"
                 app:cardElevation="5dp">
 
-                <include layout="@layout/item_line_chart" />
+                <com.robinhood.spark.SparkView
+                    android:id="@+id/sparkview"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:paddingTop="@dimen/padding_small"
+                    android:paddingBottom="@dimen/padding_small"
+                    app:spark_lineColor="@color/colorPrimary"
+                    app:spark_cornerRadius="5dp"
+                    app:spark_animateChanges="true"
+                    app:spark_scrubEnabled="true" />
+
+                <TextView
+                    android:id="@+id/no_data"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="No data"
+                    android:textColor="@color/primaryText"
+                    android:textStyle="bold"
+                    android:visibility="gone"/>
+
+                <TextView
+                    android:id="@+id/scrub"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center"
+                    android:background="@drawable/background_round_white"
+                    android:backgroundTint="@color/primaryText"
+                    android:textSize="@dimen/text_xxlarge"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:visibility="gone"/>
 
             </androidx.cardview.widget.CardView>
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
@@ -71,7 +104,37 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/measureValuesRV"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:visibility="visible"/>
+
+        <LinearLayout
+            android:id="@+id/no_measure"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="50dp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <ImageView
+                android:id="@+id/no_workout_icon"
+                android:layout_width="@dimen/view_large"
+                android:layout_height="@dimen/view_large"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/ic_chart"
+                android:tint="@color/colorPrimaryDark"
+                android:elevation="200dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_small_medium"
+                android:text="Add your first measurement!"
+                android:textSize="@dimen/text_xxlarge"
+                android:textColor="@color/primaryText"
+                android:textStyle="bold"/>
+        </LinearLayout>
+
     </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

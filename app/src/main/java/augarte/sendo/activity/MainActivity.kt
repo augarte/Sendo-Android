@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         nav_view.setNavigationItemSelectedListener(this)
 
         val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.main_frame, HomeFragment.newInstance(), "Home")
+        transaction.replace(R.id.main_frame, HomeFragment(), "Home")
         transaction.commit()
     }
 

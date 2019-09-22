@@ -1,6 +1,8 @@
 package augarte.sendo.utils
 
 import android.content.res.Resources
+import java.text.SimpleDateFormat
+import java.util.*
 
 val Int.toDp: Int
     get() = (this / Resources.getSystem().displayMetrics.density).toInt()
@@ -13,4 +15,3 @@ val Int.toDpF: Float
 
 val Int.toPxF: Float
     get() = (this * Resources.getSystem().displayMetrics.density)
-

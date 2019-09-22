@@ -1,8 +1,6 @@
 package augarte.sendo.fragment
 
 import android.app.AlertDialog
-import android.content.DialogInterface
-import android.graphics.PointF
 import android.os.Bundle
 import android.os.Handler
 import androidx.fragment.app.Fragment
@@ -14,13 +12,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import augarte.sendo.R
 import augarte.sendo.activity.MainActivity
+import augarte.sendo.adapter.LineChartAdapter
 import augarte.sendo.adapter.MeasurementAdapter
 import augarte.sendo.dataModel.DateType
 import augarte.sendo.dataModel.MeasureType
 import augarte.sendo.dataModel.Measurement
 import augarte.sendo.database.SelectTransactions
 import kotlinx.android.synthetic.main.fragment_measurements.*
-import kotlinx.android.synthetic.main.item_line_chart.*
 import kotlin.collections.ArrayList
 
 class MeasurementsFragment : Fragment() {
@@ -28,7 +26,9 @@ class MeasurementsFragment : Fragment() {
     private var selectedMeasureType: Int = 0
     private var selectedDateType: Int = 0
 
-    private lateinit var measurements: ArrayList<Measurement>
+    private var measurements: ArrayList<Measurement> = ArrayList()
+    private var lineChartAdapter: LineChartAdapter = LineChartAdapter(measurements)
+
     private lateinit var measurementTypeList: ArrayList<MeasureType>
     private lateinit var dateTypeList: ArrayList<DateType>
     private lateinit var measurementAdapter: MeasurementAdapter
@@ -69,12 +69,21 @@ class MeasurementsFragment : Fragment() {
                 .show()
         }
 
-        measurements = MainActivity.dbHandler!!.getMeasurement(SelectTransactions.SELECT_MEASUREMENT_BY_TYPE, arrayOf(measurementTypeList[selectedMeasureType].id.toString()))
+        measurements.addAll(MainActivity.dbHandler!!.getMeasurement(SelectTransactions.SELECT_MEASUREMENT_BY_TYPE_ORDER_DATE, arrayOf(measurementTypeList[selectedMeasureType].id.toString())))
         measurementAdapter = MeasurementAdapter(measurements)
         measureValuesRV.apply {
-            layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+            layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, true)
             adapter = measurementAdapter
         }
+        sparkview.setScrubListener {value ->
+            if (value==null) scrub.visibility = View.GONE
+            else {
+                scrub.text = "$value"
+                scrub.visibility = View.VISIBLE
+            }
+        }
+        sparkview.adapter = lineChartAdapter
+        lineChartAdapter.notifyDataSetChanged()
 
         val listener = object: OnDialogClickListener {
             override fun onDialogAccept(dialog: DialogFragment) {
@@ -95,27 +104,26 @@ class MeasurementsFragment : Fragment() {
             }
         }
 
-        createChart()
+        checkNoMeasurements()
     }
 
     private fun refreshData(){
         measurements.clear()
-        measurements.addAll(MainActivity.dbHandler!!.getMeasurement(SelectTransactions.SELECT_MEASUREMENT_BY_TYPE, arrayOf(measurementTypeList[selectedMeasureType].id.toString())))
+        measurements.addAll(MainActivity.dbHandler!!.getMeasurement(SelectTransactions.SELECT_MEASUREMENT_BY_TYPE_ORDER_DATE, arrayOf(measurementTypeList[selectedMeasureType].id.toString())))
         measurementAdapter.notifyDataSetChanged()
-        createChart()
+        lineChartAdapter.notifyDataSetChanged()
+        checkNoMeasurements()
     }
 
-    private fun createChart(){
-        if (measurements.size>0) {
-            var array = Array(measurements.size) {PointF(0f,0f)}
-            for ((i, m) in measurements.withIndex())  {
-                array[i] = PointF(m.id!!.toFloat(), m.value!!.toFloat())
-            }
-            chart.setData(array)
-            /*chart.setData(arrayOf(PointF(15f, 39f), PointF(20f, 21f), PointF(28f, 9f), PointF(37f, 21f), PointF(40f, 25f), PointF(50f, 31f), PointF(62f, 24f), PointF(80f, 28f)))*/
+    private fun checkNoMeasurements() {
+        if (measurements.size == 0) {
+            measureValuesRV.visibility = View.GONE
+            no_data.visibility = View.VISIBLE
+            no_measure.visibility = View.VISIBLE
         } else {
-            chart.visibility = View.GONE
-            chart_no_data.visibility = View.VISIBLE
+            no_data.visibility = View.GONE
+            no_measure.visibility = View.GONE
+            measureValuesRV.visibility = View.VISIBLE
         }
     }
 

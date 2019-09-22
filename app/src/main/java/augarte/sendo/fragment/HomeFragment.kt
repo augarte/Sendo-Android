@@ -14,6 +14,7 @@ import augarte.sendo.dataModel.Workout
 import kotlinx.android.synthetic.main.fragment_home.*
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.content.res.ResourcesCompat
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import augarte.sendo.activity.CreateWorkoutActivity
 import augarte.sendo.activity.MainActivity
@@ -25,12 +26,6 @@ import com.leinardi.android.speeddial.SpeedDialActionItem
 import com.leinardi.android.speeddial.SpeedDialView
 
 class HomeFragment : Fragment(){
-
-    companion object {
-        fun newInstance(): HomeFragment {
-            return HomeFragment()
-        }
-    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_home, container, false)
@@ -54,7 +49,7 @@ class HomeFragment : Fragment(){
                 }
             }
             workout_rv.apply {
-                layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+                layoutManager = GridLayoutManager(context, 3, GridLayoutManager.HORIZONTAL,false)
                 adapter = workoutAdapter
             }
         } else{
@@ -63,6 +58,7 @@ class HomeFragment : Fragment(){
             showTapTarget()
         }
 
+        if (workoutList.size>=3) speedDial.visibility = View.GONE
         speedDial.mainFabOpenedBackgroundColor = ResourcesCompat.getColor(resources, R.color.fab, null)
         speedDial.mainFabClosedBackgroundColor = ResourcesCompat.getColor(resources, R.color.fab, null)
         speedDial.addActionItem(

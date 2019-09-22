@@ -60,14 +60,13 @@ class WorkoutPagerTimerFragment : Fragment() {
         }
 
     }
-    
+
     private fun updateTimer(){
         if(timerFirstStart) {
             sharedPreferences!!.edit().putLong(Constants.SHARED_TIMER, System.currentTimeMillis()).apply()
             timerFirstStart = false
         } else {
-            timerTime++
-            if(timer_time!=null) timer_time.text = secondsToMinutes(timerTime)
+            if(timer_time!=null) timer_time.text = secondsToMinutes(++timerTime)
         }
     }
 

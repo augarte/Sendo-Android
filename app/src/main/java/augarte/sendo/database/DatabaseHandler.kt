@@ -312,7 +312,7 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
 
         values.put(DatabaseConstants.TABLE_MEASUREMENT_TYPE, measurement.type!!.id)
         values.put(DatabaseConstants.TABLE_MEASUREMENT_VALUE, measurement.value)
-        values.put(DatabaseConstants.TABLE_MEASUREMENT_DATE, measurement.date!!.time)
+        values.put(DatabaseConstants.TABLE_MEASUREMENT_DATE, measurement.date!!.time/1000)
         values.put(DatabaseConstants.TABLE_MEASUREMENT_CREATEDBY, measurement.createdBy?.id)
         values.put(DatabaseConstants.TABLE_MEASUREMENT_CREATEDATE, unixTime)
         values.put(DatabaseConstants.TABLE_MEASUREMENT_MODIFYDATE, unixTime)
