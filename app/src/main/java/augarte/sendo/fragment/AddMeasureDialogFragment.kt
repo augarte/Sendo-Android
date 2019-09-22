@@ -18,8 +18,9 @@ import java.text.SimpleDateFormat
 import java.util.*
 import android.text.TextUtils
 import augarte.sendo.R
+import augarte.sendo.dataModel.MeasureType
 
-class AddMeasureDialogFragment(private val listener: MeasurementsFragment.OnDialogClickListener): DialogFragment(), DatePickerDialog.OnDateSetListener {
+class AddMeasureDialogFragment(private val type: MeasureType, private val listener: MeasurementsFragment.OnDialogClickListener): DialogFragment(), DatePickerDialog.OnDateSetListener {
 
     private var dateFormat: SimpleDateFormat = SimpleDateFormat("yyyy/MM/dd")
     private val today = Calendar.getInstance()
@@ -39,6 +40,7 @@ class AddMeasureDialogFragment(private val listener: MeasurementsFragment.OnDial
 
         val arrayAdapter = ArrayAdapter<String>(context!!, R.layout.item_spinner, items)
         view.measureTypeSpiner.adapter = arrayAdapter
+        view.measureTypeSpiner.setSelection(list.indexOf(list.find{ x-> x.id == type.id }))
 
         dateValue = view.dateValue
         dateValue.setOnClickListener {
