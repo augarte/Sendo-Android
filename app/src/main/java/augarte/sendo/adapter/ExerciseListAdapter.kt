@@ -43,7 +43,8 @@ class ExerciseListAdapter(private val items : MutableList<Exercise>) : RecyclerV
         else ""
     }
 
-    fun removeWithSwipe(position: Int) {
+    fun removeWithSwipe(viewHolder: RecyclerView.ViewHolder) {
+        val position = viewHolder.adapterPosition
         removedPosition = position
         removedItem = items[position]
         removedItem.state = DatabaseConstants.STATE_ARCHIVED
@@ -51,12 +52,12 @@ class ExerciseListAdapter(private val items : MutableList<Exercise>) : RecyclerV
         items.removeAt(position)
         notifyItemRemoved(position)
 
-       /* Snackbar.make(viewHolder.itemView, "${removedItem.name} deleted.", Snackbar.LENGTH_LONG).setAction("UNDO") {
+        Snackbar.make(viewHolder.itemView, "${removedItem.name} archived.", Snackbar.LENGTH_LONG).setAction("UNDO") {
             removedItem.state = DatabaseConstants.STATE_ACTIVE
             MainActivity.dbHandler!!.updateExerciseState(removedItem)
             items.add(removedPosition, removedItem)
             notifyItemInserted(removedPosition)
-        }.show()*/
+        }.show()
     }
 
     class MainViewHolder(view: View) : RecyclerView.ViewHolder(view) {

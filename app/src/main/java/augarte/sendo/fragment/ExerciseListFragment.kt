@@ -8,6 +8,7 @@ import android.os.Handler
 import android.view.*
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -22,13 +23,15 @@ import augarte.sendo.database.SelectTransactions
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.simplecityapps.recyclerview_fastscroll.utils.Utils
 import kotlinx.android.synthetic.main.fragment_exercise_list.*
+import kotlinx.android.synthetic.main.fragment_exercise_list.fab_add
 
 class ExerciseListFragment : Fragment() {
 
     private lateinit var swipeBackground: ColorDrawable
     private lateinit var deleteIcon : Drawable
     private lateinit var exerciseList : MutableList<Exercise>
-    private lateinit  var exerciseAdapter: Any
+    private lateinit var exerciseAdapter: Any
+    private lateinit var itemTouchHelperCallback: ItemTouchHelper.SimpleCallback
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_exercise_list, container, false)
@@ -41,18 +44,31 @@ class ExerciseListFragment : Fragment() {
 
         exerciseAdapter = ExerciseListAdapter(exerciseList)
         exercise_list.apply {
-            //setHasFixedSize(true)
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
             adapter = exerciseAdapter as ExerciseListAdapter
-            //addItemDecoration(DividerItemDecoration(this.context, DividerItemDecoration.VERTICAL))
+        }
+
+        val listener = object: OnDialogClickListener {
+            override fun onDialogAccept(dialog: DialogFragment) {
+                (exerciseAdapter as RecyclerView.Adapter<RecyclerView.ViewHolder>).notifyDataSetChanged()
+                dialog.dismiss()
+            }
+            override fun onDialogDismiss() {
+                fab_add.animate().rotation(if (fab_add.rotation==0f) fab_add.rotation+45 else fab_add.rotation-45).start()
+            }
         }
 
         val fab : FloatingActionButton = view.findViewById(R.id.fab_add)
         fab.setOnClickListener {
-            fab.animate().rotation(if (fab.rotation==0f) fab.rotation+45 else fab.rotation-45).start()
+            val addExerciseDialog = AddExerciseDialogFragment(listener)
+            addExerciseDialog.setStyle(DialogFragment.STYLE_NORMAL, R.style.CustomDialog)
+            if(!addExerciseDialog.isAdded){
+                addExerciseDialog.show(fragmentManager!!, addExerciseDialog.tag)
+                fab_add.animate().rotation(if (fab_add.rotation==0f) fab_add.rotation+45 else fab_add.rotation-45).start()
+            }
         }
 
-        configureSwipeDelete(exerciseAdapter)
+        configureSwipeDelete()
         setHasOptionsMenu(true)
     }
 
@@ -85,12 +101,12 @@ class ExerciseListFragment : Fragment() {
             else -> return super.onOptionsItemSelected(item)
 
         }
-        configureSwipeDelete(exerciseAdapter)
+        configureSwipeDelete()
         return true
     }
 
-    private fun configureSwipeDelete(adapter: Any){
-        if (adapter is ExerciseArchivedAdapter) {
+    private fun configureSwipeDelete(){
+        if (exerciseAdapter is ExerciseArchivedAdapter) {
             swipeBackground = ColorDrawable(ResourcesCompat.getColor(resources, R.color.ExerciseUnarchiveBackground, null))
             deleteIcon = context?.let { ContextCompat.getDrawable(it, R.drawable.ic_unarchive) }!!
         } else{
@@ -99,17 +115,17 @@ class ExerciseListFragment : Fragment() {
         }
         deleteIcon.setTint(ResourcesCompat.getColor(resources, R.color.ExerciseArchiveIcon, null))
 
-        val itemTouchHelperCallback = object: ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT){
+        itemTouchHelperCallback = object: ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT){
             override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder): Boolean {
                 return false
             }
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, position: Int) {
                 Handler().postDelayed({
-                    when (adapter) {
-                        is ExerciseListAdapter -> adapter.removeWithSwipe(position)
-                        is ExerciseCategoryAdapter -> adapter.removeWithSwipe(position)
-                        is ExerciseArchivedAdapter -> adapter.removeWithSwipe(position)
+                    when (exerciseAdapter) {
+                        is ExerciseListAdapter -> (exerciseAdapter as ExerciseListAdapter).removeWithSwipe(viewHolder)
+                        is ExerciseCategoryAdapter -> (exerciseAdapter as ExerciseCategoryAdapter).removeWithSwipe(viewHolder)
+                        is ExerciseArchivedAdapter -> (exerciseAdapter as ExerciseArchivedAdapter).removeWithSwipe(viewHolder)
                     }
                 }, 200)
             }
@@ -142,5 +158,10 @@ class ExerciseListFragment : Fragment() {
 
         val itemTouchHelper = ItemTouchHelper(itemTouchHelperCallback)
         itemTouchHelper.attachToRecyclerView(exercise_list)
+    }
+
+    interface OnDialogClickListener {
+        fun onDialogAccept(dialog: DialogFragment)
+        fun onDialogDismiss()
     }
 }
