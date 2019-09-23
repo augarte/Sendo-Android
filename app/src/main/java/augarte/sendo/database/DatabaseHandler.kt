@@ -131,6 +131,7 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
 
                 workout.id = cursor.getInt(cursor.getColumnIndex(DatabaseConstants.TABLE_WORKOUT_ID))
                 workout.name = cursor.getString(cursor.getColumnIndex(DatabaseConstants.TABLE_WORKOUT_NAME))
+                workout.dayList = getDays(SelectTransactions.SELECT_DAYS_BY_WORKOUT_ID, arrayOf(workout.id.toString()))
                 workout.image = image
                 workout.description = cursor.getString(cursor.getColumnIndex(DatabaseConstants.TABLE_WORKOUT_DESCRIPTION))
                 workout.createdBy = getUserByUserId(userId)
@@ -170,6 +171,13 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
         } catch (e: Exception) {
             Log.e("DB ERROR", e.toString())
             e.printStackTrace()
+        }
+
+        if (id>=0) {
+            for (day in workout.dayList) {
+                day.workoutId = id.toInt()
+                insertDay(day)
+            }
         }
 
         db.close()
@@ -400,10 +408,91 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
      /********** DAYS **********/
     /**************************/
 
-    fun getDaysByWorkoutId(workoutId: Int): ArrayList<Day> {
-        return ArrayList()
+    private fun getDays(query: String, array: Array<String>?): ArrayList<Day> {
+        val db = this.writableDatabase
+        val cursor : Cursor
+        cursor = db.rawQuery(query, array)
+
+        val dayList = ArrayList<Day>()
+        if (cursor.moveToFirst()) {
+            do {
+                val day = Day()
+                val userId = cursor.getInt(cursor.getColumnIndex(DatabaseConstants.TABLE_DAY_CREATEDBY))
+                val createDateUnixSeconds = cursor.getLong(cursor.getColumnIndex(DatabaseConstants.TABLE_DAY_CREATEDATE))
+                val modifyDateUnixSeconds = cursor.getLong(cursor.getColumnIndex(DatabaseConstants.TABLE_DAY_MODIFYDATE))
+
+                day.id = cursor.getInt(cursor.getColumnIndex(DatabaseConstants.TABLE_DAY_ID))
+                day.exercises = getExercise(SelectTransactions.SELECT_EXERCISES_BY_DAY, arrayOf(day.id.toString()))
+                day.name = cursor.getString(cursor.getColumnIndex(DatabaseConstants.TABLE_DAY_NAME))
+                day.createdBy = getUserByUserId(userId)
+                day.createDate = Date((createDateUnixSeconds * 1000))
+                day.modifyDate = Date((modifyDateUnixSeconds * 1000))
+
+                dayList.add(day)
+            } while (cursor.moveToNext())
+        }
+
+        cursor.close()
+        db.close()
+
+        return dayList
     }
 
+    private fun insertDay(day: Day): Long {
+        val db = this.writableDatabase
+        val values = ContentValues()
+
+        val unixTime = Utils.getUnixSeconds()
+
+        values.put(DatabaseConstants.TABLE_DAY_NAME, day.name)
+        values.put(DatabaseConstants.TABLE_DAY_WORKOUTID, day.workoutId)
+        values.put(DatabaseConstants.TABLE_DAY_CREATEDBY, day.createdBy!!.id)
+        values.put(DatabaseConstants.TABLE_DAY_CREATEDATE, unixTime)
+        values.put(DatabaseConstants.TABLE_DAY_MODIFYDATE, unixTime)
+
+        var id: Long = -1
+        try {
+            id = db.insert(DatabaseConstants.TABLE_DAY, null, values)
+        } catch (e: Exception) {
+            Log.e("DB ERROR", e.toString())
+            e.printStackTrace()
+        }
+
+        for (exercise in day.exercises) {
+            insertExerciseDay(exercise.id!!, id.toInt())
+        }
+
+        //db.close()
+        return id
+    }
+
+
+      /**********************************/
+     /********** EXERCISE DAY **********/
+    /**********************************/
+
+    private fun insertExerciseDay(exerciseId: Int, dayId: Int): Long {
+        val db = this.writableDatabase
+        val values = ContentValues()
+
+        val unixTime = Utils.getUnixSeconds()
+
+        values.put(DatabaseConstants.TABLE_EXERCISEDAY_EXERCISEID, exerciseId)
+        values.put(DatabaseConstants.TABLE_DAY_WORKOUTID, dayId)
+        values.put(DatabaseConstants.TABLE_EXERCISEDAY_CREATEDATE, unixTime)
+        values.put(DatabaseConstants.TABLE_EXERCISEDAY_MODIFYDATE, unixTime)
+
+        var id: Long = -1
+        try {
+            id = db.insert(DatabaseConstants.TABLE_EXERCISEDAY, null, values)
+        } catch (e: Exception) {
+            Log.e("DB ERROR", e.toString())
+            e.printStackTrace()
+        }
+
+        //db.close()
+        return id
+    }
 
       /***********************************/
      /********** MEASURE TYPES **********/

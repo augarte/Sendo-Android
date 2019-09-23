@@ -4,14 +4,13 @@ import android.graphics.Bitmap
 import android.os.Parcel
 import android.os.Parcelable
 import java.util.*
-import kotlin.collections.ArrayList
 
-class Workout(): Parcelable{
+class Workout() : Parcelable{
 
     var id: Int? = null
     var name: String? = null
     var description: String? = null
-    var dayList: ArrayList<Day>? = ArrayList()
+    var dayList: ArrayList<Day> = ArrayList()
     var image: Bitmap? = null
     var createdBy: User? = null
     var lastOpen: Date? = null
@@ -22,6 +21,7 @@ class Workout(): Parcelable{
         id = parcel.readValue(Int::class.java.classLoader) as? Int
         name = parcel.readString()
         description = parcel.readString()
+        dayList = parcel.readArrayList(Day::class.java.classLoader) as ArrayList<Day>
         image = parcel.readParcelable(Bitmap::class.java.classLoader)
     }
 
@@ -29,6 +29,7 @@ class Workout(): Parcelable{
         parcel.writeValue(id)
         parcel.writeString(name)
         parcel.writeString(description)
+        parcel.writeList(dayList)
         parcel.writeParcelable(image, flags)
     }
 

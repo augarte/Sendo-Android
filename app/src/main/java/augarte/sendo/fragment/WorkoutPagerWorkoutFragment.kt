@@ -4,8 +4,12 @@ import android.os.Bundle
 import android.view.*
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import augarte.sendo.R
+import augarte.sendo.adapter.WorkoutDayAdapter
 import augarte.sendo.dataModel.Workout
+import kotlinx.android.synthetic.main.fragment_pager_workout.*
 import kotlinx.android.synthetic.main.item_workout_card.*
 
 
@@ -20,9 +24,14 @@ class WorkoutPagerWorkoutFragment(private val workout: Workout) : Fragment() {
         card_image.setImageBitmap(workout.image)
         workout_card.isClickable = false
 
-        ActivityCompat.startPostponedEnterTransition(requireActivity())
+        day_list.apply {
+            layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+            adapter = WorkoutDayAdapter(workout.dayList)
+        }
+
 
         setHasOptionsMenu(true)
+        ActivityCompat.startPostponedEnterTransition(requireActivity())
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

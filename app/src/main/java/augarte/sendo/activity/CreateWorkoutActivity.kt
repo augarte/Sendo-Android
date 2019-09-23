@@ -25,6 +25,7 @@ import augarte.sendo.utils.Animations
 import augarte.sendo.dataModel.Workout
 import android.provider.MediaStore
 import augarte.sendo.dataModel.Exercise
+import augarte.sendo.dataModel.User
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 
 class CreateWorkoutActivity : AppCompatActivity() {
@@ -48,7 +49,10 @@ class CreateWorkoutActivity : AppCompatActivity() {
         for (i in 0 until initialDayNum) {
             val day = Day()
             day.name = "DAY " + (i+1)
-            thisWorkout.dayList!!.add(day)
+            val user = User()
+            user.id = 0
+            day.createdBy = user
+            thisWorkout.dayList.add(day)
         }
 
         val lManager = LinearLayoutManager(applicationContext)
@@ -75,12 +79,15 @@ class CreateWorkoutActivity : AppCompatActivity() {
             if (newVal - oldVal > 0) {
                 val d = Day()
                 d.name = "DAY $newVal"
-                thisWorkout.dayList!!.add(oldVal, d)
+                val user = User()
+                user.id = 0
+                d.createdBy = user
+                thisWorkout.dayList.add(oldVal, d)
                 workoutAdapter.newItem = true
                 workoutAdapter.notifyItemInserted(oldVal)
             }
             else if (newVal - oldVal < 0) {
-                thisWorkout.dayList!!.removeAt(newVal)
+                thisWorkout.dayList.removeAt(newVal)
                 workoutAdapter.deleteItem(newVal)
                 workoutAdapter.notifyItemRemoved(newVal)
             }

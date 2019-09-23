@@ -5,6 +5,7 @@ class SelectTransactions {
     companion object{
         const val SELECT_ALL_WORKOUT_ORDER_NAME = "SELECT  * FROM ${DatabaseConstants.TABLE_WORKOUT} ORDER BY ${DatabaseConstants.TABLE_WORKOUT_LASTOPEN} ASC"
 
+        const val SELECT_EXERCISES_BY_DAY = "SELECT * FROM ${DatabaseConstants.TABLE_EXERCISE} ex INNER JOIN ${DatabaseConstants.TABLE_EXERCISEDAY} exda ON ex.${DatabaseConstants.TABLE_EXERCISE_ID} = exda.${DatabaseConstants.TABLE_EXERCISEDAY_EXERCISEID} WHERE exda.${DatabaseConstants.TABLE_EXERCISEDAY_DAYID} = ?"
         const val SELECT_ALL_EXERCISE_ORDER_NAME = "SELECT * FROM ${DatabaseConstants.TABLE_EXERCISE} WHERE ${DatabaseConstants.TABLE_EXERCISE_STATE} = ${DatabaseConstants.STATE_ACTIVE} ORDER BY ${DatabaseConstants.TABLE_EXERCISE_NAME} ASC"
         const val SELECT_ALL_EXERCISE_ORDER_TYPE = "SELECT * FROM ${DatabaseConstants.TABLE_EXERCISE} WHERE ${DatabaseConstants.TABLE_EXERCISE_STATE} = ${DatabaseConstants.STATE_ACTIVE} ORDER BY ${DatabaseConstants.TABLE_EXERCISE_TYPE} ASC"
         const val SELECT_ARCHIVED_EXERCISES_ORDER_NAME = "SELECT * FROM ${DatabaseConstants.TABLE_EXERCISE} WHERE ${DatabaseConstants.TABLE_EXERCISE_STATE} = ${DatabaseConstants.STATE_ARCHIVED} ORDER BY ${DatabaseConstants.TABLE_EXERCISE_NAME} ASC"
@@ -15,6 +16,8 @@ class SelectTransactions {
         const val SELECT_MEASUREMENT_BY_TYPE_ORDER_DATE = "SELECT * FROM ${DatabaseConstants.TABLE_MEASUREMENT} WHERE ${DatabaseConstants.TABLE_MEASUREMENT_TYPE} = ? ORDER BY ${DatabaseConstants.TABLE_MEASUREMENT_DATE} ASC"
         const val SELECT_MEASUREMENT_BY_TYPE_AND_DATES_ORDER_DATE = "SELECT * FROM ${DatabaseConstants.TABLE_MEASUREMENT} WHERE ${DatabaseConstants.TABLE_MEASUREMENT_TYPE} = ? AND ${DatabaseConstants.TABLE_MEASUREMENT_DATE} > ? AND ${DatabaseConstants.TABLE_MEASUREMENT_DATE} < ? ORDER BY ${DatabaseConstants.TABLE_MEASUREMENT_DATE} ASC"
         const val SELECT_MEASUREMENT_BY_TYPE_LAST_DATE = "SELECT * FROM ${DatabaseConstants.TABLE_MEASUREMENT} WHERE ${DatabaseConstants.TABLE_MEASUREMENT_TYPE} = ? ORDER BY ${DatabaseConstants.TABLE_MEASUREMENT_DATE} DESC LIMIT 1"
+
+        const val SELECT_DAYS_BY_WORKOUT_ID = "SELECT * FROM ${DatabaseConstants.TABLE_DAY} WHERE ${DatabaseConstants.TABLE_DAY_WORKOUTID} = ?"
 
         const val SELECT_ALL_DATETYPE = "SELECT * FROM ${DatabaseConstants.TABLE_DATETYPE}"
 

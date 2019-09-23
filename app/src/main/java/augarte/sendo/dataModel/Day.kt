@@ -1,24 +1,42 @@
 package augarte.sendo.dataModel
 
-import java.sql.Blob
-import java.sql.Date
+import android.os.Parcel
+import android.os.Parcelable
+import java.util.*
+import kotlin.collections.ArrayList
 
-class Day{
+class Day() : Parcelable{
     var id: Int? = null
-    var workout: Workout? = null
     var exercises: ArrayList<Exercise> = ArrayList()
+    var workoutId: Int? = null
     var name: String? = null
-    var image: Blob? = null
     var createdBy: User? = null
     var createDate: Date? = null
     var modifyDate: Date? = null
 
+    constructor(parcel: Parcel) : this() {
+        id = parcel.readValue(Int::class.java.classLoader) as? Int
+        workoutId = parcel.readValue(Int::class.java.classLoader) as? Int
+        name = parcel.readString()
+    }
 
-/*    fun getExercises(): ArrayList<Exercise> {
-        val exercises = ArrayList<Exercise>()
-        val e = Exercise()
-        e.name = "Exercise 1\nExercise 2\nExercise 3\nExercise 4"
-        exercises.add(e)
-       return exercises
-    }*/
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeValue(id)
+        parcel.writeValue(workoutId)
+        parcel.writeString(name)
+    }
+
+    override fun describeContents(): Int {
+        return 0
+    }
+
+    companion object CREATOR : Parcelable.Creator<Day> {
+        override fun createFromParcel(parcel: Parcel): Day {
+            return Day(parcel)
+        }
+
+        override fun newArray(size: Int): Array<Day?> {
+            return arrayOfNulls(size)
+        }
+    }
 }
