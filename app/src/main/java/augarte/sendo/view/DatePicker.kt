@@ -4,20 +4,15 @@ import android.app.DatePickerDialog
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
-import android.view.View
-import android.view.animation.Animation
 import android.widget.DatePicker
 import android.widget.LinearLayout
 import augarte.sendo.R
-import augarte.sendo.utils.Animations
 import augarte.sendo.utils.Utils
 import kotlinx.android.synthetic.main.item_date_picker.view.*
 import java.util.*
-import java.text.SimpleDateFormat
 
 class DatePicker @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : LinearLayout(context, attrs, defStyleAttr), DatePickerDialog.OnDateSetListener{
 
-    private var dateFormat: SimpleDateFormat = SimpleDateFormat("yyyy/MM/dd")
     private val create = Calendar.getInstance()
     private val c = Calendar.getInstance()
     private var year = c.get(Calendar.YEAR)

@@ -65,14 +65,14 @@ class SettingsFragment : Fragment(){
         var selectedLengthIndex = 0
         list2.forEach { x-> if(x.choosed) selectedLengthIndex = list2.indexOf(x) }
         val items2 = Array(list2.size) { i -> list2[i].code}
-        lenght_type_chooseTV.text = items2[selectedLengthIndex]
-        lenght_type_choose.setOnClickListener{
+        length_type_chooseTV.text = items2[selectedLengthIndex]
+        length_type_choose.setOnClickListener{
             AlertDialog.Builder(context)
                     .setTitle("Length")
                     .setSingleChoiceItems(items2, selectedLengthIndex) { dialog, item ->
                         selectedLengthIndex = item
                         MainActivity.dbHandler!!.updateLengthTypeChoosed(list2[selectedLengthIndex])
-                        lenght_type_chooseTV.text = items2[selectedLengthIndex]
+                        length_type_chooseTV.text = items2[selectedLengthIndex]
                         Handler().postDelayed({dialog.dismiss()}, 500)
                     }
                     .show()

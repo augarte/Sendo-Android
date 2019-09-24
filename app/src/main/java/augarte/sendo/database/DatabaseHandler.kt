@@ -91,7 +91,7 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
             lengthType.code = type.first
             lengthType.name = type.second
             lengthType.choosed = type == DatabaseConstants.LIST_LENGTHTYPE[0]
-            insertLenghtType(lengthType)
+            insertLengthType(lengthType)
         }
 
         val exerciseTypes: ArrayList<ExerciseType> = getExerciseType(SelectTransactions.SELECT_ALL_EXERCISETYPE, null)!!
@@ -678,7 +678,7 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
         return id
     }
 
-    private fun insertLenghtType(lengthType: LengthType): Long {
+    private fun insertLengthType(lengthType: LengthType): Long {
         val db = this.writableDatabase
         val values = ContentValues()
 

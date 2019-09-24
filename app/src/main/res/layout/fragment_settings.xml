@@ -10,97 +10,153 @@
     tools:context=".activity.MainActivity">
 
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="@dimen/margin_medium"
         android:orientation="vertical"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/button_layout">
-        <LinearLayout
-            android:id="@+id/layout_weight"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_small"
-            android:layout_marginBottom="@dimen/margin_small"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/padding_medium_small"
-                android:text="Weight"
-                android:textColor="@color/primaryText"
-                android:textSize="@dimen/text_large"
-                android:textStyle="bold"/>
-            <androidx.coordinatorlayout.widget.CoordinatorLayout
-                android:id="@+id/weight_type_choose"
-                android:layout_width="@dimen/view_medium_large"
-                android:layout_height="match_parent"
-                android:padding="5dp"
-                android:layout_marginStart="@dimen/margin_small_medium"
-                android:background="@drawable/selectable_background_border_primary"
-                android:gravity="center_vertical">
-                <TextView
-                    android:id="@+id/weight_type_chooseTV"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical|start"
-                    android:padding="@dimen/padding_small"
-                    android:text="KG"
-                    android:maxLength="4"
-                    android:textColor="@color/primaryText"
-                    android:textStyle="bold"/>
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical|end"
-                    android:src="@drawable/ic_arrow_down"
-                    android:tint="@color/primaryText"/>
-            </androidx.coordinatorlayout.widget.CoordinatorLayout>
-        </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/layout_length"
-            android:layout_width="match_parent"
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_small"
-            android:layout_marginBottom="@dimen/margin_small"
-            android:orientation="horizontal">
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.3"/>
+
+        <TextView
+            android:id="@+id/progressTV"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:padding="@dimen/padding_medium_small"
+            android:text="Progress"
+            android:textColor="@color/primaryText"
+            android:textSize="@dimen/text_large"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/guideline"/>
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:id="@+id/progress_type_choose"
+            android:layout_width="@dimen/view_medium_large"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:layout_marginStart="@dimen/margin_small_medium"
+            android:background="@drawable/selectable_background_border_primary"
+            android:gravity="center_vertical"
+            app:layout_constraintTop_toTopOf="@id/progressTV"
+            app:layout_constraintBottom_toBottomOf="@id/progressTV"
+            app:layout_constraintStart_toStartOf="@id/guideline">
             <TextView
+                android:id="@+id/progress_type_chooseTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/padding_medium_small"
-                android:text="Length"
+                android:layout_gravity="center_vertical|start"
+                android:padding="@dimen/padding_small"
+                android:text="1RM"
+                android:maxLength="4"
                 android:textColor="@color/primaryText"
-                android:textSize="@dimen/text_large"
                 android:textStyle="bold"/>
-            <androidx.coordinatorlayout.widget.CoordinatorLayout
-                android:id="@+id/lenght_type_choose"
-                android:layout_width="@dimen/view_medium_large"
-                android:layout_height="match_parent"
-                android:padding="5dp"
-                android:layout_marginStart="@dimen/margin_small_medium"
-                android:background="@drawable/selectable_background_border_primary"
-                android:gravity="center">
-                <TextView
-                    android:id="@+id/lenght_type_chooseTV"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical|start"
-                    android:padding="@dimen/padding_small"
-                    android:text="CM"
-                    android:maxLength="4"
-                    android:textColor="@color/primaryText"
-                    android:textStyle="bold"/>
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical|end"
-                    android:src="@drawable/ic_arrow_down"
-                    android:tint="@color/primaryText"/>
-            </androidx.coordinatorlayout.widget.CoordinatorLayout>
-        </LinearLayout>
-    </LinearLayout>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|end"
+                android:src="@drawable/ic_arrow_down"
+                android:tint="@color/primaryText"/>
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+        <TextView
+            android:id="@+id/weightTV"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:layout_marginTop="@dimen/margin_small_plus"
+            android:padding="@dimen/padding_medium_small"
+            android:text="Weight"
+            android:textColor="@color/primaryText"
+            android:textSize="@dimen/text_large"
+            android:textStyle="bold"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@id/progressTV"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/guideline"/>
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:id="@+id/weight_type_choose"
+            android:layout_width="@dimen/view_medium_large"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:layout_marginStart="@dimen/margin_small_medium"
+            android:background="@drawable/selectable_background_border_primary"
+            android:gravity="center_vertical"
+            app:layout_constraintTop_toTopOf="@id/weightTV"
+            app:layout_constraintBottom_toBottomOf="@id/weightTV"
+            app:layout_constraintStart_toStartOf="@id/guideline">
+            <TextView
+                android:id="@+id/weight_type_chooseTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|start"
+                android:padding="@dimen/padding_small"
+                android:text="KG"
+                android:maxLength="4"
+                android:textColor="@color/primaryText"
+                android:textStyle="bold"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|end"
+                android:src="@drawable/ic_arrow_down"
+                android:tint="@color/primaryText"/>
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+        <TextView
+            android:id="@+id/lengthTV"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:layout_marginTop="@dimen/margin_small_plus"
+            android:padding="@dimen/padding_medium_small"
+            android:text="Length"
+            android:textColor="@color/primaryText"
+            android:textSize="@dimen/text_large"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/weightTV"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/guideline"/>
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:id="@+id/length_type_choose"
+            android:layout_width="@dimen/view_medium_large"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:layout_marginStart="@dimen/margin_small_medium"
+            android:background="@drawable/selectable_background_border_primary"
+            android:gravity="center"
+            app:layout_constraintTop_toTopOf="@id/lengthTV"
+            app:layout_constraintBottom_toBottomOf="@id/lengthTV"
+            app:layout_constraintStart_toStartOf="@id/guideline">
+            <TextView
+                android:id="@+id/length_type_chooseTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|start"
+                android:padding="@dimen/padding_small"
+                android:text="CM"
+                android:maxLength="4"
+                android:textColor="@color/primaryText"
+                android:textStyle="bold"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|end"
+                android:src="@drawable/ic_arrow_down"
+                android:tint="@color/primaryText"/>
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
         android:id="@+id/button_layout"
