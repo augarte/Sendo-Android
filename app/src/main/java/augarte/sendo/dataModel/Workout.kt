@@ -23,6 +23,7 @@ class Workout() : Parcelable{
         description = parcel.readString()
         dayList = parcel.readArrayList(Day::class.java.classLoader) as ArrayList<Day>
         image = parcel.readParcelable(Bitmap::class.java.classLoader)
+        createDate = Date(parcel.readLong())
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
@@ -31,6 +32,7 @@ class Workout() : Parcelable{
         parcel.writeString(description)
         parcel.writeList(dayList)
         parcel.writeParcelable(image, flags)
+        parcel.writeLong(createDate!!.time)
     }
 
     override fun describeContents(): Int {

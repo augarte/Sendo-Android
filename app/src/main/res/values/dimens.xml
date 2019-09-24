@@ -15,7 +15,6 @@
     <dimen name="view_small_plus">15dp</dimen>
     <dimen name="view_small">10dp</dimen>
 
-
     <!--PADDINGS-->
     <dimen name="padding_xlarge">30dp</dimen>
     <dimen name="padding_large">25dp</dimen>
@@ -40,7 +39,11 @@
     <dimen name="margin_large_plus">240dp</dimen>
 
     <!--VIEW SIZES-->
+    <dimen name="corner_normal">5dp</dimen>
+    <dimen name="corner_large">10dp</dimen>
 
+    <!--ELEVATIONS-->
+    <dimen name="card_elevation">5dp</dimen>
 
     <!--TEXT SIZES-->
     <dimen name="text_xsmall">12sp</dimen>

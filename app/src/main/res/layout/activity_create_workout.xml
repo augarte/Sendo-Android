@@ -30,8 +30,8 @@
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:layout_margin="@dimen/margin_small"
-            app:cardElevation="5dp"
-            app:cardCornerRadius="5dp"
+            app:cardElevation="@dimen/card_elevation"
+            app:cardCornerRadius="@dimen/corner_normal"
             app:cardBackgroundColor="@color/colorAccentDark">
 
             <ImageView
@@ -142,7 +142,7 @@
         android:text="@string/create"
         android:backgroundTint="@color/colorAccentDark"
         android:textAllCaps="true"
-        android:elevation="5dp"/>
+        android:elevation="@dimen/card_elevation"/>
 
     <augarte.sendo.view.BottomSheet
         android:id="@+id/bottomsheet"

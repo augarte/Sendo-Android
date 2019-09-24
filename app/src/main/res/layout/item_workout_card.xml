@@ -17,11 +17,11 @@
         android:foreground="?attr/selectableItemBackgroundBorderless"
         android:clickable="true"
         android:focusable="true"
-        app:cardCornerRadius="10dp"
+        app:cardCornerRadius="@dimen/corner_large"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:cardElevation="5dp">
+        app:cardElevation="@dimen/card_elevation">
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/car_content_layout"
             android:layout_width="match_parent"

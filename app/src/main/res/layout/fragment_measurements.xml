@@ -56,7 +56,7 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardElevation="5dp">
+                app:cardElevation="@dimen/card_elevation">
 
                 <com.robinhood.spark.SparkView
                     android:id="@+id/sparkview"
@@ -65,7 +65,7 @@
                     android:paddingTop="@dimen/padding_small"
                     android:paddingBottom="@dimen/padding_small"
                     app:spark_lineColor="@color/colorPrimary"
-                    app:spark_cornerRadius="5dp"
+                    app:spark_cornerRadius="@dimen/corner_normal"
                     app:spark_animateChanges="true"
                     app:spark_scrubEnabled="true" />
 

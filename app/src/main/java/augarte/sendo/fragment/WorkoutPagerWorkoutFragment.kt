@@ -24,11 +24,12 @@ class WorkoutPagerWorkoutFragment(private val workout: Workout) : Fragment() {
         card_image.setImageBitmap(workout.image)
         workout_card.isClickable = false
 
+        datePicker.setUp(workout.createDate!!)
+
         day_list.apply {
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
             adapter = WorkoutDayAdapter(workout.dayList)
         }
-
 
         setHasOptionsMenu(true)
         ActivityCompat.startPostponedEnterTransition(requireActivity())

@@ -3,7 +3,6 @@ package augarte.sendo.dataModel
 import android.os.Parcel
 import android.os.Parcelable
 import java.util.*
-import kotlin.collections.ArrayList
 
 class Day() : Parcelable{
     var id: Int? = null
@@ -18,12 +17,14 @@ class Day() : Parcelable{
         id = parcel.readValue(Int::class.java.classLoader) as? Int
         workoutId = parcel.readValue(Int::class.java.classLoader) as? Int
         name = parcel.readString()
+        exercises = parcel.readArrayList(Exercise::class.java.classLoader) as ArrayList<Exercise>
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeValue(id)
         parcel.writeValue(workoutId)
         parcel.writeString(name)
+        parcel.writeList(exercises)
     }
 
     override fun describeContents(): Int {
