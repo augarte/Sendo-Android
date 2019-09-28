@@ -65,7 +65,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:maxLength="4"
-        android:inputType="number"
+        android:inputType="numberDecimal"
         android:textSize="@dimen/text_medium"
         app:layout_constraintTop_toTopOf="@id/valueTV"
         app:layout_constraintBottom_toBottomOf="@id/valueTV"

@@ -31,11 +31,11 @@ class WorkoutProgressAdapter(private val items: ArrayList<Serie>): RecyclerView.
         val list: ArrayList<Measurement> = ArrayList()
 
         val m = Measurement()
-        m.value = 100
+        m.value = 100.0
         m.date = Date()
         list.add(m)
         val m2 = Measurement()
-        m2.value = 200
+        m2.value = 200.0
         m2.date = Date((Date().time+100000000))
         list.add(m2)
 

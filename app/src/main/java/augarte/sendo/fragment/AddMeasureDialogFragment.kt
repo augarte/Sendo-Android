@@ -19,6 +19,7 @@ import java.util.*
 import android.text.TextUtils
 import augarte.sendo.R
 import augarte.sendo.dataModel.MeasureType
+import augarte.sendo.dataModel.User
 
 class AddMeasureDialogFragment(private val type: MeasureType, private val listener: MeasurementsFragment.OnDialogClickListener): DialogFragment(), DatePickerDialog.OnDateSetListener {
 
@@ -58,7 +59,7 @@ class AddMeasureDialogFragment(private val type: MeasureType, private val listen
                         view.valueET.error = "Enter a value"
                     } else {
                         val newMeasurement = Measurement()
-                        newMeasurement.value = Integer.parseInt(view.valueET.text.toString())
+                        newMeasurement.value = view.valueET.text.toString().toDouble()
                         newMeasurement.date = c.time
                         newMeasurement.type = list[view.measureTypeSpiner.selectedItemPosition]
                         MainActivity.dbHandler!!.insertMeasurement(newMeasurement)

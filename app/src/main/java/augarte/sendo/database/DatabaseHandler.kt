@@ -296,7 +296,7 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
 
                 measurement.id = cursor.getInt(cursor.getColumnIndex(DatabaseConstants.TABLE_MEASUREMENT_ID))
                 measurement.type = measureType
-                measurement.value = cursor.getInt(cursor.getColumnIndex(DatabaseConstants.TABLE_MEASUREMENT_VALUE))
+                measurement.value = cursor.getDouble(cursor.getColumnIndex(DatabaseConstants.TABLE_MEASUREMENT_VALUE))
                 measurement.date = Date((valueDate * 1000))
                 measurement.createdBy = getUserByUserId(userId)
                 measurement.createDate = Date((createDateUnixSeconds * 1000))
@@ -321,7 +321,7 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
         values.put(DatabaseConstants.TABLE_MEASUREMENT_TYPE, measurement.type!!.id)
         values.put(DatabaseConstants.TABLE_MEASUREMENT_VALUE, measurement.value)
         values.put(DatabaseConstants.TABLE_MEASUREMENT_DATE, measurement.date!!.time/1000)
-        values.put(DatabaseConstants.TABLE_MEASUREMENT_CREATEDBY, measurement.createdBy?.id)
+        values.put(DatabaseConstants.TABLE_MEASUREMENT_CREATEDBY, "0")
         values.put(DatabaseConstants.TABLE_MEASUREMENT_CREATEDATE, unixTime)
         values.put(DatabaseConstants.TABLE_MEASUREMENT_MODIFYDATE, unixTime)
 
