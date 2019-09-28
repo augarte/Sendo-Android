@@ -8,6 +8,7 @@ import android.database.Cursor
 import android.util.Log
 import android.graphics.BitmapFactory
 import android.graphics.Bitmap
+import augarte.sendo.activity.MainActivity
 import augarte.sendo.dataModel.*
 import augarte.sendo.utils.Utils
 import kotlin.collections.ArrayList
@@ -17,8 +18,6 @@ import java.util.*
 class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseConstants.DB_NAME, null, DatabaseConstants.DB_VERSION) {
 
     override fun onCreate(db: SQLiteDatabase?) {
-        db?.execSQL(CreateTableTransactions.CREATE_TABLE_USER)
-
         db?.execSQL(CreateTableTransactions.CREATE_TABLE_MEASURETYPE)
         db?.execSQL(CreateTableTransactions.CREATE_TABLE_DATETYPE)
         db?.execSQL(CreateTableTransactions.CREATE_TABLE_EXERCISETYPE)
@@ -39,7 +38,6 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
 
     fun deleteAllTables() {
         val db = this.writableDatabase
-        db.execSQL("DROP TABLE IF EXISTS " + DatabaseConstants.TABLE_USER)
 
         db.execSQL("DROP TABLE IF EXISTS " + DatabaseConstants.TABLE_MEASURETYPE)
         db.execSQL("DROP TABLE IF EXISTS " + DatabaseConstants.TABLE_DATETYPE)
@@ -100,9 +98,7 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
             exercise.name = UUID.randomUUID().toString()
             exercise.type = exerciseTypes[(0 until exerciseTypes.size).random()]
             exercise.description = "Description"
-            val user = User()
-            user.id = 0
-            exercise.createdBy = user
+            exercise.createdBy = MainActivity.user?.uid
             insertExercise(exercise)
         }
     }
@@ -134,7 +130,7 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
                 workout.dayList = getDays(SelectTransactions.SELECT_DAYS_BY_WORKOUT_ID, arrayOf(workout.id.toString()))
                 workout.image = image
                 workout.description = cursor.getString(cursor.getColumnIndex(DatabaseConstants.TABLE_WORKOUT_DESCRIPTION))
-                workout.createdBy = getUserByUserId(userId)
+                workout.createdBy = MainActivity.user?.uid
                 workout.lastOpen = Date((lastOpenUnixSeconds * 1000))
                 workout.createDate = Date((createDateUnixSeconds * 1000))
                 workout.modifyDate = Date((modifyDateUnixSeconds * 1000))
@@ -219,7 +215,7 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
                 exercise.description = cursor.getString(cursor.getColumnIndex(DatabaseConstants.TABLE_EXERCISE_DESCRIPTION))
                 exercise.image = image
                 exercise.type = exerciseType
-                exercise.createdBy = getUserByUserId(userId)
+                exercise.createdBy = MainActivity.user?.uid
                 exercise.createDate = Date((createDateUnixSeconds * 1000))
                 exercise.modifyDate = Date((modifyDateUnixSeconds * 1000))
 
@@ -246,7 +242,7 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
         values.put(DatabaseConstants.TABLE_EXERCISE_DESCRIPTION, exercise.description)
         values.put(DatabaseConstants.TABLE_EXERCISE_TYPE, exercise.type?.id)
         values.put(DatabaseConstants.TABLE_EXERCISE_STATE, exercise.state)
-        values.put(DatabaseConstants.TABLE_EXERCISE_CREATEDBY, exercise.createdBy?.id)
+        values.put(DatabaseConstants.TABLE_EXERCISE_CREATEDBY, exercise.createdBy)
         values.put(DatabaseConstants.TABLE_EXERCISE_CREATEDATE, unixTime)
         values.put(DatabaseConstants.TABLE_EXERCISE_MODIFYDATE, unixTime)
 
@@ -298,7 +294,7 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
                 measurement.type = measureType
                 measurement.value = cursor.getDouble(cursor.getColumnIndex(DatabaseConstants.TABLE_MEASUREMENT_VALUE))
                 measurement.date = Date((valueDate * 1000))
-                measurement.createdBy = getUserByUserId(userId)
+                measurement.createdBy = MainActivity.user?.uid
                 measurement.createDate = Date((createDateUnixSeconds * 1000))
                 measurement.modifyDate = Date((modifyDateUnixSeconds * 1000))
 
@@ -393,17 +389,6 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
         return id
     }
 
-      /***************************/
-     /********** USERS **********/
-    /***************************/
-
-    fun getUserByUserId(userId: Int): User {
-        val user = User()
-        user.id = userId
-        return user
-    }
-
-
       /**************************/
      /********** DAYS **********/
     /**************************/
@@ -424,7 +409,7 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
                 day.id = cursor.getInt(cursor.getColumnIndex(DatabaseConstants.TABLE_DAY_ID))
                 day.exercises = getExercise(SelectTransactions.SELECT_EXERCISES_BY_DAY, arrayOf(day.id.toString()))
                 day.name = cursor.getString(cursor.getColumnIndex(DatabaseConstants.TABLE_DAY_NAME))
-                day.createdBy = getUserByUserId(userId)
+                day.createdBy = MainActivity.user?.uid
                 day.createDate = Date((createDateUnixSeconds * 1000))
                 day.modifyDate = Date((modifyDateUnixSeconds * 1000))
 
@@ -446,7 +431,7 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
 
         values.put(DatabaseConstants.TABLE_DAY_NAME, day.name)
         values.put(DatabaseConstants.TABLE_DAY_WORKOUTID, day.workoutId)
-        values.put(DatabaseConstants.TABLE_DAY_CREATEDBY, day.createdBy!!.id)
+        values.put(DatabaseConstants.TABLE_DAY_CREATEDBY, day.createdBy)
         values.put(DatabaseConstants.TABLE_DAY_CREATEDATE, unixTime)
         values.put(DatabaseConstants.TABLE_DAY_MODIFYDATE, unixTime)
 

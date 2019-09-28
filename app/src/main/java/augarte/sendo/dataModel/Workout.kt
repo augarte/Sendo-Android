@@ -12,7 +12,7 @@ class Workout() : Parcelable{
     var description: String? = null
     var dayList: ArrayList<Day> = ArrayList()
     var image: Bitmap? = null
-    var createdBy: User? = null
+    var createdBy: String? = null
     var lastOpen: Date? = null
     var createDate: Date? = null
     var modifyDate: Date? = null

@@ -3,21 +3,12 @@ package augarte.sendo.database
 class CreateTableTransactions {
 
     companion object {
-        const val CREATE_TABLE_USER = "CREATE TABLE IF NOT EXISTS  ${DatabaseConstants.TABLE_USER} " +
-                "(${DatabaseConstants.TABLE_USER_ID} INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                "${DatabaseConstants.TABLE_USER_NAME} TEXT, " +
-                "${DatabaseConstants.TABLE_USER_USERNAME} TEXT, " +
-                "${DatabaseConstants.TABLE_USER_EMAIL} TEXT, " +
-                "${DatabaseConstants.TABLE_USER_PASSWORD} TEXT, " +
-                "${DatabaseConstants.TABLE_USER_CREATEDATE} INTEGER, " +
-                "${DatabaseConstants.TABLE_USER_MODIFYDATE} INTEGER)"
-
         const val CREATE_TABLE_WORKOUT = "CREATE TABLE IF NOT EXISTS ${DatabaseConstants.TABLE_WORKOUT} " +
                 "(${DatabaseConstants.TABLE_WORKOUT_ID} INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "${DatabaseConstants.TABLE_WORKOUT_NAME} TEXT NOT NULL NOT NULL, " +
                 "${DatabaseConstants.TABLE_WORKOUT_DESCRIPTION} TEXT, " +
                 "${DatabaseConstants.TABLE_WORKOUT_IMAGE} TEXT, " +
-                "${DatabaseConstants.TABLE_WORKOUT_CREATEDBY} INTEGER NOT NULL, " +
+                "${DatabaseConstants.TABLE_WORKOUT_CREATEDBY} TEXT NOT NULL, " +
                 "${DatabaseConstants.TABLE_WORKOUT_LASTOPEN} INTEGER, " +
                 "${DatabaseConstants.TABLE_WORKOUT_CREATEDATE} INTEGER NOT NULL, " +
                 "${DatabaseConstants.TABLE_WORKOUT_MODIFYDATE} INTEGER NOT NULL)"
@@ -26,7 +17,7 @@ class CreateTableTransactions {
                 "(${DatabaseConstants.TABLE_DAY_ID} INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "${DatabaseConstants.TABLE_DAY_NAME} TEXT NOT NULL, " +
                 "${DatabaseConstants.TABLE_DAY_WORKOUTID} INTEGER, " +
-                "${DatabaseConstants.TABLE_DAY_CREATEDBY} INTEGER NOT NULL, " +
+                "${DatabaseConstants.TABLE_DAY_CREATEDBY} TEXT NOT NULL, " +
                 "${DatabaseConstants.TABLE_DAY_CREATEDATE} INTEGER NOT NULL, " +
                 "${DatabaseConstants.TABLE_DAY_MODIFYDATE} INTEGER NOT NULL)"
 
@@ -37,7 +28,7 @@ class CreateTableTransactions {
                 "${DatabaseConstants.TABLE_EXERCISE_IMAGE} TEXT, " +
                 "${DatabaseConstants.TABLE_EXERCISE_TYPE} INTEGER NOT NULL, " +
                 "${DatabaseConstants.TABLE_EXERCISE_STATE} INTEGER NOT NULL, " +
-                "${DatabaseConstants.TABLE_EXERCISE_CREATEDBY} INTEGER NOT NULL, " +
+                "${DatabaseConstants.TABLE_EXERCISE_CREATEDBY} TEXT NOT NULL, " +
                 "${DatabaseConstants.TABLE_EXERCISE_CREATEDATE} INTEGER NOT NULL, " +
                 "${DatabaseConstants.TABLE_EXERCISE_MODIFYDATE} INTEGER NOT NULL, " +
                 "FOREIGN KEY (${DatabaseConstants.TABLE_EXERCISE_TYPE}) REFERENCES ${DatabaseConstants.TABLE_EXERCISETYPE} (${DatabaseConstants.TABLE_EXERCISETYPE_ID}))"
@@ -61,7 +52,7 @@ class CreateTableTransactions {
                 "${DatabaseConstants.TABLE_SERIE_EXERCISEID} INTEGER NOT NULL, " +
                 "${DatabaseConstants.TABLE_SERIE_REPETITION} INTEGER, " +
                 "${DatabaseConstants.TABLE_SERIE_WEIGHT} REAL, " +
-                "${DatabaseConstants.TABLE_SERIE_CREATEDBY} INTEGER NOT NULL NOT NULL, " +
+                "${DatabaseConstants.TABLE_SERIE_CREATEDBY} TEXT NOT NULL NOT NULL, " +
                 "${DatabaseConstants.TABLE_SERIE_CREATEDATE} INTEGER NOT NULL, " +
                 "${DatabaseConstants.TABLE_SERIE_MODIFYDATE} INTEGER NOT NULL)"
 
@@ -70,7 +61,7 @@ class CreateTableTransactions {
                 "${DatabaseConstants.TABLE_MEASUREMENT_TYPE} TEXT NOT NULL, " +
                 "${DatabaseConstants.TABLE_MEASUREMENT_VALUE} REAL NOT NULL, " +
                 "${DatabaseConstants.TABLE_MEASUREMENT_DATE} TEXT NOT NULL," +
-                "${DatabaseConstants.TABLE_MEASUREMENT_CREATEDBY} INTEGER NOT NULL, " +
+                "${DatabaseConstants.TABLE_MEASUREMENT_CREATEDBY} TEXT NOT NULL, " +
                 "${DatabaseConstants.TABLE_MEASUREMENT_CREATEDATE} INTEGER NOT NULL, " +
                 "${DatabaseConstants.TABLE_MEASUREMENT_MODIFYDATE} INTEGER NOT NULL)"
 

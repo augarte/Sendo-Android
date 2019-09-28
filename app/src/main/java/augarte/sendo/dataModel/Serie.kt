@@ -9,7 +9,7 @@ class Serie{
     var repetition: Int? = null
     var weight: Double? = null
     var week: Int? = null
-    var createdBy: User? = null
+    var createdBy: String? = null
     var createDate: Date? = null
     var modifyDate: Date? = null
 

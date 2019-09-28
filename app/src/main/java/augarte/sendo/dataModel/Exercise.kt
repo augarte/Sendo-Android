@@ -12,7 +12,7 @@ class Exercise() : Parcelable{
     var image: Bitmap? = null
     var type: ExerciseType? = null
     var state: Int? = 1
-    var createdBy: User? = null
+    var createdBy: String? = null
     var createDate: Date? = null
     var modifyDate: Date? = null
 

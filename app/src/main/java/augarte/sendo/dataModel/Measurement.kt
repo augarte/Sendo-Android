@@ -7,7 +7,7 @@ class Measurement {
     var type: MeasureType? = null
     var value: Double? = null
     var date: Date? = null
-    var createdBy: User? = null
+    var createdBy: String? = null
     var createDate: Date? = null
     var modifyDate: Date? = null
 }

@@ -9,7 +9,7 @@ class Day() : Parcelable{
     var exercises: ArrayList<Exercise> = ArrayList()
     var workoutId: Int? = null
     var name: String? = null
-    var createdBy: User? = null
+    var createdBy: String? = null
     var createDate: Date? = null
     var modifyDate: Date? = null
 

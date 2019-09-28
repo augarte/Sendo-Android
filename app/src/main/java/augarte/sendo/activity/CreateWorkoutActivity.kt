@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -17,15 +16,12 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.DefaultItemAnimator
 import android.view.animation.AnimationUtils.loadAnimation
 import android.widget.Toast
-import androidx.core.app.ActivityOptionsCompat
 import augarte.sendo.R
 import augarte.sendo.fragment.ExerciseChooserFragment
 import androidx.core.content.ContextCompat
 import augarte.sendo.utils.Animations
 import augarte.sendo.dataModel.Workout
 import android.provider.MediaStore
-import augarte.sendo.dataModel.Exercise
-import augarte.sendo.dataModel.User
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 
 class CreateWorkoutActivity : AppCompatActivity() {
@@ -49,9 +45,7 @@ class CreateWorkoutActivity : AppCompatActivity() {
         for (i in 0 until initialDayNum) {
             val day = Day()
             day.name = "DAY " + (i+1)
-            val user = User()
-            user.id = 0
-            day.createdBy = user
+            day.createdBy = MainActivity.user?.uid
             thisWorkout.dayList.add(day)
         }
 
@@ -79,9 +73,7 @@ class CreateWorkoutActivity : AppCompatActivity() {
             if (newVal - oldVal > 0) {
                 val d = Day()
                 d.name = "DAY $newVal"
-                val user = User()
-                user.id = 0
-                d.createdBy = user
+                d.createdBy = MainActivity.user?.uid
                 thisWorkout.dayList.add(oldVal, d)
                 workoutAdapter.newItem = true
                 workoutAdapter.notifyItemInserted(oldVal)

@@ -19,7 +19,6 @@ import java.util.*
 import android.text.TextUtils
 import augarte.sendo.R
 import augarte.sendo.dataModel.MeasureType
-import augarte.sendo.dataModel.User
 
 class AddMeasureDialogFragment(private val type: MeasureType, private val listener: MeasurementsFragment.OnDialogClickListener): DialogFragment(), DatePickerDialog.OnDateSetListener {
 
