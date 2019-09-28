@@ -50,7 +50,7 @@ class CreateWorkoutActivity : AppCompatActivity() {
         }
 
         val lManager = LinearLayoutManager(applicationContext)
-        val workoutAdapter = CreateWorkoutAdapter(thisWorkout.dayList!!, day_rv)
+        val workoutAdapter = CreateWorkoutAdapter(thisWorkout.dayList, day_rv)
 
         workoutAdapter.onDayEdit = { title, selectedExercises, listener ->
             bottomsheet.setFragment(ExerciseChooserFragment(title, selectedExercises,  listener))

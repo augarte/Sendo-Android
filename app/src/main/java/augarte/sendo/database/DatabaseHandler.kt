@@ -463,7 +463,7 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
         val unixTime = Utils.getUnixSeconds()
 
         values.put(DatabaseConstants.TABLE_EXERCISEDAY_EXERCISEID, exerciseId)
-        values.put(DatabaseConstants.TABLE_DAY_WORKOUTID, dayId)
+        values.put(DatabaseConstants.TABLE_EXERCISEDAY_DAYID, dayId)
         values.put(DatabaseConstants.TABLE_EXERCISEDAY_CREATEDATE, unixTime)
         values.put(DatabaseConstants.TABLE_EXERCISEDAY_MODIFYDATE, unixTime)
 
