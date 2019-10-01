@@ -25,8 +25,13 @@ class WorkoutProgressAdapter(private val items: ArrayList<ExerciseDay>): Recycle
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = items[position]
 
-        holder.max.text = item.series.maxBy { x -> x.weight!! }?.weight.toString()
-        holder.min.text = item.series.minBy { x -> x.weight!! }?.weight.toString()
+        holder.title.text = item.exercise!!.name
+
+        val max = item.series.maxBy { x -> x.weight!! }?.weight
+        val min = item.series.minBy { x -> x.weight!! }?.weight
+
+        holder.max.text = max?.toString() ?: ""
+        holder.min.text = min?.toString() ?: ""
 
         holder.sparkView.adapter = ProgressChartAdapter(item.series)
 

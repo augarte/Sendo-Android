@@ -20,6 +20,7 @@ class SelectTransactions {
 
         const val SELECT_DAYS_BY_WORKOUT_ID = "SELECT * FROM ${DatabaseConstants.TABLE_DAY} WHERE ${DatabaseConstants.TABLE_DAY_WORKOUTID} = ?"
 
+        const val SELECT_EXERCISEDAY_BY_DAY_ID = "SELECT * FROM ${DatabaseConstants.TABLE_EXERCISEDAY} WHERE ${DatabaseConstants.TABLE_EXERCISEDAY_DAYID} = ?"
         const val SELECT_EXERCISEDAY_BY_WORKOUT_ID = "SELECT * FROM ${DatabaseConstants.TABLE_EXERCISEDAY} ex INNER JOIN ${DatabaseConstants.TABLE_DAY} d ON ex.${DatabaseConstants.TABLE_EXERCISEDAY_DAYID} = d.${DatabaseConstants.TABLE_DAY_ID} WHERE d.${DatabaseConstants.TABLE_DAY_WORKOUTID} = ?"
 
         const val SELECT_ALL_DATETYPE = "SELECT * FROM ${DatabaseConstants.TABLE_DATETYPE}"

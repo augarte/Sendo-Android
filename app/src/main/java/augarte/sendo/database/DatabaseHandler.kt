@@ -409,7 +409,7 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
 
                 day.id = cursor.getInt(cursor.getColumnIndex(DatabaseConstants.TABLE_DAY_ID))
                 day.workoutId = cursor.getInt(cursor.getColumnIndex(DatabaseConstants.TABLE_DAY_WORKOUTID))
-                day.exerciseDay = getExerciseDay(SelectTransactions.SELECT_EXERCISES_BY_DAY, arrayOf(day.id.toString()))
+                day.exerciseDay = getExerciseDay(SelectTransactions.SELECT_EXERCISEDAY_BY_DAY_ID, arrayOf(day.id.toString()))
                 day.name = cursor.getString(cursor.getColumnIndex(DatabaseConstants.TABLE_DAY_NAME))
                 day.createdBy = MainActivity.user?.uid
                 day.createDate = Date((createDateUnixSeconds * 1000))
@@ -500,6 +500,9 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
 
         values.put(DatabaseConstants.TABLE_EXERCISEDAY_EXERCISEID, exerciseDay.exercise!!.id)
         values.put(DatabaseConstants.TABLE_EXERCISEDAY_DAYID, exerciseDay.dayId)
+        values.put(DatabaseConstants.TABLE_EXERCISEDAY_SERIENUM, exerciseDay.serieNum)
+        values.put(DatabaseConstants.TABLE_EXERCISEDAY_REPNUM, exerciseDay.repNum)
+        values.put(DatabaseConstants.TABLE_EXERCISEDAY_CREATEDBY, MainActivity.user!!.uid)
         values.put(DatabaseConstants.TABLE_EXERCISEDAY_CREATEDATE, unixTime)
         values.put(DatabaseConstants.TABLE_EXERCISEDAY_MODIFYDATE, unixTime)
 

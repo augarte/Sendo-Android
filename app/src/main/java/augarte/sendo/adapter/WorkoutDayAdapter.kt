@@ -4,13 +4,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import augarte.sendo.R
 import augarte.sendo.dataModel.Day
+import augarte.sendo.dataModel.ExerciseDay
 import augarte.sendo.dataModel.Workout
 import kotlinx.android.synthetic.main.item_workout_day.view.*
-import org.w3c.dom.Text
 
 class WorkoutDayAdapter(private val items: ArrayList<Day>): RecyclerView.Adapter<WorkoutDayAdapter.ViewHolder>() {
 
@@ -26,18 +25,14 @@ class WorkoutDayAdapter(private val items: ArrayList<Day>): RecyclerView.Adapter
         val item = items[position]
 
         holder.title.text = item.name
-        holder.exercise_list.text = getExerciseListText()
-       /* holder.progressExerciseList.apply {
-            layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
-            adapter = WorkoutExerciseAdapter(item.exercises)
-        }*/
+        holder.exerciseList.text = getExerciseListText(item.exerciseDay)
     }
 
-    private fun getExerciseListText(): String {
+    private fun getExerciseListText(exerciseDays: ArrayList<ExerciseDay>): String {
         var result = ""
-        /*for (exercice in day.exercises) {
-            result += day.""
-        }*/
+        for (exerciseDay in exerciseDays) {
+            result += "${exerciseDay.serieNum}x${exerciseDay.repNum} ${exerciseDay.exercise!!.name}\n"
+        }
         return result
     }
 
@@ -48,7 +43,6 @@ class WorkoutDayAdapter(private val items: ArrayList<Day>): RecyclerView.Adapter
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         val title: TextView = view.dayTitle
-        val progressExerciseList: RecyclerView = view.progressExerciseList
-        val exercise_list: TextView = view.exercise_list
+        val exerciseList: TextView = view.exercise_list
     }
 }

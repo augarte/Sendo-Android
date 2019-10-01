@@ -18,7 +18,7 @@
             android:id="@+id/dayTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="AA"
+            android:text="DAY"
             android:textSize="@dimen/text_large"
             android:textColor="@color/primaryText"
             android:textStyle="bold"/>
@@ -26,12 +26,8 @@
         <TextView
             android:id="@+id/exercise_list"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/progressExerciseList"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_small"/>
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

@@ -139,8 +139,7 @@ class CreateWorkoutAdapter(private val items : ArrayList<Day>, private val rv : 
     fun createExerciseList(exercises: ArrayList<Exercise>) : String {
         var exerciseListString = ""
         for (exercise in exercises) {
-            exerciseListString += if (exercise == exercises[0]) exercise.name
-            else "\n" + exercise.name
+            exerciseListString += "${exercise.name}\n"
         }
         return exerciseListString
     }
