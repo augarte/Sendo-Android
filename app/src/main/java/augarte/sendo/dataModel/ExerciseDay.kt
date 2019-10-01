@@ -1,15 +1,15 @@
 package augarte.sendo.dataModel
 
 import java.util.*
-import kotlin.collections.ArrayList
 
-class Serie{
+class ExerciseDay {
 
     var id: Int? = null
-    var exerciseDayId: Int? = null
-    var repetitions: Int = 0
-    var weight: Double? = null
-    var week: Int = 1
+    var dayId: Int? = null
+    var exercise: Exercise? = null
+    var series: ArrayList<Serie> = ArrayList()
+    var serieNum: Int = 0
+    var repNum: Int = 0
     var createdBy: String? = null
     var createDate: Date? = null
     var modifyDate: Date? = null

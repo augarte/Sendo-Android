@@ -26,7 +26,7 @@ class ExerciseChooserFragment(private val title: String, private var selectedExe
 
         day_title.text = title
 
-        val exerciseList = MainActivity.dbHandler!!.getExercise(SelectTransactions.SELECT_ALL_EXERCISE_ORDER_NAME, null)
+        val exerciseList = MainActivity.dbHandler.getExercise(SelectTransactions.SELECT_ALL_EXERCISE_ORDER_NAME, null)
 
         for (e in exerciseList) {
             if(selectedExercises.any {x-> x.id == e.id }) e.selected = true

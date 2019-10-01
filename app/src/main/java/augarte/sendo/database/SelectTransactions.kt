@@ -5,6 +5,7 @@ class SelectTransactions {
     companion object{
         const val SELECT_ALL_WORKOUT_ORDER_NAME = "SELECT  * FROM ${DatabaseConstants.TABLE_WORKOUT} ORDER BY ${DatabaseConstants.TABLE_WORKOUT_LASTOPEN} ASC"
 
+        const val SELECT_EXERCISE_BY_ID = "SELECT * FROM ${DatabaseConstants.TABLE_EXERCISE} WHERE ${DatabaseConstants.TABLE_EXERCISE_ID} = ?"
         const val SELECT_EXERCISES_BY_DAY = "SELECT * FROM ${DatabaseConstants.TABLE_EXERCISE} ex INNER JOIN ${DatabaseConstants.TABLE_EXERCISEDAY} exda ON ex.${DatabaseConstants.TABLE_EXERCISE_ID} = exda.${DatabaseConstants.TABLE_EXERCISEDAY_EXERCISEID} WHERE exda.${DatabaseConstants.TABLE_EXERCISEDAY_DAYID} = ?"
         const val SELECT_ALL_EXERCISE_ORDER_NAME = "SELECT * FROM ${DatabaseConstants.TABLE_EXERCISE} WHERE ${DatabaseConstants.TABLE_EXERCISE_STATE} = ${DatabaseConstants.STATE_ACTIVE} ORDER BY ${DatabaseConstants.TABLE_EXERCISE_NAME} ASC"
         const val SELECT_ALL_EXERCISE_ORDER_TYPE = "SELECT * FROM ${DatabaseConstants.TABLE_EXERCISE} WHERE ${DatabaseConstants.TABLE_EXERCISE_STATE} = ${DatabaseConstants.STATE_ACTIVE} ORDER BY ${DatabaseConstants.TABLE_EXERCISE_TYPE} ASC"
@@ -19,6 +20,8 @@ class SelectTransactions {
 
         const val SELECT_DAYS_BY_WORKOUT_ID = "SELECT * FROM ${DatabaseConstants.TABLE_DAY} WHERE ${DatabaseConstants.TABLE_DAY_WORKOUTID} = ?"
 
+        const val SELECT_EXERCISEDAY_BY_WORKOUT_ID = "SELECT * FROM ${DatabaseConstants.TABLE_EXERCISEDAY} ex INNER JOIN ${DatabaseConstants.TABLE_DAY} d ON ex.${DatabaseConstants.TABLE_EXERCISEDAY_DAYID} = d.${DatabaseConstants.TABLE_DAY_ID} WHERE d.${DatabaseConstants.TABLE_DAY_WORKOUTID} = ?"
+
         const val SELECT_ALL_DATETYPE = "SELECT * FROM ${DatabaseConstants.TABLE_DATETYPE}"
 
         const val SELECT_ALL_MEASURETYPE = "SELECT * FROM ${DatabaseConstants.TABLE_MEASURETYPE}"
@@ -29,5 +32,7 @@ class SelectTransactions {
 
         const val SELECT_ALL_LENGTHTYPE = "SELECT * FROM ${DatabaseConstants.TABLE_LENGTHTYPE}"
         const val SELECT_LENGTHTYPE_BY_CHOOSED = "SELECT * FROM ${DatabaseConstants.TABLE_LENGTHTYPE} WHERE ${DatabaseConstants.TABLE_LENGTHTYPE_CHOOSED} = 1"
+
+        const val SELECT_SERIE_BY_USER_AND_EXERCISEDAYID = "SELECT * FROM ${DatabaseConstants.TABLE_SERIE} WHERE ${DatabaseConstants.TABLE_SERIE_CREATEDBY} = ? AND ${DatabaseConstants.TABLE_SERIE_EXERCISEDAYID} = ?"
     }
 }

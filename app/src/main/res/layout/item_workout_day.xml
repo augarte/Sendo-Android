@@ -6,12 +6,32 @@
     android:layout_height="200dp"
     android:layout_marginTop="@dimen/margin_small"
     android:layout_marginBottom="@dimen/margin_small"
+    app:contentPadding="@dimen/padding_medium"
     app:cardElevation="@dimen/card_elevation"
     app:cardCornerRadius="@dimen/corner_normal">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="AA"/>
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/dayTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="AA"
+            android:textSize="@dimen/text_large"
+            android:textColor="@color/primaryText"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/exercise_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/progressExerciseList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
 </androidx.cardview.widget.CardView>

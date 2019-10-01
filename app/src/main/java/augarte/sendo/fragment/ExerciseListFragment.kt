@@ -40,7 +40,7 @@ class ExerciseListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        exerciseList = MainActivity.dbHandler!!.getExercise(SelectTransactions.SELECT_ALL_EXERCISE_ORDER_NAME, null).toMutableList()
+        exerciseList = MainActivity.dbHandler.getExercise(SelectTransactions.SELECT_ALL_EXERCISE_ORDER_NAME, null).toMutableList()
 
         exerciseAdapter = ExerciseListAdapter(exerciseList)
         exercise_list.apply {
@@ -81,19 +81,19 @@ class ExerciseListFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId){
             R.id.list -> {
-                exerciseList = MainActivity.dbHandler!!.getExercise(SelectTransactions.SELECT_ALL_EXERCISE_ORDER_NAME, null).toMutableList()
+                exerciseList = MainActivity.dbHandler.getExercise(SelectTransactions.SELECT_ALL_EXERCISE_ORDER_NAME, null).toMutableList()
                 exercise_list.setPopupTextSize(Utils.toScreenPixels(resources, 44f))
                 exerciseAdapter = ExerciseListAdapter(exerciseList)
                 exercise_list.adapter = exerciseAdapter as ExerciseListAdapter
             }
             R.id.category -> {
-                exerciseList = MainActivity.dbHandler!!.getExercise(SelectTransactions.SELECT_ALL_EXERCISE_ORDER_TYPE, null).toMutableList()
+                exerciseList = MainActivity.dbHandler.getExercise(SelectTransactions.SELECT_ALL_EXERCISE_ORDER_TYPE, null).toMutableList()
                 exercise_list.setPopupTextSize(Utils.toScreenPixels(resources, 20f))
                 exerciseAdapter = ExerciseCategoryAdapter(exerciseList)
                 exercise_list.adapter = exerciseAdapter as ExerciseCategoryAdapter
             }
             R.id.archived -> {
-                exerciseList = MainActivity.dbHandler!!.getExercise(SelectTransactions.SELECT_ARCHIVED_EXERCISES_ORDER_NAME, null).toMutableList()
+                exerciseList = MainActivity.dbHandler.getExercise(SelectTransactions.SELECT_ARCHIVED_EXERCISES_ORDER_NAME, null).toMutableList()
                 exercise_list.setPopupTextSize(Utils.toScreenPixels(resources, 44f))
                 exerciseAdapter = ExerciseArchivedAdapter(exerciseList)
                 exercise_list.adapter = exerciseAdapter as ExerciseArchivedAdapter

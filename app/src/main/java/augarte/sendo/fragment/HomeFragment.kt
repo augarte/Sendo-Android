@@ -34,7 +34,7 @@ class HomeFragment : Fragment(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val workoutList : ArrayList<Workout> = MainActivity.dbHandler!!.getWorkouts(SelectTransactions.SELECT_ALL_WORKOUT_ORDER_NAME, null)
+        val workoutList : ArrayList<Workout> = MainActivity.dbHandler.getWorkouts(SelectTransactions.SELECT_ALL_WORKOUT_ORDER_NAME, null)
 
         if (workoutList.size > 0) {
             val workoutAdapter = WorkoutAdapter(workoutList)

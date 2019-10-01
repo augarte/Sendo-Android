@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     companion object {
         var user: FirebaseUser? = null
-        var dbHandler: DatabaseHandler? = null
+        lateinit var dbHandler: DatabaseHandler
     }
 
     private var fragment: Fragment? = HomeFragment()
@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         auth = FirebaseAuth.getInstance()
         dbHandler = DatabaseHandler(this)
-        //dbHandler!!.deleteAllTables()
+        //dbHandler.deleteAllTables()
 
         setSupportActionBar(toolbar)
 

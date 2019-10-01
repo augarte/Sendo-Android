@@ -1,21 +1,18 @@
 package augarte.sendo.adapter
 
+import android.util.SparseArray
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import augarte.sendo.R
-import augarte.sendo.dataModel.Measurement
-import augarte.sendo.dataModel.Serie
+import augarte.sendo.dataModel.ExerciseDay
 import augarte.sendo.dataModel.Workout
 import com.robinhood.spark.SparkView
-import kotlinx.android.synthetic.main.item_measurement.*
 import kotlinx.android.synthetic.main.item_progress_card.view.*
-import java.util.*
-import kotlin.collections.ArrayList
 
-class WorkoutProgressAdapter(private val items: ArrayList<Serie>): RecyclerView.Adapter<WorkoutProgressAdapter.ViewHolder>() {
+class WorkoutProgressAdapter(private val items: ArrayList<ExerciseDay>): RecyclerView.Adapter<WorkoutProgressAdapter.ViewHolder>() {
 
     var onItemClick: ((Pair<Workout, View>) -> Unit)? = null
 
@@ -28,21 +25,10 @@ class WorkoutProgressAdapter(private val items: ArrayList<Serie>): RecyclerView.
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = items[position]
 
-        val list: ArrayList<Measurement> = ArrayList()
+        holder.max.text = item.series.maxBy { x -> x.weight!! }?.weight.toString()
+        holder.min.text = item.series.minBy { x -> x.weight!! }?.weight.toString()
 
-        val m = Measurement()
-        m.value = 100.0
-        m.date = Date()
-        list.add(m)
-        val m2 = Measurement()
-        m2.value = 200.0
-        m2.date = Date((Date().time+100000000))
-        list.add(m2)
-
-        holder.max.text =list.maxBy { x -> x.value!! }?.value.toString()
-        holder.min.text =list.minBy { x -> x.value!! }?.value.toString()
-
-        holder.sparkView.adapter = LineChartAdapter(list)
+        holder.sparkView.adapter = ProgressChartAdapter(item.series)
 
     }
 

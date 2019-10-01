@@ -3,7 +3,7 @@ package augarte.sendo.adapter
 import augarte.sendo.dataModel.Measurement
 import com.robinhood.spark.SparkAdapter
 
-class LineChartAdapter(private val measurements: ArrayList<Measurement>): SparkAdapter() {
+class MeasureChartAdapter(private val measurements: ArrayList<Measurement>): SparkAdapter() {
 
     override fun getX(index: Int): Float {
         return (measurements[index].date!!.time/86400000).toFloat()

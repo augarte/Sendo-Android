@@ -44,7 +44,7 @@ class SettingsFragment : Fragment(){
             e.printStackTrace()
         }
 
-        val list1: ArrayList<WeightType> = MainActivity.dbHandler!!.getWeightType(SelectTransactions.SELECT_ALL_WEIGHTTYPE, null)!!
+        val list1: ArrayList<WeightType> = MainActivity.dbHandler.getWeightType(SelectTransactions.SELECT_ALL_WEIGHTTYPE, null)!!
         var selectedWeightIndex = 0
         list1.forEach { x-> if(x.choosed) selectedWeightIndex = list1.indexOf(x) }
         val items1 = Array(list1.size) { i -> list1[i].code}
@@ -54,14 +54,14 @@ class SettingsFragment : Fragment(){
                 .setTitle("Weight")
                 .setSingleChoiceItems(items1, selectedWeightIndex) { dialog, item ->
                     selectedWeightIndex = item
-                    MainActivity.dbHandler!!.updateWeightTypeChoosed(list1[selectedWeightIndex])
+                    MainActivity.dbHandler.updateWeightTypeChoosed(list1[selectedWeightIndex])
                     weight_type_chooseTV.text = items1[selectedWeightIndex]
                     Handler().postDelayed({dialog.dismiss()}, 500)
                 }
                 .show()
         }
 
-        val list2: ArrayList<LengthType> = MainActivity.dbHandler!!.getLengthType(SelectTransactions.SELECT_ALL_LENGTHTYPE, null)!!
+        val list2: ArrayList<LengthType> = MainActivity.dbHandler.getLengthType(SelectTransactions.SELECT_ALL_LENGTHTYPE, null)!!
         var selectedLengthIndex = 0
         list2.forEach { x-> if(x.choosed) selectedLengthIndex = list2.indexOf(x) }
         val items2 = Array(list2.size) { i -> list2[i].code}
@@ -71,7 +71,7 @@ class SettingsFragment : Fragment(){
                     .setTitle("Length")
                     .setSingleChoiceItems(items2, selectedLengthIndex) { dialog, item ->
                         selectedLengthIndex = item
-                        MainActivity.dbHandler!!.updateLengthTypeChoosed(list2[selectedLengthIndex])
+                        MainActivity.dbHandler.updateLengthTypeChoosed(list2[selectedLengthIndex])
                         length_type_chooseTV.text = items2[selectedLengthIndex]
                         Handler().postDelayed({dialog.dismiss()}, 500)
                     }

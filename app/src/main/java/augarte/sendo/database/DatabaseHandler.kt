@@ -97,8 +97,9 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
             val exercise = Exercise()
             exercise.name = UUID.randomUUID().toString()
             exercise.type = exerciseTypes[(0 until exerciseTypes.size).random()]
+            exercise.state = 1
             exercise.description = "Description"
-            exercise.createdBy = MainActivity.user?.uid
+            exercise.createdBy = "0"
             insertExercise(exercise)
         }
     }
@@ -120,7 +121,7 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
                 val blob = cursor.getBlob(cursor.getColumnIndex(DatabaseConstants.TABLE_WORKOUT_IMAGE))
                 var image: Bitmap?
                 image = if (blob!= null) BitmapFactory.decodeByteArray(blob, 0, blob.size) else null
-                val userId = cursor.getInt(cursor.getColumnIndex(DatabaseConstants.TABLE_WORKOUT_CREATEDBY))
+                //val userId = cursor.getInt(cursor.getColumnIndex(DatabaseConstants.TABLE_WORKOUT_CREATEDBY))
                 val lastOpenUnixSeconds =  cursor.getLong(cursor.getColumnIndex(DatabaseConstants.TABLE_WORKOUT_LASTOPEN))
                 val createDateUnixSeconds = cursor.getLong(cursor.getColumnIndex(DatabaseConstants.TABLE_WORKOUT_CREATEDATE))
                 val modifyDateUnixSeconds = cursor.getLong(cursor.getColumnIndex(DatabaseConstants.TABLE_WORKOUT_MODIFYDATE))
@@ -156,7 +157,7 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
         values.put(DatabaseConstants.TABLE_WORKOUT_NAME, workout.name)
         if (workout.image!=null) values.put(DatabaseConstants.TABLE_WORKOUT_IMAGE, Utils.getBiteArrayFromBitmap(workout.image!!))
         values.put(DatabaseConstants.TABLE_WORKOUT_DESCRIPTION, workout.name)
-        values.put(DatabaseConstants.TABLE_WORKOUT_CREATEDBY, 0)
+        values.put(DatabaseConstants.TABLE_WORKOUT_CREATEDBY, MainActivity.user?.uid)
         values.put(DatabaseConstants.TABLE_WORKOUT_LASTOPEN, unixTime)
         values.put(DatabaseConstants.TABLE_WORKOUT_CREATEDATE, unixTime)
         values.put(DatabaseConstants.TABLE_WORKOUT_MODIFYDATE, unixTime)
@@ -238,8 +239,8 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
         val unixTime = Utils.getUnixSeconds()
 
         values.put(DatabaseConstants.TABLE_EXERCISE_NAME, exercise.name)
-        if (exercise.image!=null) values.put(DatabaseConstants.TABLE_EXERCISE_IMAGE, Utils.getBiteArrayFromBitmap(exercise.image!!))
         values.put(DatabaseConstants.TABLE_EXERCISE_DESCRIPTION, exercise.description)
+        if (exercise.image!=null) values.put(DatabaseConstants.TABLE_EXERCISE_IMAGE, Utils.getBiteArrayFromBitmap(exercise.image!!))
         values.put(DatabaseConstants.TABLE_EXERCISE_TYPE, exercise.type?.id)
         values.put(DatabaseConstants.TABLE_EXERCISE_STATE, exercise.state)
         values.put(DatabaseConstants.TABLE_EXERCISE_CREATEDBY, exercise.createdBy)
@@ -317,7 +318,7 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
         values.put(DatabaseConstants.TABLE_MEASUREMENT_TYPE, measurement.type!!.id)
         values.put(DatabaseConstants.TABLE_MEASUREMENT_VALUE, measurement.value)
         values.put(DatabaseConstants.TABLE_MEASUREMENT_DATE, measurement.date!!.time/1000)
-        values.put(DatabaseConstants.TABLE_MEASUREMENT_CREATEDBY, "0")
+        values.put(DatabaseConstants.TABLE_MEASUREMENT_CREATEDBY, MainActivity.user?.uid)
         values.put(DatabaseConstants.TABLE_MEASUREMENT_CREATEDATE, unixTime)
         values.put(DatabaseConstants.TABLE_MEASUREMENT_MODIFYDATE, unixTime)
 
@@ -393,7 +394,7 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
      /********** DAYS **********/
     /**************************/
 
-    private fun getDays(query: String, array: Array<String>?): ArrayList<Day> {
+    public fun getDays(query: String, array: Array<String>?): ArrayList<Day> {
         val db = this.writableDatabase
         val cursor : Cursor
         cursor = db.rawQuery(query, array)
@@ -407,7 +408,8 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
                 val modifyDateUnixSeconds = cursor.getLong(cursor.getColumnIndex(DatabaseConstants.TABLE_DAY_MODIFYDATE))
 
                 day.id = cursor.getInt(cursor.getColumnIndex(DatabaseConstants.TABLE_DAY_ID))
-                day.exercises = getExercise(SelectTransactions.SELECT_EXERCISES_BY_DAY, arrayOf(day.id.toString()))
+                day.workoutId = cursor.getInt(cursor.getColumnIndex(DatabaseConstants.TABLE_DAY_WORKOUTID))
+                day.exerciseDay = getExerciseDay(SelectTransactions.SELECT_EXERCISES_BY_DAY, arrayOf(day.id.toString()))
                 day.name = cursor.getString(cursor.getColumnIndex(DatabaseConstants.TABLE_DAY_NAME))
                 day.createdBy = MainActivity.user?.uid
                 day.createDate = Date((createDateUnixSeconds * 1000))
@@ -431,7 +433,7 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
 
         values.put(DatabaseConstants.TABLE_DAY_NAME, day.name)
         values.put(DatabaseConstants.TABLE_DAY_WORKOUTID, day.workoutId)
-        values.put(DatabaseConstants.TABLE_DAY_CREATEDBY, day.createdBy)
+        values.put(DatabaseConstants.TABLE_DAY_CREATEDBY, MainActivity.user?.uid)
         values.put(DatabaseConstants.TABLE_DAY_CREATEDATE, unixTime)
         values.put(DatabaseConstants.TABLE_DAY_MODIFYDATE, unixTime)
 
@@ -443,8 +445,9 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
             e.printStackTrace()
         }
 
-        for (exercise in day.exercises) {
-            insertExerciseDay(exercise.id!!, id.toInt())
+        for (exerciseDay in day.exerciseDay) {
+            exerciseDay.dayId = id.toInt()
+            insertExerciseDay(exerciseDay)
         }
 
         //db.close()
@@ -456,14 +459,47 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
      /********** EXERCISE DAY **********/
     /**********************************/
 
-    private fun insertExerciseDay(exerciseId: Int, dayId: Int): Long {
+    fun getExerciseDay(query: String, array: Array<String>?): ArrayList<ExerciseDay> {
+        val db = this.writableDatabase
+        val cursor : Cursor
+        cursor = db.rawQuery(query, array)
+
+        val exerciseDayList = ArrayList<ExerciseDay>()
+        if (cursor.moveToFirst()) {
+            do {
+                val exerciseDay = ExerciseDay()
+                val exerciseId = cursor.getInt(cursor.getColumnIndex(DatabaseConstants.TABLE_EXERCISEDAY_EXERCISEID))
+                val createDateUnixSeconds = cursor.getLong(cursor.getColumnIndex(DatabaseConstants.TABLE_EXERCISEDAY_CREATEDATE))
+                val modifyDateUnixSeconds = cursor.getLong(cursor.getColumnIndex(DatabaseConstants.TABLE_EXERCISEDAY_MODIFYDATE))
+
+                exerciseDay.id = cursor.getInt(cursor.getColumnIndex(DatabaseConstants.TABLE_EXERCISE_ID))
+                exerciseDay.exercise = getExercise(SelectTransactions.SELECT_EXERCISE_BY_ID, arrayOf(exerciseId.toString())).first()
+                exerciseDay.dayId = cursor.getInt(cursor.getColumnIndex(DatabaseConstants.TABLE_EXERCISEDAY_DAYID))
+                exerciseDay.series = getSerie(SelectTransactions.SELECT_SERIE_BY_USER_AND_EXERCISEDAYID, arrayOf(exerciseDay.id.toString()))
+                exerciseDay.serieNum = cursor.getInt(cursor.getColumnIndex(DatabaseConstants.TABLE_EXERCISEDAY_SERIENUM))
+                exerciseDay.repNum = cursor.getInt(cursor.getColumnIndex(DatabaseConstants.TABLE_EXERCISEDAY_REPNUM))
+                exerciseDay.createdBy = cursor.getString(cursor.getColumnIndex(DatabaseConstants.TABLE_EXERCISEDAY_CREATEDBY))
+                exerciseDay.createDate = Date((createDateUnixSeconds * 1000))
+                exerciseDay.modifyDate = Date((modifyDateUnixSeconds * 1000))
+
+                exerciseDayList.add(exerciseDay)
+            } while (cursor.moveToNext())
+        }
+
+        cursor.close()
+        db.close()
+
+        return exerciseDayList
+    }
+
+    private fun insertExerciseDay(exerciseDay: ExerciseDay): Long {
         val db = this.writableDatabase
         val values = ContentValues()
 
         val unixTime = Utils.getUnixSeconds()
 
-        values.put(DatabaseConstants.TABLE_EXERCISEDAY_EXERCISEID, exerciseId)
-        values.put(DatabaseConstants.TABLE_EXERCISEDAY_DAYID, dayId)
+        values.put(DatabaseConstants.TABLE_EXERCISEDAY_EXERCISEID, exerciseDay.exercise!!.id)
+        values.put(DatabaseConstants.TABLE_EXERCISEDAY_DAYID, exerciseDay.dayId)
         values.put(DatabaseConstants.TABLE_EXERCISEDAY_CREATEDATE, unixTime)
         values.put(DatabaseConstants.TABLE_EXERCISEDAY_MODIFYDATE, unixTime)
 
@@ -473,6 +509,11 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
         } catch (e: Exception) {
             Log.e("DB ERROR", e.toString())
             e.printStackTrace()
+        }
+
+        for (serie in exerciseDay.series){
+            serie.exerciseDayId = id.toInt()
+            insertSerie(serie)
         }
 
         //db.close()
@@ -743,4 +784,63 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
         return id
     }
 
+
+      /***************************/
+     /********** SERIE **********/
+    /***************************/
+
+    fun getSerie(query: String, array: Array<String>?): ArrayList<Serie> {
+        val db = this.writableDatabase
+        val cursor : Cursor
+        cursor = db.rawQuery(query, array)
+
+        val serieList = ArrayList<Serie>()
+        if (cursor.moveToFirst()) {
+            do {
+                val serie = Serie()
+                val createDateUnixSeconds = cursor.getLong(cursor.getColumnIndex(DatabaseConstants.TABLE_SERIE_CREATEDATE))
+                val modifyDateUnixSeconds = cursor.getLong(cursor.getColumnIndex(DatabaseConstants.TABLE_SERIE_MODIFYDATE))
+
+                serie.id = cursor.getInt(cursor.getColumnIndex(DatabaseConstants.TABLE_SERIE_ID))
+                serie.exerciseDayId = cursor.getInt(cursor.getColumnIndex(DatabaseConstants.TABLE_SERIE_EXERCISEDAYID))
+                serie.repetitions = cursor.getInt(cursor.getColumnIndex(DatabaseConstants.TABLE_SERIE_REPETITIONS))
+                serie.weight = cursor.getDouble(cursor.getColumnIndex(DatabaseConstants.TABLE_SERIE_WEIGHT))
+                serie.createdBy = cursor.getString(cursor.getColumnIndex(DatabaseConstants.TABLE_SERIE_CREATEDBY))
+                serie.createDate = Date((createDateUnixSeconds * 1000))
+                serie.modifyDate = Date((modifyDateUnixSeconds * 1000))
+
+                serieList.add(serie)
+            } while (cursor.moveToNext())
+        }
+
+        cursor.close()
+        db.close()
+
+        return serieList
+    }
+
+    private fun insertSerie(serie: Serie): Long {
+        val db = this.writableDatabase
+        val values = ContentValues()
+
+        val unixTime = Utils.getUnixSeconds()
+
+        values.put(DatabaseConstants.TABLE_SERIE_EXERCISEDAYID, serie.exerciseDayId)
+        values.put(DatabaseConstants.TABLE_SERIE_REPETITIONS, serie.repetitions)
+        values.put(DatabaseConstants.TABLE_SERIE_WEIGHT, serie.weight)
+        values.put(DatabaseConstants.TABLE_SERIE_CREATEDBY, MainActivity.user?.uid)
+        values.put(DatabaseConstants.TABLE_SERIE_CREATEDATE, unixTime)
+        values.put(DatabaseConstants.TABLE_SERIE_MODIFYDATE, unixTime)
+
+        var id : Long = -1
+        try {
+            id = db.insert(DatabaseConstants.TABLE_SERIE, null, values)
+        } catch (e: Exception) {
+            Log.e("DB ERROR", e.toString())
+            e.printStackTrace()
+        }
+
+        db.close()
+        return id
+    }
 }

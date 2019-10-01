@@ -22,6 +22,7 @@ import androidx.core.content.ContextCompat
 import augarte.sendo.utils.Animations
 import augarte.sendo.dataModel.Workout
 import android.provider.MediaStore
+import augarte.sendo.dataModel.Exercise
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 
 class CreateWorkoutActivity : AppCompatActivity() {
@@ -90,7 +91,7 @@ class CreateWorkoutActivity : AppCompatActivity() {
 
         create_workout_button.setOnClickListener{
             thisWorkout.name = workout_title.text.toString()
-            MainActivity.dbHandler!!.insertWorkout(thisWorkout)
+            MainActivity.dbHandler.insertWorkout(thisWorkout)
 
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)

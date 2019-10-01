@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import augarte.sendo.*
 import augarte.sendo.dataModel.Day
 import augarte.sendo.dataModel.Exercise
+import augarte.sendo.dataModel.ExerciseDay
 import augarte.sendo.utils.Animations
 import augarte.sendo.utils.toPx
 import augarte.sendo.utils.toPxF
@@ -19,6 +20,7 @@ class CreateWorkoutAdapter(private val items : ArrayList<Day>, private val rv : 
 
     var onDayEdit: ((title: String, selectedExercises: ArrayList<Exercise>, listener: OnExerciseSelectedListener) -> Unit)? = null
 
+    private var selectedExerciseList = ArrayList<Exercise>()
     private lateinit var inflater: LayoutInflater
     private lateinit var context: Context
     var newItem : Boolean = false
@@ -33,8 +35,12 @@ class CreateWorkoutAdapter(private val items : ArrayList<Day>, private val rv : 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = items[position]
 
-        holder.card_title.text = item.name.toString()
-        holder.exercise_list.text = createExerciseList(item.exercises)
+        for (exerciseDay in item.exerciseDay) {
+            selectedExerciseList.add(exerciseDay.exercise!!)
+        }
+
+        holder.cardTitle.text = item.name.toString()
+        holder.exerciseList.text = createExerciseList(selectedExerciseList)
 
         val listener = View.OnClickListener {
             if (holder.arrow.rotation == 0f) {
@@ -58,20 +64,30 @@ class CreateWorkoutAdapter(private val items : ArrayList<Day>, private val rv : 
 
         val exerciseSelectedListener = object: OnExerciseSelectedListener {
             override fun onSelect(exercise: Exercise) {
-                item.exercises.add(exercise)
-                holder.exercise_list.text = createExerciseList(item.exercises)
+                selectedExerciseList.add(exercise)
+
+                val exerciseDay = ExerciseDay()
+                exerciseDay.dayId = item.id
+                exerciseDay.exercise = exercise
+                item.exerciseDay.add(exerciseDay)
+
+                holder.exerciseList.text = createExerciseList(selectedExerciseList)
             }
 
             override fun onDeselected(exercise: Exercise) {
-                val e = item.exercises.find { x -> x.id == exercise.id }
+                val e = selectedExerciseList.find { x -> x.id== exercise.id }
                 if (e!=null) {
-                    item.exercises.add(e)
-                    holder.exercise_list.text = createExerciseList(item.exercises)
+                    val index = selectedExerciseList.indexOf(e)
+                    selectedExerciseList.removeAt(index)
+
+                    item.exerciseDay.removeAt(index)
+
+                    holder.exerciseList.text = createExerciseList(selectedExerciseList)
                 }
             }
         }
         holder.edit.setOnClickListener{
-            onDayEdit?.invoke(item.name.toString(), item.exercises, exerciseSelectedListener)
+            onDayEdit?.invoke(item.name.toString(), selectedExerciseList, exerciseSelectedListener)
         }
 
         if (position!=0 && !newItem)  {
@@ -80,11 +96,11 @@ class CreateWorkoutAdapter(private val items : ArrayList<Day>, private val rv : 
             holder.itemView.animate().setDuration(300).translationYBy((100*position).toPxF).zBy(1f*position)
             newItem = false
         }
-        else if (newItem) {
-            /*holder.itemView.z -= 1
+        /*else if (newItem) {
+            holder.itemView.z -= 1
             holder.itemView.y = ((-100)).toPxF
-            holder.itemView.animate().setDuration(400).translationYBy((100).toPxF).zBy(1f)*/
-        }
+            holder.itemView.animate().setDuration(400).translationYBy((100).toPxF).zBy(1f)
+        }*/
     }
 
     @Synchronized fun deleteItem(pos : Int){
@@ -120,20 +136,19 @@ class CreateWorkoutAdapter(private val items : ArrayList<Day>, private val rv : 
         return items.size
     }
 
-    fun createExerciseList(exercises : ArrayList<Exercise>) : String {
+    fun createExerciseList(exercises: ArrayList<Exercise>) : String {
         var exerciseListString = ""
-        for (e in exercises) {
-            exerciseListString += if (e == exercises[0]) e.name
-            else "\n" + e.name
-
+        for (exercise in exercises) {
+            exerciseListString += if (exercise == exercises[0]) exercise.name
+            else "\n" + exercise.name
         }
         return exerciseListString
     }
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val card : CardView = view.card
-        val card_title : TextView = view.card_title
-        val exercise_list : TextView = view.exercise_list
+        val cardTitle : TextView = view.card_title
+        val exerciseList : TextView = view.exercise_list
         val arrow : ImageButton = view.drop_arrow
         val edit : ImageButton = view.edit
     }

@@ -48,13 +48,13 @@ class ExerciseListAdapter(private val items : MutableList<Exercise>) : RecyclerV
         removedPosition = position
         removedItem = items[position]
         removedItem.state = DatabaseConstants.STATE_ARCHIVED
-        MainActivity.dbHandler!!.updateExerciseState(removedItem)
+        MainActivity.dbHandler.updateExerciseState(removedItem)
         items.removeAt(position)
         notifyItemRemoved(position)
 
         Snackbar.make(viewHolder.itemView, "${removedItem.name} archived.", Snackbar.LENGTH_LONG).setAction("UNDO") {
             removedItem.state = DatabaseConstants.STATE_ACTIVE
-            MainActivity.dbHandler!!.updateExerciseState(removedItem)
+            MainActivity.dbHandler.updateExerciseState(removedItem)
             items.add(removedPosition, removedItem)
             notifyItemInserted(removedPosition)
         }.show()

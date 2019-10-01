@@ -35,7 +35,7 @@ class AddMeasureDialogFragment(private val type: MeasureType, private val listen
         val inflater = activity!!.layoutInflater
         val view = inflater.inflate(R.layout.dialog_add_measure, null)
 
-        val list = MainActivity.dbHandler!!.getMeasureType(SelectTransactions.SELECT_ALL_MEASURETYPE, null)
+        val list = MainActivity.dbHandler.getMeasureType(SelectTransactions.SELECT_ALL_MEASURETYPE, null)
         val items = MutableList(list!!.size) { i -> list[i].name}
 
         val arrayAdapter = ArrayAdapter<String>(context!!, R.layout.item_spinner, items)
@@ -61,7 +61,7 @@ class AddMeasureDialogFragment(private val type: MeasureType, private val listen
                         newMeasurement.value = view.valueET.text.toString().toDouble()
                         newMeasurement.date = c.time
                         newMeasurement.type = list[view.measureTypeSpiner.selectedItemPosition]
-                        MainActivity.dbHandler!!.insertMeasurement(newMeasurement)
+                        MainActivity.dbHandler.insertMeasurement(newMeasurement)
                         listener.onDialogAccept(this)
                     }
                 }

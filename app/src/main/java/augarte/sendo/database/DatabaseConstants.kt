@@ -39,6 +39,9 @@ class DatabaseConstants {
         const val TABLE_EXERCISEDAY_ID = "_id"
         const val TABLE_EXERCISEDAY_EXERCISEID = "exerciseId"
         const val TABLE_EXERCISEDAY_DAYID = "dayId"
+        const val TABLE_EXERCISEDAY_SERIENUM = "serieNum"
+        const val TABLE_EXERCISEDAY_REPNUM = "repNum"
+        const val TABLE_EXERCISEDAY_CREATEDBY = "createdBy"
         const val TABLE_EXERCISEDAY_CREATEDATE = "createDate"
         const val TABLE_EXERCISEDAY_MODIFYDATE = "modifydate"
 
@@ -66,20 +69,13 @@ class DatabaseConstants {
         const val TABLE_WORKOUT_MODIFYDATE = "modifyDate"
 
         const val TABLE_SERIE_ID = "_id"
-        const val TABLE_SERIE_EXERCISEID = "exerciseId"
-        const val TABLE_SERIE_REPETITION = "repetition"
+        const val TABLE_SERIE_EXERCISEDAYID = "exerciseDayId"
+        const val TABLE_SERIE_REPETITIONS = "repetitions"
         const val TABLE_SERIE_WEIGHT = "weight"
+        const val TABLE_SERIE_WEEK = "week"
         const val TABLE_SERIE_CREATEDBY = "createdBy"
         const val TABLE_SERIE_CREATEDATE = "createDate"
         const val TABLE_SERIE_MODIFYDATE = "modifyDate"
-
-        const val TABLE_USER_ID = "_id"
-        const val TABLE_USER_NAME = "name"
-        const val TABLE_USER_USERNAME = "username"
-        const val TABLE_USER_EMAIL = "email"
-        const val TABLE_USER_PASSWORD = "password"
-        const val TABLE_USER_CREATEDATE = "createDate"
-        const val TABLE_USER_MODIFYDATE = "modifydate"
 
         const val TABLE_DATETYPE_ID = "_id"
         const val TABLE_DATETYPE_NAME = "name"

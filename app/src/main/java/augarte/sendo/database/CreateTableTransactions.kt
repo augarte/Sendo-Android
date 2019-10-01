@@ -37,6 +37,9 @@ class CreateTableTransactions {
                 "(${DatabaseConstants.TABLE_EXERCISEDAY_ID} INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "${DatabaseConstants.TABLE_EXERCISEDAY_DAYID} INTEGER NOT NULL, " +
                 "${DatabaseConstants.TABLE_EXERCISEDAY_EXERCISEID} INTEGER NOT NULL, " +
+                "${DatabaseConstants.TABLE_EXERCISEDAY_SERIENUM} INTEGER NOT NULL, " +
+                "${DatabaseConstants.TABLE_EXERCISEDAY_REPNUM} INTEGER NOT NULL, " +
+                "${DatabaseConstants.TABLE_EXERCISEDAY_CREATEDBY} INTEGER NOT NULL, " +
                 "${DatabaseConstants.TABLE_EXERCISEDAY_CREATEDATE} INTEGER NOT NULL, " +
                 "${DatabaseConstants.TABLE_EXERCISEDAY_MODIFYDATE} INTEGER NOT NULL)"
 
@@ -49,9 +52,10 @@ class CreateTableTransactions {
 
         const val CREATE_TABLE_SERIE = "CREATE TABLE IF NOT EXISTS ${DatabaseConstants.TABLE_SERIE} " +
                 "(${DatabaseConstants.TABLE_SERIE_ID} INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                "${DatabaseConstants.TABLE_SERIE_EXERCISEID} INTEGER NOT NULL, " +
-                "${DatabaseConstants.TABLE_SERIE_REPETITION} INTEGER, " +
+                "${DatabaseConstants.TABLE_SERIE_EXERCISEDAYID} INTEGER NOT NULL, " +
+                "${DatabaseConstants.TABLE_SERIE_REPETITIONS} INTEGER, " +
                 "${DatabaseConstants.TABLE_SERIE_WEIGHT} REAL, " +
+                "${DatabaseConstants.TABLE_SERIE_WEEK} INTEGER, " +
                 "${DatabaseConstants.TABLE_SERIE_CREATEDBY} TEXT NOT NULL NOT NULL, " +
                 "${DatabaseConstants.TABLE_SERIE_CREATEDATE} INTEGER NOT NULL, " +
                 "${DatabaseConstants.TABLE_SERIE_MODIFYDATE} INTEGER NOT NULL)"
