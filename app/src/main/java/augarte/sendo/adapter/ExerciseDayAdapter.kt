@@ -6,26 +6,24 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import augarte.sendo.R
-import augarte.sendo.dataModel.Day
 import augarte.sendo.dataModel.ExerciseDay
-import kotlinx.android.synthetic.main.item_workout_day.view.*
+import kotlinx.android.synthetic.main.item_exercise_day.view.*
 
-class WorkoutDayAdapter(private val items: ArrayList<Day>): RecyclerView.Adapter<WorkoutDayAdapter.ViewHolder>() {
+class ExerciseDayAdapter(private val items: ArrayList<ExerciseDay>): RecyclerView.Adapter<ExerciseDayAdapter.ViewHolder>() {
 
-    var onItemClick: ((Pair<Day, View>) -> Unit)? = null
+    var onItemClick: ((Pair<ExerciseDay, View>) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val view = inflater.inflate(R.layout.item_workout_day, parent, false)
+        val view = inflater.inflate(R.layout.item_exercise_day, parent, false)
         return ViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = items[position]
 
-        holder.title.text = item.name
-        holder.exerciseList.text = getExerciseListText(item.exerciseDayList)
-        holder.itemView.setOnClickListener { onItemClick?.invoke(Pair<Day, View>(item, holder.title)) }
+        holder.title.text = item.exercise!!.name
+        holder.itemView.setOnClickListener { onItemClick?.invoke(Pair<ExerciseDay, View>(item, holder.title)) }
     }
 
     private fun getExerciseListText(exerciseDays: ArrayList<ExerciseDay>): String {
@@ -42,7 +40,7 @@ class WorkoutDayAdapter(private val items: ArrayList<Day>): RecyclerView.Adapter
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-        val title: TextView = view.dayTitle
-        val exerciseList: TextView = view.exercise_list
+        val title: TextView = view.exerciseTitle
+
     }
 }

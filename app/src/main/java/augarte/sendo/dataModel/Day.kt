@@ -10,7 +10,7 @@ class Day() : Parcelable{
     var id: Int? = null
    //var exercises: ArrayList<Exercise> = ArrayList()
     var workoutId: Int? = null
-    var exerciseDay: ArrayList<ExerciseDay> = ArrayList()
+    var exerciseDayList: ArrayList<ExerciseDay> = ArrayList()
     var name: String? = null
     var createdBy: String? = null
     var createDate: Date? = null
@@ -20,14 +20,14 @@ class Day() : Parcelable{
         id = parcel.readValue(Int::class.java.classLoader) as? Int
         workoutId = parcel.readValue(Int::class.java.classLoader) as? Int
         name = parcel.readString()
-        exerciseDay = parcel.readArrayList(ExerciseDay::class.java.classLoader) as ArrayList<ExerciseDay>
+        exerciseDayList = parcel.readArrayList(ExerciseDay::class.java.classLoader) as ArrayList<ExerciseDay>
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeValue(id)
         parcel.writeValue(workoutId)
         parcel.writeString(name)
-        parcel.writeList(exerciseDay)
+        parcel.writeList(exerciseDayList)
     }
 
     override fun describeContents(): Int {

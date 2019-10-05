@@ -7,28 +7,20 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import augarte.sendo.R
-import augarte.sendo.adapter.WorkoutDayAdapter
-import augarte.sendo.dataModel.Workout
-import kotlinx.android.synthetic.main.fragment_pager_workout.*
-import kotlinx.android.synthetic.main.item_workout_card.*
+import augarte.sendo.adapter.WorkoutProgressAdapter
+import augarte.sendo.dataModel.Day
+import kotlinx.android.synthetic.main.fragment_pager_progress.*
 
-
-class WorkoutPagerWorkoutFragment(private val workout: Workout) : Fragment() {
+class DayPagerProgressFragment(private val day: Day) : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_pager_workout, container, false)
+        return inflater.inflate(R.layout.fragment_pager_progress, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        card_text.text = workout.name
-        card_image.setImageBitmap(workout.image)
-        workout_card.isClickable = false
-
-        datePicker.setUp(workout.createDate!!)
-
-        day_list.apply {
+        progress_list.apply {
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-            adapter = WorkoutDayAdapter(workout.dayList)
+            adapter = WorkoutProgressAdapter(day.exerciseDayList)
         }
 
         setHasOptionsMenu(true)
@@ -37,7 +29,6 @@ class WorkoutPagerWorkoutFragment(private val workout: Workout) : Fragment() {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.option_menu, menu)
-        menu.findItem(R.id.delete).isVisible = true
+        menu.clear()
     }
 }

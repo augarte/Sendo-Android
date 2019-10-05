@@ -8,4 +8,16 @@
     <string name="profile">Perfil</string>
     <string name="settings">Ajustes</string>
     <string name="search">Buscar</string>
+    <string name="archived">Archivado</string>
+    <string name="category">Categoría</string>
+    <string name="create">Crear</string>
+    <string name="delete">Eliminar</string>
+    <string name="day_number">Num. Días</string>
+    <string name="yesterday">Ayer</string>
+    <string name="tomorrow">Mañana</string>
+    <string name="today">Hoy</string>
+    <string name="group">Grupo</string>
+    <string name="list">Lista</string>
+    <string name="no_data">No hay datos</string>
+    <string name="workout_num">Entrenamiento %1$d</string>
 </resources>

@@ -25,8 +25,9 @@ class WorkoutAdapter(private val items : ArrayList<Workout>) : RecyclerView.Adap
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = items[position]
 
-        holder.titleTV?.text = item.name
+        holder.titleTV.text = item.name
         holder.card.setOnClickListener { onItemClick?.invoke(Pair<Workout, View>(item, holder.card)) }
+        holder.backgroundIV.setImageBitmap(item.image)
     }
 
     override fun getItemCount(): Int {
@@ -35,9 +36,8 @@ class WorkoutAdapter(private val items : ArrayList<Workout>) : RecyclerView.Adap
 
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-
-        val titleTV : TextView? = view.card_text
-        val backgroundIV : ImageView? = view.card_image
+        val titleTV : TextView = view.card_text
+        val backgroundIV : ImageView = view.card_image
         val card : CardView = view.workout_card
     }
 }

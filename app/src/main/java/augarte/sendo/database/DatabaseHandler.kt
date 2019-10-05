@@ -56,28 +56,28 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
 
     private fun insertInitialData() {
         for (type in DatabaseConstants.LIST_DATETYPES){
-            var dateType = DateType()
+            val dateType = DateType()
             dateType.code = type.first
             dateType.name = type.second
             insertDateType(dateType)
         }
 
         for (type in DatabaseConstants.LIST_MEASURETYPES){
-            var measureType = MeasureType()
+            val measureType = MeasureType()
             measureType.code = type.first
             measureType.name = type.second
             insertMeasureType(measureType)
         }
 
         for (type in DatabaseConstants.LIST_EXERCISETYPES) {
-            var exerciseType = ExerciseType()
+            val exerciseType = ExerciseType()
             exerciseType.code = type.first
             exerciseType.name = type.second
             insertExerciseType(exerciseType)
         }
 
         for (type in DatabaseConstants.LIST_WEIGHTTYPE){
-            var weightType = WeightType()
+            val weightType = WeightType()
             weightType.code = type.first
             weightType.name = type.second
             weightType.choosed = type == DatabaseConstants.LIST_WEIGHTTYPE[0]
@@ -85,7 +85,7 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
         }
 
         for (type in DatabaseConstants.LIST_LENGTHTYPE){
-            var lengthType = LengthType()
+            val lengthType = LengthType()
             lengthType.code = type.first
             lengthType.name = type.second
             lengthType.choosed = type == DatabaseConstants.LIST_LENGTHTYPE[0]
@@ -119,9 +119,7 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
             do {
                 val workout = Workout()
                 val blob = cursor.getBlob(cursor.getColumnIndex(DatabaseConstants.TABLE_WORKOUT_IMAGE))
-                var image: Bitmap?
-                image = if (blob!= null) BitmapFactory.decodeByteArray(blob, 0, blob.size) else null
-                //val userId = cursor.getInt(cursor.getColumnIndex(DatabaseConstants.TABLE_WORKOUT_CREATEDBY))
+                val image: Bitmap? = if (blob!= null) BitmapFactory.decodeByteArray(blob, 0, blob.size) else null
                 val lastOpenUnixSeconds =  cursor.getLong(cursor.getColumnIndex(DatabaseConstants.TABLE_WORKOUT_LASTOPEN))
                 val createDateUnixSeconds = cursor.getLong(cursor.getColumnIndex(DatabaseConstants.TABLE_WORKOUT_CREATEDATE))
                 val modifyDateUnixSeconds = cursor.getLong(cursor.getColumnIndex(DatabaseConstants.TABLE_WORKOUT_MODIFYDATE))
@@ -131,7 +129,7 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
                 workout.dayList = getDays(SelectTransactions.SELECT_DAYS_BY_WORKOUT_ID, arrayOf(workout.id.toString()))
                 workout.image = image
                 workout.description = cursor.getString(cursor.getColumnIndex(DatabaseConstants.TABLE_WORKOUT_DESCRIPTION))
-                workout.createdBy = MainActivity.user?.uid
+                workout.createdBy = cursor.getString(cursor.getColumnIndex(DatabaseConstants.TABLE_WORKOUT_CREATEDBY))
                 workout.lastOpen = Date((lastOpenUnixSeconds * 1000))
                 workout.createDate = Date((createDateUnixSeconds * 1000))
                 workout.modifyDate = Date((modifyDateUnixSeconds * 1000))
@@ -205,9 +203,8 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
                 val exerciseTypeList = getExerciseType(SelectTransactions.SELECT_EXERCISETYPE_BY_ID, arrayOf(exerciseTypeId))
                 val exerciseType = if (exerciseTypeList!!.size >= 1) exerciseTypeList[0] else null
                 val blob = cursor.getBlob(cursor.getColumnIndex(DatabaseConstants.TABLE_EXERCISE_IMAGE))
-                var image: Bitmap?
-                image = if (blob!= null) BitmapFactory.decodeByteArray(blob, 0, blob.size) else null
-                val userId = cursor.getInt(cursor.getColumnIndex(DatabaseConstants.TABLE_EXERCISE_CREATEDBY))
+                val image: Bitmap? = if (blob!= null) BitmapFactory.decodeByteArray(blob, 0, blob.size) else null
+                val userId = cursor.getString(cursor.getColumnIndex(DatabaseConstants.TABLE_EXERCISE_CREATEDBY))
                 val createDateUnixSeconds = cursor.getLong(cursor.getColumnIndex(DatabaseConstants.TABLE_EXERCISE_CREATEDATE))
                 val modifyDateUnixSeconds = cursor.getLong(cursor.getColumnIndex(DatabaseConstants.TABLE_EXERCISE_MODIFYDATE))
 
@@ -216,7 +213,7 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
                 exercise.description = cursor.getString(cursor.getColumnIndex(DatabaseConstants.TABLE_EXERCISE_DESCRIPTION))
                 exercise.image = image
                 exercise.type = exerciseType
-                exercise.createdBy = MainActivity.user?.uid
+                exercise.createdBy = userId
                 exercise.createDate = Date((createDateUnixSeconds * 1000))
                 exercise.modifyDate = Date((modifyDateUnixSeconds * 1000))
 
@@ -409,7 +406,7 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
 
                 day.id = cursor.getInt(cursor.getColumnIndex(DatabaseConstants.TABLE_DAY_ID))
                 day.workoutId = cursor.getInt(cursor.getColumnIndex(DatabaseConstants.TABLE_DAY_WORKOUTID))
-                day.exerciseDay = getExerciseDay(SelectTransactions.SELECT_EXERCISEDAY_BY_DAY_ID, arrayOf(day.id.toString()))
+                day.exerciseDayList = getExerciseDay(SelectTransactions.SELECT_EXERCISEDAY_BY_DAY_ID, arrayOf(day.id.toString()))
                 day.name = cursor.getString(cursor.getColumnIndex(DatabaseConstants.TABLE_DAY_NAME))
                 day.createdBy = MainActivity.user?.uid
                 day.createDate = Date((createDateUnixSeconds * 1000))
@@ -445,7 +442,7 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
             e.printStackTrace()
         }
 
-        for (exerciseDay in day.exerciseDay) {
+        for (exerciseDay in day.exerciseDayList) {
             exerciseDay.dayId = id.toInt()
             insertExerciseDay(exerciseDay)
         }

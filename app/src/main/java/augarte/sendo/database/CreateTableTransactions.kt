@@ -7,7 +7,7 @@ class CreateTableTransactions {
                 "(${DatabaseConstants.TABLE_WORKOUT_ID} INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "${DatabaseConstants.TABLE_WORKOUT_NAME} TEXT NOT NULL NOT NULL, " +
                 "${DatabaseConstants.TABLE_WORKOUT_DESCRIPTION} TEXT, " +
-                "${DatabaseConstants.TABLE_WORKOUT_IMAGE} TEXT, " +
+                "${DatabaseConstants.TABLE_WORKOUT_IMAGE} BLOB, " +
                 "${DatabaseConstants.TABLE_WORKOUT_CREATEDBY} TEXT NOT NULL, " +
                 "${DatabaseConstants.TABLE_WORKOUT_LASTOPEN} INTEGER, " +
                 "${DatabaseConstants.TABLE_WORKOUT_CREATEDATE} INTEGER NOT NULL, " +
@@ -25,7 +25,7 @@ class CreateTableTransactions {
                 "(${DatabaseConstants.TABLE_EXERCISE_ID} INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "${DatabaseConstants.TABLE_EXERCISE_NAME} TEXT NOT NULL, " +
                 "${DatabaseConstants.TABLE_EXERCISE_DESCRIPTION} TEXT, " +
-                "${DatabaseConstants.TABLE_EXERCISE_IMAGE} TEXT, " +
+                "${DatabaseConstants.TABLE_EXERCISE_IMAGE} BLOB, " +
                 "${DatabaseConstants.TABLE_EXERCISE_TYPE} INTEGER NOT NULL, " +
                 "${DatabaseConstants.TABLE_EXERCISE_STATE} INTEGER NOT NULL, " +
                 "${DatabaseConstants.TABLE_EXERCISE_CREATEDBY} TEXT NOT NULL, " +

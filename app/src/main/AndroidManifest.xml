@@ -58,7 +58,18 @@
         </activity>
         <activity
             android:name=".activity.SearchWorkoutActivity"
-            android:label="Search Workour"
+            android:label="Search Workout"
+            android:theme="@style/DarkTheme.NoActionBar"
+            android:parentActivityName=".activity.MainActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.AddProgressActivity"
+            android:label="Add Progress"
             android:theme="@style/DarkTheme.NoActionBar"
             android:parentActivityName=".activity.MainActivity"
             android:configChanges="orientation"

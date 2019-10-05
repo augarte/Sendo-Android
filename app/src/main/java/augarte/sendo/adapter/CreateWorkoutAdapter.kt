@@ -35,7 +35,7 @@ class CreateWorkoutAdapter(private val items : ArrayList<Day>, private val rv : 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = items[position]
 
-        for (exerciseDay in item.exerciseDay) {
+        for (exerciseDay in item.exerciseDayList) {
             selectedExerciseList.add(exerciseDay.exercise!!)
         }
 
@@ -69,7 +69,7 @@ class CreateWorkoutAdapter(private val items : ArrayList<Day>, private val rv : 
                 val exerciseDay = ExerciseDay()
                 exerciseDay.dayId = item.id
                 exerciseDay.exercise = exercise
-                item.exerciseDay.add(exerciseDay)
+                item.exerciseDayList.add(exerciseDay)
 
                 holder.exerciseList.text = createExerciseList(selectedExerciseList)
             }
@@ -80,7 +80,7 @@ class CreateWorkoutAdapter(private val items : ArrayList<Day>, private val rv : 
                     val index = selectedExerciseList.indexOf(e)
                     selectedExerciseList.removeAt(index)
 
-                    item.exerciseDay.removeAt(index)
+                    item.exerciseDayList.removeAt(index)
 
                     holder.exerciseList.text = createExerciseList(selectedExerciseList)
                 }

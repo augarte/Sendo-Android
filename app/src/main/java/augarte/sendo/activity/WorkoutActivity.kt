@@ -1,22 +1,22 @@
 package augarte.sendo.activity
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
+import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
-import androidx.viewpager.widget.ViewPager
+import androidx.core.app.ActivityOptionsCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import augarte.sendo.dataModel.Workout
 import kotlinx.android.synthetic.main.app_bar_main.*
 import augarte.sendo.R
-import augarte.sendo.adapter.WorkoutPagerAdapter
-import augarte.sendo.fragment.WorkoutPagerProgressFragment
-import augarte.sendo.fragment.WorkoutPagerTimerFragment
-import augarte.sendo.fragment.WorkoutPagerWorkoutFragment
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import kotlinx.android.synthetic.main.activity_workout.*
+import augarte.sendo.adapter.WorkoutDayAdapter
+import kotlinx.android.synthetic.main.activity_workout.datePicker
+import kotlinx.android.synthetic.main.activity_workout.day_list
+import kotlinx.android.synthetic.main.item_workout_card.*
 
 
 class WorkoutActivity : AppCompatActivity() {
@@ -25,7 +25,6 @@ class WorkoutActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        ActivityCompat.postponeEnterTransition(this)
         setContentView(R.layout.activity_workout)
 
         workout = if (savedInstanceState == null) {
@@ -38,43 +37,33 @@ class WorkoutActivity : AppCompatActivity() {
         supportActionBar?.title = workout.name
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        val pageAdapter = WorkoutPagerAdapter(supportFragmentManager)
-        pageAdapter.addFragment(WorkoutPagerWorkoutFragment(workout))
-        pageAdapter.addFragment(WorkoutPagerProgressFragment(workout))
-        pageAdapter.addFragment(WorkoutPagerTimerFragment())
-        viewPager.adapter = pageAdapter
+        card_text.text = workout.name
+        card_image.setImageBitmap(workout.image)
+        workout_card.isClickable = false
 
-        viewPager.addOnPageChangeListener(object: ViewPager.OnPageChangeListener{
-            override fun onPageScrollStateChanged(state: Int) {
+        datePicker.setUp(workout.createDate!!)
+
+        val workoutDayAdapter = WorkoutDayAdapter(workout.dayList)
+        workoutDayAdapter.onItemClick = { pair ->
+            val intent = Intent(this, AddProgressActivity::class.java)
+            intent.putExtra("day", pair.first)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                val options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, pair.second, "dayCard")
+                startActivity(intent, options.toBundle())
+            } else {
+                startActivity(intent)
             }
+        }
+        day_list.apply {
+            layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+            adapter = workoutDayAdapter
+        }
+    }
 
-            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
-            }
-
-            override fun onPageSelected(position: Int) {
-                bottomNavigation.menu.getItem(position).isChecked = true
-            }
-
-        })
-
-        bottomNavigation.setOnNavigationItemSelectedListener(BottomNavigationView.OnNavigationItemSelectedListener {item->
-            when(item.itemId){
-                R.id.workout ->{
-                    viewPager.currentItem = 0
-                    return@OnNavigationItemSelectedListener true
-                }
-                R.id.progress ->{
-                    viewPager.currentItem = 1
-                    return@OnNavigationItemSelectedListener true
-                }
-                R.id.timer ->{
-                    viewPager.currentItem = 2
-                    return@OnNavigationItemSelectedListener true
-                } else -> viewPager.currentItem = 1
-            }
-            false
-        })
-        bottomNavigation.selectedItemId = R.id.workout
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.option_menu, menu)
+        menu?.findItem(R.id.delete)?.isVisible = true
+        return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {

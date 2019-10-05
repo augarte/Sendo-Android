@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.fragment_pager_timer.*
 import java.util.*
 import kotlin.concurrent.timer
 
-class WorkoutPagerTimerFragment : Fragment() {
+class DayPagerTimerFragment : Fragment() {
 
     private var timerTime: Int = 0
     private var timerFirstStart: Boolean = true
@@ -56,6 +56,7 @@ class WorkoutPagerTimerFragment : Fragment() {
             play.visibility = View.VISIBLE
             timer_time.text = "00:00"
             timerTime = 0
+            timer.cancel()
             sharedPreferences!!.edit().putLong(Constants.SHARED_TIMER, 0).apply()
         }
 

@@ -8,4 +8,16 @@
     <string name="profile">Profila</string>
     <string name="settings">Ezarpenak</string>
     <string name="search">Bilatu</string>
+    <string name="create">Sortu</string>
+    <string name="category">Kategoria</string>
+    <string name="archived">Artxibatua</string>
+    <string name="delete">Ezabatu</string>
+    <string name="day_number">Egun kopurua</string>
+    <string name="group">Multzo</string>
+    <string name="yesterday">Atzo</string>
+    <string name="tomorrow">Bihar</string>
+    <string name="today">Gaur</string>
+    <string name="list">Zerrenda</string>
+    <string name="no_data">Daturik ez</string>
+    <string name="workout_num">%1$d Entrenamendua</string>
 </resources>
