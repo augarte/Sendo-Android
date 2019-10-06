@@ -146,6 +146,25 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
         return workouts
     }
 
+    fun getWorkoutImage(workoutId: Int): Bitmap? {
+        var image: Bitmap? = null
+
+        val db = this.writableDatabase
+        val cursor = db.rawQuery(SelectTransactions.SELECT_WORKOUTIMAGE_BY_ID, arrayOf(workoutId.toString()))
+
+        if (cursor.moveToFirst()) {
+            do {
+                val blob = cursor.getBlob(cursor.getColumnIndex(DatabaseConstants.TABLE_WORKOUT_IMAGE))
+                image = if (blob!= null) BitmapFactory.decodeByteArray(blob, 0, blob.size) else null
+            } while (cursor.moveToNext())
+        }
+
+        cursor.close()
+        db.close()
+
+        return image
+    }
+
     fun insertWorkout(workout: Workout): Long {
         val db = this.writableDatabase
         val values = ContentValues()

@@ -14,6 +14,7 @@ import augarte.sendo.dataModel.Workout
 import kotlinx.android.synthetic.main.app_bar_main.*
 import augarte.sendo.R
 import augarte.sendo.adapter.WorkoutDayAdapter
+import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_workout.datePicker
 import kotlinx.android.synthetic.main.activity_workout.day_list
 import kotlinx.android.synthetic.main.item_workout_card.*
@@ -33,12 +34,14 @@ class WorkoutActivity : AppCompatActivity() {
             savedInstanceState.getParcelable("workout") as Workout
         }
 
+        workout.image = MainActivity.dbHandler.getWorkoutImage(workout.id!!)
+
         setSupportActionBar(toolbar)
         supportActionBar?.title = workout.name
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         card_text.text = workout.name
-        card_image.setImageBitmap(workout.image)
+        Glide.with(card_image.context).load(workout.image).into(card_image)
         workout_card.isClickable = false
 
         datePicker.setUp(workout.createDate!!)

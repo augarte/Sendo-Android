@@ -1,7 +1,6 @@
 package augarte.sendo.utils
 
 import android.graphics.Bitmap
-import android.widget.TextView
 import java.io.ByteArrayOutputStream
 import java.text.SimpleDateFormat
 import java.util.*

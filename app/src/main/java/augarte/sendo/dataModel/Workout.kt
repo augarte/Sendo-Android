@@ -22,7 +22,7 @@ class Workout() : Parcelable{
         name = parcel.readString()
         description = parcel.readString()
         dayList = parcel.readArrayList(Day::class.java.classLoader) as ArrayList<Day>
-        image = parcel.readParcelable(Bitmap::class.java.classLoader)
+        //image = parcel.readParcelable(Bitmap::class.java.classLoader)
         createDate = Date(parcel.readLong())
     }
 
@@ -31,7 +31,7 @@ class Workout() : Parcelable{
         parcel.writeString(name)
         parcel.writeString(description)
         parcel.writeList(dayList)
-        parcel.writeParcelable(image, flags)
+        //parcel.writeParcelable(image, flags)
         parcel.writeLong(createDate!!.time)
     }
 

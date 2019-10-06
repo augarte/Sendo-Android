@@ -22,7 +22,6 @@ import androidx.core.content.ContextCompat
 import augarte.sendo.utils.Animations
 import augarte.sendo.dataModel.Workout
 import android.provider.MediaStore
-import augarte.sendo.dataModel.Exercise
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 
 class CreateWorkoutActivity : AppCompatActivity() {
