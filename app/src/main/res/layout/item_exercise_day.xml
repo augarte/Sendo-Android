@@ -4,7 +4,9 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="@dimen/padding_small">
+    android:paddingTop="@dimen/padding_medium_small"
+    android:paddingStart="@dimen/padding_medium_lage"
+    android:paddingEnd="@dimen/padding_medium_lage">
 
     <ImageView
         android:id="@+id/image1"

@@ -12,7 +12,6 @@ class DatabaseConstants {
         const val TABLE_MEASUREMENT = "measurement"
         const val TABLE_WORKOUT = "workout"
         const val TABLE_SERIE = "serie"
-        const val TABLE_USER = "user"
         const val TABLE_MEASURETYPE = "measureType"
         const val TABLE_DATETYPE = "dateType"
         const val TABLE_EXERCISETYPE = "exerciseType"

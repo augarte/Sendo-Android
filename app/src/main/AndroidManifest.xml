@@ -68,7 +68,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.AddProgressActivity"
+            android:name=".activity.WorkoutDayActivity"
             android:label="Add Progress"
             android:theme="@style/DarkTheme.NoActionBar"
             android:parentActivityName=".activity.MainActivity"

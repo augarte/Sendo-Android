@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="@dimen/padding_large"
+    android:paddingStart="@dimen/padding_large"
+    android:paddingEnd="@dimen/padding_large"
+    android:paddingBottom="@dimen/padding_xlarge">
+
+    <TextView
+        android:id="@+id/title_exercise"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/margin_medium"
+        android:text="Exercise"
+        android:textSize="@dimen/text_xlarge"
+        android:textColor="@color/primaryText"
+        android:textStyle="bold"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_small">
+
+        <TextView
+            android:id="@+id/serie"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Series"
+            android:textSize="@dimen/text_medium"
+            android:textStyle="bold"
+            android:paddingBottom="@dimen/padding_medium_small"
+            app:layout_constraintBottom_toBottomOf="@id/serieET"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/guideline"/>
+        <TextView
+            android:id="@+id/rep"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Repetition"
+            android:textSize="@dimen/text_medium"
+            android:textStyle="bold"
+            android:paddingBottom="@dimen/padding_medium_small"
+            app:layout_constraintBottom_toBottomOf="@id/repET"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/guideline"/>
+        <TextView
+            android:id="@+id/weight"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Weight"
+            android:textSize="@dimen/text_medium"
+            android:textStyle="bold"
+            android:paddingBottom="@dimen/padding_medium_small"
+            app:layout_constraintBottom_toBottomOf="@id/weightET"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/guideline"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5"/>
+
+        <EditText
+            android:id="@+id/serieET"
+            android:layout_width="@dimen/view_medium"
+            android:layout_height="wrap_content"
+            android:maxLength="2"
+            android:inputType="number"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/guideline"/>
+        <EditText
+            android:id="@+id/repET"
+            android:layout_width="@dimen/view_medium"
+            android:layout_height="wrap_content"
+            android:maxLength="3"
+            android:inputType="number"
+            android:layout_marginTop="@dimen/margin_small"
+            app:layout_constraintTop_toBottomOf="@id/serieET"
+            app:layout_constraintStart_toEndOf="@id/guideline"/>
+        <EditText
+            android:id="@+id/weightET"
+            android:layout_width="@dimen/view_medium"
+            android:layout_height="wrap_content"
+            android:maxLength="4"
+            android:inputType="numberDecimal"
+            android:layout_marginTop="@dimen/margin_small"
+            app:layout_constraintTop_toBottomOf="@id/repET"
+            app:layout_constraintStart_toEndOf="@id/guideline"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <Button
+        android:id="@+id/insertButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_medium"
+        android:layout_gravity="center"
+        android:text="Insert"/>
+
+</LinearLayout>

@@ -186,10 +186,8 @@ class CreateWorkoutActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         when {
-            bottomsheet.getState() == BottomSheetBehavior.STATE_EXPANDED -> bottomsheet.setState(BottomSheetBehavior.STATE_COLLAPSED)
-            bottomsheet.getState() == BottomSheetBehavior.STATE_HALF_EXPANDED -> bottomsheet.setState(BottomSheetBehavior.STATE_COLLAPSED)
-            bottomsheet.getState() == BottomSheetBehavior.STATE_COLLAPSED -> bottomsheet.setState(BottomSheetBehavior.STATE_HIDDEN)
-            else -> super.onBackPressed()
+            bottomsheet.getState() == BottomSheetBehavior.STATE_EXPANDED -> bottomsheet.setState(BottomSheetBehavior.STATE_HIDDEN)
+            else -> finish()
         }
     }
 }

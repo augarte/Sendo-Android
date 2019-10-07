@@ -838,7 +838,7 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
         return serieList
     }
 
-    private fun insertSerie(serie: Serie): Long {
+    fun insertSerie(serie: Serie): Long {
         val db = this.writableDatabase
         val values = ContentValues()
 

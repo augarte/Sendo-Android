@@ -8,14 +8,19 @@ import androidx.viewpager.widget.ViewPager
 import augarte.sendo.R
 import augarte.sendo.adapter.WorkoutPagerAdapter
 import augarte.sendo.dataModel.Day
+import augarte.sendo.dataModel.Exercise
+import augarte.sendo.dataModel.ExerciseDay
+import augarte.sendo.fragment.AddProgressFragment
 import augarte.sendo.fragment.DayPagerExercisesFragment
 import augarte.sendo.fragment.DayPagerProgressFragment
 import augarte.sendo.fragment.DayPagerTimerFragment
+import augarte.sendo.view.BottomSheet
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kotlinx.android.synthetic.main.activity_add_progress.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 
-class AddProgressActivity: AppCompatActivity() {
+class WorkoutDayActivity: AppCompatActivity() {
 
     private lateinit var day: Day
 
@@ -34,7 +39,21 @@ class AddProgressActivity: AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val pageAdapter = WorkoutPagerAdapter(supportFragmentManager)
-        pageAdapter.addFragment(DayPagerExercisesFragment(day.exerciseDayList))
+
+        val listenerSerie = object : OnAddProgress{
+            override fun onSerieAdded() {
+                bottomsheet.setState(BottomSheetBehavior.STATE_HIDDEN)
+            }
+        }
+
+        val listener = object : OnExerciseDayClickListener{
+            override fun onItemClick(exerciseDay: ExerciseDay) {
+                bottomsheet.fullScreen = false
+                bottomsheet.setFragment(AddProgressFragment(exerciseDay, listenerSerie))
+            }
+        }
+
+        pageAdapter.addFragment(DayPagerExercisesFragment(day.exerciseDayList, listener))
         pageAdapter.addFragment(DayPagerProgressFragment(day))
         pageAdapter.addFragment(DayPagerTimerFragment())
         viewPager.adapter = pageAdapter
@@ -80,5 +99,13 @@ class AddProgressActivity: AppCompatActivity() {
             }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    interface OnAddProgress {
+        fun onSerieAdded()
+    }
+
+    interface OnExerciseDayClickListener {
+        fun onItemClick(exerciseDay: ExerciseDay)
     }
 }

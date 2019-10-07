@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/background"
-    tools:context=".activity.AddProgressActivity">
+    tools:context=".activity.WorkoutDayActivity">
 
     <include
         layout="@layout/app_bar_main"
@@ -43,4 +43,11 @@
         app:itemIconTint="@color/selectable_bottom_navigation_icons"
         app:menu="@menu/bottom_navigation_workout"/>
 
+
+    <augarte.sendo.view.BottomSheet
+        android:id="@+id/bottomsheet"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:elevation="15dp"
+        android:layout_alignParentBottom="true"/>
 </RelativeLayout>

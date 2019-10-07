@@ -28,7 +28,9 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/day_list"
-            android:padding="@dimen/padding_large"
+            android:paddingTop="@dimen/padding_medium_small"
+            android:paddingStart="@dimen/padding_medium"
+            android:paddingEnd="@dimen/padding_medium"
             android:clipToPadding="false"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>

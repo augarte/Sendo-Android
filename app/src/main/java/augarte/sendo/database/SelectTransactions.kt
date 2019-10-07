@@ -35,6 +35,6 @@ class SelectTransactions {
         const val SELECT_ALL_LENGTHTYPE = "SELECT * FROM ${DatabaseConstants.TABLE_LENGTHTYPE}"
         const val SELECT_LENGTHTYPE_BY_CHOOSED = "SELECT * FROM ${DatabaseConstants.TABLE_LENGTHTYPE} WHERE ${DatabaseConstants.TABLE_LENGTHTYPE_CHOOSED} = 1"
 
-        const val SELECT_SERIE_BY_USER_AND_EXERCISEDAYID = "SELECT * FROM ${DatabaseConstants.TABLE_SERIE} WHERE ${DatabaseConstants.TABLE_SERIE_CREATEDBY} = ? AND ${DatabaseConstants.TABLE_SERIE_EXERCISEDAYID} = ?"
+        const val SELECT_SERIE_BY_USER_AND_EXERCISEDAYID = "SELECT * FROM ${DatabaseConstants.TABLE_SERIE} WHERE ${DatabaseConstants.TABLE_SERIE_EXERCISEDAYID} = ?"
     }
 }

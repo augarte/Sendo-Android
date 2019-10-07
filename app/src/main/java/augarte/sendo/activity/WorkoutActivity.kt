@@ -48,7 +48,7 @@ class WorkoutActivity : AppCompatActivity() {
 
         val workoutDayAdapter = WorkoutDayAdapter(workout.dayList)
         workoutDayAdapter.onItemClick = { pair ->
-            val intent = Intent(this, AddProgressActivity::class.java)
+            val intent = Intent(this, WorkoutDayActivity::class.java)
             intent.putExtra("day", pair.first)
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 val options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, pair.second, "dayCard")
