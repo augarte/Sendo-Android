@@ -20,7 +20,7 @@ class CreateWorkoutAdapter(private val items : ArrayList<Day>, private val rv : 
 
     var onDayEdit: ((title: String, selectedExercises: ArrayList<Exercise>, listener: OnExerciseSelectedListener) -> Unit)? = null
 
-    private var selectedExerciseList = ArrayList<Exercise>()
+    private var selectedExerciseList = ArrayList<ArrayList<Exercise>>()
     private lateinit var inflater: LayoutInflater
     private lateinit var context: Context
     var newItem : Boolean = false
@@ -28,6 +28,9 @@ class CreateWorkoutAdapter(private val items : ArrayList<Day>, private val rv : 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         context = parent.context
         inflater = LayoutInflater.from(context)
+        for (i in 0 until items.size) {
+            selectedExerciseList.add(ArrayList())
+        }
         val view = inflater.inflate(R.layout.item_day_card, parent, false)
         return ViewHolder(view)
     }
@@ -36,11 +39,11 @@ class CreateWorkoutAdapter(private val items : ArrayList<Day>, private val rv : 
         val item = items[position]
 
         for (exerciseDay in item.exerciseDayList) {
-            selectedExerciseList.add(exerciseDay.exercise!!)
+            selectedExerciseList[position].add(exerciseDay.exercise!!)
         }
 
         holder.cardTitle.text = item.name.toString()
-        holder.exerciseList.text = createExerciseList(selectedExerciseList)
+        holder.exerciseList.text = createExerciseList(selectedExerciseList[position])
 
         val listener = View.OnClickListener {
             if (holder.arrow.rotation == 0f) {
@@ -64,30 +67,30 @@ class CreateWorkoutAdapter(private val items : ArrayList<Day>, private val rv : 
 
         val exerciseSelectedListener = object: OnExerciseSelectedListener {
             override fun onSelect(exercise: Exercise) {
-                selectedExerciseList.add(exercise)
+                selectedExerciseList[position].add(exercise)
 
                 val exerciseDay = ExerciseDay()
                 exerciseDay.dayId = item.id
                 exerciseDay.exercise = exercise
                 item.exerciseDayList.add(exerciseDay)
 
-                holder.exerciseList.text = createExerciseList(selectedExerciseList)
+                holder.exerciseList.text = createExerciseList(selectedExerciseList[position])
             }
 
             override fun onDeselected(exercise: Exercise) {
-                val e = selectedExerciseList.find { x -> x.id== exercise.id }
+                val e = selectedExerciseList[position].find { x -> x.id== exercise.id }
                 if (e!=null) {
-                    val index = selectedExerciseList.indexOf(e)
-                    selectedExerciseList.removeAt(index)
+                    val index = selectedExerciseList[position].indexOf(e)
+                    selectedExerciseList[position].removeAt(index)
 
                     item.exerciseDayList.removeAt(index)
 
-                    holder.exerciseList.text = createExerciseList(selectedExerciseList)
+                    holder.exerciseList.text = createExerciseList(selectedExerciseList[position])
                 }
             }
         }
         holder.edit.setOnClickListener{
-            onDayEdit?.invoke(item.name.toString(), selectedExerciseList, exerciseSelectedListener)
+            onDayEdit?.invoke(item.name.toString(), selectedExerciseList[position], exerciseSelectedListener)
         }
 
         if (position!=0 && !newItem)  {

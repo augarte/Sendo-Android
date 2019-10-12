@@ -13,6 +13,9 @@ import augarte.sendo.dataModel.*
 import augarte.sendo.utils.Utils
 import kotlin.collections.ArrayList
 import java.util.*
+import android.database.sqlite.SQLiteException
+
+
 
 
 class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseConstants.DB_NAME, null, DatabaseConstants.DB_VERSION) {
@@ -30,7 +33,7 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
         db?.execSQL(CreateTableTransactions.CREATE_TABLE_EXERCISEDAY)
         db?.execSQL(CreateTableTransactions.CREATE_TABLE_SERIE)
         db?.execSQL(CreateTableTransactions.CREATE_TABLE_MEASUREMENT)
-        insertInitialData()
+        //insertInitialData()
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
@@ -54,7 +57,7 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
         onCreate(db)
     }
 
-    private fun insertInitialData() {
+    fun insertInitialData() {
         for (type in DatabaseConstants.LIST_DATETYPES){
             val dateType = DateType()
             dateType.code = type.first
@@ -303,7 +306,7 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
                 val measureTypeList = getMeasureType(SelectTransactions.SELECT_MEASURETYPE_BY_ID, arrayOf(measureTypeId))
                 val measureType = if (measureTypeList!!.size >= 1) measureTypeList[0] else null
                 val valueDate = cursor.getLong(cursor.getColumnIndex(DatabaseConstants.TABLE_MEASUREMENT_DATE))
-                val userId = cursor.getInt(cursor.getColumnIndex(DatabaseConstants.TABLE_MEASUREMENT_CREATEDBY))
+                val userId = cursor.getString(cursor.getColumnIndex(DatabaseConstants.TABLE_MEASUREMENT_CREATEDBY))
                 val createDateUnixSeconds = cursor.getLong(cursor.getColumnIndex(DatabaseConstants.TABLE_MEASUREMENT_CREATEDATE))
                 val modifyDateUnixSeconds = cursor.getLong(cursor.getColumnIndex(DatabaseConstants.TABLE_MEASUREMENT_MODIFYDATE))
 
@@ -311,7 +314,7 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
                 measurement.type = measureType
                 measurement.value = cursor.getDouble(cursor.getColumnIndex(DatabaseConstants.TABLE_MEASUREMENT_VALUE))
                 measurement.date = Date((valueDate * 1000))
-                measurement.createdBy = MainActivity.user?.uid
+                measurement.createdBy = userId
                 measurement.createDate = Date((createDateUnixSeconds * 1000))
                 measurement.modifyDate = Date((modifyDateUnixSeconds * 1000))
 
@@ -410,7 +413,7 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
      /********** DAYS **********/
     /**************************/
 
-    public fun getDays(query: String, array: Array<String>?): ArrayList<Day> {
+    fun getDays(query: String, array: Array<String>?): ArrayList<Day> {
         val db = this.writableDatabase
         val cursor : Cursor
         cursor = db.rawQuery(query, array)
@@ -419,7 +422,7 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
         if (cursor.moveToFirst()) {
             do {
                 val day = Day()
-                val userId = cursor.getInt(cursor.getColumnIndex(DatabaseConstants.TABLE_DAY_CREATEDBY))
+                val userId = cursor.getString(cursor.getColumnIndex(DatabaseConstants.TABLE_DAY_CREATEDBY))
                 val createDateUnixSeconds = cursor.getLong(cursor.getColumnIndex(DatabaseConstants.TABLE_DAY_CREATEDATE))
                 val modifyDateUnixSeconds = cursor.getLong(cursor.getColumnIndex(DatabaseConstants.TABLE_DAY_MODIFYDATE))
 
@@ -427,7 +430,7 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
                 day.workoutId = cursor.getInt(cursor.getColumnIndex(DatabaseConstants.TABLE_DAY_WORKOUTID))
                 day.exerciseDayList = getExerciseDay(SelectTransactions.SELECT_EXERCISEDAY_BY_DAY_ID, arrayOf(day.id.toString()))
                 day.name = cursor.getString(cursor.getColumnIndex(DatabaseConstants.TABLE_DAY_NAME))
-                day.createdBy = MainActivity.user?.uid
+                day.createdBy = userId
                 day.createDate = Date((createDateUnixSeconds * 1000))
                 day.modifyDate = Date((modifyDateUnixSeconds * 1000))
 
@@ -543,7 +546,7 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
      /********** MEASURE TYPES **********/
     /***********************************/
 
-    fun getMeasureType(query: String, array: Array<String>?): ArrayList<MeasureType>? {
+    fun getMeasureType(query: String, array: Array<String>?): ArrayList<MeasureType> {
         val db = this.writableDatabase
         val cursor : Cursor
         cursor = db.rawQuery(query, array)

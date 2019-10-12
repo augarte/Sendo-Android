@@ -1,19 +1,20 @@
 package augarte.sendo.activity
 
 import android.os.Bundle
-import com.google.android.material.navigation.NavigationView
-import androidx.fragment.app.Fragment
-import androidx.core.view.GravityCompat
-import androidx.appcompat.app.AppCompatActivity
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GravityCompat
+import androidx.fragment.app.Fragment
+import augarte.sendo.R
 import augarte.sendo.database.DatabaseHandler
+import augarte.sendo.database.SelectTransactions
 import augarte.sendo.fragment.ExerciseListFragment
 import augarte.sendo.fragment.HomeFragment
 import augarte.sendo.fragment.MeasurementsFragment
 import augarte.sendo.fragment.SettingsFragment
-import augarte.sendo.R
+import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.activity_home.*
@@ -37,6 +38,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         auth = FirebaseAuth.getInstance()
         dbHandler = DatabaseHandler(this)
         //dbHandler.deleteAllTables()
+
+        if (dbHandler.getMeasureType(SelectTransactions.SELECT_ALL_MEASURETYPE, null).count() == 0) dbHandler.insertInitialData()
 
         setSupportActionBar(toolbar)
 
@@ -69,7 +72,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
             drawer_layout.closeDrawer(GravityCompat.START)
         } else {
-            super.onBackPressed()
+             androidx.appcompat.app.AlertDialog.Builder(this)
+                .setTitle("Close Sendo")
+                .setMessage("Are you sure you want close the app?")
+                .setPositiveButton("Accept") { _, _ -> finishAndRemoveTask() }
+                .setNegativeButton("Cancel") { _, _ -> }
+                .show()
         }
     }
 

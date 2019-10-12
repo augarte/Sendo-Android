@@ -39,7 +39,7 @@ class CreateTableTransactions {
                 "${DatabaseConstants.TABLE_EXERCISEDAY_EXERCISEID} INTEGER NOT NULL, " +
                 "${DatabaseConstants.TABLE_EXERCISEDAY_SERIENUM} INTEGER NOT NULL, " +
                 "${DatabaseConstants.TABLE_EXERCISEDAY_REPNUM} INTEGER NOT NULL, " +
-                "${DatabaseConstants.TABLE_EXERCISEDAY_CREATEDBY} INTEGER NOT NULL, " +
+                "${DatabaseConstants.TABLE_EXERCISEDAY_CREATEDBY} TEXT NOT NULL, " +
                 "${DatabaseConstants.TABLE_EXERCISEDAY_CREATEDATE} INTEGER NOT NULL, " +
                 "${DatabaseConstants.TABLE_EXERCISEDAY_MODIFYDATE} INTEGER NOT NULL)"
 

@@ -13,7 +13,7 @@ android {
         minSdkVersion 21
         targetSdkVersion 28
         versionCode 1
-        versionName "0.1"
+        versionName "0.1-Beta"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -51,7 +51,6 @@ dependencies {
     implementation 'com.leinardi.android:speed-dial:3.0.0'
     implementation 'com.getkeepsafe.taptargetview:taptargetview:1.13.0'
     implementation 'com.simplecityapps:recyclerview-fastscroll:1.0.18'
-    implementation 'com.diogobernardino:williamchart:3.1.0'
     implementation 'com.robinhood.spark:spark:1.2.0'
     implementation 'com.github.bumptech.glide:glide:4.10.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.10.0'
