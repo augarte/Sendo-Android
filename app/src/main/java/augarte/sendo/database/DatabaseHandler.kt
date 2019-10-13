@@ -184,7 +184,7 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
 
         var id : Long = -1
         try {
-            id = db.insert(DatabaseConstants.TABLE_WORKOUT, null, values)
+            id = db.insertOrThrow(DatabaseConstants.TABLE_WORKOUT, null, values)
         } catch (e: Exception) {
             Log.e("DB ERROR", e.toString())
             e.printStackTrace()
@@ -268,7 +268,7 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
 
         var id : Long = -1
         try {
-            id = db.insert(DatabaseConstants.TABLE_EXERCISE, null, values)
+            id = db.insertOrThrow(DatabaseConstants.TABLE_EXERCISE, null, values)
         } catch (e: Exception) {
             Log.e("DB ERROR", e.toString())
             e.printStackTrace()
@@ -343,7 +343,7 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
 
         var id : Long = -1
         try {
-            id = db.insert(DatabaseConstants.TABLE_MEASUREMENT, null, values)
+            id = db.insertOrThrow(DatabaseConstants.TABLE_MEASUREMENT, null, values)
         } catch (e: Exception) {
             Log.e("DB ERROR", e.toString())
             e.printStackTrace()
@@ -399,7 +399,7 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
 
         var id : Long = -1
         try {
-            id = db.insert(DatabaseConstants.TABLE_EXERCISETYPE, null, values)
+            id = db.insertOrThrow(DatabaseConstants.TABLE_EXERCISETYPE, null, values)
         } catch (e: Exception) {
             Log.e("DB ERROR", e.toString())
             e.printStackTrace()
@@ -458,7 +458,7 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
 
         var id: Long = -1
         try {
-            id = db.insert(DatabaseConstants.TABLE_DAY, null, values)
+            id = db.insertOrThrow(DatabaseConstants.TABLE_DAY, null, values)
         } catch (e: Exception) {
             Log.e("DB ERROR", e.toString())
             e.printStackTrace()
@@ -527,7 +527,7 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
 
         var id: Long = -1
         try {
-            id = db.insert(DatabaseConstants.TABLE_EXERCISEDAY, null, values)
+            id = db.insertOrThrow(DatabaseConstants.TABLE_EXERCISEDAY, null, values)
         } catch (e: Exception) {
             Log.e("DB ERROR", e.toString())
             e.printStackTrace()
@@ -587,7 +587,7 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
 
         var id : Long = -1
         try {
-            id = db.insert(DatabaseConstants.TABLE_MEASURETYPE, null, values)
+            id = db.insertOrThrow(DatabaseConstants.TABLE_MEASURETYPE, null, values)
         } catch (e: Exception) {
             Log.e("DB ERROR", e.toString())
             e.printStackTrace()
@@ -664,7 +664,7 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
 
         var id : Long = -1
         try {
-            id = db.insert(DatabaseConstants.TABLE_WEIGHTTYPE, null, values)
+            id = db.insertOrThrow(DatabaseConstants.TABLE_WEIGHTTYPE, null, values)
         } catch (e: Exception) {
             Log.e("DB ERROR", e.toString())
             e.printStackTrace()
@@ -740,7 +740,7 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
 
         var id : Long = -1
         try {
-            id = db.insert(DatabaseConstants.TABLE_LENGTHTYPE, null, values)
+            id = db.insertOrThrow(DatabaseConstants.TABLE_LENGTHTYPE, null, values)
         } catch (e: Exception) {
             Log.e("DB ERROR", e.toString())
             e.printStackTrace()
@@ -796,7 +796,7 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
 
         var id : Long = -1
         try {
-            id = db.insert(DatabaseConstants.TABLE_DATETYPE, null, values)
+            id = db.insertOrThrow(DatabaseConstants.TABLE_DATETYPE, null, values)
         } catch (e: Exception) {
             Log.e("DB ERROR", e.toString())
             e.printStackTrace()
@@ -856,7 +856,7 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
 
         var id : Long = -1
         try {
-            id = db.insert(DatabaseConstants.TABLE_SERIE, null, values)
+            id = db.insertOrThrow(DatabaseConstants.TABLE_SERIE, null, values)
         } catch (e: Exception) {
             Log.e("DB ERROR", e.toString())
             e.printStackTrace()
