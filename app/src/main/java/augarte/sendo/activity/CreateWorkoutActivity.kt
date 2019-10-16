@@ -22,6 +22,7 @@ import androidx.core.content.ContextCompat
 import augarte.sendo.utils.Animations
 import augarte.sendo.dataModel.Workout
 import android.provider.MediaStore
+import android.view.MenuItem
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 
 class CreateWorkoutActivity : AppCompatActivity() {
@@ -181,6 +182,16 @@ class CreateWorkoutActivity : AppCompatActivity() {
             anim2.startOffset = 100
             delete_image.startAnimation(anim1)
             add_image.startAnimation(anim2)
+        }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        return when (item?.itemId) {
+            android.R.id.home -> {
+                onBackPressed()
+                true
+            }
+            else -> false
         }
     }
 
