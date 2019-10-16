@@ -77,13 +77,13 @@ class WorkoutActivity : AppCompatActivity() {
             }
             R.id.delete -> {
                 val dialog = AlertDialog.Builder(this)
-                dialog.setTitle("Delete workout")
-                dialog.setMessage("Are you sure you want to delete this workout?")
-                dialog.setPositiveButton("Accept") { _, _ ->
+                dialog.setTitle(getString(R.string.sendo_alert_delete_workout_title))
+                dialog.setMessage(getString(R.string.sendo_alert_delete_workout_message))
+                dialog.setPositiveButton(getText(R.string.sendo_accept)) { _, _ ->
                     MainActivity.dbHandler.deleteWorkoutById(workout.id!!)
                     startActivity(Intent(this, MainActivity::class.java))
                 }
-                dialog.setNegativeButton("Cancel") { _, _ -> }
+                dialog.setNegativeButton(getString(R.string.sendo_cancel)) { _, _ -> }
                 dialog.show()
                 true
             }

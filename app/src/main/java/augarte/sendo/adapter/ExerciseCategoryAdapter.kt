@@ -1,5 +1,6 @@
 package augarte.sendo.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +13,6 @@ import augarte.sendo.dataModel.Exercise
 import augarte.sendo.database.DatabaseConstants
 import com.google.android.material.snackbar.Snackbar
 import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView
-import kotlinx.android.synthetic.main.item_exercise.view.*
 import kotlinx.android.synthetic.main.item_exercise.view.exercise_name
 import kotlinx.android.synthetic.main.item_exercise_category.view.*
 
@@ -55,7 +55,7 @@ class ExerciseCategoryAdapter(private val items : MutableList<Exercise>) : Recyc
         else ""
     }
 
-    fun removeWithSwipe(viewHolder: RecyclerView.ViewHolder) {
+    fun removeWithSwipe(context: Context, viewHolder: RecyclerView.ViewHolder) {
         val position = viewHolder.adapterPosition
         removedPosition = position
         removedItem = items[position]
@@ -64,7 +64,7 @@ class ExerciseCategoryAdapter(private val items : MutableList<Exercise>) : Recyc
         items.removeAt(position)
         notifyItemRemoved(position)
 
-        Snackbar.make(viewHolder.itemView, "${removedItem.name} archived.", Snackbar.LENGTH_LONG).setAction("UNDO") {
+        Snackbar.make(viewHolder.itemView, context.getString(R.string.sendo_snackbar_archived_exercise, removedItem.name.toString()), Snackbar.LENGTH_LONG).setAction(context.getString(R.string.sendo_snackbar_undo)) {
             removedItem.state = DatabaseConstants.STATE_ACTIVE
             MainActivity.dbHandler.updateExerciseState(removedItem)
             items.add(removedPosition, removedItem)

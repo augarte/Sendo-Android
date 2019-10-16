@@ -65,7 +65,7 @@ class HomeFragment : Fragment(){
             SpeedDialActionItem.Builder(R.id.fab_new, R.drawable.ic_dumbbell_add)
                     .setFabBackgroundColor(ResourcesCompat.getColor(resources, R.color.fabChild, null))
                     .setFabImageTintColor(ResourcesCompat.getColor(resources, R.color.black, null))
-                    .setLabel("New")
+                    .setLabel(getString(R.string.sendo_new))
                     .setLabelColor(ResourcesCompat.getColor(resources, R.color.black, null))
                     .setLabelBackgroundColor(ResourcesCompat.getColor(resources, R.color.fabChild, null))
                     .setLabelClickable(false)
@@ -76,7 +76,7 @@ class HomeFragment : Fragment(){
             SpeedDialActionItem.Builder(R.id.fab_search, R.drawable.ic_dumbbell_search)
                     .setFabBackgroundColor(ResourcesCompat.getColor(resources, R.color.fabChild, null))
                     .setFabImageTintColor(ResourcesCompat.getColor(resources, R.color.black, null))
-                    .setLabel("Search")
+                    .setLabel(getString(R.string.sendo_search))
                     .setLabelColor(ResourcesCompat.getColor(resources, R.color.black, null))
                     .setLabelBackgroundColor(ResourcesCompat.getColor(resources, R.color.fabChild, null))
                     .setLabelClickable(false)
@@ -87,13 +87,11 @@ class HomeFragment : Fragment(){
                 R.id.fab_new -> {
                     val intent = Intent(activity, CreateWorkoutActivity::class.java)
                     startActivity(intent)
-                    Log.d("tag","Link action clicked!")
                     false // true to keep the Speed Dial open
                 }
                 R.id.fab_search -> {
                     val intent = Intent(activity, SearchWorkoutActivity::class.java)
                     startActivity(intent)
-                    Log.d("tag","Link action clicked!")
                     false // true to keep the Speed Dial open
                 }
                 else -> false
@@ -102,13 +100,10 @@ class HomeFragment : Fragment(){
 
         speedDial.setOnChangeListener(object : SpeedDialView.OnChangeListener {
             override fun onMainActionSelected() : Boolean {
-                // Call your main action here
-                Log.d("TAG", "Speed dial toggle state changed. Open = ")
-                return false // true to keep the Speed Dial open
+                return false
             }
 
             override fun onToggleChanged(isOpen: Boolean) {
-                Log.d("TAG", "Speed dial toggle state changed. Open = $isOpen")
             }
         })
 
@@ -128,6 +123,6 @@ class HomeFragment : Fragment(){
                 speedDial.open()
             }
         }
-       CustomTapTargetView.showCustomTapTarget(requireActivity(), speedDial, "Add a new workout", "Click the button to add your first workout", listener)
+       CustomTapTargetView.showCustomTapTarget(requireActivity(), speedDial, getString(R.string.sendo_taptarget_workout_title), getString(R.string.sendo_taptarget_workout_description), listener)
     }
 }

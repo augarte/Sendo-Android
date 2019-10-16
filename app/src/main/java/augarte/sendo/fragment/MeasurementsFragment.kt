@@ -48,7 +48,7 @@ class MeasurementsFragment : Fragment() {
         measureType.text = items1[selectedMeasureType]
         measureType.setOnClickListener {
             AlertDialog.Builder(context)
-                .setTitle("Meassurements")
+                .setTitle(getString(R.string.sendo_measurements))
                 .setSingleChoiceItems(items1, selectedMeasureType) { dialog, item ->
                     selectedMeasureType = item
                     measureType.text = items1[selectedMeasureType]
@@ -63,7 +63,7 @@ class MeasurementsFragment : Fragment() {
         dateRange.text = items2[selectedDateType]
         dateRange.setOnClickListener {
             AlertDialog.Builder(context)
-                .setTitle("Period")
+                .setTitle(getString(R.string.sendo_period))
                 .setSingleChoiceItems(items2, selectedDateType) { dialog, item ->
                     selectedDateType = item
                     dateRange.text = items2[selectedDateType]

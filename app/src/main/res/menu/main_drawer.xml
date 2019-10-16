@@ -6,17 +6,17 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_home"
-            android:title="@string/home" />
+            android:title="@string/sendo_home" />
         <item
             android:id="@+id/nav_measurement"
-            android:title="@string/measurement" />
+            android:title="@string/sendo_measurement" />
         <item
             android:id="@+id/nav_exercise_list"
-            android:title="@string/exercise_list" />
+            android:title="@string/sendo_exercise_list" />
 
         <item
             android:id="@+id/nav_settings"
-            android:title="@string/settings"/>
+            android:title="@string/sendo_settings"/>
     </group>
 
 </menu>

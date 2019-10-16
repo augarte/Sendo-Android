@@ -36,7 +36,7 @@ class AddMeasureDialogFragment(private val type: MeasureType, private val listen
         val view = inflater.inflate(R.layout.dialog_add_measure, null)
 
         val list = MainActivity.dbHandler.getMeasureType(SelectTransactions.SELECT_ALL_MEASURETYPE, null)
-        val items = MutableList(list!!.size) { i -> list[i].name}
+        val items = MutableList(list.size) { i -> list[i].name}
 
         val arrayAdapter = ArrayAdapter<String>(context!!, R.layout.item_spinner, items)
         view.measureTypeSpiner.adapter = arrayAdapter
@@ -51,11 +51,11 @@ class AddMeasureDialogFragment(private val type: MeasureType, private val listen
         setDate()
 
         return AlertDialog.Builder(activity)
-                .setTitle("Add measure")
-                .setPositiveButton("ADD") { _, _ ->
+                .setTitle(getString(R.string.sendo_alert_add_measure_title))
+                .setPositiveButton(getString(R.string.sendo_add)) { _, _ ->
                     val value = view.valueET.text.toString().trim()
                     if (TextUtils.isEmpty(value)) {
-                        view.valueET.error = "Enter a value"
+                        view.valueET.error = getString(R.string.sendo_error_enter_value)
                     } else {
                         val newMeasurement = Measurement()
                         newMeasurement.value = view.valueET.text.toString().toDouble()
@@ -65,7 +65,7 @@ class AddMeasureDialogFragment(private val type: MeasureType, private val listen
                         listener.onDialogAccept(this)
                     }
                 }
-                .setNegativeButton("Cancel") { _, _ ->
+                .setNegativeButton(getText(R.string.sendo_cancel)) { _, _ ->
                     dismiss()
                 }
                 .setView(view)
@@ -83,9 +83,9 @@ class AddMeasureDialogFragment(private val type: MeasureType, private val listen
 
     private fun setDate(){
         when {
-            today.get(Calendar.DATE) == c.get(Calendar.DATE) -> dateValue.text = getString(R.string.today)
-            today.get(Calendar.DATE) - c.get(Calendar.DATE) == 1 -> dateValue.text = getString(R.string.yesterday)
-            c.get(Calendar.DATE) - today.get(Calendar.DATE) == 1 -> dateValue.text = getString(R.string.tomorrow)
+            today.get(Calendar.DATE) == c.get(Calendar.DATE) -> dateValue.text = getString(R.string.sendo_today)
+            today.get(Calendar.DATE) - c.get(Calendar.DATE) == 1 -> dateValue.text = getString(R.string.sendo_yesterday)
+            c.get(Calendar.DATE) - today.get(Calendar.DATE) == 1 -> dateValue.text = getString(R.string.sendo_tomorrow)
             else -> dateValue.text = dateFormat.format(c.time)
         }
     }

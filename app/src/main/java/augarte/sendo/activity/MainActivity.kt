@@ -43,7 +43,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         setSupportActionBar(toolbar)
 
-        val toggle = ActionBarDrawerToggle(this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+        val toggle = ActionBarDrawerToggle(this, drawer_layout, toolbar, R.string.sendo_navigation_drawer_open, R.string.sendo_navigation_drawer_close)
         drawer_layout.addDrawerListener(toggle)
         toggle.syncState()
 
@@ -73,10 +73,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             drawer_layout.closeDrawer(GravityCompat.START)
         } else {
              androidx.appcompat.app.AlertDialog.Builder(this)
-                .setTitle("Close Sendo")
-                .setMessage("Are you sure you want close the app?")
-                .setPositiveButton("Accept") { _, _ -> finishAndRemoveTask() }
-                .setNegativeButton("Cancel") { _, _ -> }
+                .setTitle(getString(R.string.sendo_alert_close_app_title))
+                .setMessage(getString(R.string.sendo_alert_close_app_message))
+                .setPositiveButton(getString(R.string.sendo_accept)) { _, _ -> finishAndRemoveTask() }
+                .setNegativeButton(getString(R.string.sendo_cancel)) { _, _ -> }
                 .show()
         }
     }

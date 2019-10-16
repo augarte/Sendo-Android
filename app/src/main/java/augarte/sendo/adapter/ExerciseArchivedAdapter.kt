@@ -1,5 +1,6 @@
 package augarte.sendo.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -42,7 +43,7 @@ class ExerciseArchivedAdapter(private val items : MutableList<Exercise>) : Recyc
         else ""
     }
 
-    fun removeWithSwipe(viewHolder: RecyclerView.ViewHolder) {
+    fun removeWithSwipe(context: Context, viewHolder: RecyclerView.ViewHolder) {
         val position = viewHolder.adapterPosition
         removedPosition = position
         removedItem = items[position]
@@ -51,7 +52,7 @@ class ExerciseArchivedAdapter(private val items : MutableList<Exercise>) : Recyc
         items.removeAt(position)
         notifyItemRemoved(position)
 
-        Snackbar.make(viewHolder.itemView, "${removedItem.name} deleted.", Snackbar.LENGTH_LONG).setAction("UNDO") {
+        Snackbar.make(viewHolder.itemView, context.getString(R.string.sendo_snackbar_unarchived_exercise, removedItem.name.toString()), Snackbar.LENGTH_LONG).setAction(context.getString(R.string.sendo_snackbar_undo)) {
             removedItem.state = DatabaseConstants.STATE_ARCHIVED
             MainActivity.dbHandler.updateExerciseState(removedItem)
             items.add(removedPosition, removedItem)

@@ -51,7 +51,7 @@ class SettingsFragment : Fragment(){
         weight_type_chooseTV.text = items1[selectedWeightIndex]
         weight_type_choose.setOnClickListener{
             AlertDialog.Builder(context)
-                .setTitle("Weight")
+                .setTitle(getString(R.string.sendo_weight))
                 .setSingleChoiceItems(items1, selectedWeightIndex) { dialog, item ->
                     selectedWeightIndex = item
                     MainActivity.dbHandler.updateWeightTypeChoosed(list1[selectedWeightIndex])
@@ -68,7 +68,7 @@ class SettingsFragment : Fragment(){
         length_type_chooseTV.text = items2[selectedLengthIndex]
         length_type_choose.setOnClickListener{
             AlertDialog.Builder(context)
-                    .setTitle("Length")
+                    .setTitle(getString(R.string.sendo_length))
                     .setSingleChoiceItems(items2, selectedLengthIndex) { dialog, item ->
                         selectedLengthIndex = item
                         MainActivity.dbHandler.updateLengthTypeChoosed(list2[selectedLengthIndex])

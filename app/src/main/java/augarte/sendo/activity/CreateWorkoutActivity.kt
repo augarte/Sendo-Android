@@ -44,7 +44,7 @@ class CreateWorkoutActivity : AppCompatActivity() {
 
         for (i in 0 until initialDayNum) {
             val day = Day()
-            day.name = "DAY " + (i+1)
+            day.name = getString(R.string.sendo_day_num, (i+1))
             day.createdBy = MainActivity.user?.uid
             thisWorkout.dayList.add(day)
         }
@@ -130,7 +130,7 @@ class CreateWorkoutActivity : AppCompatActivity() {
                 }
                 else{
                     //permission from popup denied
-                    Toast.makeText(this, "Permission denied", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, getString(R.string.sendo_permision_denied), Toast.LENGTH_SHORT).show()
                 }
             }
         }

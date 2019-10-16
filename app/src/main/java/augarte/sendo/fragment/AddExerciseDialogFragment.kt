@@ -14,11 +14,11 @@ class AddExerciseDialogFragment(private val listener: ExerciseListFragment.OnDia
         val view = inflater.inflate(R.layout.dialog_add_exercise, null)
 
         return AlertDialog.Builder(activity)
-                .setTitle("Add exercise")
-                .setPositiveButton("ADD") { _, _ ->
+                .setTitle(getString(R.string.sendo_dialog_add_exercise_title))
+                .setPositiveButton(getString(R.string.sendo_add)) { _, _ ->
 
                 }
-                .setNegativeButton("Cancel") { _, _ ->
+                .setNegativeButton(getString(R.string.sendo_cancel)) { _, _ ->
                     dismiss()
                 }
                 .setView(view)

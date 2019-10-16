@@ -123,9 +123,9 @@ class ExerciseListFragment : Fragment() {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, position: Int) {
                 Handler().postDelayed({
                     when (exerciseAdapter) {
-                        is ExerciseListAdapter -> (exerciseAdapter as ExerciseListAdapter).removeWithSwipe(viewHolder)
-                        is ExerciseCategoryAdapter -> (exerciseAdapter as ExerciseCategoryAdapter).removeWithSwipe(viewHolder)
-                        is ExerciseArchivedAdapter -> (exerciseAdapter as ExerciseArchivedAdapter).removeWithSwipe(viewHolder)
+                        is ExerciseListAdapter -> (exerciseAdapter as ExerciseListAdapter).removeWithSwipe(context ?: requireContext(), viewHolder)
+                        is ExerciseCategoryAdapter -> (exerciseAdapter as ExerciseCategoryAdapter).removeWithSwipe(context ?: requireContext(), viewHolder)
+                        is ExerciseArchivedAdapter -> (exerciseAdapter as ExerciseArchivedAdapter).removeWithSwipe(context ?: requireContext(), viewHolder)
                     }
                 }, 200)
             }
@@ -134,7 +134,7 @@ class ExerciseListFragment : Fragment() {
                 val itemView = viewHolder.itemView
                 val iconMargin = (itemView.height - deleteIcon.intrinsicHeight) / 2
                 if (dX < 0) {
-                    itemView.background = ContextCompat.getDrawable(context!!, R.drawable.background_exercise_swipe)
+                    itemView.background = ContextCompat.getDrawable(context ?: requireContext(), R.drawable.background_exercise_swipe)
                     swipeBackground.setBounds(itemView.right + dX.toInt(), itemView.top, itemView.right, itemView.bottom)
                     deleteIcon.setBounds(itemView.right - iconMargin - deleteIcon.intrinsicWidth, itemView.top + iconMargin, itemView.right - iconMargin, itemView.bottom - iconMargin)
                 }

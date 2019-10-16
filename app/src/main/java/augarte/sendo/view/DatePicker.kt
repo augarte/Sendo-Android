@@ -59,7 +59,7 @@ class DatePicker @JvmOverloads constructor(context: Context, attrs: AttributeSet
     }
 
     private fun setDate(){
-        val weekNumber = "WEEK " + (c.get(Calendar.WEEK_OF_YEAR) - create.get(Calendar.WEEK_OF_YEAR) + 1)
+        val weekNumber = context.getString(R.string.sendo_week_num) + (c.get(Calendar.WEEK_OF_YEAR) - create.get(Calendar.WEEK_OF_YEAR) + 1)
         date.text = weekNumber
         if (create.get(Calendar.WEEK_OF_YEAR) < c.get(Calendar.WEEK_OF_YEAR)) previous.setImageDrawable(context.getDrawable(R.drawable.ic_arrow_left))
         else if (create.get(Calendar.WEEK_OF_YEAR) == c.get(Calendar.WEEK_OF_YEAR)) previous.setImageDrawable(null)
