@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import augarte.sendo.R
 import augarte.sendo.dataModel.Exercise
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import kotlinx.android.synthetic.main.item_exercise.view.exercise_name
 import kotlinx.android.synthetic.main.item_exercise_chooser.view.*
 
@@ -32,7 +33,7 @@ class ExerciseChooseAdapter(private val items: ArrayList<Exercise>, private val 
             holder.itemView.background = ContextCompat.getDrawable(context, R.color.colorPrimary)
         }
 
-        Glide.with(holder.exerciseImage.context).load(item.imageURL).into(holder.exerciseImage)
+        Glide.with(holder.exerciseImage.context).load(item.imageURL).placeholder(R.drawable.ic_sendo_placeholder).diskCacheStrategy(DiskCacheStrategy.AUTOMATIC).into(holder.exerciseImage)
 
         holder.itemView.setOnClickListener {
             if (item.selected){

@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import augarte.sendo.R
 import augarte.sendo.dataModel.Workout
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import kotlinx.android.synthetic.main.item_workout_card.view.*
 
 class WorkoutAdapter(private val items : ArrayList<Workout>) : RecyclerView.Adapter<WorkoutAdapter.ViewHolder>() {
@@ -28,7 +29,7 @@ class WorkoutAdapter(private val items : ArrayList<Workout>) : RecyclerView.Adap
 
         holder.titleTV.text = item.name
         holder.card.setOnClickListener { onItemClick?.invoke(Pair<Workout, View>(item, holder.card)) }
-        Glide.with(holder.backgroundIV.context).load(item.image).into(holder.backgroundIV)
+        Glide.with(holder.backgroundIV.context).load(item.image).diskCacheStrategy(DiskCacheStrategy.AUTOMATIC).into(holder.backgroundIV)
     }
 
     override fun getItemCount(): Int {

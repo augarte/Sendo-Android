@@ -18,7 +18,7 @@
             android:padding="@dimen/padding_small"
             android:gravity="center"
             android:text="CATEGORY"
-            android:textColor="@color/secondaryText"
+            android:textColor="@color/primaryText"
             android:textStyle="bold"/>
     </LinearLayout>
 
@@ -28,7 +28,7 @@
         android:padding="@dimen/padding_medium_small"
         android:background="@drawable/background_exercise_noswipe">
         <androidx.cardview.widget.CardView
-            android:layout_width="50dp"
+            android:layout_width="75dp"
             android:layout_height="50dp"
             app:cardCornerRadius="25dp">
 

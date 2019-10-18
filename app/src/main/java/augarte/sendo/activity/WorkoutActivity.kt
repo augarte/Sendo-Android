@@ -15,6 +15,7 @@ import kotlinx.android.synthetic.main.app_bar_main.*
 import augarte.sendo.R
 import augarte.sendo.adapter.WorkoutDayAdapter
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import kotlinx.android.synthetic.main.activity_workout.datePicker
 import kotlinx.android.synthetic.main.activity_workout.day_list
 import kotlinx.android.synthetic.main.item_workout_card.*
@@ -41,7 +42,7 @@ class WorkoutActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         card_text.text = workout.name
-        Glide.with(card_image.context).load(workout.image).into(card_image)
+        Glide.with(card_image.context).load(workout.image).diskCacheStrategy(DiskCacheStrategy.AUTOMATIC).into(card_image)
         workout_card.isClickable = false
 
         datePicker.setUp(workout.createDate!!)

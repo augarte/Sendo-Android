@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -11,10 +12,14 @@ import augarte.sendo.R
 import augarte.sendo.activity.MainActivity
 import augarte.sendo.dataModel.Exercise
 import augarte.sendo.database.DatabaseConstants
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.google.android.material.snackbar.Snackbar
 import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView
 import kotlinx.android.synthetic.main.item_exercise.view.exercise_name
 import kotlinx.android.synthetic.main.item_exercise_category.view.*
+import kotlinx.android.synthetic.main.item_exercise_category.view.exercise_image
+import kotlinx.android.synthetic.main.item_exercise_chooser.view.*
 
 class ExerciseCategoryAdapter(private val items : MutableList<Exercise>) : RecyclerView.Adapter<ExerciseCategoryAdapter.MainViewHolder>(), FastScrollRecyclerView.SectionedAdapter {
 
@@ -43,6 +48,7 @@ class ExerciseCategoryAdapter(private val items : MutableList<Exercise>) : Recyc
         lastCategory = item.type!!.id!!
 
         holder.exerciseName.text = item.name
+        Glide.with(holder.exerciseImage.context).load(item.imageURL).placeholder(R.drawable.ic_sendo_placeholder).diskCacheStrategy(DiskCacheStrategy.AUTOMATIC).into(holder.exerciseImage)
     }
 
     override fun getItemCount(): Int {
@@ -76,5 +82,6 @@ class ExerciseCategoryAdapter(private val items : MutableList<Exercise>) : Recyc
         var exerciseName: TextView = view.exercise_name
         var categoryLayout: LinearLayout = view.category_layout
         var categoryTitle: TextView = view.category_title
+        var exerciseImage: ImageView = view.exercise_image
     }
 }

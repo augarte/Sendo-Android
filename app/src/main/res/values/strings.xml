@@ -60,4 +60,5 @@
     <string name="sendo_measure_type">Measure type</string>
     <string name="sendo_insert_value">Insert value</string>
     <string name="sendo_date">Date</string>
+    <string name="sendo_progress">Progress</string>
 </resources>

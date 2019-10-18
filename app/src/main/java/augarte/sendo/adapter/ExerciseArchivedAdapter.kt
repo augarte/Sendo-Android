@@ -4,12 +4,15 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import augarte.sendo.R
 import augarte.sendo.activity.MainActivity
 import augarte.sendo.dataModel.Exercise
 import augarte.sendo.database.DatabaseConstants
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.google.android.material.snackbar.Snackbar
 import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView
 import kotlinx.android.synthetic.main.item_exercise.view.*
@@ -31,6 +34,8 @@ class ExerciseArchivedAdapter(private val items : MutableList<Exercise>) : Recyc
         val item = items[position]
 
         holder.exerciseName.text = item.name
+        Glide.with(holder.exerciseImage.context).load(item.imageURL).placeholder(R.drawable.ic_sendo_placeholder).diskCacheStrategy(DiskCacheStrategy.AUTOMATIC).into(holder.exerciseImage)
+
     }
 
     override fun getItemCount(): Int {
@@ -62,5 +67,6 @@ class ExerciseArchivedAdapter(private val items : MutableList<Exercise>) : Recyc
 
     class MainViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         var exerciseName: TextView = view.exercise_name
+        var exerciseImage: ImageView = view.exercise_image
     }
 }

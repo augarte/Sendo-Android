@@ -43,8 +43,8 @@
     <string name="sendo_dialog_add_exercise_title">Ariketa gehitu</string>
     <string name="sendo_error_enter_value">Balioa sartu</string>
     <string name="sendo_exercise">Ariketa</string>
-    <string name="sendo_insert">Txertatu</string>
-    <string name="sendo_insert_value">Balioa txertatu</string>
+    <string name="sendo_insert">Gehitu</string>
+    <string name="sendo_insert_value">Balioa gehitu</string>
     <string name="sendo_length">Luzera</string>
     <string name="sendo_measure_type">Neurketa mota</string>
     <string name="sendo_not_enough_data">Datu nahikorik ez</string>
