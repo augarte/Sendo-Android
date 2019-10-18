@@ -1,6 +1,5 @@
 package augarte.sendo.activity
 
-import android.content.Context
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Toast
@@ -10,7 +9,6 @@ import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import augarte.sendo.R
 import augarte.sendo.database.DatabaseHandler
-import augarte.sendo.database.SelectTransactions
 import augarte.sendo.fragment.ExerciseListFragment
 import augarte.sendo.fragment.HomeFragment
 import augarte.sendo.fragment.MeasurementsFragment

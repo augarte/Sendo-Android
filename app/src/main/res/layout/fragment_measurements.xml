@@ -75,7 +75,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="@string/sendo_not_enough_data"
-                    android:textColor="@color/primaryText"
+                    android:textColor="@color/secondaryText"
                     android:textStyle="bold"
                     android:visibility="gone"/>
 
