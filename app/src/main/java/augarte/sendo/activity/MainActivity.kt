@@ -1,5 +1,6 @@
 package augarte.sendo.activity
 
+import android.content.Context
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Toast
@@ -38,8 +39,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         auth = FirebaseAuth.getInstance()
         dbHandler = DatabaseHandler(this)
         //dbHandler.deleteAllTables()
-
-        if (dbHandler.getMeasureType(SelectTransactions.SELECT_ALL_MEASURETYPE, null).count() == 0) dbHandler.insertInitialData()
 
         setSupportActionBar(toolbar)
 

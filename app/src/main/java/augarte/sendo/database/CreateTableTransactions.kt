@@ -25,7 +25,7 @@ class CreateTableTransactions {
                 "(${DatabaseConstants.TABLE_EXERCISE_ID} INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "${DatabaseConstants.TABLE_EXERCISE_NAME} TEXT NOT NULL, " +
                 "${DatabaseConstants.TABLE_EXERCISE_DESCRIPTION} TEXT, " +
-                "${DatabaseConstants.TABLE_EXERCISE_IMAGE} BLOB, " +
+                "${DatabaseConstants.TABLE_EXERCISE_IMAGE} TEXT, " +
                 "${DatabaseConstants.TABLE_EXERCISE_TYPE} INTEGER NOT NULL, " +
                 "${DatabaseConstants.TABLE_EXERCISE_STATE} INTEGER NOT NULL, " +
                 "${DatabaseConstants.TABLE_EXERCISE_CREATEDBY} TEXT NOT NULL, " +

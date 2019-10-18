@@ -13,12 +13,13 @@ import augarte.sendo.dataModel.*
 import augarte.sendo.utils.Utils
 import kotlin.collections.ArrayList
 import java.util.*
-import android.database.sqlite.SQLiteException
-
-
+import java.io.BufferedReader
+import java.io.InputStreamReader
 
 
 class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseConstants.DB_NAME, null, DatabaseConstants.DB_VERSION) {
+
+    private val mContext = context!!
 
     override fun onCreate(db: SQLiteDatabase?) {
         db?.execSQL(CreateTableTransactions.CREATE_TABLE_MEASURETYPE)
@@ -33,7 +34,8 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
         db?.execSQL(CreateTableTransactions.CREATE_TABLE_EXERCISEDAY)
         db?.execSQL(CreateTableTransactions.CREATE_TABLE_SERIE)
         db?.execSQL(CreateTableTransactions.CREATE_TABLE_MEASUREMENT)
-        //insertInitialData()
+
+        insertFromFile(db)
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
@@ -57,54 +59,19 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
         onCreate(db)
     }
 
-    fun insertInitialData() {
-        for (type in DatabaseConstants.LIST_DATETYPES){
-            val dateType = DateType()
-            dateType.code = type.first
-            dateType.name = type.second
-            insertDateType(dateType)
-        }
+    private fun insertFromFile(db: SQLiteDatabase?): Int {
+        var result = 0
+        val insertsStream = InputStreamReader(mContext.assets.open("initial_data.sqlite"))
+        val insertReader = BufferedReader(insertsStream)
 
-        for (type in DatabaseConstants.LIST_MEASURETYPES){
-            val measureType = MeasureType()
-            measureType.code = type.first
-            measureType.name = type.second
-            insertMeasureType(measureType)
+        while (insertReader.ready()) {
+            val insertStmt = insertReader.readLine()
+            db?.execSQL(insertStmt)
+            result++
         }
+        insertReader.close()
 
-        for (type in DatabaseConstants.LIST_EXERCISETYPES) {
-            val exerciseType = ExerciseType()
-            exerciseType.code = type.first
-            exerciseType.name = type.second
-            insertExerciseType(exerciseType)
-        }
-
-        for (type in DatabaseConstants.LIST_WEIGHTTYPE){
-            val weightType = WeightType()
-            weightType.code = type.first
-            weightType.name = type.second
-            weightType.choosed = type == DatabaseConstants.LIST_WEIGHTTYPE[0]
-            insertWeightType(weightType)
-        }
-
-        for (type in DatabaseConstants.LIST_LENGTHTYPE){
-            val lengthType = LengthType()
-            lengthType.code = type.first
-            lengthType.name = type.second
-            lengthType.choosed = type == DatabaseConstants.LIST_LENGTHTYPE[0]
-            insertLengthType(lengthType)
-        }
-
-        val exerciseTypes: ArrayList<ExerciseType> = getExerciseType(SelectTransactions.SELECT_ALL_EXERCISETYPE, null)!!
-        for (i in 0..50) {
-            val exercise = Exercise()
-            exercise.name = UUID.randomUUID().toString()
-            exercise.type = exerciseTypes[(0 until exerciseTypes.size).random()]
-            exercise.state = 1
-            exercise.description = "Description"
-            exercise.createdBy = "0"
-            insertExercise(exercise)
-        }
+        return result
     }
 
 
@@ -224,8 +191,8 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
                 val exerciseTypeId = cursor.getString(cursor.getColumnIndex(DatabaseConstants.TABLE_EXERCISE_TYPE))
                 val exerciseTypeList = getExerciseType(SelectTransactions.SELECT_EXERCISETYPE_BY_ID, arrayOf(exerciseTypeId))
                 val exerciseType = if (exerciseTypeList!!.size >= 1) exerciseTypeList[0] else null
-                val blob = cursor.getBlob(cursor.getColumnIndex(DatabaseConstants.TABLE_EXERCISE_IMAGE))
-                val image: Bitmap? = if (blob!= null) BitmapFactory.decodeByteArray(blob, 0, blob.size) else null
+                // val blob = cursor.getBlob(cursor.getColumnIndex(DatabaseConstants.TABLE_EXERCISE_IMAGE))
+                //val image: Bitmap? = if (blob!= null) BitmapFactory.decodeByteArray(blob, 0, blob.size) else null
                 val userId = cursor.getString(cursor.getColumnIndex(DatabaseConstants.TABLE_EXERCISE_CREATEDBY))
                 val createDateUnixSeconds = cursor.getLong(cursor.getColumnIndex(DatabaseConstants.TABLE_EXERCISE_CREATEDATE))
                 val modifyDateUnixSeconds = cursor.getLong(cursor.getColumnIndex(DatabaseConstants.TABLE_EXERCISE_MODIFYDATE))
@@ -233,7 +200,8 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
                 exercise.id = cursor.getInt(cursor.getColumnIndex(DatabaseConstants.TABLE_EXERCISE_ID))
                 exercise.name = cursor.getString(cursor.getColumnIndex(DatabaseConstants.TABLE_EXERCISE_NAME))
                 exercise.description = cursor.getString(cursor.getColumnIndex(DatabaseConstants.TABLE_EXERCISE_DESCRIPTION))
-                exercise.image = image
+                //exercise.image = image
+                exercise.imageURL = cursor.getString(cursor.getColumnIndex(DatabaseConstants.TABLE_EXERCISE_IMAGE))
                 exercise.type = exerciseType
                 exercise.createdBy = userId
                 exercise.createDate = Date((createDateUnixSeconds * 1000))
@@ -259,7 +227,7 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
 
         values.put(DatabaseConstants.TABLE_EXERCISE_NAME, exercise.name)
         values.put(DatabaseConstants.TABLE_EXERCISE_DESCRIPTION, exercise.description)
-        if (exercise.image!=null) values.put(DatabaseConstants.TABLE_EXERCISE_IMAGE, Utils.getBiteArrayFromBitmap(exercise.image!!))
+        //if (exercise.image!=null) values.put(DatabaseConstants.TABLE_EXERCISE_IMAGE, Utils.getBiteArrayFromBitmap(exercise.image!!))
         values.put(DatabaseConstants.TABLE_EXERCISE_TYPE, exercise.type?.id)
         values.put(DatabaseConstants.TABLE_EXERCISE_STATE, exercise.state)
         values.put(DatabaseConstants.TABLE_EXERCISE_CREATEDBY, exercise.createdBy)
@@ -280,7 +248,7 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
 
     fun updateExerciseState(exercise: Exercise){
         val db = this.writableDatabase
-        var values = ContentValues()
+        val values = ContentValues()
         values.put(DatabaseConstants.TABLE_EXERCISE_STATE, exercise.state)
 
         db.update(DatabaseConstants.TABLE_EXERCISE, values, "${DatabaseConstants.TABLE_EXERCISE_ID} = ${exercise.id}", null)
@@ -304,7 +272,7 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
                 val measurement = Measurement()
                 val measureTypeId = cursor.getString(cursor.getColumnIndex(DatabaseConstants.TABLE_MEASUREMENT_TYPE))
                 val measureTypeList = getMeasureType(SelectTransactions.SELECT_MEASURETYPE_BY_ID, arrayOf(measureTypeId))
-                val measureType = if (measureTypeList!!.size >= 1) measureTypeList[0] else null
+                val measureType = if (measureTypeList.size >= 1) measureTypeList[0] else null
                 val valueDate = cursor.getLong(cursor.getColumnIndex(DatabaseConstants.TABLE_MEASUREMENT_DATE))
                 val userId = cursor.getString(cursor.getColumnIndex(DatabaseConstants.TABLE_MEASUREMENT_CREATEDBY))
                 val createDateUnixSeconds = cursor.getLong(cursor.getColumnIndex(DatabaseConstants.TABLE_MEASUREMENT_CREATEDATE))
@@ -413,7 +381,7 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
      /********** DAYS **********/
     /**************************/
 
-    fun getDays(query: String, array: Array<String>?): ArrayList<Day> {
+    private fun getDays(query: String, array: Array<String>?): ArrayList<Day> {
         val db = this.writableDatabase
         val cursor : Cursor
         cursor = db.rawQuery(query, array)
@@ -478,7 +446,7 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
      /********** EXERCISE DAY **********/
     /**********************************/
 
-    fun getExerciseDay(query: String, array: Array<String>?): ArrayList<ExerciseDay> {
+    private fun getExerciseDay(query: String, array: Array<String>?): ArrayList<ExerciseDay> {
         val db = this.writableDatabase
         val cursor : Cursor
         cursor = db.rawQuery(query, array)
@@ -811,7 +779,7 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
      /********** SERIE **********/
     /***************************/
 
-    fun getSerie(query: String, array: Array<String>?): ArrayList<Serie> {
+    private fun getSerie(query: String, array: Array<String>?): ArrayList<Serie> {
         val db = this.writableDatabase
         val cursor : Cursor
         cursor = db.rawQuery(query, array)

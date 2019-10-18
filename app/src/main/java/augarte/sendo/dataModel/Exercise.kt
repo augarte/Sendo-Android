@@ -9,7 +9,8 @@ class Exercise() : Parcelable{
     var id: Int? = null
     var name: String? = null
     var description: String? = null
-    var image: Bitmap? = null
+    //var image: Bitmap? = null
+    var imageURL: String? = null
     var type: ExerciseType? = null
     var state: Int? = 1
     var createdBy: String? = null
@@ -22,7 +23,8 @@ class Exercise() : Parcelable{
         id = parcel.readValue(Int::class.java.classLoader) as? Int
         name = parcel.readString()
         description = parcel.readString()
-        image = parcel.readParcelable(Bitmap::class.java.classLoader)
+        //image = parcel.readParcelable(Bitmap::class.java.classLoader)
+        imageURL = parcel.readString()
         state = parcel.readValue(Int::class.java.classLoader) as? Int
         selected = parcel.readByte() != 0.toByte()
     }
@@ -31,7 +33,8 @@ class Exercise() : Parcelable{
         parcel.writeValue(id)
         parcel.writeString(name)
         parcel.writeString(description)
-        parcel.writeParcelable(image, flags)
+        //parcel.writeParcelable(image, flags)
+        parcel.writeString(imageURL)
         parcel.writeValue(state)
         parcel.writeByte(if (selected) 1 else 0)
     }
