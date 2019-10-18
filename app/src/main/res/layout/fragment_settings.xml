@@ -172,7 +172,7 @@
             android:layout_height="wrap_content"
             android:padding="@dimen/padding_medium"
             android:src="@drawable/ic_github"
-            android:tint="@color/primaryText"
+            android:tint="@color/secondaryText"
             android:background="?attr/selectableItemBackgroundBorderless"/>
     </LinearLayout>
 
@@ -181,7 +181,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/margin_small"
-        android:textColor="@color/primaryText"
+        android:textColor="@color/secondaryText"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--MAIN-->
-    <color name="colorPrimary">#525E54</color>
-    <color name="colorPrimaryDark">#29342b</color>
-    <color name="colorPrimaryLight">#7e8b80</color>
-    <color name="colorAccent">#00E676</color>
-    <color name="colorAccentDark">#00C853</color>
-    <color name="colorAccentLight">#69F0AE</color>
+    <color name="colorPrimary">#262C34</color>
+    <color name="colorPrimaryDark">#00000d</color>
+    <color name="colorPrimaryLight">#38404B</color>
+    <color name="colorAccent">#F44336</color>
+    <color name="colorAccentDark">#E53935</color>
+    <color name="colorAccentLight">#EF5350</color>
 <!--    <color name="colorAccent">#F9AA33</color>
     <color name="colorAccentDark">#F48226</color>
     <color name="colorAccentLight">#FFF07B</color>-->
@@ -15,34 +15,39 @@
     <color name="rippleEfect">#42ffffff</color>
 
     <!--TEXT-->
-    <color name="primaryText">@color/colorPrimaryDark</color>
-    <color name="secondaryText">@color/colorPrimaryLight</color>
+    <color name="primaryText">@color/white</color>
+    <color name="secondaryText">@color/colorPrimaryDark</color>
 
     <!--VIEWS-->
-    <color name="fabChild">@color/colorAccent</color>
-    <color name="fab">@color/colorAccentDark</color>
+    <color name="cardTitle">@color/secondaryText</color>
+
+    <color name="fab">@color/colorAccent</color>
+    <color name="fabChild">@color/colorAccentLight</color>
 
     <color name="appbar_icons">@color/white</color>
     <color name="appbar_text">@color/white</color>
 
-    <color name="toolbar_icons">@color/colorPrimaryLight</color>
-    <color name="toolbar_text">@color/colorPrimaryDark</color>
+    <color name="toolbar_background">@color/colorPrimary</color>
+    <color name="toolbar_text">@color/white</color>
 
     <color name="bottom_sheet_fragment_background">@color/colorPrimaryLight</color>
     <color name="bottom_sheet_background">@color/colorPrimaryDark</color>
 
     <color name="tapTargetOuterCircle">@color/colorPrimaryLight</color>
-    <color name="tapTargetInnerCircle">#FF9CA99E</color>
+    <color name="tapTargetInnerCircle">@color/white</color>
+    <color name="tapTargetTitle">@color/secondaryText</color>
+    <color name="tapTargetDescription">@color/black</color>
 
     <color name="ExerciseArchiveBackground">#64b2ff</color>
     <color name="ExerciseUnarchiveBackground">#81C784</color>
     <color name="ExerciseArchiveIcon">@color/black</color>
 
+    <color name="pagerBackground">@color/colorPrimaryLight</color>
     <color name="pagerSelectedIcon">@color/white</color>
-    <color name="pagerUnSelectedIcon">@color/colorPrimaryLight</color>
+    <color name="pagerUnSelectedIcon">@color/colorPrimaryDark</color>
 
     <!--ICONS-->
-    <color name="fabIcon">@color/black</color>
+    <color name="fabIcon">@color/white</color>
     <color name="toolbarIcon">@color/white</color>
 
     <!--BASIC-->

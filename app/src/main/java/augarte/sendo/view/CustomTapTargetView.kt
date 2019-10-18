@@ -21,10 +21,10 @@ class CustomTapTargetView(context: Context, parent: ViewManager, boundingParent:
                     .outerCircleAlpha(0.96f)            // Specify the alpha amount for the outer circle
                     .targetCircleColor(R.color.tapTargetInnerCircle)   // Specify a color for the target circle
                     .titleTextSize(28)                  // Specify the size (in sp) of the title text
-                    .titleTextColor(R.color.primaryText)      // Specify the color of the title text
+                    .titleTextColor(R.color.tapTargetTitle)      // Specify the color of the title text
                     .descriptionTextSize(18)            // Specify the size (in sp) of the description text
-                    .descriptionTextColor(R.color.black)  // Specify the color of the description text
-                    .textColor(R.color.primaryText)            // Specify a color for both the title and description text
+                    .descriptionTextColor(R.color.tapTargetDescription)  // Specify the color of the description text
+                    //.textColor(R.color.tapTargetDescription)            // Specify a color for both the title and description text
                     //.textTypeface(Typeface.SANS_SERIF)  // Specify a typeface for the text
                     .dimColor(R.color.black)            // If set, will dim behind the view with 30% opacity of the given color
                     .drawShadow(true)                   // Whether to draw a drop shadow or not

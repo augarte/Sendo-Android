@@ -58,7 +58,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/sendo_workout"
                         android:textSize="@dimen/text_xlarge"
-                        android:textColor="@color/primaryText"
+                        android:textColor="@color/secondaryText"
                         android:visibility="visible"
                         app:layout_constraintTop_toTopOf="@id/workout_title"
                         app:layout_constraintBottom_toBottomOf="@id/workout_title"
@@ -71,7 +71,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/sendo_workout"
                         android:textSize="@dimen/text_xlarge"
-                        android:textColor="@color/primaryText"
+                        android:textColor="@color/secondaryText"
                         android:maxLength="25"
                         android:inputType="text"
                         app:layout_constraintTop_toTopOf="parent"
@@ -90,7 +90,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:text="@string/sendo_day_number"
-                        android:textColor="@color/primaryText"
+                        android:textColor="@color/secondaryText"
                         android:textSize="@dimen/text_large"
                         android:textStyle="bold"/>
 
@@ -112,7 +112,7 @@
                 android:padding="@dimen/margin_small"
                 android:background="@drawable/background_round_white"
                 android:src="@drawable/ic_delete"
-                android:tint="@color/primaryText"
+                android:tint="@color/secondaryText"
                 android:visibility="gone"/>
 
             <ImageButton
@@ -124,7 +124,7 @@
                 android:padding="@dimen/margin_small"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:src="@drawable/ic_add_photo"
-                android:tint="@color/primaryText" />
+                android:tint="@color/secondaryText" />
         </androidx.cardview.widget.CardView>
 
         <androidx.recyclerview.widget.RecyclerView
@@ -137,9 +137,15 @@
         android:id="@+id/create_workout_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingStart="@dimen/padding_medium_lage"
+        android:paddingEnd="@dimen/padding_medium_lage"
+        android:paddingTop="@dimen/padding_medium"
+        android:paddingBottom="@dimen/padding_medium"
         android:layout_marginBottom="@dimen/margin_medium"
         android:layout_gravity="center_horizontal|bottom"
         android:text="@string/sendo_create"
+        android:textColor="@color/secondaryText"
+        android:textStyle="bold"
         android:backgroundTint="@color/colorAccentDark"
         android:textAllCaps="true"
         android:elevation="@dimen/card_elevation"/>

@@ -21,7 +21,7 @@
     </style>
 
     <style name="PopupOverlay" parent="ThemeOverlay.AppCompat.Light">
-        <item name="android:colorBackground">@color/toolbar_icons</item>
+        <item name="android:colorBackground">@color/toolbar_background</item>
         <item name="android:textColor">@color/toolbar_text</item>
     </style>
 

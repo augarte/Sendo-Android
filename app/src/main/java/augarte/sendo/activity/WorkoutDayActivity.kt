@@ -8,13 +8,11 @@ import androidx.viewpager.widget.ViewPager
 import augarte.sendo.R
 import augarte.sendo.adapter.WorkoutPagerAdapter
 import augarte.sendo.dataModel.Day
-import augarte.sendo.dataModel.Exercise
 import augarte.sendo.dataModel.ExerciseDay
 import augarte.sendo.fragment.AddProgressFragment
 import augarte.sendo.fragment.DayPagerExercisesFragment
 import augarte.sendo.fragment.DayPagerProgressFragment
 import augarte.sendo.fragment.DayPagerTimerFragment
-import augarte.sendo.view.BottomSheet
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kotlinx.android.synthetic.main.activity_add_progress.*

@@ -6,11 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import augarte.sendo.R
 import augarte.sendo.dataModel.Exercise
+import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.item_exercise.view.exercise_name
 import kotlinx.android.synthetic.main.item_exercise_chooser.view.*
 
@@ -31,6 +31,8 @@ class ExerciseChooseAdapter(private val items: ArrayList<Exercise>, private val 
             holder.selected.visibility = View.VISIBLE
             holder.itemView.background = ContextCompat.getDrawable(context, R.color.colorPrimary)
         }
+
+        Glide.with(holder.exerciseImage.context).load(item.imageURL).into(holder.exerciseImage)
 
         holder.itemView.setOnClickListener {
             if (item.selected){
@@ -54,6 +56,6 @@ class ExerciseChooseAdapter(private val items: ArrayList<Exercise>, private val 
     class MainViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         var exerciseName: TextView = view.exercise_name
         var selected: ImageView = view.selected_image
-        var imageCard: CardView = view.imageCard
+        var exerciseImage: ImageView = view.exercise_image
     }
 }

@@ -37,4 +37,24 @@
     <string name="sendo_week_num">SEMANA %1$d</string>
     <string name="sendo_alert_delete_workout_title">Eliminar entrenamiento</string>
     <string name="sendo_alert_delete_workout_message">¿Está seguro de que desea eliminar este entrenamiento?</string>
+    <string name="sendo_add_first_measurement">¡Añada su primera medida!</string>
+    <string name="sendo_add_first_workout">¡Añada su primer entrenamiento!</string>
+    <string name="sendo_date">Fecha</string>
+    <string name="sendo_dialog_add_exercise_title">Añadir entrenamiento</string>
+    <string name="sendo_error_enter_value">Añada un valor</string>
+    <string name="sendo_exercise">Ejercicio</string>
+    <string name="sendo_insert">Insertar</string>
+    <string name="sendo_insert_value">Insertart valor</string>
+    <string name="sendo_length">Longitud</string>
+    <string name="sendo_measure_type">Tipo de medida</string>
+    <string name="sendo_not_enough_data">Sin datos suficientes</string>
+    <string name="sendo_period">Periodo</string>
+    <string name="sendo_permision_denied">Permiso denegado</string>
+    <string name="sendo_repetition">Repetición</string>
+    <string name="sendo_series">Serie</string>
+    <string name="sendo_snackbar_archived_exercise">%1$s archivado.</string>
+    <string name="sendo_snackbar_deleted_exercise">%1$s eliminado.</string>
+    <string name="sendo_snackbar_unarchived_exercise">%1$s desarchivado.</string>
+    <string name="sendo_snackbar_undo">DESHACER</string>
+    <string name="sendo_weight">Peso</string>
 </resources>

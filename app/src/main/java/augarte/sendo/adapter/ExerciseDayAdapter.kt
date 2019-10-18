@@ -3,11 +3,13 @@ package augarte.sendo.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import augarte.sendo.R
 import augarte.sendo.activity.WorkoutDayActivity
 import augarte.sendo.dataModel.ExerciseDay
+import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.item_exercise_day.view.*
 
 class ExerciseDayAdapter(private val items: ArrayList<ExerciseDay>, private val listener: WorkoutDayActivity.OnExerciseDayClickListener): RecyclerView.Adapter<ExerciseDayAdapter.ViewHolder>() {
@@ -23,6 +25,8 @@ class ExerciseDayAdapter(private val items: ArrayList<ExerciseDay>, private val 
 
         holder.title.text = item.exercise!!.name
         holder.itemView.setOnClickListener { listener.onItemClick(item) }
+
+        Glide.with(holder.image.context).load(item.exercise!!.imageURL).into(holder.image)
     }
 
     private fun getExerciseListText(exerciseDays: ArrayList<ExerciseDay>): String {
@@ -40,6 +44,7 @@ class ExerciseDayAdapter(private val items: ArrayList<ExerciseDay>, private val 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         val title: TextView = view.exerciseTitle
+        val image: ImageView = view.image1
 
     }
 }

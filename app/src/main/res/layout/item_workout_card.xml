@@ -52,7 +52,7 @@
                 android:textStyle="bold"
                 android:fontFamily="sans-serif"
                 android:textAllCaps="true"
-                android:textColor="@color/primaryText"
+                android:textColor="@color/cardTitle"
 
                 app:autoSizeTextType="uniform"
                 app:autoSizeMinTextSize="@dimen/text_xsmall"

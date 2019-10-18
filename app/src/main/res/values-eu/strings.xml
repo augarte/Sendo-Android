@@ -37,4 +37,24 @@
     <string name="sendo_week_num">" %1$d ASTEA"</string>
     <string name="sendo_alert_delete_workout_title">Ezabatu entrenamendua</string>
     <string name="sendo_alert_delete_workout_message">Ziur zaude entrenamendu hau ezabatu nahi duzula?</string>
+    <string name="sendo_add_first_measurement">Gehitu zure lehen neurria!</string>
+    <string name="sendo_add_first_workout">Gehitu zure lehen entrenamendua!</string>
+    <string name="sendo_date">Data</string>
+    <string name="sendo_dialog_add_exercise_title">Ariketa gehitu</string>
+    <string name="sendo_error_enter_value">Balioa sartu</string>
+    <string name="sendo_exercise">Ariketa</string>
+    <string name="sendo_insert">Txertatu</string>
+    <string name="sendo_insert_value">Balioa txertatu</string>
+    <string name="sendo_length">Luzera</string>
+    <string name="sendo_measure_type">Neurketa mota</string>
+    <string name="sendo_not_enough_data">Datu nahikorik ez</string>
+    <string name="sendo_period">Denbora tartea</string>
+    <string name="sendo_permision_denied">Baimena ukatua</string>
+    <string name="sendo_repetition">Errepikapena</string>
+    <string name="sendo_series">Serie</string>
+    <string name="sendo_snackbar_archived_exercise">%1$s artxibatua.</string>
+    <string name="sendo_snackbar_deleted_exercise">%1$s ezabatua.</string>
+    <string name="sendo_snackbar_unarchived_exercise">%1$s desartxibatua.</string>
+    <string name="sendo_snackbar_undo">DESEGIN</string>
+    <string name="sendo_weight">Pisua</string>
 </resources>

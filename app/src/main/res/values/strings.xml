@@ -50,4 +50,14 @@
     <string name="sendo_period">Period</string>
     <string name="sendo_weight">Weight</string>
     <string name="sendo_length">Length</string>
+    <string name="sendo_add_first_workout">Add your first workout!</string>
+    <string name="sendo_insert">Insert</string>
+    <string name="sendo_exercise">Exercise</string>
+    <string name="sendo_series">Series</string>
+    <string name="sendo_repetition">Repetition</string>
+    <string name="sendo_add_first_measurement">Add your first measurement!</string>
+    <string name="sendo_not_enough_data">Not enough data</string>
+    <string name="sendo_measure_type">Measure type</string>
+    <string name="sendo_insert_value">Insert value</string>
+    <string name="sendo_date">Date</string>
 </resources>

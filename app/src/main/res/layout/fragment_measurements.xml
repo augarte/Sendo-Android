@@ -74,7 +74,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="No enough data"
+                    android:text="@string/sendo_not_enough_data"
                     android:textColor="@color/primaryText"
                     android:textStyle="bold"
                     android:visibility="gone"/>
@@ -129,12 +129,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_small_medium"
-                android:text="Add your first measurement!"
+                android:text="@string/sendo_add_first_measurement"
                 android:textSize="@dimen/text_xxlarge"
-                android:textColor="@color/primaryText"
+                android:textColor="@color/secondaryText"
                 android:textStyle="bold"/>
         </LinearLayout>
-
     </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -143,7 +142,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/fab_margin"
         android:layout_gravity="bottom|end"
-        android:backgroundTint="?attr/colorAccent"
+        android:backgroundTint="@color/fab"
         app:srcCompat="@drawable/ic_add"
         app:layout_constraintStart_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>

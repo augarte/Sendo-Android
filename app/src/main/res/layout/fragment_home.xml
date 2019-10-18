@@ -10,7 +10,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
-
     <LinearLayout
         android:id="@+id/new_workokut_layout"
         android:layout_width="match_parent"
@@ -23,19 +22,19 @@
             android:id="@+id/no_workout_icon"
             android:layout_width="@dimen/view_large"
             android:layout_height="@dimen/view_large"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="125dp"
             android:layout_gravity="center_horizontal"
             android:src="@drawable/ic_weightlifting"
-            android:tint="@color/colorPrimaryDark"
+            android:tint="@color/secondaryText"
             android:elevation="200dp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_small_medium"
-            android:text="Add your first workout!"
+            android:text="@string/sendo_add_first_workout"
             android:textSize="@dimen/text_xxlarge"
-            android:textColor="@color/primaryText"
+            android:textColor="@color/secondaryText"
             android:textStyle="bold"/>
     </LinearLayout>
 

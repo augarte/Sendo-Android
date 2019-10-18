@@ -66,6 +66,11 @@ class CreateWorkoutAdapter(private val items : ArrayList<Day>, private val rv : 
 
 
         val exerciseSelectedListener = object: OnExerciseSelectedListener {
+            override fun onTitleChanged(title: String) {
+                holder.cardTitle.text = title
+                item.name = title
+            }
+
             override fun onSelect(exercise: Exercise) {
                 selectedExerciseList[position].add(exercise)
 
@@ -158,5 +163,6 @@ class CreateWorkoutAdapter(private val items : ArrayList<Day>, private val rv : 
     interface OnExerciseSelectedListener {
         fun onSelect(exercise: Exercise)
         fun onDeselected(exercise: Exercise)
+        fun onTitleChanged(title: String)
     }
 }

@@ -5,15 +5,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
+    <EditText
         android:id="@+id/day_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingTop="0dp"
         android:layout_marginTop="25dp"
         android:layout_marginStart="25dp"
+        android:maxLength="25"
+        android:inputType="text"
         android:text="Day Tilte"
+        android:textStyle="bold"
         android:textSize="@dimen/text_xlarge"
-        android:textColor="@color/primaryText"/>
+        android:textColor="@color/secondaryText"/>
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -25,7 +29,4 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </androidx.core.widget.NestedScrollView>
-
-
-
 </LinearLayout>

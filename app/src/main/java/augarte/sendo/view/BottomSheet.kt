@@ -47,7 +47,7 @@ class BottomSheet @JvmOverloads constructor(context: Context, attrs: AttributeSe
             }
 
             override fun onSlide(bottomSheet: View, slideOffset: Float) {
-                bottomsheet_background.alpha = (slideOffset*0.75f)
+                //bottomsheet_background.alpha = (slideOffset*0.75f)
             }
         })
 

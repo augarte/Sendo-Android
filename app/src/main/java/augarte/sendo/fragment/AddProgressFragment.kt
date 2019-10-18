@@ -5,20 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import augarte.sendo.R
 import augarte.sendo.activity.MainActivity
 import augarte.sendo.activity.WorkoutDayActivity
-import augarte.sendo.adapter.CreateWorkoutAdapter
-import augarte.sendo.adapter.ExerciseChooseAdapter
-import augarte.sendo.dataModel.Exercise
 import augarte.sendo.dataModel.ExerciseDay
 import augarte.sendo.dataModel.Serie
-import augarte.sendo.database.SelectTransactions
 import kotlinx.android.synthetic.main.bottomsheet_add_progress.*
-import kotlinx.android.synthetic.main.bottomsheet_choose_exercise.*
-import kotlinx.android.synthetic.main.item_exercise_day.*
 
 class AddProgressFragment(private val exerciseDay: ExerciseDay, private val listener: WorkoutDayActivity.OnAddProgress) : Fragment() {
 

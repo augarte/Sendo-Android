@@ -14,9 +14,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/margin_medium"
-        android:text="Exercise"
+        android:text="@string/sendo_exercise"
         android:textSize="@dimen/text_xlarge"
-        android:textColor="@color/primaryText"
+        android:textColor="@color/secondaryText"
         android:textStyle="bold"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -28,7 +28,8 @@
             android:id="@+id/serie"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Series"
+            android:text="@string/sendo_series"
+            android:textColor="@color/secondaryText"
             android:textSize="@dimen/text_medium"
             android:textStyle="bold"
             android:paddingBottom="@dimen/padding_medium_small"
@@ -39,7 +40,8 @@
             android:id="@+id/rep"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Repetition"
+            android:text="@string/sendo_repetition"
+            android:textColor="@color/secondaryText"
             android:textSize="@dimen/text_medium"
             android:textStyle="bold"
             android:paddingBottom="@dimen/padding_medium_small"
@@ -50,7 +52,8 @@
             android:id="@+id/weight"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Weight"
+            android:text="@string/sendo_weight"
+            android:textColor="@color/secondaryText"
             android:textSize="@dimen/text_medium"
             android:textStyle="bold"
             android:paddingBottom="@dimen/padding_medium_small"
@@ -69,6 +72,7 @@
             android:id="@+id/serieET"
             android:layout_width="@dimen/view_medium"
             android:layout_height="wrap_content"
+            android:textColor="@color/secondaryText"
             android:maxLength="2"
             android:inputType="number"
             app:layout_constraintTop_toTopOf="parent"
@@ -77,6 +81,7 @@
             android:id="@+id/repET"
             android:layout_width="@dimen/view_medium"
             android:layout_height="wrap_content"
+            android:textColor="@color/secondaryText"
             android:maxLength="3"
             android:inputType="number"
             android:layout_marginTop="@dimen/margin_small"
@@ -86,6 +91,7 @@
             android:id="@+id/weightET"
             android:layout_width="@dimen/view_medium"
             android:layout_height="wrap_content"
+            android:textColor="@color/secondaryText"
             android:maxLength="4"
             android:inputType="numberDecimal"
             android:layout_marginTop="@dimen/margin_small"
@@ -99,6 +105,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_medium"
         android:layout_gravity="center"
-        android:text="Insert"/>
+        android:text="@string/sendo_insert"
+        android:textColor="@color/secondaryText"
+        android:textStyle="bold"
+        android:backgroundTint="@color/colorAccentDark"/>
 
 </LinearLayout>

@@ -38,7 +38,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@color/colorPrimaryDark"
+        android:background="@color/pagerBackground"
         app:labelVisibilityMode="unlabeled"
         app:itemIconTint="@color/selectable_bottom_navigation_icons"
         app:menu="@menu/bottom_navigation_workout"/>
