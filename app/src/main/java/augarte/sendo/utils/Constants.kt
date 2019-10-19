@@ -11,5 +11,7 @@ class Constants{
         /* SHARED PREFERENCES */
         const val SHARED_PREFERENCES = "mySharedPreferences"
         const val SHARED_TIMER = "timer"
+
+        const val SHARED_THEME = "theme"
     }
 }

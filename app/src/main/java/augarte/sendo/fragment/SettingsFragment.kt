@@ -1,6 +1,7 @@
 package augarte.sendo.fragment
 
 import android.app.AlertDialog
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -14,14 +15,13 @@ import kotlinx.android.synthetic.main.fragment_settings.*
 import android.content.pm.PackageManager
 import android.os.Handler
 import augarte.sendo.activity.MainActivity
-import augarte.sendo.dataModel.DateType
 import augarte.sendo.dataModel.LengthType
 import augarte.sendo.dataModel.WeightType
-import augarte.sendo.database.DatabaseHandler
 import augarte.sendo.database.SelectTransactions
-import kotlinx.android.synthetic.main.fragment_measurements.*
+import augarte.sendo.activity.WorkoutDayActivity
 
-class SettingsFragment : Fragment(){
+
+class SettingsFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_settings, container, false)
@@ -46,39 +46,53 @@ class SettingsFragment : Fragment(){
 
         val list1: ArrayList<WeightType> = MainActivity.dbHandler.getWeightType(SelectTransactions.SELECT_ALL_WEIGHTTYPE, null)!!
         var selectedWeightIndex = 0
-        list1.forEach { x-> if(x.choosed) selectedWeightIndex = list1.indexOf(x) }
-        val items1 = Array(list1.size) { i -> list1[i].code}
+        list1.forEach { x -> if (x.choosed) selectedWeightIndex = list1.indexOf(x) }
+        val items1 = Array(list1.size) { i -> list1[i].code }
         weight_type_chooseTV.text = items1[selectedWeightIndex]
-        weight_type_choose.setOnClickListener{
+        weight_type_choose.setOnClickListener {
             AlertDialog.Builder(context)
-                .setTitle(getString(R.string.sendo_weight))
-                .setSingleChoiceItems(items1, selectedWeightIndex) { dialog, item ->
-                    selectedWeightIndex = item
-                    MainActivity.dbHandler.updateWeightTypeChoosed(list1[selectedWeightIndex])
-                    weight_type_chooseTV.text = items1[selectedWeightIndex]
-                    Handler().postDelayed({dialog.dismiss()}, 500)
-                }
-                .show()
+                    .setTitle(getString(R.string.sendo_weight))
+                    .setSingleChoiceItems(items1, selectedWeightIndex) { dialog, item ->
+                        selectedWeightIndex = item
+                        MainActivity.dbHandler.updateWeightTypeChoosed(list1[selectedWeightIndex])
+                        weight_type_chooseTV.text = items1[selectedWeightIndex]
+                        Handler().postDelayed({ dialog.dismiss() }, 500)
+                    }
+                    .show()
         }
 
         val list2: ArrayList<LengthType> = MainActivity.dbHandler.getLengthType(SelectTransactions.SELECT_ALL_LENGTHTYPE, null)!!
         var selectedLengthIndex = 0
-        list2.forEach { x-> if(x.choosed) selectedLengthIndex = list2.indexOf(x) }
-        val items2 = Array(list2.size) { i -> list2[i].code}
+        list2.forEach { x -> if (x.choosed) selectedLengthIndex = list2.indexOf(x) }
+        val items2 = Array(list2.size) { i -> list2[i].code }
         length_type_chooseTV.text = items2[selectedLengthIndex]
-        length_type_choose.setOnClickListener{
+        length_type_choose.setOnClickListener {
             AlertDialog.Builder(context)
                     .setTitle(getString(R.string.sendo_length))
                     .setSingleChoiceItems(items2, selectedLengthIndex) { dialog, item ->
                         selectedLengthIndex = item
                         MainActivity.dbHandler.updateLengthTypeChoosed(list2[selectedLengthIndex])
                         length_type_chooseTV.text = items2[selectedLengthIndex]
-                        Handler().postDelayed({dialog.dismiss()}, 500)
+                        Handler().postDelayed({ dialog.dismiss() }, 500)
                     }
                     .show()
         }
 
-        github_button.setOnClickListener{
+
+        val sharedPreferences = activity?.getSharedPreferences(Constants.SHARED_PREFERENCES, Context.MODE_PRIVATE)
+        var themeId : Int = sharedPreferences?.getInt(Constants.SHARED_THEME, R.style.DarkTheme_NoActionBar) ?: 0
+        if (themeId == R.style.GreenTheme_NoActionBar) themeSwitch.isChecked = true
+        themeSwitch.setOnCheckedChangeListener { _, isChecked ->
+            themeId = if (isChecked) R.style.GreenTheme_NoActionBar
+            else R.style.DarkTheme_NoActionBar
+
+            sharedPreferences?.edit()?.putInt(Constants.SHARED_THEME, themeId)?.apply()
+
+            activity?.setTheme(themeId)
+            activity?.recreate()
+        }
+
+        github_button.setOnClickListener {
             val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(Constants.GITHUB_LINK))
             startActivity(browserIntent)
 

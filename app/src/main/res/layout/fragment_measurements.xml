@@ -122,7 +122,7 @@
                 android:layout_height="@dimen/view_large"
                 android:layout_gravity="center_horizontal"
                 android:src="@drawable/ic_chart"
-                android:tint="?attr/colorPrimaryDark"
+                android:tint="?attr/placeHolderText"
                 android:elevation="200dp"/>
 
             <TextView
@@ -131,7 +131,7 @@
                 android:layout_marginTop="@dimen/margin_small_medium"
                 android:text="@string/sendo_add_first_measurement"
                 android:textSize="@dimen/text_xxlarge"
-                android:textColor="?attr/secondaryText"
+                android:textColor="?attr/placeHolderText"
                 android:textStyle="bold"/>
         </LinearLayout>
     </LinearLayout>

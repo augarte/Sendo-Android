@@ -19,7 +19,7 @@ import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 
-class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     private lateinit var auth: FirebaseAuth
 
@@ -28,12 +28,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         lateinit var dbHandler: DatabaseHandler
     }
 
-    private var fragment: Fragment? = HomeFragment()
+    private var fragment: Fragment = HomeFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        //setTheme(R.style.DarkTheme_NoActionBar)
+        //setTheme(R.style.GreenTheme_NoActionBar)
 
         setContentView(R.layout.activity_home)
 
@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         nav_view.setNavigationItemSelectedListener(this)
 
         val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.main_frame, HomeFragment(), "Home")
+        transaction.replace(R.id.main_frame, fragment)
         transaction.commit()
     }
 
@@ -114,9 +114,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
         }
 
-        if (fragment != null && replace)  {
+        if (replace)  {
             val transaction = supportFragmentManager.beginTransaction()
-            transaction.replace(R.id.main_frame, fragment!!)
+            transaction.replace(R.id.main_frame, fragment)
             transaction.commit()
         }
 

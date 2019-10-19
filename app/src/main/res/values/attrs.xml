@@ -9,9 +9,11 @@
     <!--TEXT-->
     <attr name="primaryText" format="color"/>
     <attr name="secondaryText" format="color"/>
+    <attr name="placeHolderText" format="color"/>
     
     <!--VIEWS-->
     <attr name="cardTitle" format="color"/>
+    <attr name="cardColorTitle" format="color"/>
 
     <attr name="fab" format="color"/>
     <attr name="fabChild" format="color"/>

@@ -6,7 +6,7 @@ import augarte.sendo.R
 import kotlinx.android.synthetic.main.app_bar_main.*
 import android.view.MenuItem
 
-class SearchWorkoutActivity : AppCompatActivity() {
+class SearchWorkoutActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

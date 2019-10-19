@@ -21,7 +21,7 @@ import kotlinx.android.synthetic.main.activity_workout.day_list
 import kotlinx.android.synthetic.main.item_workout_card.*
 
 
-class WorkoutActivity : AppCompatActivity() {
+class WorkoutActivity : BaseActivity() {
 
     private lateinit var workout: Workout
 

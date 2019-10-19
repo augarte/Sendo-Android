@@ -25,7 +25,7 @@ import android.provider.MediaStore
 import android.view.MenuItem
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 
-class CreateWorkoutActivity : AppCompatActivity() {
+class CreateWorkoutActivity : BaseActivity() {
 
     private val initialDayNum = 3
     private var thisWorkout: Workout = Workout()

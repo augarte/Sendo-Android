@@ -30,7 +30,7 @@
         android:fitsSystemWindows="true"
         android:background="?attr/background"
         android:paddingTop="@dimen/view_medium"
-        android:theme="@style/DarkTheme.NoActionBar"
+        android:checkableBehavior="single"
         app:itemTextColor="@color/white"
         app:itemIconTint="@color/white"
         app:menu="@menu/main_drawer"

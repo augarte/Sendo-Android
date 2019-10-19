@@ -58,7 +58,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/sendo_workout"
                         android:textSize="@dimen/text_xlarge"
-                        android:textColor="?attr/secondaryText"
+                        android:textColor="?attr/cardColorTitle"
                         android:visibility="visible"
                         app:layout_constraintTop_toTopOf="@id/workout_title"
                         app:layout_constraintBottom_toBottomOf="@id/workout_title"
@@ -71,7 +71,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/sendo_workout"
                         android:textSize="@dimen/text_xlarge"
-                        android:textColor="?attr/secondaryText"
+                        android:textColor="?attr/cardColorTitle"
                         android:maxLength="25"
                         android:inputType="text"
                         app:layout_constraintTop_toTopOf="parent"
@@ -90,7 +90,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:text="@string/sendo_day_number"
-                        android:textColor="?attr/secondaryText"
+                        android:textColor="?attr/cardColorTitle"
                         android:textSize="@dimen/text_large"
                         android:textStyle="bold"/>
 
@@ -112,7 +112,7 @@
                 android:padding="@dimen/margin_small"
                 android:background="@drawable/background_round_white"
                 android:src="@drawable/ic_delete"
-                android:tint="?attr/secondaryText"
+                android:tint="?attr/cardColorTitle"
                 android:visibility="gone"/>
 
             <ImageButton
@@ -124,7 +124,7 @@
                 android:padding="@dimen/margin_small"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:src="@drawable/ic_add_photo"
-                android:tint="?attr/secondaryText" />
+                android:tint="?attr/cardColorTitle" />
         </androidx.cardview.widget.CardView>
 
         <androidx.recyclerview.widget.RecyclerView

@@ -48,7 +48,7 @@ class DayPagerTimerFragment : Fragment() {
             pause.visibility = View.GONE
             reset.visibility = View.VISIBLE
             timer.cancel()
-            sharedPreferences!!.edit().putLong(Constants.SHARED_TIMER, 0).apply()
+            sharedPreferences?.edit()?.putLong(Constants.SHARED_TIMER, 0)?.apply()
         }
 
         reset.setOnClickListener {
@@ -57,7 +57,7 @@ class DayPagerTimerFragment : Fragment() {
             timer_time.text = "00:00"
             timerTime = 0
             timer.cancel()
-            sharedPreferences!!.edit().putLong(Constants.SHARED_TIMER, 0).apply()
+            sharedPreferences?.edit()?.putLong(Constants.SHARED_TIMER, 0)?.apply()
         }
 
     }

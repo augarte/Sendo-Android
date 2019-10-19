@@ -20,7 +20,7 @@ import kotlinx.android.synthetic.main.activity_add_progress.bottomSheet
 import kotlinx.android.synthetic.main.activity_create_workout.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 
-class WorkoutDayActivity: AppCompatActivity() {
+class WorkoutDayActivity: BaseActivity() {
 
     private lateinit var day: Day
 

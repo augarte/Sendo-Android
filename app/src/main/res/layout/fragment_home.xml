@@ -25,7 +25,7 @@
             android:layout_marginTop="125dp"
             android:layout_gravity="center_horizontal"
             android:src="@drawable/ic_weightlifting"
-            android:tint="?attr/secondaryText"
+            android:tint="?attr/placeHolderText"
             android:elevation="200dp"/>
 
         <TextView
@@ -37,7 +37,7 @@
             android:gravity="center"
             android:text="@string/sendo_add_first_workout"
             android:textSize="@dimen/text_xxlarge"
-            android:textColor="?attr/secondaryText"
+            android:textColor="?attr/placeHolderText"
             android:textStyle="bold"/>
     </LinearLayout>
 

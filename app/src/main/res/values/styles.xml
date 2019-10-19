@@ -12,8 +12,10 @@
 
         <item name="primaryText">@color/white</item>
         <item name="secondaryText">@color/colorPrimaryDark</item>
+        <item name="placeHolderText">@color/colorPrimaryDark</item>
 
         <item name="cardTitle">@color/colorPrimaryDark</item>
+        <item name="cardColorTitle">@color/colorPrimaryDark</item>
 
         <item name="fab">@color/colorAccent</item>
         <item name="fabChild">@color/colorAccentLight</item>
@@ -62,10 +64,42 @@
 
     <!--GREEN THEME-->
     <style name="GreenTheme" parent="Theme.AppCompat.DayNight.DarkActionBar">
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-        <item name="background">@color/colorPrimary</item>
+        <item name="colorPrimary">@color/colorPrimary_green</item>
+        <item name="colorPrimaryLight">@color/colorPrimaryLight_green</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark_green</item>
+        <item name="colorAccent">@color/colorAccent_green</item>
+        <item name="colorAccentLight">@color/colorAccentLight_green</item>
+        <item name="colorAccentDark">@color/colorAccentDark_green</item>
+        <item name="background">@color/colorPrimary_green</item>
+
+        <item name="primaryText">@color/colorPrimaryDark_green</item>
+        <item name="secondaryText">@color/colorPrimaryLight_green</item>
+        <item name="placeHolderText">@color/colorPrimaryDark_green</item>
+
+        <item name="cardTitle">@color/black</item>
+        <item name="cardColorTitle">@color/colorPrimaryDark_green</item>
+
+        <item name="fab">@color/colorAccentDark_green</item>
+        <item name="fabChild">@color/colorAccent_green</item>
+
+        <item name="bottom_sheet_fragment_background">@color/colorPrimaryLight_green</item>
+        <item name="bottom_sheet_background">@color/colorPrimaryDark_green</item>
+
+        <item name="tapTargetOuterCircle">@color/colorPrimaryLight_green</item>
+        <item name="tapTargetInnerCircle">@color/colorPrimaryVeryLight_green</item>
+        <item name="tapTargetTitle">@color/colorPrimaryDark_green</item>
+        <item name="tapTargetDescription">@color/black</item>
+
+        <item name="ExerciseArchiveBackground">@color/lightBlue</item>
+        <item name="ExerciseUnarchiveBackground">@color/lightGreen</item>
+        <item name="ExerciseArchiveIcon">@color/black</item>
+
+        <item name="pagerBackground">@color/colorPrimaryDark_green</item>
+        <item name="pagerSelectedIcon">@color/white</item>
+        <item name="pagerUnSelectedIcon">@color/colorPrimaryLight_green</item>
+
+        <item name="fabIcon">@color/white</item>
+        <item name="toolbarIcon">@color/white</item>
 
         <item name="android:windowContentTransitions">true</item>
     </style>

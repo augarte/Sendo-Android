@@ -22,7 +22,7 @@
         android:padding="@dimen/padding_small"
         android:layout_gravity="center"
         android:text="3"
-        android:textColor="?attr/secondaryText"/>
+        android:textColor="?attr/cardColorTitle"/>
 
     <ImageButton
         android:id="@+id/button_up"

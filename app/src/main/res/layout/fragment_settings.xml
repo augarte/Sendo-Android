@@ -156,6 +156,34 @@
                 android:src="@drawable/ic_arrow_down"
                 android:tint="?attr/primaryText"/>
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+
+        <TextView
+            android:id="@+id/themeTV"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:layout_marginTop="@dimen/margin_small_plus"
+            android:padding="@dimen/padding_medium_small"
+            android:text="Theme"
+            android:textColor="?attr/primaryText"
+            android:textSize="@dimen/text_large"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/lengthTV"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/guideline"/>
+
+
+        <Switch
+            android:id="@+id/themeSwitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/themeTV"
+            app:layout_constraintBottom_toBottomOf="@id/themeTV"
+            app:layout_constraintStart_toStartOf="@id/length_type_choose"
+            app:layout_constraintEnd_toEndOf="@id/length_type_choose"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
@@ -172,7 +200,7 @@
             android:layout_height="wrap_content"
             android:padding="@dimen/padding_medium"
             android:src="@drawable/ic_github"
-            android:tint="?attr/secondaryText"
+            android:tint="?attr/placeHolderText"
             android:background="?attr/selectableItemBackgroundBorderless"/>
     </LinearLayout>
 
@@ -181,7 +209,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/margin_small"
-        android:textColor="?attr/secondaryText"
+        android:textColor="?attr/placeHolderText"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
