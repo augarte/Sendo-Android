@@ -13,8 +13,8 @@
         android:layout_weight="2"
         android:clickable="true"
         android:focusable="true"
-        android:tint="@color/primaryText"
-        android:background="@color/colorPrimaryLight"
+        android:tint="?attr/primaryText"
+        android:background="?attr/colorPrimaryLight"
         android:foreground="?attr/selectableItemBackground" />
 
     <TextView
@@ -24,11 +24,11 @@
         android:layout_weight="10"
         android:text="Hoy"
         android:textStyle="bold"
-        android:textColor="@color/primaryText"
+        android:textColor="?attr/primaryText"
         android:gravity="center"
         android:clickable="true"
         android:focusable="true"
-        android:background="@color/colorPrimaryLight"
+        android:background="?attr/colorPrimaryLight"
         android:foreground="?attr/selectableItemBackground"/>
 
     <ImageView
@@ -40,8 +40,8 @@
         android:focusable="true"
         android:src="@drawable/ic_arrow_left"
         android:rotation="180"
-        android:tint="@color/primaryText"
-        android:background="@color/colorPrimaryLight"
+        android:tint="?attr/primaryText"
+        android:background="?attr/colorPrimaryLight"
         android:foreground="?attr/selectableItemBackground" />
 
 </LinearLayout>

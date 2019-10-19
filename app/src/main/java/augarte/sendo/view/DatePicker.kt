@@ -53,7 +53,7 @@ class DatePicker @JvmOverloads constructor(context: Context, attrs: AttributeSet
         month = p2+1
         day = p3
 
-        c.time = Utils.partseDatePickerValues(year, month, day)
+        c.time = Utils.parseDatePickerValues(year, month, day)
 
         setDate()
     }

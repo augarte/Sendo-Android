@@ -4,6 +4,10 @@ import android.graphics.Bitmap
 import java.io.ByteArrayOutputStream
 import java.text.SimpleDateFormat
 import java.util.*
+import android.content.Context
+import android.util.TypedValue
+
+
 
 class Utils {
 
@@ -15,8 +19,7 @@ class Utils {
         private val dateFormat: SimpleDateFormat = SimpleDateFormat(pattern)
 
         fun unixTimeSecondsToDate(unixTimeSecond: Int): Date {
-            val date = Date((unixTimeSecond * 1000).toLong())
-            return  date
+            return Date((unixTimeSecond * 1000).toLong())
         }
 
         fun getUnixSeconds(): Long{
@@ -30,13 +33,20 @@ class Utils {
             return stream.toByteArray()
         }
 
-        fun partseDatePickerValues(year: Int, month: Int, day: Int): Date {
+        fun parseDatePickerValues(year: Int, month: Int, day: Int): Date {
             val dateString = "$year/$month/$day"
             return dateFormat.parse(dateString)
         }
 
         fun dateToString(date: Date?): String {
             return dateFormat.format(date)
+        }
+
+        fun getColorFromAttr(context: Context?, attribute: Int): Int {
+            val typedValue = TypedValue()
+            val theme = context?.theme
+            theme?.resolveAttribute(attribute, typedValue, true)
+            return typedValue.data
         }
     }
 }

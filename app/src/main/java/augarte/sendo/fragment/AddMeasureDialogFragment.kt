@@ -77,7 +77,7 @@ class AddMeasureDialogFragment(private val type: MeasureType, private val listen
         month = p2+1
         day = p3
 
-        c.time = Utils.partseDatePickerValues(year, month, day)
+        c.time = Utils.parseDatePickerValues(year, month, day)
         setDate()
     }
 

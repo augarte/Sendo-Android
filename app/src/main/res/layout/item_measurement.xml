@@ -16,7 +16,7 @@
         android:padding="@dimen/padding_large"
         android:paddingStart="@dimen/padding_xlarge"
         android:paddingEnd="@dimen/padding_xlarge"
-        android:background="@color/colorPrimaryLight"
+        android:background="?attr/colorPrimaryLight"
         android:orientation="horizontal"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -28,7 +28,7 @@
             android:layout_weight="6"
             android:gravity="center_vertical|start"
             android:text="70kg"
-            android:textColor="@color/primaryText"
+            android:textColor="?attr/primaryText"
             android:textStyle="bold"
             android:textSize="@dimen/text_large"/>
 
@@ -39,7 +39,7 @@
             android:layout_weight="4"
             android:gravity="center_vertical|end"
             android:text="2019/05/01"
-            android:textColor="@color/primaryText"
+            android:textColor="?attr/primaryText"
             android:textStyle="normal"
             android:textSize="@dimen/text_large"/>
     </LinearLayout>
@@ -47,7 +47,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/colorPrimaryDark"
+        android:background="?attr/colorPrimaryDark"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

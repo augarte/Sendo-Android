@@ -32,6 +32,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        //setTheme(R.style.DarkTheme_NoActionBar)
+
         setContentView(R.layout.activity_home)
 
         auth = FirebaseAuth.getInstance()

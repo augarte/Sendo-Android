@@ -38,14 +38,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@color/pagerBackground"
+        android:background="?attr/pagerBackground"
         app:labelVisibilityMode="unlabeled"
         app:itemIconTint="@color/selectable_bottom_navigation_icons"
         app:menu="@menu/bottom_navigation_workout"/>
 
 
     <augarte.sendo.view.BottomSheet
-        android:id="@+id/bottomsheet"
+        android:id="@+id/bottomSheet"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:elevation="15dp"

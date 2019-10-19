@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Exercise"
-            android:textColor="@color/primaryText"
+            android:textColor="?attr/primaryText"
             android:textSize="@dimen/text_xlarge"
             android:textStyle="bold"
             app:layout_constraintTop_toTopOf="parent"/>
@@ -39,7 +39,7 @@
             android:layout_height="wrap_content"
             android:background="@color/white"
             android:text="250"
-            android:textColor="@color/primaryText"
+            android:textColor="?attr/primaryText"
             android:textSize="@dimen/text_xlarge"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/sparkView"/>
@@ -50,7 +50,7 @@
             android:layout_height="wrap_content"
             android:background="@color/white"
             android:text="100"
-            android:textColor="@color/primaryText"
+            android:textColor="?attr/primaryText"
             android:textSize="@dimen/text_xlarge"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"/>

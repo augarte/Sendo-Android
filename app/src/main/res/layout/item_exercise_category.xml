@@ -9,7 +9,7 @@
         android:id="@+id/category_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimaryDark"
+        android:background="?attr/colorPrimaryDark"
         android:visibility="gone">
         <TextView
             android:id="@+id/category_title"
@@ -18,7 +18,7 @@
             android:padding="@dimen/padding_small"
             android:gravity="center"
             android:text="CATEGORY"
-            android:textColor="@color/primaryText"
+            android:textColor="?attr/primaryText"
             android:textStyle="bold"/>
     </LinearLayout>
 
@@ -47,7 +47,7 @@
             android:padding="@dimen/padding_small"
             android:layout_gravity="center_vertical"
             android:text="Exercise name"
-            android:textColor="@color/primaryText"
+            android:textColor="?attr/primaryText"
             android:textStyle="bold"/>
     </LinearLayout>
 

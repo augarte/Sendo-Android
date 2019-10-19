@@ -4,51 +4,16 @@
     <color name="colorPrimary">#262C34</color>
     <color name="colorPrimaryDark">#00000d</color>
     <color name="colorPrimaryLight">#38404B</color>
+
     <color name="colorAccent">#F44336</color>
     <color name="colorAccentDark">#E53935</color>
     <color name="colorAccentLight">#EF5350</color>
-<!--    <color name="colorAccent">#F9AA33</color>
-    <color name="colorAccentDark">#F48226</color>
-    <color name="colorAccentLight">#FFF07B</color>-->
 
-    <color name="red">#f4564e</color>
     <color name="rippleEfect">#42ffffff</color>
 
-    <!--TEXT-->
-    <color name="primaryText">@color/white</color>
-    <color name="secondaryText">@color/colorPrimaryDark</color>
-
-    <!--VIEWS-->
-    <color name="cardTitle">@color/secondaryText</color>
-
-    <color name="fab">@color/colorAccent</color>
-    <color name="fabChild">@color/colorAccentLight</color>
-
-    <color name="appbar_icons">@color/white</color>
-    <color name="appbar_text">@color/white</color>
-
-    <color name="toolbar_background">@color/colorPrimary</color>
-    <color name="toolbar_text">@color/white</color>
-
-    <color name="bottom_sheet_fragment_background">@color/colorPrimaryLight</color>
-    <color name="bottom_sheet_background">@color/colorPrimaryDark</color>
-
-    <color name="tapTargetOuterCircle">@color/colorPrimaryLight</color>
-    <color name="tapTargetInnerCircle">@color/white</color>
-    <color name="tapTargetTitle">@color/secondaryText</color>
-    <color name="tapTargetDescription">@color/black</color>
-
-    <color name="ExerciseArchiveBackground">#64b2ff</color>
-    <color name="ExerciseUnarchiveBackground">#81C784</color>
-    <color name="ExerciseArchiveIcon">@color/black</color>
-
-    <color name="pagerBackground">@color/colorPrimaryLight</color>
-    <color name="pagerSelectedIcon">@color/white</color>
-    <color name="pagerUnSelectedIcon">@color/colorPrimaryDark</color>
-
-    <!--ICONS-->
-    <color name="fabIcon">@color/white</color>
-    <color name="toolbarIcon">@color/white</color>
+    <color name="red">#f4564e</color>
+    <color name="lightBlue">#64b2ff</color>
+    <color name="lightGreen">#81C784</color>
 
     <!--BASIC-->
     <color name="white">#ffffff</color>
@@ -68,4 +33,13 @@
     <color name="whiteshadow60">#99FFFFFF</color>
     <color name="whiteshadow80">#CCFFFFFF</color>
 
+    <!--GREEN THEME-->
+    <color name="colorPrimary_green">#525E54</color>
+    <color name="colorPrimaryDark_green">#29342b</color>
+    <color name="colorPrimaryLight_green">#7e8b80</color>
+    <color name="colorAccent_green">#00E676</color>
+    <color name="colorAccentDark_green">#00C853</color>
+    <color name="colorAccentLight_green">#69F0AE</color>
+
+    <color name="colorPrimaryVeryLight_greeen">#FF9CA99E</color>
 </resources>

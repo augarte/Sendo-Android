@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.os.Handler
 import android.view.*
 import androidx.core.content.ContextCompat
-import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -23,7 +22,6 @@ import augarte.sendo.database.SelectTransactions
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.simplecityapps.recyclerview_fastscroll.utils.Utils
 import kotlinx.android.synthetic.main.fragment_exercise_list.*
-import kotlinx.android.synthetic.main.fragment_exercise_list.fab_add
 
 class ExerciseListFragment : Fragment() {
 
@@ -107,13 +105,13 @@ class ExerciseListFragment : Fragment() {
 
     private fun configureSwipeDelete(){
         if (exerciseAdapter is ExerciseArchivedAdapter) {
-            swipeBackground = ColorDrawable(ResourcesCompat.getColor(resources, R.color.ExerciseUnarchiveBackground, null))
+            swipeBackground = ColorDrawable(augarte.sendo.utils.Utils.getColorFromAttr(context, R.attr.ExerciseUnarchiveBackground))
             deleteIcon = context?.let { ContextCompat.getDrawable(it, R.drawable.ic_unarchive) }!!
         } else{
-            swipeBackground = ColorDrawable(ResourcesCompat.getColor(resources, R.color.ExerciseArchiveBackground, null))
+            swipeBackground = ColorDrawable(augarte.sendo.utils.Utils.getColorFromAttr(context, R.attr.ExerciseArchiveBackground))
             deleteIcon = context?.let { ContextCompat.getDrawable(it, R.drawable.ic_archive) }!!
         }
-        deleteIcon.setTint(ResourcesCompat.getColor(resources, R.color.ExerciseArchiveIcon, null))
+        deleteIcon.setTint(augarte.sendo.utils.Utils.getColorFromAttr(context, R.attr.ExerciseArchiveIcon))
 
         itemTouchHelperCallback = object: ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT){
             override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder): Boolean {

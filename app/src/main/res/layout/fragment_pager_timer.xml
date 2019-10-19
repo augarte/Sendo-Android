@@ -31,7 +31,7 @@
         android:layout_height="wrap_content"
         android:text="00:00"
         android:textSize="50sp"
-        android:textColor="@color/primaryText"
+        android:textColor="?attr/primaryText"
         android:textStyle="bold"
         android:gravity="center"
         app:layout_constraintTop_toTopOf="@id/circle"

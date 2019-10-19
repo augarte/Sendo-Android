@@ -52,14 +52,14 @@
                 android:textStyle="bold"
                 android:fontFamily="sans-serif"
                 android:textAllCaps="true"
-                android:textColor="@color/cardTitle"
+                android:textColor="?attr/cardTitle"
 
                 app:autoSizeTextType="uniform"
                 app:autoSizeMinTextSize="@dimen/text_xsmall"
                 app:autoSizeMaxTextSize="@dimen/text_xlarge"
                 app:autoSizeStepGranularity="2sp"
 
-                android:shadowColor="@color/secondaryText"
+                android:shadowColor="?attr/secondaryText"
                 android:shadowDx="1"
                 android:shadowDy="1"
                 android:shadowRadius="1"

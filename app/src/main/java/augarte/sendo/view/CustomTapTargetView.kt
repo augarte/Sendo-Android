@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.ViewManager
 import augarte.sendo.R
+import augarte.sendo.utils.Utils
 import com.getkeepsafe.taptargetview.TapTarget
 import com.getkeepsafe.taptargetview.TapTargetView
 
@@ -17,13 +18,13 @@ class CustomTapTargetView(context: Context, parent: ViewManager, boundingParent:
             showFor(activity,
                 TapTarget.forView(view, title, description)
                     // All options below are optional
-                    .outerCircleColor(R.color.tapTargetOuterCircle)      // Specify a color for the outer circle
+                    .outerCircleColorInt(Utils.getColorFromAttr(activity, R.attr.tapTargetOuterCircle))      // Specify a color for the outer circle
                     .outerCircleAlpha(0.96f)            // Specify the alpha amount for the outer circle
-                    .targetCircleColor(R.color.tapTargetInnerCircle)   // Specify a color for the target circle
+                    .targetCircleColorInt(Utils.getColorFromAttr(activity, R.attr.tapTargetInnerCircle))   // Specify a color for the target circle
                     .titleTextSize(28)                  // Specify the size (in sp) of the title text
-                    .titleTextColor(R.color.tapTargetTitle)      // Specify the color of the title text
+                    .titleTextColorInt(Utils.getColorFromAttr(activity, R.attr.tapTargetTitle))      // Specify the color of the title text
                     .descriptionTextSize(18)            // Specify the size (in sp) of the description text
-                    .descriptionTextColor(R.color.tapTargetDescription)  // Specify the color of the description text
+                    .descriptionTextColorInt(Utils.getColorFromAttr(activity, R.attr.tapTargetDescription))  // Specify the color of the description text
                     //.textColor(R.color.tapTargetDescription)            // Specify a color for both the title and description text
                     //.textTypeface(Typeface.SANS_SERIF)  // Specify a typeface for the text
                     .dimColor(R.color.black)            // If set, will dim behind the view with 30% opacity of the given color

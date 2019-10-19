@@ -54,7 +54,7 @@ class CreateWorkoutActivity : AppCompatActivity() {
         val workoutAdapter = CreateWorkoutAdapter(thisWorkout.dayList, day_rv)
 
         workoutAdapter.onDayEdit = { title, selectedExercises, listener ->
-            bottomsheet.setFragment(ExerciseChooserFragment(title, selectedExercises,  listener))
+            bottomSheet.setFragment(ExerciseChooserFragment(title, selectedExercises,  listener))
         }
         val animator = object : DefaultItemAnimator() {
             override fun canReuseUpdatedViewHolder(viewHolder: RecyclerView.ViewHolder): Boolean {
@@ -197,7 +197,7 @@ class CreateWorkoutActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         when {
-            bottomsheet.getState() == BottomSheetBehavior.STATE_EXPANDED -> bottomsheet.setState(BottomSheetBehavior.STATE_HIDDEN)
+            bottomSheet.getState() == BottomSheetBehavior.STATE_EXPANDED -> bottomSheet.setState(BottomSheetBehavior.STATE_HIDDEN)
             else -> finish()
         }
     }

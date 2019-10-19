@@ -16,6 +16,8 @@ import augarte.sendo.fragment.DayPagerTimerFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kotlinx.android.synthetic.main.activity_add_progress.*
+import kotlinx.android.synthetic.main.activity_add_progress.bottomSheet
+import kotlinx.android.synthetic.main.activity_create_workout.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 
 class WorkoutDayActivity: AppCompatActivity() {
@@ -40,14 +42,14 @@ class WorkoutDayActivity: AppCompatActivity() {
 
         val listenerSerie = object : OnAddProgress{
             override fun onSerieAdded() {
-                bottomsheet.setState(BottomSheetBehavior.STATE_HIDDEN)
+                bottomSheet.setState(BottomSheetBehavior.STATE_HIDDEN)
             }
         }
 
         val listener = object : OnExerciseDayClickListener{
             override fun onItemClick(exerciseDay: ExerciseDay) {
-                bottomsheet.fullScreen = false
-                bottomsheet.setFragment(AddProgressFragment(exerciseDay, listenerSerie))
+                bottomSheet.fullScreen = false
+                bottomSheet.setFragment(AddProgressFragment(exerciseDay, listenerSerie))
             }
         }
 
@@ -96,6 +98,13 @@ class WorkoutDayActivity: AppCompatActivity() {
                 true
             }
             else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    override fun onBackPressed() {
+        when {
+            bottomSheet.getState() == BottomSheetBehavior.STATE_EXPANDED -> bottomSheet.setState(BottomSheetBehavior.STATE_HIDDEN)
+            else -> finish()
         }
     }
 

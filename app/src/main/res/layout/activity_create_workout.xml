@@ -32,7 +32,7 @@
             android:layout_margin="@dimen/margin_small"
             app:cardElevation="@dimen/card_elevation"
             app:cardCornerRadius="@dimen/corner_normal"
-            app:cardBackgroundColor="@color/colorAccentDark">
+            app:cardBackgroundColor="?attr/colorAccentDark">
 
             <ImageView
                 android:id="@+id/workout_image"
@@ -58,7 +58,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/sendo_workout"
                         android:textSize="@dimen/text_xlarge"
-                        android:textColor="@color/secondaryText"
+                        android:textColor="?attr/secondaryText"
                         android:visibility="visible"
                         app:layout_constraintTop_toTopOf="@id/workout_title"
                         app:layout_constraintBottom_toBottomOf="@id/workout_title"
@@ -71,7 +71,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/sendo_workout"
                         android:textSize="@dimen/text_xlarge"
-                        android:textColor="@color/secondaryText"
+                        android:textColor="?attr/secondaryText"
                         android:maxLength="25"
                         android:inputType="text"
                         app:layout_constraintTop_toTopOf="parent"
@@ -90,7 +90,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:text="@string/sendo_day_number"
-                        android:textColor="@color/secondaryText"
+                        android:textColor="?attr/secondaryText"
                         android:textSize="@dimen/text_large"
                         android:textStyle="bold"/>
 
@@ -112,7 +112,7 @@
                 android:padding="@dimen/margin_small"
                 android:background="@drawable/background_round_white"
                 android:src="@drawable/ic_delete"
-                android:tint="@color/secondaryText"
+                android:tint="?attr/secondaryText"
                 android:visibility="gone"/>
 
             <ImageButton
@@ -124,7 +124,7 @@
                 android:padding="@dimen/margin_small"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:src="@drawable/ic_add_photo"
-                android:tint="@color/secondaryText" />
+                android:tint="?attr/secondaryText" />
         </androidx.cardview.widget.CardView>
 
         <androidx.recyclerview.widget.RecyclerView
@@ -144,14 +144,14 @@
         android:layout_marginBottom="@dimen/margin_medium"
         android:layout_gravity="center_horizontal|bottom"
         android:text="@string/sendo_create"
-        android:textColor="@color/secondaryText"
+        android:textColor="?attr/secondaryText"
         android:textStyle="bold"
-        android:backgroundTint="@color/colorAccentDark"
+        android:backgroundTint="?attr/colorAccentDark"
         android:textAllCaps="true"
         android:elevation="@dimen/card_elevation"/>
 
     <augarte.sendo.view.BottomSheet
-        android:id="@+id/bottomsheet"
+        android:id="@+id/bottomSheet"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:elevation="15dp"/>

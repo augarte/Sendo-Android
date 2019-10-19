@@ -17,7 +17,7 @@
         android:text="Day Tilte"
         android:textStyle="bold"
         android:textSize="@dimen/text_xlarge"
-        android:textColor="@color/secondaryText"/>
+        android:textColor="?attr/secondaryText"/>
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"

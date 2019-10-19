@@ -3,27 +3,25 @@ package augarte.sendo.fragment
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.*
-import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
-import augarte.sendo.R
-import augarte.sendo.activity.WorkoutActivity
-import augarte.sendo.adapter.WorkoutAdapter
-import augarte.sendo.dataModel.Workout
-import kotlinx.android.synthetic.main.fragment_home.*
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.content.res.ResourcesCompat
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import augarte.sendo.R
 import augarte.sendo.activity.CreateWorkoutActivity
 import augarte.sendo.activity.MainActivity
 import augarte.sendo.activity.SearchWorkoutActivity
+import augarte.sendo.activity.WorkoutActivity
+import augarte.sendo.adapter.WorkoutAdapter
+import augarte.sendo.dataModel.Workout
 import augarte.sendo.database.SelectTransactions
+import augarte.sendo.utils.Utils
 import augarte.sendo.view.CustomTapTargetView
 import com.getkeepsafe.taptargetview.TapTargetView
 import com.leinardi.android.speeddial.SpeedDialActionItem
 import com.leinardi.android.speeddial.SpeedDialView
+import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeFragment : Fragment(){
 
@@ -59,26 +57,26 @@ class HomeFragment : Fragment(){
         }
 
         if (workoutList.size>=3) speedDial.visibility = View.GONE
-        speedDial.mainFabOpenedBackgroundColor = ResourcesCompat.getColor(resources, R.color.fab, null)
-        speedDial.mainFabClosedBackgroundColor = ResourcesCompat.getColor(resources, R.color.fab, null)
+        speedDial.mainFabOpenedBackgroundColor = Utils.getColorFromAttr(context, R.attr.fab)
+        speedDial.mainFabClosedBackgroundColor = Utils.getColorFromAttr(context, R.attr.fab)
         speedDial.addActionItem(
             SpeedDialActionItem.Builder(R.id.fab_new, R.drawable.ic_dumbbell_add)
-                    .setFabBackgroundColor(ResourcesCompat.getColor(resources, R.color.fabChild, null))
+                    .setFabBackgroundColor(Utils.getColorFromAttr(context, R.attr.fabChild))
                     .setFabImageTintColor(ResourcesCompat.getColor(resources, R.color.black, null))
                     .setLabel(getString(R.string.sendo_new))
                     .setLabelColor(ResourcesCompat.getColor(resources, R.color.black, null))
-                    .setLabelBackgroundColor(ResourcesCompat.getColor(resources, R.color.fabChild, null))
+                    .setLabelBackgroundColor(Utils.getColorFromAttr(context, R.attr.fabChild))
                     .setLabelClickable(false)
                     .create()
         )
 
         speedDial.addActionItem(
             SpeedDialActionItem.Builder(R.id.fab_search, R.drawable.ic_dumbbell_search)
-                    .setFabBackgroundColor(ResourcesCompat.getColor(resources, R.color.fabChild, null))
+                    .setFabBackgroundColor(Utils.getColorFromAttr(context, R.attr.fabChild))
                     .setFabImageTintColor(ResourcesCompat.getColor(resources, R.color.black, null))
                     .setLabel(getString(R.string.sendo_search))
                     .setLabelColor(ResourcesCompat.getColor(resources, R.color.black, null))
-                    .setLabelBackgroundColor(ResourcesCompat.getColor(resources, R.color.fabChild, null))
+                    .setLabelBackgroundColor(Utils.getColorFromAttr(context, R.attr.fabChild))
                     .setLabelClickable(false)
                     .create()
         )

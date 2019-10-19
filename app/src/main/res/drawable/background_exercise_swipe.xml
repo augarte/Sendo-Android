@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android" >
-    <solid android:color="@color/colorPrimaryLight"/>
-    <stroke android:color="@color/colorPrimaryDark" android:width="1px"/>
+    <solid android:color="?attr/colorPrimaryLight"/>
+    <stroke android:color="?attr/colorPrimaryDark" android:width="1px"/>
     <corners android:radius="10dp"/>
 </shape>
 
@@ -10,13 +10,13 @@
 <layer-list>
 <item>
     <shape xmlns:android="http://schemas.android.com/apk/res/android">
-        <solid android:color="@color/ExerciseArchiveBackground"/>
+        <solid android:color="?attr/ExerciseArchiveBackground"/>
     </shape>
 </item>
 <item>
     <shape xmlns:android="http://schemas.android.com/apk/res/android">
-        <solid android:color="@color/colorPrimaryLight"/>
-        <stroke android:color="@color/colorPrimaryDark" android:width="1px"/>
+        <solid android:color="?attr/colorPrimaryLight"/>
+        <stroke android:color="?attr/colorPrimaryDark" android:width="1px"/>
         <corners android:radius="10dp"/>
     </shape>
 </item>

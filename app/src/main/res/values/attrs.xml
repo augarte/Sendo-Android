@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--MAIN-->
+    <attr name="colorPrimaryLight" format="color"/>
+    <attr name="colorAccentDark" format="color"/>
+    <attr name="colorAccentLight" format="color"/>
+    <attr name="rippleEffect" format="color"/>
+    
+    <!--TEXT-->
+    <attr name="primaryText" format="color"/>
+    <attr name="secondaryText" format="color"/>
+    
+    <!--VIEWS-->
+    <attr name="cardTitle" format="color"/>
+
+    <attr name="fab" format="color"/>
+    <attr name="fabChild" format="color"/>
+
+    <attr name="bottom_sheet_fragment_background" format="color"/>
+    <attr name="bottom_sheet_background" format="color"/>
+
+    <attr name="tapTargetOuterCircle" format="color"/>
+    <attr name="tapTargetInnerCircle" format="color"/>
+    <attr name="tapTargetTitle" format="color"/>
+    <attr name="tapTargetDescription" format="color"/>
+
+    <attr name="ExerciseArchiveBackground" format="color"/>
+    <attr name="ExerciseUnarchiveBackground" format="color"/>
+    <attr name="ExerciseArchiveIcon" format="color"/>
+
+    <attr name="pagerBackground" format="color"/>
+    <attr name="pagerSelectedIcon" format="color"/>
+    <attr name="pagerUnSelectedIcon" format="color"/>
+
+    <!--ICONS-->
+    <attr name="fabIcon" format="color"/>
+    <attr name="toolbarIcon" format="color"/>
+</resources>
