@@ -60,25 +60,25 @@ class HomeFragment : Fragment(){
         speedDial.mainFabOpenedBackgroundColor = Utils.getColorFromAttr(context, R.attr.fab)
         speedDial.mainFabClosedBackgroundColor = Utils.getColorFromAttr(context, R.attr.fab)
         speedDial.addActionItem(
-            SpeedDialActionItem.Builder(R.id.fab_new, R.drawable.ic_dumbbell_add)
-                    .setFabBackgroundColor(Utils.getColorFromAttr(context, R.attr.fabChild))
-                    .setFabImageTintColor(ResourcesCompat.getColor(resources, R.color.black, null))
-                    .setLabel(getString(R.string.sendo_new))
-                    .setLabelColor(ResourcesCompat.getColor(resources, R.color.black, null))
-                    .setLabelBackgroundColor(Utils.getColorFromAttr(context, R.attr.fabChild))
-                    .setLabelClickable(false)
-                    .create()
+            SpeedDialActionItem.Builder(R.id.fab_search, R.drawable.ic_dumbbell_add)
+                .setFabBackgroundColor(Utils.getColorFromAttr(context, R.attr.fabChild))
+                .setFabImageTintColor(ResourcesCompat.getColor(resources, R.color.black, null))
+                .setLabel(getString(R.string.sendo_new))
+                .setLabelColor(ResourcesCompat.getColor(resources, R.color.black, null))
+                .setLabelBackgroundColor(Utils.getColorFromAttr(context, R.attr.fabChild))
+                .setLabelClickable(false)
+                .create()
         )
 
         speedDial.addActionItem(
-            SpeedDialActionItem.Builder(R.id.fab_search, R.drawable.ic_dumbbell_search)
-                    .setFabBackgroundColor(Utils.getColorFromAttr(context, R.attr.fabChild))
-                    .setFabImageTintColor(ResourcesCompat.getColor(resources, R.color.black, null))
-                    .setLabel(getString(R.string.sendo_search))
-                    .setLabelColor(ResourcesCompat.getColor(resources, R.color.black, null))
-                    .setLabelBackgroundColor(Utils.getColorFromAttr(context, R.attr.fabChild))
-                    .setLabelClickable(false)
-                    .create()
+            SpeedDialActionItem.Builder(R.id.fab_new, R.drawable.ic_dumbbell_search)
+                .setFabBackgroundColor(Utils.getColorFromAttr(context, R.attr.fabChild))
+                .setFabImageTintColor(ResourcesCompat.getColor(resources, R.color.black, null))
+                .setLabel(getString(R.string.sendo_search))
+                .setLabelColor(ResourcesCompat.getColor(resources, R.color.black, null))
+                .setLabelBackgroundColor(Utils.getColorFromAttr(context, R.attr.fabChild))
+                .setLabelClickable(false)
+                .create()
         )
         speedDial.setOnActionSelectedListener { speedDialActionItem ->
             when (speedDialActionItem.id) {
@@ -95,9 +95,8 @@ class HomeFragment : Fragment(){
                 else -> false
             }
         }
-
         speedDial.setOnChangeListener(object : SpeedDialView.OnChangeListener {
-            override fun onMainActionSelected() : Boolean {
+            override fun onMainActionSelected(): Boolean {
                 return false
             }
 
@@ -111,7 +110,7 @@ class HomeFragment : Fragment(){
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         activity?.menuInflater?.inflate(R.menu.option_menu, menu)
-        menu.findItem(R.id.search)?.isVisible = true
+        //menu.findItem(R.id.search)?.isVisible = true
     }
 
     private fun showTapTarget() {
