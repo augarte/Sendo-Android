@@ -18,6 +18,8 @@ class DatePicker @JvmOverloads constructor(context: Context, attrs: AttributeSet
     private var year = c.get(Calendar.YEAR)
     private var month = c.get(Calendar.MONTH)+1
     private var day = c.get(Calendar.DAY_OF_MONTH)
+    private var weekNumber = 1
+    private var listener: DatePickerListener? = null
 
     init {
         LayoutInflater.from(context).inflate(R.layout.item_date_picker, this, true)
@@ -44,7 +46,6 @@ class DatePicker @JvmOverloads constructor(context: Context, attrs: AttributeSet
 
     fun setUp(d: Date) {
         create.time = d
-
         setDate()
     }
 
@@ -59,10 +60,24 @@ class DatePicker @JvmOverloads constructor(context: Context, attrs: AttributeSet
     }
 
     private fun setDate(){
-        val weekNumber = context.getString(R.string.sendo_week_num, ((c.get(Calendar.WEEK_OF_YEAR) - create.get(Calendar.WEEK_OF_YEAR) + 1)))
-        date.text = weekNumber
+        weekNumber = ((c.get(Calendar.WEEK_OF_YEAR) - create.get(Calendar.WEEK_OF_YEAR) + 1))
+        listener?.onDateWeekChanger(weekNumber)
+        val weekString = context.getString(R.string.sendo_week_num, weekNumber)
+        date.text = weekString
         if (create.get(Calendar.WEEK_OF_YEAR) < c.get(Calendar.WEEK_OF_YEAR)) previous.setImageDrawable(context.getDrawable(R.drawable.ic_arrow_left))
         else if (create.get(Calendar.WEEK_OF_YEAR) == c.get(Calendar.WEEK_OF_YEAR)) previous.setImageDrawable(null)
+    }
+
+    fun getWeek(): Int{
+        return weekNumber
+    }
+
+    fun setListener(listener: DatePickerListener){
+        this.listener = listener
+    }
+
+    interface DatePickerListener{
+        fun onDateWeekChanger(week: Int)
     }
 }
 

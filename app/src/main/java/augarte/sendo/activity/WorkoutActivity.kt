@@ -6,20 +6,18 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityOptionsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import augarte.sendo.dataModel.Workout
-import kotlinx.android.synthetic.main.app_bar_main.*
 import augarte.sendo.R
 import augarte.sendo.adapter.WorkoutDayAdapter
+import augarte.sendo.dataModel.Workout
+import augarte.sendo.view.DatePicker
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-import kotlinx.android.synthetic.main.activity_workout.datePicker
-import kotlinx.android.synthetic.main.activity_workout.day_list
+import kotlinx.android.synthetic.main.activity_workout.*
+import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.item_workout_card.*
-
 
 class WorkoutActivity : BaseActivity() {
 
@@ -45,9 +43,8 @@ class WorkoutActivity : BaseActivity() {
         Glide.with(card_image.context).load(workout.image).diskCacheStrategy(DiskCacheStrategy.AUTOMATIC).into(card_image)
         workout_card.isClickable = false
 
-        datePicker.setUp(workout.createDate!!)
-
         val workoutDayAdapter = WorkoutDayAdapter(workout.dayList)
+        workoutDayAdapter.setWeekNumber(1)
         workoutDayAdapter.onItemClick = { pair ->
             val intent = Intent(this, WorkoutDayActivity::class.java)
             intent.putExtra("day", pair.first)
@@ -62,6 +59,13 @@ class WorkoutActivity : BaseActivity() {
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
             adapter = workoutDayAdapter
         }
+
+        datePicker.setUp(workout.createDate!!)
+        datePicker.setListener(object: DatePicker.DatePickerListener{
+            override fun onDateWeekChanger(week: Int) {
+                workoutDayAdapter.setWeekNumber(datePicker.getWeek())
+            }
+        })
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

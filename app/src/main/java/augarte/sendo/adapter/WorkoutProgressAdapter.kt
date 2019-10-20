@@ -32,6 +32,8 @@ class WorkoutProgressAdapter(private val items: ArrayList<ExerciseDay>): Recycle
         holder.max.text = max?.toString() ?: ""
         holder.min.text = min?.toString() ?: ""
 
+        if (item.series.isEmpty())  holder.noData.visibility = View.VISIBLE
+        else holder.noData.visibility = View.GONE
         holder.sparkView.adapter = ProgressChartAdapter(item.series)
 
     }
@@ -40,11 +42,11 @@ class WorkoutProgressAdapter(private val items: ArrayList<ExerciseDay>): Recycle
         return items.size
     }
 
-
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val sparkView: SparkView = view.sparkView
         val title: TextView = view.title
         val max: TextView = view.max
         val min: TextView = view.min
+        val noData: TextView = view.no_data
     }
 }

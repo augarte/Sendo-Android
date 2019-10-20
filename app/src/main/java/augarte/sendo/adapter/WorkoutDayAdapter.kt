@@ -8,11 +8,13 @@ import androidx.recyclerview.widget.RecyclerView
 import augarte.sendo.R
 import augarte.sendo.dataModel.Day
 import augarte.sendo.dataModel.ExerciseDay
+import augarte.sendo.utils.toStringFormat
 import kotlinx.android.synthetic.main.item_workout_day.view.*
 
 class WorkoutDayAdapter(private val items: ArrayList<Day>): RecyclerView.Adapter<WorkoutDayAdapter.ViewHolder>() {
 
     var onItemClick: ((Pair<Day, View>) -> Unit)? = null
+    var week : Int = 1
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -31,9 +33,22 @@ class WorkoutDayAdapter(private val items: ArrayList<Day>): RecyclerView.Adapter
     private fun getExerciseListText(exerciseDays: ArrayList<ExerciseDay>): String {
         var result = ""
         for (exerciseDay in exerciseDays) {
-            result += "${exerciseDay.serieNum}x${exerciseDay.repNum} ${exerciseDay.exercise!!.name}\n"
+            var serieWork = ""
+            for (serie in exerciseDay.series){
+                if (serie.week == week){
+                    serieWork += if (exerciseDay.series.indexOf(serie)==0) "${serie.weight?.toStringFormat}"
+                    else " + ${serie.weight?.toStringFormat}"
+                }
+            }
+            if(serieWork.isNotEmpty()) serieWork = "($serieWork)"
+            result += "${exerciseDay.serieNum}x${exerciseDay.repNum} ${exerciseDay.exercise!!.name} ${serieWork}\n"
         }
         return result
+    }
+
+    fun setWeekNumber(weekNumber: Int) {
+        week = weekNumber
+        notifyDataSetChanged()
     }
 
     override fun getItemCount(): Int {
@@ -41,7 +56,6 @@ class WorkoutDayAdapter(private val items: ArrayList<Day>): RecyclerView.Adapter
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-
         val title: TextView = view.dayTitle
         val exerciseList: TextView = view.exercise_list
     }

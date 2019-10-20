@@ -14,13 +14,12 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
         <TextView
             android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Exercise"
-            android:textColor="?attr/primaryText"
+            android:textColor="?attr/secondaryText"
             android:textSize="@dimen/text_xlarge"
             android:textStyle="bold"
             app:layout_constraintTop_toTopOf="parent"/>
@@ -33,13 +32,28 @@
             app:layout_constraintTop_toBottomOf="@id/title"
             app:layout_constraintBottom_toBottomOf="parent"/>
 
+
+        <TextView
+            android:id="@+id/no_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/sendo_not_enough_data"
+            android:textColor="?attr/secondaryText"
+            android:textStyle="bold"
+            android:visibility="gone"
+            app:layout_constraintTop_toTopOf="@id/sparkView"
+            app:layout_constraintBottom_toBottomOf="@id/sparkView"
+            app:layout_constraintStart_toStartOf="@id/sparkView"
+            app:layout_constraintEnd_toEndOf="@id/sparkView"/>
+
         <TextView
             android:id="@+id/max"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/white"
             android:text="250"
-            android:textColor="?attr/primaryText"
+            android:textColor="?attr/secondaryText"
             android:textSize="@dimen/text_xlarge"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/sparkView"/>
@@ -50,12 +64,10 @@
             android:layout_height="wrap_content"
             android:background="@color/white"
             android:text="100"
-            android:textColor="?attr/primaryText"
+            android:textColor="?attr/secondaryText"
             android:textSize="@dimen/text_xlarge"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"/>
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.cardview.widget.CardView>

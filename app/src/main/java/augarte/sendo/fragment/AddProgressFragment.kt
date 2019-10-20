@@ -10,6 +10,7 @@ import augarte.sendo.activity.MainActivity
 import augarte.sendo.activity.WorkoutDayActivity
 import augarte.sendo.dataModel.ExerciseDay
 import augarte.sendo.dataModel.Serie
+import augarte.sendo.utils.toStringFormat
 import kotlinx.android.synthetic.main.bottomsheet_add_progress.*
 
 class AddProgressFragment(private val exerciseDay: ExerciseDay, private val listener: WorkoutDayActivity.OnAddProgress) : Fragment() {
@@ -24,16 +25,18 @@ class AddProgressFragment(private val exerciseDay: ExerciseDay, private val list
         title_exercise.text = exerciseDay.exercise!!.name
         serieET.setText(exerciseDay.serieNum.toString())
         repET.setText(exerciseDay.repNum.toString())
-        weightET.setText(if (exerciseDay.series.isNotEmpty()) exerciseDay.series.last().weight.toString() else "")
+        weightET.setText(if (exerciseDay.series.isNotEmpty()) exerciseDay.series.last().weight?.toStringFormat else "")
 
         insertButton.setOnClickListener {
-            val newSerie = Serie()
-            newSerie.exerciseDayId = exerciseDay.id
-            newSerie.repetitions = repET.text.toString().toInt()
-            newSerie.weight = weightET.text.toString().toDouble()
-            exerciseDay.series.add(newSerie)
+            for (i in 0 until serieET.toString().toInt()) {
+                val newSerie = Serie()
+                newSerie.exerciseDayId = exerciseDay.id
+                newSerie.repetitions = repET.text.toString().toInt()
+                newSerie.weight = weightET.text.toString().toDouble()
+                exerciseDay.series.add(newSerie)
+                MainActivity.dbHandler.insertSerie(newSerie)
+            }
 
-            MainActivity.dbHandler.insertSerie(newSerie)
             listener.onSerieAdded()
         }
     }

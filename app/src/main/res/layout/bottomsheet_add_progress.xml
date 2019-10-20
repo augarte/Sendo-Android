@@ -70,7 +70,7 @@
 
         <EditText
             android:id="@+id/serieET"
-            android:layout_width="@dimen/view_medium"
+            android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:textColor="?attr/secondaryText"
             android:maxLength="2"
@@ -79,7 +79,7 @@
             app:layout_constraintStart_toEndOf="@id/guideline"/>
         <EditText
             android:id="@+id/repET"
-            android:layout_width="@dimen/view_medium"
+            android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:textColor="?attr/secondaryText"
             android:maxLength="3"
@@ -89,7 +89,7 @@
             app:layout_constraintStart_toEndOf="@id/guideline"/>
         <EditText
             android:id="@+id/weightET"
-            android:layout_width="@dimen/view_medium"
+            android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:textColor="?attr/secondaryText"
             android:maxLength="4"

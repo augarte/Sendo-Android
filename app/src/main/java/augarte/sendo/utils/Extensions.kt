@@ -1,6 +1,7 @@
 package augarte.sendo.utils
 
 import android.content.res.Resources
+import java.text.DecimalFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -15,3 +16,6 @@ val Int.toDpF: Float
 
 val Int.toPxF: Float
     get() = (this * Resources.getSystem().displayMetrics.density)
+
+val Double.toStringFormat: String
+    get() = (DecimalFormat("##.###").format(this))
