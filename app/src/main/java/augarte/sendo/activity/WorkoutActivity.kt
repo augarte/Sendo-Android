@@ -48,6 +48,7 @@ class WorkoutActivity : BaseActivity() {
         workoutDayAdapter.onItemClick = { pair ->
             val intent = Intent(this, WorkoutDayActivity::class.java)
             intent.putExtra("day", pair.first)
+            intent.putExtra("week", datePicker.getWeek())
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 val options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, pair.second, "dayCard")
                 startActivity(intent, options.toBundle())
@@ -63,7 +64,7 @@ class WorkoutActivity : BaseActivity() {
         datePicker.setUp(workout.createDate!!)
         datePicker.setListener(object: DatePicker.DatePickerListener{
             override fun onDateWeekChanger(week: Int) {
-                workoutDayAdapter.setWeekNumber(datePicker.getWeek())
+                workoutDayAdapter.setWeekNumber(week)
             }
         })
     }

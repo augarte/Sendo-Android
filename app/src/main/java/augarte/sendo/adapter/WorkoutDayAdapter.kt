@@ -34,10 +34,14 @@ class WorkoutDayAdapter(private val items: ArrayList<Day>): RecyclerView.Adapter
         var result = ""
         for (exerciseDay in exerciseDays) {
             var serieWork = ""
+            var first = true
             for (serie in exerciseDay.series){
                 if (serie.week == week){
-                    serieWork += if (exerciseDay.series.indexOf(serie)==0) "${serie.weight?.toStringFormat}"
-                    else " + ${serie.weight?.toStringFormat}"
+                    if (first) {
+                        serieWork += "${serie.weight?.toStringFormat}"
+                        first = false
+                    }
+                    else serieWork += " + ${serie.weight?.toStringFormat}"
                 }
             }
             if(serieWork.isNotEmpty()) serieWork = "($serieWork)"

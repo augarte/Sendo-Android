@@ -23,6 +23,7 @@ import kotlinx.android.synthetic.main.app_bar_main.*
 class WorkoutDayActivity: BaseActivity() {
 
     private lateinit var day: Day
+    private var week = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +35,8 @@ class WorkoutDayActivity: BaseActivity() {
         } else {
             savedInstanceState.getParcelable("day") as Day
         }
+
+        week = savedInstanceState?.getInt("week") ?: intent.extras?.getInt("week")!!
 
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -49,7 +52,7 @@ class WorkoutDayActivity: BaseActivity() {
         val listener = object : OnExerciseDayClickListener{
             override fun onItemClick(exerciseDay: ExerciseDay) {
                 bottomSheet.fullScreen = false
-                bottomSheet.setFragment(AddProgressFragment(exerciseDay, listenerSerie))
+                bottomSheet.setFragment(AddProgressFragment(exerciseDay, week, listenerSerie))
             }
         }
 

@@ -13,7 +13,7 @@ import augarte.sendo.dataModel.Serie
 import augarte.sendo.utils.toStringFormat
 import kotlinx.android.synthetic.main.bottomsheet_add_progress.*
 
-class AddProgressFragment(private val exerciseDay: ExerciseDay, private val listener: WorkoutDayActivity.OnAddProgress) : Fragment() {
+class AddProgressFragment(private val exerciseDay: ExerciseDay, private val week: Int, private val listener: WorkoutDayActivity.OnAddProgress) : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.bottomsheet_add_progress, container, false)
@@ -28,11 +28,12 @@ class AddProgressFragment(private val exerciseDay: ExerciseDay, private val list
         weightET.setText(if (exerciseDay.series.isNotEmpty()) exerciseDay.series.last().weight?.toStringFormat else "")
 
         insertButton.setOnClickListener {
-            for (i in 0 until serieET.toString().toInt()) {
+            for (i in 0 until serieET.text.toString().toInt()) {
                 val newSerie = Serie()
                 newSerie.exerciseDayId = exerciseDay.id
                 newSerie.repetitions = repET.text.toString().toInt()
                 newSerie.weight = weightET.text.toString().toDouble()
+                newSerie.week = week
                 exerciseDay.series.add(newSerie)
                 MainActivity.dbHandler.insertSerie(newSerie)
             }
