@@ -47,20 +47,6 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" >
-        <item name="android:textColorPrimary">@color/white</item>
-        <item name="android:textColorSecondary">@color/white</item>
-    </style>
-
-    <style name="PopupOverlay" parent="ThemeOverlay.AppCompat.Light">
-        <item name="android:colorBackground">@color/colorPrimary</item>
-        <item name="android:textColor">@color/white</item>
-    </style>
-
-    <style name="CustomDialog" parent="@style/Theme.AppCompat.Light.Dialog">
-        <item name="android:windowNoTitle">false</item>
-    </style>
-
 
     <!--GREEN THEME-->
     <style name="GreenTheme" parent="Theme.AppCompat.DayNight.DarkActionBar">
@@ -107,6 +93,22 @@
     <style name="GreenTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+    </style>
+
+
+    <!--GENERAL-->
+    <style name="CustomDialog" parent="@style/Theme.AppCompat.Light.Dialog">
+        <item name="android:windowNoTitle">false</item>
+    </style>
+
+    <style name="AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" >
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:textColorSecondary">@color/white</item>
+    </style>
+
+    <style name="PopupOverlay" parent="ThemeOverlay.AppCompat.Light">
+        <item name="android:colorBackground">?attr/colorPrimary</item>
+        <item name="android:textColor">@color/white</item>
     </style>
 
 </resources>

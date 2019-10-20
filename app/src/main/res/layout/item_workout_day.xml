@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:text="DAY"
             android:textSize="@dimen/text_large"
-            android:textColor="?attr/secondaryText"
+            android:textColor="@color/black"
             android:textStyle="bold"/>
 
         <TextView
