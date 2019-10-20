@@ -6,11 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.cardview.widget.CardView
+import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import augarte.sendo.*
 import augarte.sendo.dataModel.Day
 import augarte.sendo.dataModel.Exercise
 import augarte.sendo.dataModel.ExerciseDay
+import augarte.sendo.fragment.AddExerciseDialogFragment
+import augarte.sendo.fragment.AddExerciseToWorkoutDialogFragment
+import augarte.sendo.fragment.ExerciseInfoDialogFragment
 import augarte.sendo.utils.Animations
 import augarte.sendo.utils.toPx
 import augarte.sendo.utils.toPxF
@@ -64,19 +68,15 @@ class CreateWorkoutAdapter(private val items : ArrayList<Day>, private val rv : 
         }
         holder.arrow.setOnClickListener(listener)
 
-
         val exerciseSelectedListener = object: OnExerciseSelectedListener {
             override fun onTitleChanged(title: String) {
                 holder.cardTitle.text = title
                 item.name = title
             }
 
-            override fun onSelect(exercise: Exercise) {
-                selectedExerciseList[position].add(exercise)
-
-                val exerciseDay = ExerciseDay()
+            override fun onSelect(exerciseDay: ExerciseDay) {
+                selectedExerciseList[position].add(exerciseDay.exercise!!)
                 exerciseDay.dayId = item.id
-                exerciseDay.exercise = exercise
                 item.exerciseDayList.add(exerciseDay)
 
                 holder.exerciseList.text = createExerciseList(selectedExerciseList[position])
@@ -161,7 +161,7 @@ class CreateWorkoutAdapter(private val items : ArrayList<Day>, private val rv : 
     }
 
     interface OnExerciseSelectedListener {
-        fun onSelect(exercise: Exercise)
+        fun onSelect(exerciseDay: ExerciseDay)
         fun onDeselected(exercise: Exercise)
         fun onTitleChanged(title: String)
     }

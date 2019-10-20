@@ -60,7 +60,7 @@ class HomeFragment : Fragment(){
         speedDial.mainFabOpenedBackgroundColor = Utils.getColorFromAttr(context, R.attr.fab)
         speedDial.mainFabClosedBackgroundColor = Utils.getColorFromAttr(context, R.attr.fab)
         speedDial.addActionItem(
-            SpeedDialActionItem.Builder(R.id.fab_search, R.drawable.ic_dumbbell_add)
+            SpeedDialActionItem.Builder(R.id.fab_new, R.drawable.ic_dumbbell_add)
                 .setFabBackgroundColor(Utils.getColorFromAttr(context, R.attr.fabChild))
                 .setFabImageTintColor(ResourcesCompat.getColor(resources, R.color.black, null))
                 .setLabel(getString(R.string.sendo_new))
@@ -71,7 +71,7 @@ class HomeFragment : Fragment(){
         )
 
         speedDial.addActionItem(
-            SpeedDialActionItem.Builder(R.id.fab_new, R.drawable.ic_dumbbell_search)
+            SpeedDialActionItem.Builder(R.id.fab_search, R.drawable.ic_dumbbell_search)
                 .setFabBackgroundColor(Utils.getColorFromAttr(context, R.attr.fabChild))
                 .setFabImageTintColor(ResourcesCompat.getColor(resources, R.color.black, null))
                 .setLabel(getString(R.string.sendo_search))
