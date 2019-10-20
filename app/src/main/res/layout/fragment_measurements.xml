@@ -81,14 +81,15 @@
 
                 <TextView
                     android:id="@+id/scrub"
-                    android:layout_width="50dp"
+                    android:layout_width="75dp"
                     android:layout_height="50dp"
+                    android:autoSizeTextType="uniform"
+                    android:padding="@dimen/padding_medium_small"
                     android:layout_marginTop="10dp"
                     android:layout_gravity="center_horizontal"
                     android:gravity="center"
-                    android:background="@drawable/background_round_white"
-                    android:backgroundTint="?attr/primaryText"
-                    android:textSize="@dimen/text_xxlarge"
+                    android:background="@drawable/background_rounded_primary"
+                    android:textSize="@dimen/text_xlarge"
                     android:textColor="@color/white"
                     android:textStyle="bold"
                     android:visibility="gone"/>

@@ -21,7 +21,6 @@ import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView
 import kotlinx.android.synthetic.main.item_exercise.view.exercise_name
 import kotlinx.android.synthetic.main.item_exercise_category.view.*
 import kotlinx.android.synthetic.main.item_exercise_category.view.exercise_image
-import kotlinx.android.synthetic.main.item_exercise_chooser.view.*
 
 class ExerciseCategoryAdapter(private val items : MutableList<Exercise>) : RecyclerView.Adapter<ExerciseCategoryAdapter.MainViewHolder>(), FastScrollRecyclerView.SectionedAdapter {
 

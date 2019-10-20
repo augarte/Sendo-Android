@@ -6,6 +6,7 @@ import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.os.Handler
 import android.view.*
+import androidx.appcompat.widget.SearchView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
@@ -19,7 +20,6 @@ import augarte.sendo.adapter.ExerciseCategoryAdapter
 import augarte.sendo.adapter.ExerciseListAdapter
 import augarte.sendo.dataModel.Exercise
 import augarte.sendo.database.SelectTransactions
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.simplecityapps.recyclerview_fastscroll.utils.Utils
 import kotlinx.android.synthetic.main.fragment_exercise_list.*
 
@@ -30,6 +30,7 @@ class ExerciseListFragment : Fragment() {
     private lateinit var exerciseList : MutableList<Exercise>
     private lateinit var exerciseAdapter: Any
     private lateinit var itemTouchHelperCallback: ItemTouchHelper.SimpleCallback
+    private var hasSearch = true;
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_exercise_list, container, false)
@@ -46,7 +47,7 @@ class ExerciseListFragment : Fragment() {
             adapter = exerciseAdapter as ExerciseListAdapter
         }
 
-        val listener = object: OnDialogClickListener {
+        /*val listener = object: OnDialogClickListener {
             override fun onDialogAccept(dialog: DialogFragment) {
                 (exerciseAdapter as RecyclerView.Adapter<RecyclerView.ViewHolder>).notifyDataSetChanged()
                 dialog.dismiss()
@@ -64,7 +65,7 @@ class ExerciseListFragment : Fragment() {
                 addExerciseDialog.show(fragmentManager!!, addExerciseDialog.tag)
                 fab_add.animate().rotation(if (fab_add.rotation==0f) fab_add.rotation+45 else fab_add.rotation-45).start()
             }
-        }
+        }*/
 
         configureSwipeDelete()
         setHasOptionsMenu(true)
@@ -74,23 +75,59 @@ class ExerciseListFragment : Fragment() {
         super.onCreateOptionsMenu(menu, inflater)
         activity?.menuInflater?.inflate(R.menu.option_menu, menu)
         menu.findItem(R.id.group)?.isVisible = true
+        val search = menu.findItem(R.id.search)
+
+        search?.isVisible = true
+        val searchView = search.actionView as SearchView
+        search(searchView)
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu) {
+        menu.findItem(R.id.search).isVisible = hasSearch
+    }
+
+    private fun search(searchView: SearchView){
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String): Boolean {
+                val filterText = newText.toLowerCase()
+                val newList = ArrayList<Exercise>()
+                for (exercise in exerciseList) {
+                    if (exercise.name?.toLowerCase()?.contains(filterText) == true || exercise.type?.name?.toLowerCase()?.contains(filterText) == true) {
+                        newList.add(exercise)
+                    }
+                }
+                if (exerciseAdapter is ExerciseListAdapter) (exerciseAdapter as ExerciseListAdapter).setFilter(newList)
+                if (exerciseAdapter is ExerciseArchivedAdapter) (exerciseAdapter as ExerciseArchivedAdapter).setFilter(newList)
+                return true
+            }
+        })
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId){
             R.id.list -> {
+                hasSearch = true
+                activity?.invalidateOptionsMenu()
                 exerciseList = MainActivity.dbHandler.getExercise(SelectTransactions.SELECT_ALL_EXERCISE_ORDER_NAME, null).toMutableList()
                 exercise_list.setPopupTextSize(Utils.toScreenPixels(resources, 44f))
                 exerciseAdapter = ExerciseListAdapter(exerciseList)
                 exercise_list.adapter = exerciseAdapter as ExerciseListAdapter
             }
             R.id.category -> {
+                hasSearch = false
+                activity?.invalidateOptionsMenu()
                 exerciseList = MainActivity.dbHandler.getExercise(SelectTransactions.SELECT_ALL_EXERCISE_ORDER_TYPE, null).toMutableList()
-                exercise_list.setPopupTextSize(Utils.toScreenPixels(resources, 20f))
+                exercise_list.setPopupTextSize(Utils.toScreenPixels(resources, 44f))
                 exerciseAdapter = ExerciseCategoryAdapter(exerciseList)
                 exercise_list.adapter = exerciseAdapter as ExerciseCategoryAdapter
             }
             R.id.archived -> {
+                hasSearch = true
+                activity?.invalidateOptionsMenu()
                 exerciseList = MainActivity.dbHandler.getExercise(SelectTransactions.SELECT_ARCHIVED_EXERCISES_ORDER_NAME, null).toMutableList()
                 exercise_list.setPopupTextSize(Utils.toScreenPixels(resources, 44f))
                 exerciseAdapter = ExerciseArchivedAdapter(exerciseList)

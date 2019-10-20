@@ -19,7 +19,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView
 import kotlinx.android.synthetic.main.item_exercise.view.*
 
-class ExerciseArchivedAdapter(private val items : MutableList<Exercise>) : RecyclerView.Adapter<ExerciseArchivedAdapter.MainViewHolder>(), FastScrollRecyclerView.SectionedAdapter {
+class ExerciseArchivedAdapter(private var items : MutableList<Exercise>) : RecyclerView.Adapter<ExerciseArchivedAdapter.MainViewHolder>(), FastScrollRecyclerView.SectionedAdapter {
 
     var onItemClick: ((Pair<Exercise, View>) -> Unit)? = null
 
@@ -43,6 +43,12 @@ class ExerciseArchivedAdapter(private val items : MutableList<Exercise>) : Recyc
             val exerciseInforDialogFragment = ExerciseInfoDialogFragment(item)
             exerciseInforDialogFragment.show(manager, "DIALOG")
         }
+    }
+
+    fun setFilter(newList: MutableList<Exercise>) {
+        items = ArrayList()
+        items.addAll(newList)
+        notifyDataSetChanged()
     }
 
     override fun getItemCount(): Int {
