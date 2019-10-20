@@ -54,6 +54,12 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         transaction.commit()
     }
 
+    fun changeTheme(themeId: Int){
+        nav_view.menu.getItem(0).isChecked = true
+        setTheme(themeId)
+        recreate()
+    }
+
     public override fun onStart() {
         super.onStart()
         user = auth.currentUser
@@ -69,15 +75,18 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     }
 
     override fun onBackPressed() {
-        if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
-            drawer_layout.closeDrawer(GravityCompat.START)
-        } else {
-             androidx.appcompat.app.AlertDialog.Builder(this)
-                .setTitle(getString(R.string.sendo_alert_close_app_title))
-                .setMessage(getString(R.string.sendo_alert_close_app_message))
-                .setPositiveButton(getString(R.string.sendo_accept)) { _, _ -> finishAndRemoveTask() }
-                .setNegativeButton(getString(R.string.sendo_cancel)) { _, _ -> }
-                .show()
+        when {
+            drawer_layout.isDrawerOpen(GravityCompat.START) -> drawer_layout.closeDrawer(GravityCompat.START)
+            nav_view.checkedItem?.itemId != R.id.nav_home -> {
+                nav_view.menu.getItem(0).isChecked = true
+                onNavigationItemSelected(nav_view.menu.getItem(0))
+            }
+            else -> androidx.appcompat.app.AlertDialog.Builder(this)
+                    .setTitle(getString(R.string.sendo_alert_close_app_title))
+                    .setMessage(getString(R.string.sendo_alert_close_app_message))
+                    .setPositiveButton(getString(R.string.sendo_accept)) { _, _ -> finishAndRemoveTask() }
+                    .setNegativeButton(getString(R.string.sendo_cancel)) { _, _ -> }
+                    .show()
         }
     }
 

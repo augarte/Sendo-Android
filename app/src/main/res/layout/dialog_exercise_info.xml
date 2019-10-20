@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/padding_medium_small">
+
+    <ImageView
+        android:id="@+id/exercise_image"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:src="@drawable/ic_sendo_placeholder"/>
+
+    <TextView
+        android:id="@+id/exercise_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_small_medium"
+        android:layout_marginEnd="@dimen/margin_small_medium"
+        android:text="Exercise name"
+        android:textSize="@dimen/text_xxlarge"
+        android:textStyle="bold"
+        android:textColor="@color/black" />
+
+    <TextView
+        android:id="@+id/exercise_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_small_medium"
+        android:layout_marginEnd="@dimen/margin_small_medium" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/exercise_tags"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" />
+</LinearLayout>

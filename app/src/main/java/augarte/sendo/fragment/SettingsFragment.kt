@@ -88,8 +88,7 @@ class SettingsFragment : Fragment() {
 
             sharedPreferences?.edit()?.putInt(Constants.SHARED_THEME, themeId)?.apply()
 
-            activity?.setTheme(themeId)
-            activity?.recreate()
+            (activity as MainActivity).changeTheme(themeId)
         }
 
         github_button.setOnClickListener {

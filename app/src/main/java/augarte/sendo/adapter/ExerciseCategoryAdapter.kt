@@ -7,11 +7,13 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import augarte.sendo.R
 import augarte.sendo.activity.MainActivity
 import augarte.sendo.dataModel.Exercise
 import augarte.sendo.database.DatabaseConstants
+import augarte.sendo.fragment.ExerciseInfoDialogFragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.google.android.material.snackbar.Snackbar
@@ -49,6 +51,12 @@ class ExerciseCategoryAdapter(private val items : MutableList<Exercise>) : Recyc
 
         holder.exerciseName.text = item.name
         Glide.with(holder.exerciseImage.context).load(item.imageURL).placeholder(R.drawable.ic_sendo_placeholder).diskCacheStrategy(DiskCacheStrategy.AUTOMATIC).into(holder.exerciseImage)
+
+        holder.itemView.setOnClickListener {
+            val manager = (holder.itemView.context as FragmentActivity).supportFragmentManager
+            val exerciseInforDialogFragment = ExerciseInfoDialogFragment(item)
+            exerciseInforDialogFragment.show(manager, "DIALOG")
+        }
     }
 
     override fun getItemCount(): Int {
