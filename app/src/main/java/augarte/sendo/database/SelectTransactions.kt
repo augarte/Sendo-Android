@@ -5,6 +5,7 @@ class SelectTransactions {
     companion object{
         const val SELECT_ALL_WORKOUT_ORDER_NAME = "SELECT  * FROM ${DatabaseConstants.TABLE_WORKOUT} ORDER BY ${DatabaseConstants.TABLE_WORKOUT_LASTOPEN} ASC"
         const val SELECT_WORKOUTIMAGE_BY_ID = "SELECT ${DatabaseConstants.TABLE_WORKOUT_IMAGE} FROM ${DatabaseConstants.TABLE_WORKOUT} WHERE ${DatabaseConstants.TABLE_WORKOUT_ID} = ?"
+        const val SELECT_WORKOUT_BY_ID = "SELECT * FROM ${DatabaseConstants.TABLE_WORKOUT} WHERE ${DatabaseConstants.TABLE_WORKOUT_ID} = ?"
 
         const val SELECT_EXERCISE_BY_ID = "SELECT * FROM ${DatabaseConstants.TABLE_EXERCISE} WHERE ${DatabaseConstants.TABLE_EXERCISE_ID} = ?"
         const val SELECT_EXERCISES_BY_DAY = "SELECT * FROM ${DatabaseConstants.TABLE_EXERCISE} ex INNER JOIN ${DatabaseConstants.TABLE_EXERCISEDAY} exda ON ex.${DatabaseConstants.TABLE_EXERCISE_ID} = exda.${DatabaseConstants.TABLE_EXERCISEDAY_EXERCISEID} WHERE exda.${DatabaseConstants.TABLE_EXERCISEDAY_DAYID} = ?"
@@ -35,6 +36,6 @@ class SelectTransactions {
         const val SELECT_ALL_LENGTHTYPE = "SELECT * FROM ${DatabaseConstants.TABLE_LENGTHTYPE}"
         const val SELECT_LENGTHTYPE_BY_CHOOSED = "SELECT * FROM ${DatabaseConstants.TABLE_LENGTHTYPE} WHERE ${DatabaseConstants.TABLE_LENGTHTYPE_CHOOSED} = 1"
 
-        const val SELECT_SERIE_BY_USER_AND_EXERCISEDAYID = "SELECT * FROM ${DatabaseConstants.TABLE_SERIE} WHERE ${DatabaseConstants.TABLE_SERIE_EXERCISEDAYID} = ?"
+        const val SELECT_SERIE_BY_USER_AND_EXERCISEDAYID = "SELECT * FROM ${DatabaseConstants.TABLE_SERIE} WHERE ${DatabaseConstants.TABLE_SERIE_EXERCISEDAYID} = ? ORDER BY ${DatabaseConstants.TABLE_SERIE_WEEK} ASC"
     }
 }

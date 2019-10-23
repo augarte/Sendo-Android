@@ -10,8 +10,10 @@ import androidx.core.app.ActivityOptionsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import augarte.sendo.R
+import augarte.sendo.adapter.CreateWorkoutAdapter
 import augarte.sendo.adapter.WorkoutDayAdapter
 import augarte.sendo.dataModel.Workout
+import augarte.sendo.database.SelectTransactions
 import augarte.sendo.view.DatePicker
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -22,6 +24,7 @@ import kotlinx.android.synthetic.main.item_workout_card.*
 class WorkoutActivity : BaseActivity() {
 
     private lateinit var workout: Workout
+    private lateinit var workoutDayAdapter: WorkoutDayAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,8 +46,19 @@ class WorkoutActivity : BaseActivity() {
         Glide.with(card_image.context).load(workout.image).diskCacheStrategy(DiskCacheStrategy.AUTOMATIC).into(card_image)
         workout_card.isClickable = false
 
-        val workoutDayAdapter = WorkoutDayAdapter(workout.dayList)
-        workoutDayAdapter.setWeekNumber(1)
+        datePicker.setUp(workout.createDate!!)
+        datePicker.setListener(object: DatePicker.DatePickerListener{
+            override fun onDateWeekChanger(week: Int) {
+                workoutDayAdapter.setWeekNumber(week)
+            }
+        })
+
+        setAdapter()
+    }
+
+    private fun setAdapter(){
+        workoutDayAdapter = WorkoutDayAdapter(workout.dayList)
+        workoutDayAdapter.setWeekNumber(datePicker.getWeek())
         workoutDayAdapter.onItemClick = { pair ->
             val intent = Intent(this, WorkoutDayActivity::class.java)
             intent.putExtra("day", pair.first)
@@ -56,17 +70,17 @@ class WorkoutActivity : BaseActivity() {
                 startActivity(intent)
             }
         }
+
         day_list.apply {
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
             adapter = workoutDayAdapter
         }
+    }
 
-        datePicker.setUp(workout.createDate!!)
-        datePicker.setListener(object: DatePicker.DatePickerListener{
-            override fun onDateWeekChanger(week: Int) {
-                workoutDayAdapter.setWeekNumber(week)
-            }
-        })
+    override fun onRestart() {
+        super.onRestart()
+        workout = MainActivity.dbHandler.getWorkouts(SelectTransactions.SELECT_WORKOUT_BY_ID, arrayOf(workout.id.toString())).first()
+        setAdapter()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

@@ -381,7 +381,7 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
      /********** DAYS **********/
     /**************************/
 
-    private fun getDays(query: String, array: Array<String>?): ArrayList<Day> {
+    public fun getDays(query: String, array: Array<String>?): ArrayList<Day> {
         val db = this.writableDatabase
         val cursor : Cursor
         cursor = db.rawQuery(query, array)

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import augarte.sendo.R
 import augarte.sendo.activity.MainActivity
@@ -28,16 +29,19 @@ class AddProgressFragment(private val exerciseDay: ExerciseDay, private val week
         weightET.setText(if (exerciseDay.series.isNotEmpty()) exerciseDay.series.last().weight?.toStringFormat else "")
 
         insertButton.setOnClickListener {
-            for (i in 0 until serieET.text.toString().toInt()) {
-                val newSerie = Serie()
-                newSerie.exerciseDayId = exerciseDay.id
-                newSerie.repetitions = repET.text.toString().toInt()
-                newSerie.weight = weightET.text.toString().toDouble()
-                newSerie.week = week
-                exerciseDay.series.add(newSerie)
-                MainActivity.dbHandler.insertSerie(newSerie)
+            when {
+                repET.text.toString().trim().isEmpty() -> Toast.makeText(context, "You need to insert the number of repetitions", Toast.LENGTH_SHORT).show()
+                weightET.text.toString().trim().isEmpty() -> Toast.makeText(context, "You need to insert a weigh", Toast.LENGTH_SHORT).show()
+                else -> for (i in 0 until serieET.text.toString().toInt()) {
+                    val newSerie = Serie()
+                    newSerie.exerciseDayId = exerciseDay.id
+                    newSerie.repetitions = repET.text.toString().toInt()
+                    newSerie.weight = weightET.text.toString().toDouble()
+                    newSerie.week = week
+                    exerciseDay.series.add(newSerie)
+                    MainActivity.dbHandler.insertSerie(newSerie)
+                }
             }
-
             listener.onSerieAdded()
         }
     }
