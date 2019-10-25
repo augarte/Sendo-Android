@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="augarte.sendo">
-    <meta-data android:name="com.google.firebase.messaging.default_notification_icon" android:resource="@drawable/ic_sendo_icon_notification" />
-    <meta-data android:name="com.google.firebase.messaging.default_notification_color" android:resource="@color/colorPrimary" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <application
         android:allowBackup="true"
@@ -12,6 +10,8 @@
         android:supportsRtl="true"
         android:theme="@style/DarkTheme.NoActionBar"
         android:resizeableActivity="false">
+        <meta-data android:name="com.google.firebase.messaging.default_notification_icon" android:resource="@drawable/ic_sendo_icon_notification" />
+        <meta-data android:name="com.google.firebase.messaging.default_notification_color" android:resource="@color/colorPrimary" />
         <activity
             android:name=".activity.MainActivity"
             android:label="@string/sendo_app_name"
