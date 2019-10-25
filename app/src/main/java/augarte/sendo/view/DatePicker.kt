@@ -32,14 +32,20 @@ class DatePicker @JvmOverloads constructor(context: Context, attrs: AttributeSet
         }
 
         previous.setOnClickListener{
-            if (create.get(Calendar.WEEK_OF_YEAR) < c.get(Calendar.WEEK_OF_YEAR)) {
+            if (weekNumber > 1) {
                 c.add(Calendar.WEEK_OF_YEAR, -1)
+                year = c.get(Calendar.YEAR)
+                month = c.get(Calendar.MONTH) + 1
+                day = c.get(Calendar.DAY_OF_MONTH)
                 setDate()
             }
         }
 
         next.setOnClickListener{
             c.add(Calendar.WEEK_OF_YEAR, +1)
+            year = c.get(Calendar.YEAR)
+            month = c.get(Calendar.MONTH) + 1
+            day = c.get(Calendar.DAY_OF_MONTH)
             setDate()
         }
     }
@@ -60,12 +66,25 @@ class DatePicker @JvmOverloads constructor(context: Context, attrs: AttributeSet
     }
 
     private fun setDate(){
-        weekNumber = ((c.get(Calendar.WEEK_OF_YEAR) - create.get(Calendar.WEEK_OF_YEAR) + 1))
+        if (c.get(Calendar.YEAR) == create.get(Calendar.YEAR)) {
+            weekNumber = ((c.get(Calendar.WEEK_OF_YEAR) - create.get(Calendar.WEEK_OF_YEAR) + 1))
+        } else {
+            val calAux = Calendar.getInstance()
+            calAux.time = create.time
+            for (i in 0 until c.get(Calendar.YEAR)-create.get(Calendar.YEAR)) {
+                when {
+                    calAux.get(Calendar.YEAR) == create.get(Calendar.YEAR) -> weekNumber = calAux.getActualMaximum(Calendar.WEEK_OF_YEAR) - create.get(Calendar.WEEK_OF_YEAR)
+                    calAux.get(Calendar.YEAR) != c.get(Calendar.YEAR) -> weekNumber += calAux.getActualMaximum(Calendar.WEEK_OF_YEAR)
+                }
+                calAux.add(Calendar.YEAR, 1)
+            }
+            weekNumber += c.get(Calendar.WEEK_OF_YEAR) + 1
+        }
         listener?.onDateWeekChanger(weekNumber)
         val weekString = context.getString(R.string.sendo_week_num, weekNumber)
         date.text = weekString
-        if (create.get(Calendar.WEEK_OF_YEAR) < c.get(Calendar.WEEK_OF_YEAR)) previous.setImageDrawable(context.getDrawable(R.drawable.ic_arrow_left))
-        else if (create.get(Calendar.WEEK_OF_YEAR) == c.get(Calendar.WEEK_OF_YEAR)) previous.setImageDrawable(null)
+        if (weekNumber > 1) previous.setImageDrawable(context.getDrawable(R.drawable.ic_arrow_left))
+        else previous.setImageDrawable(null)
     }
 
     fun getWeek(): Int{
