@@ -4,7 +4,7 @@ class DatabaseConstants {
 
     companion object{
         const val DB_NAME = "Sendo"
-        const val DB_VERSION = 3
+        const val DB_VERSION = 4
 
         const val TABLE_EXERCISE = "exercise"
         const val TABLE_DAY = "day"
