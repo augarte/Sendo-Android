@@ -57,4 +57,12 @@
     <string name="sendo_snackbar_unarchived_exercise">%1$s desarchivado.</string>
     <string name="sendo_snackbar_undo">DESHACER</string>
     <string name="sendo_weight">Peso</string>
+    <string name="sendo_back">Atras</string>
+    <string name="sendo_dark_theme">Tema oscuro</string>
+    <string name="sendo_green_theme">Tema berde</string>
+    <string name="sendo_modify">Modificar</string>
+    <string name="sendo_modify_value">Modificar valor</string>
+    <string name="sendo_theme">Tema</string>
+    <string name="sendo_progress">Progreso</string>
+    <string name="sendo_open_source_licenses">"Licencias del código abierto "</string>
 </resources>

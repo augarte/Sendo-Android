@@ -57,4 +57,12 @@
     <string name="sendo_snackbar_unarchived_exercise">%1$s desartxibatua.</string>
     <string name="sendo_snackbar_undo">DESEGIN</string>
     <string name="sendo_weight">Pisua</string>
+    <string name="sendo_back">Atzera</string>
+    <string name="sendo_dark_theme">Tema iluna</string>
+    <string name="sendo_green_theme">Tema berdea</string>
+    <string name="sendo_modify">Aldatu</string>
+    <string name="sendo_modify_value">Balioa aldatu</string>
+    <string name="sendo_open_source_licenses">"Iturburu irekiko lizentziak "</string>
+    <string name="sendo_progress">Aurrerapena</string>
+    <string name="sendo_theme">Tema</string>
 </resources>
