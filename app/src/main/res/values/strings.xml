@@ -62,4 +62,10 @@
     <string name="sendo_date">Date</string>
     <string name="sendo_progress">Progress</string>
     <string name="sendo_back">Back</string>
+    <string name="sendo_theme">Theme</string>
+    <string name="sendo_green_theme">Green theme</string>
+    <string name="sendo_dark_theme">Dark theme</string>
+    <string name="sendo_open_source_licenses">Open-source licenses</string>
+    <string name="sendo_modify">Modify</string>
+    <string name="sendo_modify_value">Modify value</string>
 </resources>

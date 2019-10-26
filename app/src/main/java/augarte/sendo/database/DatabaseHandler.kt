@@ -74,6 +74,11 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
         return result
     }
 
+    fun removeFromTable(table: String, id: Int): Int {
+        val db = this.writableDatabase
+        return db.delete(table,"_id=?", arrayOf(id.toString()))
+    }
+
 
       /******************************/
      /********** WORKOUTS **********/
@@ -249,9 +254,13 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
     fun updateExerciseState(exercise: Exercise){
         val db = this.writableDatabase
         val values = ContentValues()
-        values.put(DatabaseConstants.TABLE_EXERCISE_STATE, exercise.state)
 
-        db.update(DatabaseConstants.TABLE_EXERCISE, values, "${DatabaseConstants.TABLE_EXERCISE_ID} = ${exercise.id}", null)
+        val unixTime = Utils.getUnixSeconds()
+
+        values.put(DatabaseConstants.TABLE_EXERCISE_STATE, exercise.state)
+        values.put(DatabaseConstants.TABLE_EXERCISE_MODIFYDATE, unixTime)
+
+        db.update(DatabaseConstants.TABLE_EXERCISE, values, "${DatabaseConstants.TABLE_EXERCISE_ID}=?", arrayOf(exercise.id.toString()))
         db.close()
     }
 
@@ -319,6 +328,18 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
 
         db.close()
         return id
+    }
+
+    fun updateMeasurementValue(measurement: Measurement): Int {
+        val db = this.writableDatabase
+        val values = ContentValues()
+
+        val unixTime = Utils.getUnixSeconds()
+
+        values.put(DatabaseConstants.TABLE_MEASUREMENT_VALUE, measurement.value)
+        values.put(DatabaseConstants.TABLE_MEASUREMENT_MODIFYDATE, unixTime)
+
+        return db.update(DatabaseConstants.TABLE_MEASUREMENT, values,"${DatabaseConstants.TABLE_MEASUREMENT_ID}=?", arrayOf(measurement.id.toString()))
     }
 
 
@@ -603,7 +624,10 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
         val db = this.writableDatabase
         val values = ContentValues()
 
+        val unixTime = Utils.getUnixSeconds()
+
         values.put(DatabaseConstants.TABLE_WEIGHTTYPE_CHOOSED, if (weightType.choosed) 0 else 1)
+        values.put(DatabaseConstants.TABLE_WEIGHTTYPE_MODIFYDATE, unixTime)
 
         var id : Int = -1
         try {
@@ -679,7 +703,10 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
         val db = this.writableDatabase
         val values = ContentValues()
 
+        val unixTime = Utils.getUnixSeconds()
+
         values.put(DatabaseConstants.TABLE_LENGTHTYPE_CHOOSED, if (lengthType.choosed) 0 else 1)
+        values.put(DatabaseConstants.TABLE_LENGTHTYPE_MODIFYDATE, unixTime)
 
         var id : Int = -1
         try {

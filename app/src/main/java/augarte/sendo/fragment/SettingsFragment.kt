@@ -4,9 +4,6 @@ import android.app.AlertDialog
 import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import augarte.sendo.R
 import android.content.Intent
 import android.net.Uri
@@ -14,12 +11,13 @@ import augarte.sendo.utils.Constants
 import kotlinx.android.synthetic.main.fragment_settings.*
 import android.content.pm.PackageManager
 import android.os.Handler
+import android.view.*
 import augarte.sendo.activity.MainActivity
 import augarte.sendo.dataModel.LengthType
 import augarte.sendo.dataModel.WeightType
 import augarte.sendo.database.SelectTransactions
 import augarte.sendo.activity.WorkoutDayActivity
-
+import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 
 class SettingsFragment : Fragment() {
 
@@ -95,6 +93,27 @@ class SettingsFragment : Fragment() {
             val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(Constants.GITHUB_LINK))
             startActivity(browserIntent)
 
+        }
+
+        setHasOptionsMenu(true)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        activity?.menuInflater?.inflate(R.menu.option_menu, menu)
+        menu.findItem(R.id.licences)?.isVisible = true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.licences -> {
+                val intent = Intent(context, OssLicensesMenuActivity::class.java)
+                val title = getString(R.string.sendo_open_source_licenses)
+                intent.putExtra("title", title)
+                startActivity(intent)
+                true
+            }
+            else -> false
         }
     }
 }

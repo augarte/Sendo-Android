@@ -56,8 +56,12 @@ class HomeFragment : Fragment(){
             showTapTarget()
         }
 
-        if (workoutList.size>=3) speedDial.visibility = View.GONE
-        speedDial.mainFabOpenedBackgroundColor = Utils.getColorFromAttr(context, R.attr.fab)
+        if (workoutList.size>=3) fab.visibility = View.GONE
+        fab.setOnClickListener {
+            val intent = Intent(activity, CreateWorkoutActivity::class.java)
+            startActivity(intent)
+        }
+/*        speedDial.mainFabOpenedBackgroundColor = Utils.getColorFromAttr(context, R.attr.fab)
         speedDial.mainFabClosedBackgroundColor = Utils.getColorFromAttr(context, R.attr.fab)
         speedDial.addActionItem(
             SpeedDialActionItem.Builder(R.id.fab_new, R.drawable.ic_dumbbell_add)
@@ -102,7 +106,7 @@ class HomeFragment : Fragment(){
 
             override fun onToggleChanged(isOpen: Boolean) {
             }
-        })
+        })*/
 
         setHasOptionsMenu(true)
     }
@@ -117,9 +121,10 @@ class HomeFragment : Fragment(){
         val listener = object : TapTargetView.Listener() {
             override fun onTargetClick(view: TapTargetView) {
                 super.onTargetClick(view)
-                speedDial.open()
+                //speedDial.open()
+                fab.performClick()
             }
         }
-       CustomTapTargetView.showCustomTapTarget(requireActivity(), speedDial, getString(R.string.sendo_taptarget_workout_title), getString(R.string.sendo_taptarget_workout_description), listener)
+       CustomTapTargetView.showCustomTapTarget(requireActivity(), fab, getString(R.string.sendo_taptarget_workout_title), getString(R.string.sendo_taptarget_workout_description), listener)
     }
 }

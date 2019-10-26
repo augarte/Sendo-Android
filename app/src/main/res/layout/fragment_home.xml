@@ -47,12 +47,21 @@
         android:layout_height="match_parent"
         android:background="@color/transparent"/>
 
-    <com.leinardi.android.speeddial.SpeedDialView
+    <!--<com.leinardi.android.speeddial.SpeedDialView
         android:id="@+id/speedDial"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         app:sdMainFabClosedSrc="@drawable/ic_add"
-        app:sdOverlayLayout="@id/overlay"/>
+        app:sdOverlayLayout="@id/overlay"/>-->
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_add"
+        app:backgroundTint="@color/colorAccent"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

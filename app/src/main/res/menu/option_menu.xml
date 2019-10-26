@@ -25,11 +25,15 @@
                 android:title="@string/sendo_archived"/>
         </menu>
     </item>
-    <item
-        android:id="@+id/delete"
+
+    <item android:id="@+id/delete"
         android:title="@string/sendo_delete"
         android:icon="@drawable/ic_delete"
         android:visible="false"
-        app:showAsAction="ifRoom">
-    </item>
+        app:showAsAction="ifRoom"/>
+
+    <item android:id="@+id/licences"
+        android:title="@string/sendo_open_source_licenses"
+        android:visible="false"
+        app:showAsAction="never"/>
 </menu>

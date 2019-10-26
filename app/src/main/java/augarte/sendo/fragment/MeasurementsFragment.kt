@@ -43,7 +43,7 @@ class MeasurementsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        measurementTypeList = MainActivity.dbHandler.getMeasureType(SelectTransactions.SELECT_ALL_MEASURETYPE, null)!!
+        measurementTypeList = MainActivity.dbHandler.getMeasureType(SelectTransactions.SELECT_ALL_MEASURETYPE, null)
         val items1 = Array(measurementTypeList.size) { i -> measurementTypeList[i].name!!}
         measureType.text = items1[selectedMeasureType]
         measureType.setOnClickListener {
@@ -77,6 +77,7 @@ class MeasurementsFragment : Fragment() {
         if (lastMeasurementArray.size>0) lastMeasurement = lastMeasurementArray.first()
         measurements.addAll(getMeasurementsByDateType(measurementTypeList[selectedMeasureType], dateTypeList[selectedDateType]))
         measurementAdapter = MeasurementAdapter(measurements)
+        measurementAdapter.onReload = { refreshData() }
         measureValuesRV.apply {
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, true)
             adapter = measurementAdapter
@@ -179,6 +180,11 @@ class MeasurementsFragment : Fragment() {
                 measureValuesRV.visibility = View.VISIBLE
             }
         }
+    }
+
+    interface MeasureEditListener {
+        fun onDelete(measurement: Measurement)
+        fun onModify(measurement: Measurement)
     }
 
     interface OnDialogClickListener {

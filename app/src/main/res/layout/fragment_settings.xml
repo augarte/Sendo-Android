@@ -11,12 +11,13 @@
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/main_settings"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="@dimen/margin_medium"
         android:orientation="vertical"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/button_layout">
+        app:layout_constraintBottom_toTopOf="@id/secondary_settings">
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline"
@@ -157,33 +158,53 @@
                 android:tint="?attr/primaryText"/>
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/secondary_settings"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/button_layout"
+        app:layout_constraintTop_toBottomOf="@id/main_settings"
+        tools:layout_editor_absoluteX="16dp">
 
         <TextView
-            android:id="@+id/themeTV"
+            android:id="@+id/darkThemeTV"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
             android:layout_marginTop="@dimen/margin_small_plus"
+            android:gravity="center_vertical"
             android:padding="@dimen/padding_medium_small"
-            android:text="Theme"
+            android:text="@string/sendo_dark_theme"
             android:textColor="?attr/primaryText"
             android:textSize="@dimen/text_large"
             android:textStyle="bold"
-            app:layout_constraintTop_toBottomOf="@id/lengthTV"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/guideline"/>
-
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <Switch
             android:id="@+id/themeSwitch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="@id/themeTV"
-            app:layout_constraintBottom_toBottomOf="@id/themeTV"
-            app:layout_constraintStart_toStartOf="@id/length_type_choose"
-            app:layout_constraintEnd_toEndOf="@id/length_type_choose"/>
+            app:layout_constraintTop_toTopOf="@id/darkThemeTV"
+            app:layout_constraintBottom_toBottomOf="@id/darkThemeTV"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
+        <TextView
+            android:id="@+id/greenThemeTV"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_small_plus"
+            android:gravity="center_vertical"
+            android:padding="@dimen/padding_medium_small"
+            android:text="@string/sendo_green_theme"
+            android:textColor="?attr/primaryText"
+            android:textSize="@dimen/text_large"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
