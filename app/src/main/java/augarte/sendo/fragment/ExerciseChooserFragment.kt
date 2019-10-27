@@ -3,7 +3,9 @@ package augarte.sendo.fragment
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -11,9 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import augarte.sendo.R
 import augarte.sendo.activity.MainActivity
 import augarte.sendo.adapter.CreateWorkoutAdapter
-import augarte.sendo.adapter.ExerciseArchivedAdapter
 import augarte.sendo.adapter.ExerciseChooseAdapter
-import augarte.sendo.adapter.ExerciseListAdapter
 import augarte.sendo.dataModel.Exercise
 import augarte.sendo.database.SelectTransactions
 import kotlinx.android.synthetic.main.bottomsheet_choose_exercise.*
