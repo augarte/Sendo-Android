@@ -13,6 +13,7 @@ import augarte.sendo.R
 import augarte.sendo.dataModel.Exercise
 import augarte.sendo.dataModel.ExerciseDay
 import augarte.sendo.fragment.AddExerciseToWorkoutDialogFragment
+import augarte.sendo.utils.Utils
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import kotlinx.android.synthetic.main.item_exercise.view.exercise_name
@@ -42,15 +43,14 @@ class ExerciseChooseAdapter(private var items: ArrayList<Exercise>, private val 
             if (item.selected) {
                 item.selected = false
                 holder.selected.visibility = View.GONE
-                holder.itemView.background = ContextCompat.getDrawable(context, R.color.colorPrimaryLight)
+                holder.itemView.setBackgroundColor(Utils.getColorFromAttr(context, R.attr.colorPrimaryLight))
                 listener.onDeselected(item)
             } else {
                 val listener = object: ExerciseAddDialogListener {
                     override fun onExerciseAdded(exerciseDay: ExerciseDay) {
                         item.selected = true
                         holder.selected.visibility = View.VISIBLE
-                        holder.itemView.background = ContextCompat.getDrawable(context, R.color.colorPrimary)
-
+                        holder.itemView.setBackgroundColor(Utils.getColorFromAttr(context, R.attr.colorPrimary))
                         listener.onSelect(exerciseDay)
                     }
                 }

@@ -17,7 +17,7 @@
         android:text="Day Tilte"
         android:textStyle="bold"
         android:textSize="@dimen/text_xlarge"
-        android:textColor="?attr/secondaryText"/>
+        android:textColor="?attr/primaryText"/>
 
     <androidx.appcompat.widget.SearchView
         android:id="@+id/search_view"

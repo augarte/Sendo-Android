@@ -34,7 +34,7 @@
             android:layout_margin="@dimen/padding_medium"
             android:padding="@dimen/padding_medium_small"
             android:src="@drawable/ic_close"
-            android:tint="?attr/colorPrimaryDark"
+            android:tint="?attr/primaryText"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"

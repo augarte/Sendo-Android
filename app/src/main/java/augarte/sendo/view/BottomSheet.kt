@@ -1,6 +1,7 @@
 package augarte.sendo.view
 
 import android.content.Context
+import android.content.res.ColorStateList
 import android.util.AttributeSet
 import android.util.Log
 import android.view.LayoutInflater
@@ -13,6 +14,7 @@ import kotlinx.android.synthetic.main.item_bottomsheet.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import android.widget.ScrollView
+import androidx.core.widget.ImageViewCompat
 
 class BottomSheet @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : CoordinatorLayout(context, attrs, defStyleAttr){
 
@@ -54,6 +56,10 @@ class BottomSheet @JvmOverloads constructor(context: Context, attrs: AttributeSe
         close.setOnClickListener{
             setState(BottomSheetBehavior.STATE_HIDDEN)
         }
+    }
+
+    fun setCloseColor(color: Int){
+        ImageViewCompat.setImageTintList(close, ColorStateList.valueOf(color))
     }
 
     private fun setBottomSheetListener(listener: BottomSheetBehavior.BottomSheetCallback){

@@ -37,7 +37,7 @@
         android:padding="@dimen/padding_small"
         android:layout_gravity="center_vertical"
         android:text="Exercise name"
-        android:textColor="?attr/secondaryText"
+        android:textColor="?attr/primaryText"
         android:textStyle="bold"/>
 
 </LinearLayout>

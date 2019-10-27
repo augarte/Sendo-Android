@@ -37,7 +37,7 @@
         android:text="Exercise name"
         android:textSize="@dimen/text_medium"
         android:textStyle="bold"
-        android:textColor="?attr/primaryText"
+        android:textColor="@color/white"
         app:layout_constraintTop_toTopOf="@id/imageCard"
         app:layout_constraintStart_toEndOf="@id/imageCard"
         app:layout_constraintEnd_toStartOf="@id/info_icon" />
@@ -49,12 +49,12 @@
         android:padding="2.5dp"
         style="@style/ThemeOverlay.AppCompat.Dark"
         android:src="@drawable/ic_info"
-        android:tint="?attr/primaryText"
+        android:tint="@color/white"
         android:background="?attr/selectableItemBackgroundBorderless"
         app:layout_constraintTop_toTopOf="@id/exerciseTitle"
         app:layout_constraintEnd_toEndOf="parent"/>
 
-    <TextView
+    <!--<TextView
         android:id="@+id/exerciseInfo"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -62,10 +62,10 @@
         android:layout_marginStart="@dimen/margin_small_medium"
         android:text="info"
         android:textSize="@dimen/text_medium"
-        android:textColor="?attr/primaryText"
+        android:textColor="@color/white"
         app:layout_constraintTop_toBottomOf="@id/exerciseTitle"
         app:layout_constraintBottom_toBottomOf="@id/imageCard"
         app:layout_constraintStart_toEndOf="@id/imageCard"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

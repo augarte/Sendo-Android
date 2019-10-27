@@ -144,7 +144,7 @@
         android:layout_marginBottom="@dimen/margin_medium"
         android:layout_gravity="center_horizontal|bottom"
         android:text="@string/sendo_create"
-        android:textColor="?attr/secondaryText"
+        android:textColor="?attr/darkText"
         android:textStyle="bold"
         android:backgroundTint="?attr/colorAccentDark"
         android:textAllCaps="true"

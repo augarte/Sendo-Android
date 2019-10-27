@@ -62,6 +62,7 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
         android:src="@drawable/ic_add"
-        app:backgroundTint="@color/colorAccent"/>
+        android:contentDescription="@string/sendo_taptarget_workout_title"
+        app:backgroundTint="?attr/fab"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

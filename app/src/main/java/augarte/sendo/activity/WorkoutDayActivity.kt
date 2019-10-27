@@ -13,6 +13,7 @@ import augarte.sendo.fragment.AddProgressFragment
 import augarte.sendo.fragment.DayPagerExercisesFragment
 import augarte.sendo.fragment.DayPagerProgressFragment
 import augarte.sendo.fragment.DayPagerTimerFragment
+import augarte.sendo.utils.Utils
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kotlinx.android.synthetic.main.activity_add_progress.*
@@ -43,6 +44,7 @@ class WorkoutDayActivity: BaseActivity() {
 
         val pageAdapter = WorkoutPagerAdapter(supportFragmentManager)
 
+        bottomSheet.setCloseColor(Utils.getColorFromAttr(this, R.attr.darkText))
         val listenerSerie = object : OnAddProgress{
             override fun onSerieAdded() {
                 bottomSheet.setState(BottomSheetBehavior.STATE_HIDDEN)

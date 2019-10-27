@@ -12,6 +12,7 @@
 
         <item name="primaryText">@color/white</item>
         <item name="secondaryText">@color/colorPrimaryDark</item>
+        <item name="darkText">@color/colorPrimaryDark</item>
         <item name="placeHolderText">@color/colorPrimaryDark</item>
 
         <item name="cardTitle">@color/colorPrimaryDark</item>
@@ -60,6 +61,7 @@
 
         <item name="primaryText">@color/colorPrimaryDark_green</item>
         <item name="secondaryText">@color/colorPrimaryLight_green</item>
+        <item name="darkText">@color/colorPrimaryDark_green</item>
         <item name="placeHolderText">@color/colorPrimaryDark_green</item>
 
         <item name="cardTitle">@color/black</item>
