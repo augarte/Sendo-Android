@@ -74,7 +74,7 @@ class MeasurementsFragment : Fragment() {
         }
 
         val lastMeasurementArray = MainActivity.dbHandler.getMeasurement(SelectTransactions.SELECT_MEASUREMENT_BY_TYPE_LAST_DATE, arrayOf(measurementTypeList[selectedMeasureType].id.toString()))
-        if (lastMeasurementArray.size>0) lastMeasurement = lastMeasurementArray.first()
+        if (lastMeasurementArray.isNotEmpty()) lastMeasurement = lastMeasurementArray.first()
         measurements.addAll(getMeasurementsByDateType(measurementTypeList[selectedMeasureType], dateTypeList[selectedDateType]))
         measurementAdapter = MeasurementAdapter(measurements)
         measurementAdapter.onReload = { refreshData() }

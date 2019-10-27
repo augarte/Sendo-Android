@@ -4,6 +4,8 @@ class SelectTransactions {
 
     companion object{
         const val SELECT_ALL_WORKOUT_ORDER_NAME = "SELECT  * FROM ${DatabaseConstants.TABLE_WORKOUT} ORDER BY ${DatabaseConstants.TABLE_WORKOUT_LASTOPEN} ASC"
+        const val SELECT_ALL_WORKOUT_ORDER_NAME_NOIMAGE = "SELECT _id, name, description, lastOpen, createdBy, createDate, modifyDate FROM ${DatabaseConstants.TABLE_WORKOUT} ORDER BY ${DatabaseConstants.TABLE_WORKOUT_LASTOPEN} ASC"
+
         const val SELECT_WORKOUTIMAGE_BY_ID = "SELECT ${DatabaseConstants.TABLE_WORKOUT_IMAGE} FROM ${DatabaseConstants.TABLE_WORKOUT} WHERE ${DatabaseConstants.TABLE_WORKOUT_ID} = ?"
         const val SELECT_WORKOUT_BY_ID = "SELECT * FROM ${DatabaseConstants.TABLE_WORKOUT} WHERE ${DatabaseConstants.TABLE_WORKOUT_ID} = ?"
 

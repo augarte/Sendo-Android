@@ -5,6 +5,7 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.content.ContentValues
 import android.database.Cursor
+import android.database.sqlite.SQLiteBlobTooBigException
 import android.util.Log
 import android.graphics.BitmapFactory
 import android.graphics.Bitmap
@@ -90,11 +91,53 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
         val db = this.writableDatabase
         val cursor = db.rawQuery(query, array)
 
+        try{
+            if (cursor.moveToFirst()) {
+                do {
+                    val workout = Workout()
+                    val blob = cursor.getBlob(cursor.getColumnIndex(DatabaseConstants.TABLE_WORKOUT_IMAGE))
+                    val image: Bitmap? = if (blob!= null) BitmapFactory.decodeByteArray(blob, 0, blob.size) else null
+                    val lastOpenUnixSeconds =  cursor.getLong(cursor.getColumnIndex(DatabaseConstants.TABLE_WORKOUT_LASTOPEN))
+                    val createDateUnixSeconds = cursor.getLong(cursor.getColumnIndex(DatabaseConstants.TABLE_WORKOUT_CREATEDATE))
+                    val modifyDateUnixSeconds = cursor.getLong(cursor.getColumnIndex(DatabaseConstants.TABLE_WORKOUT_MODIFYDATE))
+
+                    workout.id = cursor.getInt(cursor.getColumnIndex(DatabaseConstants.TABLE_WORKOUT_ID))
+                    workout.name = cursor.getString(cursor.getColumnIndex(DatabaseConstants.TABLE_WORKOUT_NAME))
+                    workout.dayList = getDays(SelectTransactions.SELECT_DAYS_BY_WORKOUT_ID, arrayOf(workout.id.toString()))
+                    workout.image = image
+                    workout.description = cursor.getString(cursor.getColumnIndex(DatabaseConstants.TABLE_WORKOUT_DESCRIPTION))
+                    workout.createdBy = cursor.getString(cursor.getColumnIndex(DatabaseConstants.TABLE_WORKOUT_CREATEDBY))
+                    workout.lastOpen = Date((lastOpenUnixSeconds * 1000))
+                    workout.createDate = Date((createDateUnixSeconds * 1000))
+                    workout.modifyDate = Date((modifyDateUnixSeconds * 1000))
+
+                    //workout.dayList = getDaysByWorkoutId(id)
+
+                    workouts.add(workout)
+                } while (cursor.moveToNext())
+            }
+
+            cursor.close()
+            db.close()
+        } catch (e: SQLiteBlobTooBigException){
+            cursor.close()
+            db.close()
+
+            return getWorkoutsNoImage(SelectTransactions.SELECT_ALL_WORKOUT_ORDER_NAME_NOIMAGE, null)
+        }
+
+        return workouts
+    }
+
+    private fun getWorkoutsNoImage(query: String, array: Array<String>?): ArrayList<Workout> {
+        val workouts = ArrayList<Workout>()
+
+        val db = this.writableDatabase
+        val cursor = db.rawQuery(query, array)
+
         if (cursor.moveToFirst()) {
             do {
                 val workout = Workout()
-                val blob = cursor.getBlob(cursor.getColumnIndex(DatabaseConstants.TABLE_WORKOUT_IMAGE))
-                val image: Bitmap? = if (blob!= null) BitmapFactory.decodeByteArray(blob, 0, blob.size) else null
                 val lastOpenUnixSeconds =  cursor.getLong(cursor.getColumnIndex(DatabaseConstants.TABLE_WORKOUT_LASTOPEN))
                 val createDateUnixSeconds = cursor.getLong(cursor.getColumnIndex(DatabaseConstants.TABLE_WORKOUT_CREATEDATE))
                 val modifyDateUnixSeconds = cursor.getLong(cursor.getColumnIndex(DatabaseConstants.TABLE_WORKOUT_MODIFYDATE))
@@ -102,7 +145,6 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
                 workout.id = cursor.getInt(cursor.getColumnIndex(DatabaseConstants.TABLE_WORKOUT_ID))
                 workout.name = cursor.getString(cursor.getColumnIndex(DatabaseConstants.TABLE_WORKOUT_NAME))
                 workout.dayList = getDays(SelectTransactions.SELECT_DAYS_BY_WORKOUT_ID, arrayOf(workout.id.toString()))
-                workout.image = image
                 workout.description = cursor.getString(cursor.getColumnIndex(DatabaseConstants.TABLE_WORKOUT_DESCRIPTION))
                 workout.createdBy = cursor.getString(cursor.getColumnIndex(DatabaseConstants.TABLE_WORKOUT_CREATEDBY))
                 workout.lastOpen = Date((lastOpenUnixSeconds * 1000))
@@ -127,15 +169,19 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
         val db = this.writableDatabase
         val cursor = db.rawQuery(SelectTransactions.SELECT_WORKOUTIMAGE_BY_ID, arrayOf(workoutId.toString()))
 
-        if (cursor.moveToFirst()) {
-            do {
-                val blob = cursor.getBlob(cursor.getColumnIndex(DatabaseConstants.TABLE_WORKOUT_IMAGE))
-                image = if (blob!= null) BitmapFactory.decodeByteArray(blob, 0, blob.size) else null
-            } while (cursor.moveToNext())
-        }
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    val blob = cursor.getBlob(cursor.getColumnIndex(DatabaseConstants.TABLE_WORKOUT_IMAGE))
+                    image = if (blob != null) BitmapFactory.decodeByteArray(blob, 0, blob.size) else null
+                } while (cursor.moveToNext())
+            }
 
-        cursor.close()
-        db.close()
+            cursor.close()
+            db.close()
+        } catch (e: SQLiteBlobTooBigException) {
+            return null
+        }
 
         return image
     }

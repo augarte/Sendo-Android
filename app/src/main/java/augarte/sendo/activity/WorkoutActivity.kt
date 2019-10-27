@@ -79,7 +79,9 @@ class WorkoutActivity : BaseActivity() {
 
     override fun onRestart() {
         super.onRestart()
-        workout = MainActivity.dbHandler.getWorkouts(SelectTransactions.SELECT_WORKOUT_BY_ID, arrayOf(workout.id.toString())).first()
+        val workoutList = MainActivity.dbHandler.getWorkouts(SelectTransactions.SELECT_WORKOUT_BY_ID, arrayOf(workout.id.toString()))
+        if(workoutList.isNotEmpty()) workout =  workoutList.first()
+        else onBackPressed()
         setAdapter()
     }
 
