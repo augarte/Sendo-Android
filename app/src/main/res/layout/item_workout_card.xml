@@ -17,6 +17,7 @@
         android:foreground="?attr/selectableItemBackgroundBorderless"
         android:clickable="true"
         android:focusable="true"
+        app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="@dimen/corner_large"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"

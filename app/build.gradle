@@ -13,8 +13,8 @@ android {
         applicationId "augarte.sendo"
         minSdkVersion 21
         targetSdkVersion 28
-        versionCode 7
-        versionName "0.3.3 Beta"
+        versionCode 8
+        versionName "0.3.4 Beta"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     flavorDimensions "default"
