@@ -17,6 +17,7 @@ import augarte.sendo.dataModel.LengthType
 import augarte.sendo.dataModel.WeightType
 import augarte.sendo.database.SelectTransactions
 import augarte.sendo.activity.WorkoutDayActivity
+import augarte.sendo.dataModel.WorkloadType
 import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 
 class SettingsFragment : Fragment() {
@@ -27,6 +28,8 @@ class SettingsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val sharedPreferences = activity?.getSharedPreferences(Constants.SHARED_PREFERENCES, Context.MODE_PRIVATE)
 
         try {
             val pInfo = context!!.packageManager.getPackageInfo(context!!.packageName, 0)
@@ -42,8 +45,25 @@ class SettingsFragment : Fragment() {
             e.printStackTrace()
         }
 
+        val list0: ArrayList<WorkloadType> = MainActivity.dbHandler.getWorkloadType(SelectTransactions.SELECT_ALL_WORKLOADTYPE, null)!!
+        var selectedWorkloadtIndex = sharedPreferences?.getInt(Constants.SHARED_UNITS_WORKLOAD, 0) ?: 0
+        list0.forEach { x -> if (x.choosed) selectedWorkloadtIndex = list0.indexOf(x) }
+        val items0 = Array(list0.size) { i -> list0[i].code }
+        workload_type_chooseTV.text = items0[selectedWorkloadtIndex]
+        workload_type_choose.setOnClickListener {
+            AlertDialog.Builder(context)
+                    .setTitle(getString(R.string.sendo_workload))
+                    .setSingleChoiceItems(items0, selectedWorkloadtIndex) { dialog, item ->
+                        selectedWorkloadtIndex = item
+                        MainActivity.dbHandler.updateWorkloadTypeChoosed(list0[selectedWorkloadtIndex])
+                        workload_type_chooseTV.text = items0[selectedWorkloadtIndex]
+                        Handler().postDelayed({ dialog.dismiss() }, 500)
+                    }
+                    .show()
+        }
+
         val list1: ArrayList<WeightType> = MainActivity.dbHandler.getWeightType(SelectTransactions.SELECT_ALL_WEIGHTTYPE, null)!!
-        var selectedWeightIndex = 0
+        var selectedWeightIndex = sharedPreferences?.getInt(Constants.SHARED_UNITS_WEIGHT, 0) ?: 0
         list1.forEach { x -> if (x.choosed) selectedWeightIndex = list1.indexOf(x) }
         val items1 = Array(list1.size) { i -> list1[i].code }
         weight_type_chooseTV.text = items1[selectedWeightIndex]
@@ -60,7 +80,7 @@ class SettingsFragment : Fragment() {
         }
 
         val list2: ArrayList<LengthType> = MainActivity.dbHandler.getLengthType(SelectTransactions.SELECT_ALL_LENGTHTYPE, null)!!
-        var selectedLengthIndex = 0
+        var selectedLengthIndex = sharedPreferences?.getInt(Constants.SHARED_UNITS_LENGTH, 0) ?: 0
         list2.forEach { x -> if (x.choosed) selectedLengthIndex = list2.indexOf(x) }
         val items2 = Array(list2.size) { i -> list2[i].code }
         length_type_chooseTV.text = items2[selectedLengthIndex]
@@ -76,8 +96,6 @@ class SettingsFragment : Fragment() {
                     .show()
         }
 
-
-        val sharedPreferences = activity?.getSharedPreferences(Constants.SHARED_PREFERENCES, Context.MODE_PRIVATE)
         var themeId : Int = sharedPreferences?.getInt(Constants.SHARED_THEME, R.style.DarkTheme_NoActionBar) ?: 0
         if (themeId == R.style.GreenTheme_NoActionBar) themeSwitch.isChecked = true
         themeSwitch.setOnCheckedChangeListener { _, isChecked ->

@@ -69,4 +69,5 @@
     <string name="sendo_modify">Modify</string>
     <string name="sendo_modify_value">Modify value</string>
     <string name="sendo_delete_measurement">Delete measurement</string>
+    <string name="sendo_workload">Work load</string>
 </resources>

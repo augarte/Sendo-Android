@@ -1,0 +1,7 @@
+UPDATE lengthType SET name = 'Centimeter', code = 'CM' WHERE name = 'CM';
+UPDATE lengthType SET name = 'Inch', code = 'INCH' WHERE name = 'INCH';
+UPDATE lengthType SET name = 'Metre', code = 'M' WHERE name = 'MTR';
+UPDATE lengthType SET name = 'Foot', code = 'FT' WHERE name = 'FoT';
+UPDATE workloadType SET name = 'Maximum repetition', code = 'RM' WHERE name = 'RM';
+UPDATE workloadType SET name = 'Reps in reserve', code = 'RIR' WHERE name = 'RIR';
+UPDATE workloadType SET name = 'Total work', code = 'TW' WHERE name = 'TW';

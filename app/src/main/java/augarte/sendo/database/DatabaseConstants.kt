@@ -4,7 +4,11 @@ class DatabaseConstants {
 
     companion object{
         const val DB_NAME = "Sendo"
-        const val DB_VERSION = 4
+        const val DB_VERSION = 6
+
+        const val DB_INITIAL_FILE = "initial_data.sqlite"
+        const val DB_UPDATE_5_FILE = "v5.sqlite"
+        const val DB_UPDATE_6_FILE = "v6.sqlite"
 
         const val TABLE_EXERCISE = "exercise"
         const val TABLE_DAY = "day"
@@ -17,6 +21,7 @@ class DatabaseConstants {
         const val TABLE_EXERCISETYPE = "exerciseType"
         const val TABLE_WEIGHTTYPE = "weightType"
         const val TABLE_LENGTHTYPE = "lengthType"
+        const val TABLE_WORKLOADTYPE = "workloadType"
 
         const val TABLE_EXERCISE_ID = "_id"
         const val TABLE_EXERCISE_NAME = "name"
@@ -101,6 +106,13 @@ class DatabaseConstants {
         const val TABLE_LENGTHTYPE_CHOOSED = "choosed"
         const val TABLE_LENGTHTYPE_CREATEDATE = "createDate"
         const val TABLE_LENGTHTYPE_MODIFYDATE = "modifydate"
+
+        const val TABLE_WORKLOADTYPE_ID = "_id"
+        const val TABLE_WORKLOADTYPE_NAME = "name"
+        const val TABLE_WORKLOADTYPE_CODE = "code"
+        const val TABLE_WORKLOADTYPE_CHOOSED = "choosed"
+        const val TABLE_WORKLOADTYPE_CREATEDATE = "createDate"
+        const val TABLE_WORKLOADTYPE_MODIFYDATE = "modifydate"
 
         const val STATE_DELETED = 0
         const val STATE_ACTIVE = 1

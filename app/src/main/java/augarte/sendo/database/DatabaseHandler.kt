@@ -11,6 +11,7 @@ import android.graphics.BitmapFactory
 import android.graphics.Bitmap
 import augarte.sendo.activity.MainActivity
 import augarte.sendo.dataModel.*
+import augarte.sendo.utils.Constants
 import augarte.sendo.utils.Utils
 import kotlin.collections.ArrayList
 import java.util.*
@@ -28,6 +29,7 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
         db?.execSQL(CreateTableTransactions.CREATE_TABLE_EXERCISETYPE)
         db?.execSQL(CreateTableTransactions.CREATE_TABLE_WEIGHTYPE)
         db?.execSQL(CreateTableTransactions.CREATE_TABLE_LENGTHTYPE)
+        db?.execSQL(CreateTableTransactions.CREATE_TABLE_WORKLOADTYPE)
 
         db?.execSQL(CreateTableTransactions.CREATE_TABLE_WORKOUT)
         db?.execSQL(CreateTableTransactions.CREATE_TABLE_DAY)
@@ -36,10 +38,23 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
         db?.execSQL(CreateTableTransactions.CREATE_TABLE_SERIE)
         db?.execSQL(CreateTableTransactions.CREATE_TABLE_MEASUREMENT)
 
-        insertFromFile(db)
+        val sharedPreferences = mContext.getSharedPreferences(Constants.SHARED_PREFERENCES, Context.MODE_PRIVATE)
+        sharedPreferences.edit().putInt(Constants.SHARED_UNITS_LENGTH, 0).apply()
+        sharedPreferences.edit().putInt(Constants.SHARED_UNITS_WEIGHT, 0).apply()
+        sharedPreferences.edit().putInt(Constants.SHARED_UNITS_WORKLOAD, 0).apply()
+
+        insertFromFile(db, DatabaseConstants.DB_INITIAL_FILE)
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
+        if (oldVersion < 5) {
+            db?.execSQL(CreateTableTransactions.CREATE_TABLE_WORKLOADTYPE)
+            insertFromFile(db, DatabaseConstants.DB_UPDATE_5_FILE)
+        }
+
+        if (oldVersion < 6) {
+            insertFromFile(db, DatabaseConstants.DB_UPDATE_6_FILE)
+        }
     }
 
     fun deleteAllTables() {
@@ -50,6 +65,7 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
         db.execSQL("DROP TABLE IF EXISTS " + DatabaseConstants.TABLE_EXERCISETYPE)
         db.execSQL("DROP TABLE IF EXISTS " + DatabaseConstants.TABLE_WEIGHTTYPE)
         db.execSQL("DROP TABLE IF EXISTS " + DatabaseConstants.TABLE_LENGTHTYPE)
+        db.execSQL("DROP TABLE IF EXISTS " + DatabaseConstants.TABLE_WORKLOADTYPE)
 
         db.execSQL("DROP TABLE IF EXISTS " + DatabaseConstants.TABLE_WORKOUT)
         db.execSQL("DROP TABLE IF EXISTS " + DatabaseConstants.TABLE_DAY)
@@ -60,9 +76,9 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
         onCreate(db)
     }
 
-    private fun insertFromFile(db: SQLiteDatabase?): Int {
+    private fun insertFromFile(db: SQLiteDatabase?, fileName: String): Int {
         var result = 0
-        val insertsStream = InputStreamReader(mContext.assets.open("initial_data.sqlite"))
+        val insertsStream = InputStreamReader(mContext.assets.open(fileName))
         val insertReader = BufferedReader(insertsStream)
 
         while (insertReader.ready()) {
@@ -698,7 +714,7 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
         values.put(DatabaseConstants.TABLE_WEIGHTTYPE_NAME, weightType.name)
         values.put(DatabaseConstants.TABLE_WEIGHTTYPE_CHOOSED, if (weightType.choosed) 1 else 0)
         values.put(DatabaseConstants.TABLE_WEIGHTTYPE_CREATEDATE, unixTime)
-        values.put(DatabaseConstants.TABLE_MEASURETYPE_MODIFYDATE, unixTime)
+        values.put(DatabaseConstants.TABLE_WEIGHTTYPE_MODIFYDATE, unixTime)
 
         var id : Long = -1
         try {
@@ -782,6 +798,86 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
         var id : Long = -1
         try {
             id = db.insertOrThrow(DatabaseConstants.TABLE_LENGTHTYPE, null, values)
+        } catch (e: Exception) {
+            Log.e("DB ERROR", e.toString())
+            e.printStackTrace()
+        }
+
+        db.close()
+        return id
+    }
+
+
+      /**************++********************/
+     /********** WORKLOAD TYPES **********/
+    /**********************++************/
+
+    fun getWorkloadType(query: String, array: Array<String>?): ArrayList<WorkloadType>? {
+        val db = this.writableDatabase
+        val cursor : Cursor
+        cursor = db.rawQuery(query, array)
+
+        val workloadTypeList = ArrayList<WorkloadType>()
+        if (cursor.moveToFirst()) {
+            do {
+                val workloadType = WorkloadType()
+                val createDateUnixSeconds = cursor.getLong(cursor.getColumnIndex(DatabaseConstants.TABLE_WORKLOADTYPE_CREATEDATE))
+                val modifyDateUnixSeconds = cursor.getLong(cursor.getColumnIndex(DatabaseConstants.TABLE_WORKLOADTYPE_MODIFYDATE))
+
+                workloadType.id = cursor.getInt(cursor.getColumnIndex(DatabaseConstants.TABLE_WORKLOADTYPE_ID))
+                workloadType.name = cursor.getString(cursor.getColumnIndex(DatabaseConstants.TABLE_WORKLOADTYPE_NAME))
+                workloadType.code = cursor.getString(cursor.getColumnIndex(DatabaseConstants.TABLE_WORKLOADTYPE_CODE))
+                workloadType.choosed = cursor.getInt(cursor.getColumnIndex(DatabaseConstants.TABLE_WORKLOADTYPE_CHOOSED)) == 1
+                workloadType.createDate = Date((createDateUnixSeconds * 1000))
+                workloadType.modifyDate = Date((modifyDateUnixSeconds * 1000))
+
+                workloadTypeList.add(workloadType)
+            } while (cursor.moveToNext())
+        }
+
+        cursor.close()
+        db.close()
+
+        return workloadTypeList
+    }
+
+    fun updateWorkloadTypeChoosed(workloadType: WorkloadType): Int {
+        val db = this.writableDatabase
+        val values = ContentValues()
+
+        val unixTime = Utils.getUnixSeconds()
+
+        values.put(DatabaseConstants.TABLE_WORKLOADTYPE_CHOOSED, if (workloadType.choosed) 0 else 1)
+        values.put(DatabaseConstants.TABLE_WORKLOADTYPE_MODIFYDATE, unixTime)
+
+        var id : Int = -1
+        try {
+            id = db.update(DatabaseConstants.TABLE_WORKLOADTYPE, values, "${DatabaseConstants.TABLE_WORKLOADTYPE_ID}=?", arrayOf(workloadType.id.toString()))
+        } catch (e: Exception) {
+            Log.e("DB ERROR", e.toString())
+            e.printStackTrace()
+        }
+
+        db.close()
+
+        return id
+    }
+
+    private fun insertWorkloadType(workloadType: WorkloadType): Long {
+        val db = this.writableDatabase
+        val values = ContentValues()
+
+        val unixTime = Utils.getUnixSeconds()
+
+        values.put(DatabaseConstants.TABLE_WORKLOADTYPE_CODE, workloadType.code)
+        values.put(DatabaseConstants.TABLE_WORKLOADTYPE_NAME, workloadType.name)
+        values.put(DatabaseConstants.TABLE_WORKLOADTYPE_CHOOSED, if (workloadType.choosed) 1 else 0)
+        values.put(DatabaseConstants.TABLE_WORKLOADTYPE_CREATEDATE, unixTime)
+        values.put(DatabaseConstants.TABLE_WORKLOADTYPE_MODIFYDATE, unixTime)
+
+        var id : Long = -1
+        try {
+            id = db.insertOrThrow(DatabaseConstants.TABLE_WORKLOADTYPE, null, values)
         } catch (e: Exception) {
             Log.e("DB ERROR", e.toString())
             e.printStackTrace()

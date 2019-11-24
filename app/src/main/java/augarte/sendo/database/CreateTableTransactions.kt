@@ -96,8 +96,15 @@ class CreateTableTransactions {
                 "${DatabaseConstants.TABLE_WEIGHTTYPE_CREATEDATE} INTEGER NOT NULL, " +
                 "${DatabaseConstants.TABLE_WEIGHTTYPE_MODIFYDATE} INTEGER NOT NULL)"
 
-
         const val CREATE_TABLE_LENGTHTYPE = "CREATE TABLE IF NOT EXISTS  ${DatabaseConstants.TABLE_LENGTHTYPE} " +
+                "(${DatabaseConstants.TABLE_LENGTHTYPE_ID} INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "${DatabaseConstants.TABLE_LENGTHTYPE_NAME} TEXT NOT NULL, " +
+                "${DatabaseConstants.TABLE_LENGTHTYPE_CODE} TEXT NOT NULL, " +
+                "${DatabaseConstants.TABLE_LENGTHTYPE_CHOOSED} INTEGER NOT NULL, " +
+                "${DatabaseConstants.TABLE_LENGTHTYPE_CREATEDATE} INTEGER NOT NULL, " +
+                "${DatabaseConstants.TABLE_LENGTHTYPE_MODIFYDATE} INTEGER NOT NULL)"
+
+        const val CREATE_TABLE_WORKLOADTYPE = "CREATE TABLE IF NOT EXISTS  ${DatabaseConstants.TABLE_WORKLOADTYPE} " +
                 "(${DatabaseConstants.TABLE_LENGTHTYPE_ID} INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "${DatabaseConstants.TABLE_LENGTHTYPE_NAME} TEXT NOT NULL, " +
                 "${DatabaseConstants.TABLE_LENGTHTYPE_CODE} TEXT NOT NULL, " +

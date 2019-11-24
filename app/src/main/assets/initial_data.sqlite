@@ -318,7 +318,10 @@ INSERT INTO measureType ('name', 'code', 'createDate', 'modifydate') VALUES('Arm
 INSERT INTO measureType ('name', 'code', 'createDate', 'modifydate') VALUES('Legs', 'LEG', '0', '0');
 INSERT INTO weightType ('name', 'code', 'choosed', 'createDate', 'modifydate') VALUES('Kilogram', 'KG', '0', '0', '0');
 INSERT INTO weightType ('name', 'code', 'choosed', 'createDate', 'modifydate') VALUES('Pound', 'LBS', '0', '0', '0');
-INSERT INTO lengthType ('name', 'code', 'choosed', 'createDate', 'modifydate') VALUES('CM', 'Centimeter', '0', '0', '0');
-INSERT INTO lengthType ('name', 'code', 'choosed', 'createDate', 'modifydate') VALUES('INCH', 'Inch', '0', '0', '0');
-INSERT INTO lengthType ('name', 'code', 'choosed', 'createDate', 'modifydate') VALUES('MTR', 'Metre', '0', '0', '0');
-INSERT INTO lengthType ('name', 'code', 'choosed', 'createDate', 'modifydate') VALUES('FOT', 'Foot', '0', '0', '0');
+INSERT INTO lengthType ('name', 'code', 'choosed', 'createDate', 'modifydate') VALUES('Centimeter', 'CM', '0', '0', '0');
+INSERT INTO lengthType ('name', 'code', 'choosed', 'createDate', 'modifydate') VALUES('Inch', 'INCH', '0', '0', '0');
+INSERT INTO lengthType ('name', 'code', 'choosed', 'createDate', 'modifydate') VALUES('Metre', 'M', '0', '0', '0');
+INSERT INTO lengthType ('name', 'code', 'choosed', 'createDate', 'modifydate') VALUES('Foot', 'FT', '0', '0', '0');
+INSERT INTO workloadType ('name', 'code', 'choosed', 'createDate', 'modifydate') VALUES('Maximum repetition', 'RM', '0', '0', '0');
+INSERT INTO workloadType ('name', 'code', 'choosed', 'createDate', 'modifydate') VALUES('Reps in reserve', 'RIR', '0', '0', '0');
+INSERT INTO workloadType ('name', 'code', 'choosed', 'createDate', 'modifydate') VALUES('Total work', 'TW', '0', '0', '0');
