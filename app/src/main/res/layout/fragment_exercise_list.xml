@@ -15,6 +15,38 @@
         app:fastScrollAutoHide="true"
         app:fastScrollAutoHideDelay="1000"/>
 
+    <LinearLayout
+        android:id="@+id/no_exercise_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/no_exercise_icon"
+            android:layout_width="@dimen/view_large"
+            android:layout_height="@dimen/view_large"
+            android:layout_marginTop="125dp"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/ic_archive"
+            android:tint="?attr/placeHolderText"
+            android:elevation="200dp"/>
+
+        <TextView
+            android:id="@+id/no_exercise_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_small_medium"
+            android:layout_marginStart="@dimen/margin_medium"
+            android:layout_marginEnd="@dimen/margin_medium"
+            android:gravity="center"
+            android:text="@string/sendo_no_archived_exercise"
+            android:textSize="@dimen/text_xxlarge"
+            android:textColor="?attr/placeHolderText"
+            android:textStyle="bold"/>
+    </LinearLayout>
+
     <!--<com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_add"
         android:layout_width="wrap_content"

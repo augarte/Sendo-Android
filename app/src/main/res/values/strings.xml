@@ -70,4 +70,6 @@
     <string name="sendo_modify_value">Modify value</string>
     <string name="sendo_delete_measurement">Delete measurement</string>
     <string name="sendo_workload">Work load</string>
+    <string name="sendo_no_exercise">There is no exercises to show</string>
+    <string name="sendo_no_archived_exercise">You have no exercises archived</string>
 </resources>

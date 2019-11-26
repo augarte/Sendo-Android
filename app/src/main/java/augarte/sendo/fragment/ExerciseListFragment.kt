@@ -68,6 +68,7 @@ class ExerciseListFragment : Fragment() {
         }*/
 
         configureSwipeDelete()
+        checkEmptyExerciseList()
         setHasOptionsMenu(true)
     }
 
@@ -134,9 +135,9 @@ class ExerciseListFragment : Fragment() {
                 exercise_list.adapter = exerciseAdapter as ExerciseArchivedAdapter
             }
             else -> return super.onOptionsItemSelected(item)
-
         }
         configureSwipeDelete()
+        checkEmptyExerciseList()
         return true
     }
 
@@ -193,6 +194,24 @@ class ExerciseListFragment : Fragment() {
 
         val itemTouchHelper = ItemTouchHelper(itemTouchHelperCallback)
         itemTouchHelper.attachToRecyclerView(exercise_list)
+    }
+
+    private fun checkEmptyExerciseList(){
+        if (exerciseList.isEmpty()) {
+            when (exerciseAdapter){
+                is ExerciseListAdapter,
+                is ExerciseCategoryAdapter -> {
+                    no_exercise_icon.setBackgroundResource(R.drawable.ic_weightlifting)
+                    no_exercise_text.text = getString(R.string.sendo_no_exercise)
+                }
+                is ExerciseArchivedAdapter -> {
+                    no_exercise_icon.setBackgroundResource(R.drawable.ic_archive)
+                    no_exercise_text.text = getString(R.string.sendo_no_archived_exercise)
+                }
+            }
+            exercise_list.visibility = View.GONE
+            no_exercise_layout.visibility = View.VISIBLE
+        }
     }
 
     interface OnDialogClickListener {
