@@ -65,4 +65,8 @@
     <string name="sendo_theme">Tema</string>
     <string name="sendo_progress">Progreso</string>
     <string name="sendo_open_source_licenses">"Licencias del código abierto "</string>
+    <string name="sendo_no_archived_exercise">No tiene ejercicios archivados</string>
+    <string name="sendo_no_exercise">No hay ningun ejercicio para mostrar</string>
+    <string name="sendo_workload">Carga total</string>
+    <string name="sendo_delete_measurement">Eliminar medida</string>
 </resources>

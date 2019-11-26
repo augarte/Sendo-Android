@@ -65,4 +65,8 @@
     <string name="sendo_open_source_licenses">"Iturburu irekiko lizentziak "</string>
     <string name="sendo_progress">Aurrerapena</string>
     <string name="sendo_theme">Tema</string>
+    <string name="sendo_no_archived_exercise">Ez duzu artxibaturiko ariketarik</string>
+    <string name="sendo_no_exercise">Ez dago ariketarik erakusteko</string>
+    <string name="sendo_workload">Karga totala</string>
+    <string name="sendo_delete_measurement">Neurketa ezabatu</string>
 </resources>
