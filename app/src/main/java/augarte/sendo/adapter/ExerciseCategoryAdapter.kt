@@ -39,7 +39,7 @@ class ExerciseCategoryAdapter(private val items : MutableList<Exercise>) : Recyc
     override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
         val item = items[position]
 
-        if (lastCategory != item.type!!.id){
+        if (position == 0 || items[position-1].type!!.id != item.type!!.id){
             holder.categoryTitle.text = item.type!!.name
             holder.categoryLayout.visibility = View.VISIBLE
         }
