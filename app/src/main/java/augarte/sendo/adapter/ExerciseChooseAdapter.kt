@@ -1,12 +1,14 @@
 package augarte.sendo.adapter
 
 import android.content.Context
+import android.content.res.ColorStateList
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.core.widget.ImageViewCompat
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import augarte.sendo.R
@@ -35,6 +37,14 @@ class ExerciseChooseAdapter(private var items: ArrayList<Exercise>, private val 
         if (item.selected) {
             holder.selected.visibility = View.VISIBLE
             holder.itemView.background = ContextCompat.getDrawable(context, R.color.colorPrimary)
+        }
+
+        if (item.favorite) {
+            holder.fav.setBackgroundResource(R.drawable.ic_full_star)
+            ImageViewCompat.setImageTintList(holder.fav, ColorStateList.valueOf(ContextCompat.getColor(context, R.color.starYellow)))
+        } else {
+            holder.fav.setBackgroundResource(R.drawable.ic_empty_star)
+            ImageViewCompat.setImageTintList(holder.fav, ColorStateList.valueOf(Utils.getColorFromAttr(context, R.attr.primaryText)))
         }
 
         Glide.with(holder.exerciseImage.context).load(item.imageURL).placeholder(R.drawable.ic_sendo_placeholder).diskCacheStrategy(DiskCacheStrategy.AUTOMATIC).into(holder.exerciseImage)
@@ -74,6 +84,7 @@ class ExerciseChooseAdapter(private var items: ArrayList<Exercise>, private val 
     class MainViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         var exerciseName: TextView = view.exercise_name
         var selected: ImageView = view.selected_image
+        var fav: ImageView = view.img_favorite
         var exerciseImage: ImageView = view.exercise_image
     }
 

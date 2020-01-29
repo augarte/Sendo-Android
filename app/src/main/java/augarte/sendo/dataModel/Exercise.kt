@@ -14,6 +14,7 @@ class Exercise() : Parcelable{
     var type: ExerciseType? = null
     var state: Int? = 1
     var selected: Boolean = false
+    var favorite: Boolean = false;
     var createdBy: String? = null
     var createDate: Date? = null
     var modifyDate: Date? = null
@@ -25,6 +26,7 @@ class Exercise() : Parcelable{
         //image = parcel.readParcelable(Bitmap::class.java.classLoader)
         imageURL = parcel.readString()
         state = parcel.readValue(Int::class.java.classLoader) as? Int
+        favorite = parcel.readByte() != 0.toByte()
         selected = parcel.readByte() != 0.toByte()
     }
 
@@ -35,6 +37,7 @@ class Exercise() : Parcelable{
         //parcel.writeParcelable(image, flags)
         parcel.writeString(imageURL)
         parcel.writeValue(state)
+        parcel.writeByte(if (favorite) 1 else 0)
         parcel.writeByte(if (selected) 1 else 0)
     }
 
