@@ -55,6 +55,10 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
         if (oldVersion < 6) {
             insertFromFile(db, DatabaseConstants.DB_UPDATE_6_FILE)
         }
+
+        if (oldVersion < 7) {
+            insertFromFile(db, DatabaseConstants.DB_UPDATE_7_FILE)
+        }
     }
 
     fun deleteAllTables() {

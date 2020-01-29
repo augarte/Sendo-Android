@@ -4,11 +4,12 @@ class DatabaseConstants {
 
     companion object{
         const val DB_NAME = "Sendo"
-        const val DB_VERSION = 6
+        const val DB_VERSION = 7
 
         const val DB_INITIAL_FILE = "initial_data.sqlite"
         const val DB_UPDATE_5_FILE = "v5.sqlite"
         const val DB_UPDATE_6_FILE = "v6.sqlite"
+        const val DB_UPDATE_7_FILE = "v7.sqlite"
 
         const val TABLE_EXERCISE = "exercise"
         const val TABLE_DAY = "day"
