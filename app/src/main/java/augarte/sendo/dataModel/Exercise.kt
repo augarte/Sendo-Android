@@ -1,9 +1,9 @@
 package augarte.sendo.dataModel
 
-import android.graphics.Bitmap
 import android.os.Parcel
 import android.os.Parcelable
-import java.util.Date
+import java.util.*
+
 
 class Exercise() : Parcelable{
     var id: Int? = null
@@ -13,11 +13,10 @@ class Exercise() : Parcelable{
     var imageURL: String? = null
     var type: ExerciseType? = null
     var state: Int? = 1
+    var selected: Boolean = false
     var createdBy: String? = null
     var createDate: Date? = null
     var modifyDate: Date? = null
-
-    var selected: Boolean = false
 
     constructor(parcel: Parcel) : this() {
         id = parcel.readValue(Int::class.java.classLoader) as? Int
