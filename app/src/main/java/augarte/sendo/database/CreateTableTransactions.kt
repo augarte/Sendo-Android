@@ -29,6 +29,7 @@ class CreateTableTransactions {
                 "${DatabaseConstants.TABLE_EXERCISE_IMAGE} TEXT, " +
                 "${DatabaseConstants.TABLE_EXERCISE_TYPE} INTEGER NOT NULL, " +
                 "${DatabaseConstants.TABLE_EXERCISE_STATE} INTEGER NOT NULL, " +
+                "${DatabaseConstants.TABLE_EXERCISE_FAVORITE} INTEGER NOT NULL, " +
                 "${DatabaseConstants.TABLE_EXERCISE_CREATEDBY} TEXT NOT NULL, " +
                 "${DatabaseConstants.TABLE_EXERCISE_CREATEDATE} INTEGER NOT NULL, " +
                 "${DatabaseConstants.TABLE_EXERCISE_MODIFYDATE} INTEGER NOT NULL, " +

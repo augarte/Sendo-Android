@@ -29,6 +29,7 @@ class DatabaseConstants {
         const val TABLE_EXERCISE_IMAGE = "image"
         const val TABLE_EXERCISE_TYPE = "type"
         const val TABLE_EXERCISE_STATE = "state"
+        const val TABLE_EXERCISE_FAVORITE = "favorite"
         const val TABLE_EXERCISE_CREATEDBY = "createdBy"
         const val TABLE_EXERCISE_CREATEDATE = "createDate"
         const val TABLE_EXERCISE_MODIFYDATE = "modifyDate"

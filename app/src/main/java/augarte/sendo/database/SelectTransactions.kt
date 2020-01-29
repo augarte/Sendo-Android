@@ -11,6 +11,7 @@ class SelectTransactions {
 
         const val SELECT_EXERCISE_BY_ID = "SELECT * FROM ${DatabaseConstants.TABLE_EXERCISE} WHERE ${DatabaseConstants.TABLE_EXERCISE_ID} = ?"
         const val SELECT_EXERCISES_BY_DAY = "SELECT * FROM ${DatabaseConstants.TABLE_EXERCISE} ex INNER JOIN ${DatabaseConstants.TABLE_EXERCISEDAY} exda ON ex.${DatabaseConstants.TABLE_EXERCISE_ID} = exda.${DatabaseConstants.TABLE_EXERCISEDAY_EXERCISEID} WHERE exda.${DatabaseConstants.TABLE_EXERCISEDAY_DAYID} = ?"
+        const val SELECT_STARRED_EXERCISES = "SELECT * FROM ${DatabaseConstants.TABLE_EXERCISE} WHERE ${DatabaseConstants.TABLE_EXERCISE_FAVORITE} = 1 ORDER BY ${DatabaseConstants.TABLE_EXERCISE_NAME} ASC"
         const val SELECT_ALL_EXERCISE_ORDER_NAME = "SELECT * FROM ${DatabaseConstants.TABLE_EXERCISE} WHERE ${DatabaseConstants.TABLE_EXERCISE_STATE} = ${DatabaseConstants.STATE_ACTIVE} ORDER BY ${DatabaseConstants.TABLE_EXERCISE_NAME} ASC"
         const val SELECT_ALL_EXERCISE_ORDER_TYPE = "SELECT * FROM ${DatabaseConstants.TABLE_EXERCISE} WHERE ${DatabaseConstants.TABLE_EXERCISE_STATE} = ${DatabaseConstants.STATE_ACTIVE} ORDER BY ${DatabaseConstants.TABLE_EXERCISE_TYPE} ASC"
         const val SELECT_ARCHIVED_EXERCISES_ORDER_NAME = "SELECT * FROM ${DatabaseConstants.TABLE_EXERCISE} WHERE ${DatabaseConstants.TABLE_EXERCISE_STATE} = ${DatabaseConstants.STATE_ARCHIVED} ORDER BY ${DatabaseConstants.TABLE_EXERCISE_NAME} ASC"

@@ -270,6 +270,7 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
                 //exercise.image = image
                 exercise.imageURL = cursor.getString(cursor.getColumnIndex(DatabaseConstants.TABLE_EXERCISE_IMAGE))
                 exercise.type = exerciseType
+                exercise.favorite = cursor.getInt(cursor.getColumnIndex(DatabaseConstants.TABLE_EXERCISE_FAVORITE)) == 0
                 exercise.createdBy = userId
                 exercise.createDate = Date((createDateUnixSeconds * 1000))
                 exercise.modifyDate = Date((modifyDateUnixSeconds * 1000))
@@ -291,12 +292,14 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
         val values = ContentValues()
 
         val unixTime = Utils.getUnixSeconds()
+        val fav = if (exercise.favorite) "1" else "0"
 
         values.put(DatabaseConstants.TABLE_EXERCISE_NAME, exercise.name)
         values.put(DatabaseConstants.TABLE_EXERCISE_DESCRIPTION, exercise.description)
         //if (exercise.image!=null) values.put(DatabaseConstants.TABLE_EXERCISE_IMAGE, Utils.getBiteArrayFromBitmap(exercise.image!!))
         values.put(DatabaseConstants.TABLE_EXERCISE_TYPE, exercise.type?.id)
         values.put(DatabaseConstants.TABLE_EXERCISE_STATE, exercise.state)
+        values.put(DatabaseConstants.TABLE_EXERCISE_FAVORITE, fav)
         values.put(DatabaseConstants.TABLE_EXERCISE_CREATEDBY, exercise.createdBy)
         values.put(DatabaseConstants.TABLE_EXERCISE_CREATEDATE, unixTime)
         values.put(DatabaseConstants.TABLE_EXERCISE_MODIFYDATE, unixTime)
@@ -320,6 +323,19 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
         val unixTime = Utils.getUnixSeconds()
 
         values.put(DatabaseConstants.TABLE_EXERCISE_STATE, exercise.state)
+        values.put(DatabaseConstants.TABLE_EXERCISE_MODIFYDATE, unixTime)
+
+        db.update(DatabaseConstants.TABLE_EXERCISE, values, "${DatabaseConstants.TABLE_EXERCISE_ID}=?", arrayOf(exercise.id.toString()))
+        db.close()
+    }
+
+    fun updateExerciseFav(exercise: Exercise){
+        val db = this.writableDatabase
+        val values = ContentValues()
+
+        val unixTime = Utils.getUnixSeconds()
+
+        values.put(DatabaseConstants.TABLE_EXERCISE_FAVORITE, exercise.favorite)
         values.put(DatabaseConstants.TABLE_EXERCISE_MODIFYDATE, unixTime)
 
         db.update(DatabaseConstants.TABLE_EXERCISE, values, "${DatabaseConstants.TABLE_EXERCISE_ID}=?", arrayOf(exercise.id.toString()))
