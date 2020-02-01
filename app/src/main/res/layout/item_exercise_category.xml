@@ -22,16 +22,20 @@
             android:textStyle="bold"/>
     </LinearLayout>
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/padding_medium_small"
         android:background="@drawable/background_exercise_noswipe">
         <androidx.cardview.widget.CardView
+            android:id="@+id/imageCard"
             android:layout_width="75dp"
             android:layout_height="50dp"
             app:cardBackgroundColor="@color/white"
-            app:cardCornerRadius="25dp">
+            app:cardCornerRadius="25dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
 
             <ImageView
                 android:id="@+id/exercise_image"
@@ -49,7 +53,20 @@
             android:layout_gravity="center_vertical"
             android:text="Exercise name"
             android:textColor="?attr/primaryText"
-            android:textStyle="bold"/>
-    </LinearLayout>
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/imageCard"/>
+
+        <ImageView
+            android:id="@+id/fav"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_star_empty"
+            android:tint="?attr/primaryText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>

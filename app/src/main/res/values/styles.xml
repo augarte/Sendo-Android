@@ -39,6 +39,7 @@
 
         <item name="fabIcon">@color/white</item>
         <item name="toolbarIcon">@color/white</item>
+        <item name="starIcon">@color/starYellow</item>
 
         <item name="android:windowContentTransitions">true</item>
     </style>
@@ -88,6 +89,7 @@
 
         <item name="fabIcon">@color/white</item>
         <item name="toolbarIcon">@color/white</item>
+        <item name="starIcon">@color/starYellow</item>
 
         <item name="android:windowContentTransitions">true</item>
     </style>

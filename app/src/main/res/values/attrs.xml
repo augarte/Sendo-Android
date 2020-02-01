@@ -38,4 +38,5 @@
     <!--ICONS-->
     <attr name="fabIcon" format="color"/>
     <attr name="toolbarIcon" format="color"/>
+    <attr name="starIcon" format="color"/>
 </resources>

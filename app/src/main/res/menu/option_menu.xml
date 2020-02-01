@@ -16,7 +16,10 @@
         app:showAsAction="ifRoom">
         <menu>
             <item android:id="@+id/list"
-                android:title="@string/sendo_list"/>
+                android:title="@string/sendo_all"/>
+
+            <item android:id="@+id/fav"
+                android:title="@string/sendo_fav"/>
 
             <item android:id="@+id/category"
                 android:title="@string/sendo_category"/>

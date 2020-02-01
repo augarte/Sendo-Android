@@ -35,23 +35,25 @@
 
     <TextView
         android:id="@+id/exercise_name"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_small"
+        android:layout_marginEnd="@dimen/margin_small"
         android:padding="@dimen/padding_small"
         android:layout_gravity="center_vertical"
         android:text="Exercise name"
         android:textColor="?attr/primaryText"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@id/imageCard"
+        app:layout_constraintEnd_toStartOf="@id/fav"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
     <ImageView
-        android:id="@+id/img_favorite"
+        android:id="@+id/fav"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_empty_star"
+        android:src="@drawable/ic_star_empty"
         android:tint="?attr/primaryText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"

@@ -14,7 +14,7 @@ class Exercise() : Parcelable{
     var type: ExerciseType? = null
     var state: Int? = 1
     var selected: Boolean = false
-    var favorite: Boolean = false;
+    var favorite: Boolean = false
     var createdBy: String? = null
     var createDate: Date? = null
     var modifyDate: Date? = null

@@ -18,7 +18,6 @@ import augarte.sendo.fragment.AddExerciseToWorkoutDialogFragment
 import augarte.sendo.utils.Utils
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-import kotlinx.android.synthetic.main.item_exercise.view.exercise_name
 import kotlinx.android.synthetic.main.item_exercise_chooser.view.*
 
 class ExerciseChooseAdapter(private var items: ArrayList<Exercise>, private val listener: CreateWorkoutAdapter.OnExerciseSelectedListener, private val context: Context) : RecyclerView.Adapter<ExerciseChooseAdapter.MainViewHolder>() {
@@ -40,10 +39,10 @@ class ExerciseChooseAdapter(private var items: ArrayList<Exercise>, private val 
         }
 
         if (item.favorite) {
-            holder.fav.setBackgroundResource(R.drawable.ic_full_star)
+            holder.fav.setImageResource(R.drawable.ic_star_full)
             ImageViewCompat.setImageTintList(holder.fav, ColorStateList.valueOf(ContextCompat.getColor(context, R.color.starYellow)))
         } else {
-            holder.fav.setBackgroundResource(R.drawable.ic_empty_star)
+            holder.fav.setImageResource(R.drawable.ic_star_empty)
             ImageViewCompat.setImageTintList(holder.fav, ColorStateList.valueOf(Utils.getColorFromAttr(context, R.attr.primaryText)))
         }
 
@@ -84,7 +83,7 @@ class ExerciseChooseAdapter(private var items: ArrayList<Exercise>, private val 
     class MainViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         var exerciseName: TextView = view.exercise_name
         var selected: ImageView = view.selected_image
-        var fav: ImageView = view.img_favorite
+        var fav: ImageView = view.fav
         var exerciseImage: ImageView = view.exercise_image
     }
 

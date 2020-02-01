@@ -5,11 +5,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/exercise_image"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:src="@drawable/ic_sendo_placeholder"/>
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/exercise_image"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:src="@drawable/ic_sendo_placeholder"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <ImageView
+            android:id="@+id/fav"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_star_filled"
+            android:layout_margin="@dimen/margin_small_medium"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
         android:id="@+id/exercise_name"

@@ -118,6 +118,14 @@ class ExerciseListFragment : Fragment() {
                 exerciseAdapter = ExerciseListAdapter(exerciseList)
                 exercise_list.adapter = exerciseAdapter as ExerciseListAdapter
             }
+            R.id.fav -> {
+                hasSearch = true
+                activity?.invalidateOptionsMenu()
+                exerciseList = MainActivity.dbHandler.getExercise(SelectTransactions.SELECT_STARRED_EXERCISES, null).toMutableList()
+                exercise_list.setPopupTextSize(Utils.toScreenPixels(resources, 44f))
+                exerciseAdapter = ExerciseListAdapter(exerciseList)
+                exercise_list.adapter = exerciseAdapter as ExerciseListAdapter
+            }
             R.id.category -> {
                 hasSearch = false
                 activity?.invalidateOptionsMenu()
@@ -201,16 +209,19 @@ class ExerciseListFragment : Fragment() {
             when (exerciseAdapter){
                 is ExerciseListAdapter,
                 is ExerciseCategoryAdapter -> {
-                    no_exercise_icon.setBackgroundResource(R.drawable.ic_weightlifting)
+                    no_exercise_icon.setImageResource(R.drawable.ic_weightlifting)
                     no_exercise_text.text = getString(R.string.sendo_no_exercise)
                 }
                 is ExerciseArchivedAdapter -> {
-                    no_exercise_icon.setBackgroundResource(R.drawable.ic_archive)
+                    no_exercise_icon.setImageResource(R.drawable.ic_archive)
                     no_exercise_text.text = getString(R.string.sendo_no_archived_exercise)
                 }
             }
             exercise_list.visibility = View.GONE
             no_exercise_layout.visibility = View.VISIBLE
+        } else {
+            exercise_list.visibility = View.VISIBLE
+            no_exercise_layout.visibility = View.GONE
         }
     }
 

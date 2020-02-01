@@ -72,4 +72,6 @@
     <string name="sendo_workload">Workload</string>
     <string name="sendo_no_exercise">There is no exercises to show</string>
     <string name="sendo_no_archived_exercise">You have no exercises archived</string>
+    <string name="sendo_all">All</string>
+    <string name="sendo_fav">Favorites</string>
 </resources>
