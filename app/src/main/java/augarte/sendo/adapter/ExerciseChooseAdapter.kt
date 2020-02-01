@@ -38,14 +38,6 @@ class ExerciseChooseAdapter(private var items: ArrayList<Exercise>, private val 
             holder.itemView.background = ContextCompat.getDrawable(context, R.color.colorPrimary)
         }
 
-        if (item.favorite) {
-            holder.fav.setImageResource(R.drawable.ic_star_full)
-            ImageViewCompat.setImageTintList(holder.fav, ColorStateList.valueOf(ContextCompat.getColor(context, R.color.starYellow)))
-        } else {
-            holder.fav.setImageResource(R.drawable.ic_star_empty)
-            ImageViewCompat.setImageTintList(holder.fav, ColorStateList.valueOf(Utils.getColorFromAttr(context, R.attr.primaryText)))
-        }
-
         Glide.with(holder.exerciseImage.context).load(item.imageURL).placeholder(R.drawable.ic_sendo_placeholder).diskCacheStrategy(DiskCacheStrategy.AUTOMATIC).into(holder.exerciseImage)
 
         holder.itemView.setOnClickListener {
@@ -55,19 +47,35 @@ class ExerciseChooseAdapter(private var items: ArrayList<Exercise>, private val 
                 holder.itemView.setBackgroundColor(Utils.getColorFromAttr(context, R.attr.colorPrimaryLight))
                 listener.onDeselected(item)
             } else {
-                val listener = object: ExerciseAddDialogListener {
+                val exerciseAddedListener = object: AddExerciseToWorkoutDialogFragment.ExerciseAddDialogListener {
                     override fun onExerciseAdded(exerciseDay: ExerciseDay) {
                         item.selected = true
                         holder.selected.visibility = View.VISIBLE
                         holder.itemView.setBackgroundColor(Utils.getColorFromAttr(context, R.attr.colorPrimary))
                         listener.onSelect(exerciseDay)
                     }
+
+                    override fun onStarred() {
+                        setStarColor(holder, item)
+                    }
                 }
                 val manager = (context as FragmentActivity).supportFragmentManager
-                val addExerciseToWorkoutDialogFragment = AddExerciseToWorkoutDialogFragment(item, listener)
+                val addExerciseToWorkoutDialogFragment = AddExerciseToWorkoutDialogFragment(item, exerciseAddedListener)
                 addExerciseToWorkoutDialogFragment.show(manager, "DIALOG")
             }
         }
+    }
+
+    private fun setStarColor(holder: MainViewHolder, item: Exercise){
+
+        if (item.favorite) {
+            holder.fav.setImageResource(R.drawable.ic_star_full)
+            ImageViewCompat.setImageTintList(holder.fav, ColorStateList.valueOf(ContextCompat.getColor(context, R.color.starYellow)))
+        } else {
+            holder.fav.setImageResource(R.drawable.ic_star_empty)
+            ImageViewCompat.setImageTintList(holder.fav, ColorStateList.valueOf(Utils.getColorFromAttr(context, R.attr.primaryText)))
+        }
+
     }
 
     fun setFilter(newList: MutableList<Exercise>) {
@@ -85,9 +93,5 @@ class ExerciseChooseAdapter(private var items: ArrayList<Exercise>, private val 
         var selected: ImageView = view.selected_image
         var fav: ImageView = view.fav
         var exerciseImage: ImageView = view.exercise_image
-    }
-
-    interface ExerciseAddDialogListener{
-        fun onExerciseAdded(exerciseDay: ExerciseDay)
     }
 }

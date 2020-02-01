@@ -33,7 +33,7 @@ class ExerciseDayAdapter(private val items: ArrayList<ExerciseDay>, private val 
 
         holder.infoIcon.setOnClickListener {
             val manager = (holder.itemView.context as FragmentActivity).supportFragmentManager
-            val exerciseInforDialogFragment = ExerciseInfoDialogFragment(item.exercise!!)
+            val exerciseInforDialogFragment = ExerciseInfoDialogFragment(item.exercise!!, null)
             exerciseInforDialogFragment.show(manager, "DIALOG")
         }
     }

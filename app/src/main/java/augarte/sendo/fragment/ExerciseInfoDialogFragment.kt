@@ -10,12 +10,13 @@ import androidx.fragment.app.DialogFragment
 import augarte.sendo.R
 import augarte.sendo.activity.MainActivity
 import augarte.sendo.dataModel.Exercise
+import augarte.sendo.dataModel.ExerciseDay
 import augarte.sendo.utils.Utils
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import kotlinx.android.synthetic.main.dialog_exercise_info.view.*
 
-class ExerciseInfoDialogFragment(private val exercise: Exercise): DialogFragment() {
+class ExerciseInfoDialogFragment(private val exercise: Exercise, private val listener: ExerciseInfoDialogListener?): DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val inflater = activity!!.layoutInflater
@@ -31,6 +32,7 @@ class ExerciseInfoDialogFragment(private val exercise: Exercise): DialogFragment
             exercise.favorite = !exercise.favorite
             MainActivity.dbHandler.updateExerciseFav(exercise)
             setStarColor(view)
+            listener?.onStarred()
         }
 
         return AlertDialog.Builder(activity).setView(view).create()
@@ -44,5 +46,9 @@ class ExerciseInfoDialogFragment(private val exercise: Exercise): DialogFragment
             view.fav.setImageResource(R.drawable.ic_star_filled)
             ImageViewCompat.setImageTintList(view.fav, null)
         }
+    }
+
+    interface ExerciseInfoDialogListener{
+        fun onStarred()
     }
 }

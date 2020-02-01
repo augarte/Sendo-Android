@@ -1,11 +1,13 @@
 package augarte.sendo.adapter
 
 import android.content.Context
+import android.content.res.ColorStateList
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.widget.ImageViewCompat
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import augarte.sendo.R
@@ -13,6 +15,7 @@ import augarte.sendo.activity.MainActivity
 import augarte.sendo.dataModel.Exercise
 import augarte.sendo.database.DatabaseConstants
 import augarte.sendo.fragment.ExerciseInfoDialogFragment
+import augarte.sendo.utils.Utils
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.google.android.material.snackbar.Snackbar
@@ -40,9 +43,27 @@ class ExerciseArchivedAdapter(private var items : MutableList<Exercise>) : Recyc
 
         holder.itemView.setOnClickListener {
             val manager = (holder.itemView.context as FragmentActivity).supportFragmentManager
-            val exerciseInforDialogFragment = ExerciseInfoDialogFragment(item)
+            val exerciseInforDialogFragment = ExerciseInfoDialogFragment(item, object: ExerciseInfoDialogFragment.ExerciseInfoDialogListener {
+                override fun onStarred() {
+                    setStarColor(holder, item)
+                }
+            })
             exerciseInforDialogFragment.show(manager, "DIALOG")
         }
+
+        setStarColor(holder, item)
+    }
+
+    private fun setStarColor(holder: MainViewHolder, item: Exercise){
+
+        if (item.favorite) {
+            holder.fav.setImageResource(R.drawable.ic_star_full)
+            ImageViewCompat.setImageTintList(holder.fav, ColorStateList.valueOf(Utils.getColorFromAttr(holder.fav.context, R.attr.starIcon)))
+        } else {
+            holder.fav.setImageResource(R.drawable.ic_star_empty)
+            ImageViewCompat.setImageTintList(holder.fav, ColorStateList.valueOf(Utils.getColorFromAttr(holder.fav.context, R.attr.primaryText)))
+        }
+
     }
 
     fun setFilter(newList: MutableList<Exercise>) {
@@ -81,5 +102,6 @@ class ExerciseArchivedAdapter(private var items : MutableList<Exercise>) : Recyc
     class MainViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         var exerciseName: TextView = view.exercise_name
         var exerciseImage: ImageView = view.exercise_image
+        var fav: ImageView = view.fav
     }
 }

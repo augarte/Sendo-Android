@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.content.ContextCompat
 import androidx.core.widget.ImageViewCompat
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
@@ -45,17 +44,27 @@ class ExerciseListAdapter(private var items : MutableList<Exercise>) : RecyclerV
 
         holder.itemView.setOnClickListener {
             val manager = (holder.itemView.context as FragmentActivity).supportFragmentManager
-            val exerciseInforDialogFragment = ExerciseInfoDialogFragment(item)
+            val exerciseInforDialogFragment = ExerciseInfoDialogFragment(item, object: ExerciseInfoDialogFragment.ExerciseInfoDialogListener {
+                override fun onStarred() {
+                    setStarColor(holder, item)
+                }
+            })
             exerciseInforDialogFragment.show(manager, "DIALOG")
         }
 
+        setStarColor(holder, item)
+    }
+
+    private fun setStarColor(holder: MainViewHolder, item: Exercise){
+
         if (item.favorite) {
             holder.fav.setImageResource(R.drawable.ic_star_full)
-            ImageViewCompat.setImageTintList(holder.fav, ColorStateList.valueOf(ContextCompat.getColor(holder.fav.context, R.color.starYellow)))
+            ImageViewCompat.setImageTintList(holder.fav, ColorStateList.valueOf(Utils.getColorFromAttr(holder.fav.context, R.attr.starIcon)))
         } else {
             holder.fav.setImageResource(R.drawable.ic_star_empty)
             ImageViewCompat.setImageTintList(holder.fav, ColorStateList.valueOf(Utils.getColorFromAttr(holder.fav.context, R.attr.primaryText)))
         }
+
     }
 
     fun setFilter(newList: MutableList<Exercise>) {

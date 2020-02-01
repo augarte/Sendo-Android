@@ -9,7 +9,6 @@ import androidx.core.widget.ImageViewCompat
 import androidx.fragment.app.DialogFragment
 import augarte.sendo.R
 import augarte.sendo.activity.MainActivity
-import augarte.sendo.adapter.ExerciseChooseAdapter
 import augarte.sendo.dataModel.Exercise
 import augarte.sendo.dataModel.ExerciseDay
 import augarte.sendo.utils.Utils
@@ -17,7 +16,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import kotlinx.android.synthetic.main.dialog_exercise_add_to_workout.view.*
 
-class AddExerciseToWorkoutDialogFragment(private val exercise: Exercise, private val listener: ExerciseChooseAdapter.ExerciseAddDialogListener): DialogFragment() {
+class AddExerciseToWorkoutDialogFragment(private val exercise: Exercise, private val listener: ExerciseAddDialogListener): DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val inflater = activity!!.layoutInflater
@@ -32,6 +31,7 @@ class AddExerciseToWorkoutDialogFragment(private val exercise: Exercise, private
             exercise.favorite = !exercise.favorite
             MainActivity.dbHandler.updateExerciseFav(exercise)
             setStarColor(view)
+            listener.onStarred()
         }
 
         return AlertDialog.Builder(activity)
@@ -56,5 +56,10 @@ class AddExerciseToWorkoutDialogFragment(private val exercise: Exercise, private
             view.fav.setImageResource(R.drawable.ic_star_filled)
             ImageViewCompat.setImageTintList(view.fav, null)
         }
+    }
+
+    interface ExerciseAddDialogListener{
+        fun onExerciseAdded(exerciseDay: ExerciseDay)
+        fun onStarred()
     }
 }
