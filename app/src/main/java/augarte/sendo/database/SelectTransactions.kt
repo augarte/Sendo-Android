@@ -15,6 +15,7 @@ class SelectTransactions {
         const val SELECT_ALL_EXERCISE_ORDER_NAME = "SELECT * FROM ${DatabaseConstants.TABLE_EXERCISE} WHERE ${DatabaseConstants.TABLE_EXERCISE_STATE} = ${DatabaseConstants.STATE_ACTIVE} ORDER BY ${DatabaseConstants.TABLE_EXERCISE_NAME} ASC"
         const val SELECT_ALL_EXERCISE_ORDER_TYPE = "SELECT * FROM ${DatabaseConstants.TABLE_EXERCISE} WHERE ${DatabaseConstants.TABLE_EXERCISE_STATE} = ${DatabaseConstants.STATE_ACTIVE} ORDER BY ${DatabaseConstants.TABLE_EXERCISE_TYPE} ASC"
         const val SELECT_ARCHIVED_EXERCISES_ORDER_NAME = "SELECT * FROM ${DatabaseConstants.TABLE_EXERCISE} WHERE ${DatabaseConstants.TABLE_EXERCISE_STATE} = ${DatabaseConstants.STATE_ARCHIVED} ORDER BY ${DatabaseConstants.TABLE_EXERCISE_NAME} ASC"
+        //const val SELECT_EXERCISE_WITH_FILTERS = "SELECT * FROM ${DatabaseConstants.TABLE_EXERCISE} WHERE ${DatabaseConstants.TABLE_EXERCISE_STATE} "
 
         const val SELECT_ALL_EXERCISETYPE = "SELECT * FROM ${DatabaseConstants.TABLE_EXERCISETYPE}"
         const val SELECT_EXERCISETYPE_BY_ID = "SELECT * FROM ${DatabaseConstants.TABLE_EXERCISETYPE} WHERE ${DatabaseConstants.TABLE_EXERCISETYPE_ID} = ?"

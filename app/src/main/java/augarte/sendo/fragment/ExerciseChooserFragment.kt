@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import augarte.sendo.R
@@ -15,6 +16,7 @@ import augarte.sendo.activity.MainActivity
 import augarte.sendo.adapter.CreateWorkoutAdapter
 import augarte.sendo.adapter.ExerciseChooseAdapter
 import augarte.sendo.dataModel.Exercise
+import augarte.sendo.dataModel.ExerciseType
 import augarte.sendo.database.SelectTransactions
 import kotlinx.android.synthetic.main.bottomsheet_choose_exercise.*
 
@@ -72,5 +74,22 @@ class ExerciseChooserFragment(private val title: String, private var selectedExe
                 return true
             }
         })
+
+        filter.setOnClickListener {
+
+            val manager = (context as FragmentActivity).supportFragmentManager
+            val filterDialog = ExerciseFilterDialogFragment(object: ExerciseFilterDialogFragment.ExerciseFilterDialogListener{
+
+
+                override fun onAccept(exerciseTypeList: ArrayList<ExerciseType>, favSelected: Boolean) {
+                    //TODO
+                    //val filteredList = MainActivity.dbHandler.getExercise(SelectTransactions.SELECT_ALL_EXERCISE_ORDER_NAME, null)
+                    //exerciseChooseAdapter = ExerciseChooseAdapter(filteredList, exerciseSelectedListener, context!!)
+                    exercise_list.adapter = exerciseChooseAdapter
+                }
+
+            })
+            filterDialog.show(manager, "DIALOG")
+        }
     }
 }

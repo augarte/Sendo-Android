@@ -261,7 +261,7 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
                 val exercise = Exercise()
                 val exerciseTypeId = cursor.getString(cursor.getColumnIndex(DatabaseConstants.TABLE_EXERCISE_TYPE))
                 val exerciseTypeList = getExerciseType(SelectTransactions.SELECT_EXERCISETYPE_BY_ID, arrayOf(exerciseTypeId))
-                val exerciseType = if (exerciseTypeList!!.size >= 1) exerciseTypeList[0] else null
+                val exerciseType = if (exerciseTypeList.size >= 1) exerciseTypeList[0] else null
                 // val blob = cursor.getBlob(cursor.getColumnIndex(DatabaseConstants.TABLE_EXERCISE_IMAGE))
                 //val image: Bitmap? = if (blob!= null) BitmapFactory.decodeByteArray(blob, 0, blob.size) else null
                 val userId = cursor.getString(cursor.getColumnIndex(DatabaseConstants.TABLE_EXERCISE_CREATEDBY))
@@ -429,7 +429,7 @@ class DatabaseHandler(context: Context?) : SQLiteOpenHelper(context, DatabaseCon
      /********** EXERCISE TYPES **********/
     /************************************/
 
-    private fun getExerciseType(query: String, array: Array<String>?): ArrayList<ExerciseType>? {
+    fun getExerciseType(query: String, array: Array<String>?): ArrayList<ExerciseType> {
         val db = this.writableDatabase
         val cursor : Cursor
         cursor = db.rawQuery(query, array)
