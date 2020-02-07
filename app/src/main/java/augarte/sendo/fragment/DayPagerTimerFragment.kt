@@ -9,16 +9,15 @@ import augarte.sendo.R
 import augarte.sendo.utils.Constants
 import kotlinx.android.synthetic.main.fragment_pager_timer.*
 import java.util.*
+import java.util.concurrent.TimeUnit
 import kotlin.concurrent.timer
 
 class DayPagerTimerFragment : Fragment() {
 
-    private var timerTime: Int = 0
-    private var timerFirstStart: Boolean = true
+    private var startTime: Long = 0
+    private var stopTime: Long = 0
     private lateinit  var timer: Timer
     private var sharedPreferences: SharedPreferences? = null
-    private var sharedTimer: Long = 0
-
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_pager_timer, container, false)
@@ -26,56 +25,83 @@ class DayPagerTimerFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         sharedPreferences = activity?.getSharedPreferences(Constants.SHARED_PREFERENCES, Context.MODE_PRIVATE)
-        sharedTimer = sharedPreferences?.getLong(Constants.SHARED_TIMER, 0)!!
+        startTime = sharedPreferences?.getLong(Constants.SHARED_TIMER_START, 0)!!
+        stopTime = sharedPreferences?.getLong(Constants.SHARED_TIMER_STOP, 0)!!
 
-        if (sharedTimer.compareTo(0L)==1){
+        if (startTime > 0 && stopTime > 0) {
+            play.visibility = View.GONE
+            reset.visibility = View.VISIBLE
+
+            updateTimer()
+        } else if (startTime > 0) {
             play.visibility = View.GONE
             pause.visibility = View.VISIBLE
-            timerTime = ((System.currentTimeMillis() - sharedTimer) / 1000).toInt()
-            if(timer_time!=null) timer_time.text = secondsToMinutes(timerTime)
 
-            timerFirstStart = false
-            timer = timer("timer", true, 0, 1000) {updateTimer()}
+            timer = timer("timer", false, 0, 10) {activity?.runOnUiThread {updateTimer()}}
+        } else {
+            startTime = 0
+            stopTime = 0
         }
 
         play.setOnClickListener{
+            startTime = System.currentTimeMillis()
+            timer = timer("timer", false, 0, 10) {activity?.runOnUiThread {updateTimer()}}
+
             play.visibility = View.GONE
             pause.visibility = View.VISIBLE
-            timer = timer("timer", true, 0, 1000) {updateTimer()}
+
+            sharedPreferences?.edit()?.putLong(Constants.SHARED_TIMER_START, startTime)?.apply()
         }
 
         pause.setOnClickListener {
+            stopTime = System.currentTimeMillis()
+            cleanTimer()
+
             pause.visibility = View.GONE
             reset.visibility = View.VISIBLE
-            timer.cancel()
-            sharedPreferences?.edit()?.putLong(Constants.SHARED_TIMER, 0)?.apply()
+
+            sharedPreferences?.edit()?.putLong(Constants.SHARED_TIMER_STOP, stopTime)?.apply()
         }
 
         reset.setOnClickListener {
+            startTime = 0
+            stopTime = 0
+            cleanTimer()
+
             reset.visibility = View.GONE
             play.visibility = View.VISIBLE
-            timer_time.text = "00:00"
-            timerTime = 0
-            timer.cancel()
-            sharedPreferences?.edit()?.putLong(Constants.SHARED_TIMER, 0)?.apply()
-        }
 
+            timer_time.text = "00:00"
+            timer_milliseconds.text = "00"
+
+            sharedPreferences?.edit()?.putLong(Constants.SHARED_TIMER_START, 0)?.apply()
+            sharedPreferences?.edit()?.putLong(Constants.SHARED_TIMER_STOP, 0)?.apply()
+        }
     }
 
     private fun updateTimer(){
-        if(timerFirstStart) {
-            sharedPreferences!!.edit().putLong(Constants.SHARED_TIMER, System.currentTimeMillis()).apply()
-            timerFirstStart = false
+        if (stopTime > 0) {
+            if(timer_time!=null) milisecondsToTimeFormat((stopTime - startTime))
         } else {
-            if(timer_time!=null) timer_time.text = secondsToMinutes(++timerTime)
+            if(timer_time!=null) milisecondsToTimeFormat((System.currentTimeMillis() - startTime))
         }
     }
 
-    private fun secondsToMinutes(s: Int): String {
-        val minutes = s/60
-        val seconds = s%60
+    private fun milisecondsToTimeFormat(ms: Long) {
+        val hours = TimeUnit.MILLISECONDS.toHours(ms)
+        val minutes = TimeUnit.MILLISECONDS.toMinutes(ms) - TimeUnit.HOURS.toMinutes(hours)
+        val seconds = TimeUnit.MILLISECONDS.toSeconds(ms) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(ms))
+        val millisecs = ((ms - TimeUnit.SECONDS.toMillis(TimeUnit.HOURS.toSeconds(hours) + TimeUnit.MINUTES.toSeconds(minutes) + seconds))/10)
+        val hoursString: String
         val minutesString: String
         val secondsString: String
+        val millisecsString: String
+
+        hoursString = when {
+            hours==0L -> ""
+            hours<10 -> "0$hours:"
+            else -> "$hours:"
+        }
 
         minutesString = if (minutes<10) "0$minutes"
         else "$minutes"
@@ -83,6 +109,22 @@ class DayPagerTimerFragment : Fragment() {
         secondsString = if (seconds<10) "0$seconds"
         else "$seconds"
 
-        return "$minutesString:$secondsString"
+        millisecsString = if (millisecs<10) "0$millisecs"
+        else "$millisecs"
+
+        timer_time.text = "$hoursString$minutesString:$secondsString"
+        timer_milliseconds.text = millisecsString
+    }
+
+    private fun cleanTimer() {
+        if (::timer.isInitialized) {
+            timer.cancel()
+            timer.purge()
+        }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        cleanTimer()
     }
 }

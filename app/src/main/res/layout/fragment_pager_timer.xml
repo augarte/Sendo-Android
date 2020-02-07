@@ -39,6 +39,19 @@
         app:layout_constraintStart_toStartOf="@id/circle"
         app:layout_constraintEnd_toEndOf="@id/circle"/>
 
+    <TextView
+        android:id="@+id/timer_milliseconds"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="00"
+        android:textSize="30sp"
+        android:textColor="?attr/primaryText"
+        android:textStyle="bold"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/timer_time"
+        app:layout_constraintStart_toStartOf="@id/circle"
+        app:layout_constraintEnd_toEndOf="@id/circle"/>
+
     <ImageButton
         android:id="@+id/play"
         android:layout_width="100dp"
