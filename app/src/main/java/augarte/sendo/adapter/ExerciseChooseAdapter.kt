@@ -35,7 +35,10 @@ class ExerciseChooseAdapter(private var items: ArrayList<Exercise>, private val 
 
         if (item.selected) {
             holder.selected.visibility = View.VISIBLE
-            holder.itemView.background = ContextCompat.getDrawable(context, R.color.colorPrimary)
+            holder.itemView.setBackgroundColor(Utils.getColorFromAttr(context, R.attr.colorPrimary))
+        } else {
+            holder.selected.visibility = View.GONE
+            holder.itemView.setBackgroundColor(Utils.getColorFromAttr(context, R.attr.colorPrimaryLight))
         }
 
         Glide.with(holder.exerciseImage.context).load(item.imageURL).placeholder(R.drawable.ic_sendo_placeholder).diskCacheStrategy(DiskCacheStrategy.AUTOMATIC).into(holder.exerciseImage)
