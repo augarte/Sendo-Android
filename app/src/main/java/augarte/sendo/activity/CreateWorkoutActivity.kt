@@ -6,7 +6,6 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.app_bar_main.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import augarte.sendo.adapter.CreateWorkoutAdapter
@@ -23,12 +22,19 @@ import augarte.sendo.utils.Animations
 import augarte.sendo.dataModel.Workout
 import android.provider.MediaStore
 import android.view.MenuItem
+import augarte.sendo.dataModel.Exercise
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 
 class CreateWorkoutActivity : BaseActivity() {
 
-    private val initialDayNum = 3
+    private val MIN_DAYS = 1
+    private val MAX_DAYS = 7
+    private val INIT_DAYS = 3
+
     private var thisWorkout: Workout = Workout()
+
+    private lateinit var lManager: LinearLayoutManager
+    private lateinit var workoutAdapter: CreateWorkoutAdapter
 
     companion object {
         private const val IMAGE_PICK_CODE = 1000 //Image pick code
@@ -43,19 +49,21 @@ class CreateWorkoutActivity : BaseActivity() {
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        for (i in 0 until initialDayNum) {
+        for (i in 0 until INIT_DAYS) {
             val day = Day()
             day.name = getString(R.string.sendo_day_num, (i+1))
             day.createdBy = MainActivity.user?.uid
             thisWorkout.dayList.add(day)
         }
 
-        val lManager = LinearLayoutManager(applicationContext)
-        val workoutAdapter = CreateWorkoutAdapter(thisWorkout.dayList, day_rv)
+        lManager = LinearLayoutManager(applicationContext)
+        workoutAdapter = CreateWorkoutAdapter(thisWorkout.dayList, day_rv)
+        workoutAdapter.setDayEditListener(object : CreateWorkoutAdapter.WorkoutdayEditListener {
+            override fun onEditPressed(title: String, selectedExercises: ArrayList<Exercise>, listener: CreateWorkoutAdapter.OnExerciseSelectedListener) {
+                bottomSheet.setFragment(ExerciseChooserFragment(title, selectedExercises,  listener))
+            }
+        })
 
-        workoutAdapter.onDayEdit = { title, selectedExercises, listener ->
-            bottomSheet.setFragment(ExerciseChooserFragment(title, selectedExercises,  listener))
-        }
         val animator = object : DefaultItemAnimator() {
             override fun canReuseUpdatedViewHolder(viewHolder: RecyclerView.ViewHolder): Boolean {
                 return true
@@ -67,27 +75,36 @@ class CreateWorkoutActivity : BaseActivity() {
             adapter = workoutAdapter
         }
 
-        number_picker.minVal = 1
-        number_picker.maxVal = 7
-        number_picker.value = initialDayNum
+        number_picker.minVal = MIN_DAYS
+        number_picker.maxVal = MAX_DAYS
+        number_picker.value = INIT_DAYS
+
+        val shake = loadAnimation(this, R.anim.hovering)
+        create_workout_button.startAnimation(shake)
+
+        setListeners()
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        workoutName.visibility = View.GONE
+    }
+
+    private fun setListeners () {
         number_picker.listener = {oldVal, newVal ->
             if (newVal - oldVal > 0) {
                 val d = Day()
                 d.name = "DAY $newVal"
                 d.createdBy = MainActivity.user?.uid
                 thisWorkout.dayList.add(oldVal, d)
-                workoutAdapter.newItem = true
-                workoutAdapter.notifyItemInserted(oldVal)
+                workoutAdapter.addItem()
             }
             else if (newVal - oldVal < 0) {
                 thisWorkout.dayList.removeAt(newVal)
                 workoutAdapter.deleteItem(newVal)
-                workoutAdapter.notifyItemRemoved(newVal)
             }
         }
-
-        val shake = loadAnimation(this, R.anim.hovering)
-        create_workout_button.startAnimation(shake)
 
         create_workout_button.setOnClickListener{
             thisWorkout.name = workout_title.text.toString()
@@ -107,37 +124,29 @@ class CreateWorkoutActivity : BaseActivity() {
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-
-        workoutName.visibility = View.GONE
-    }
-
-
-    private fun pickImageFromGallery() {
-        //Intent to pick image
-        val intent = Intent(Intent.ACTION_PICK)
-        intent.type = "image/*"
-        startActivityForResult(intent, IMAGE_PICK_CODE)
-    }
-
-    //handle requested permission result
+    //Request permission result
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         when(requestCode){
             PERMISSION_CODE -> {
                 if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED){
-                    //permission from popup granted
+                    //Granted
                     pickImageFromGallery()
                 }
                 else{
-                    //permission from popup denied
+                    //Denied
                     Toast.makeText(this, getString(R.string.sendo_permision_denied), Toast.LENGTH_SHORT).show()
                 }
             }
         }
     }
 
-    //handle result of picked image
+    private fun pickImageFromGallery() {
+        val intent = Intent(Intent.ACTION_PICK)
+        intent.type = "image/*"
+        startActivityForResult(intent, IMAGE_PICK_CODE)
+    }
+
+    //Image picked result
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK && requestCode == IMAGE_PICK_CODE) {
@@ -196,8 +205,8 @@ class CreateWorkoutActivity : BaseActivity() {
     }
 
     override fun onBackPressed() {
-        when {
-            bottomSheet.getState() == BottomSheetBehavior.STATE_EXPANDED -> bottomSheet.setState(BottomSheetBehavior.STATE_HIDDEN)
+        when (BottomSheetBehavior.STATE_EXPANDED) {
+            bottomSheet.getState() -> bottomSheet.setState(BottomSheetBehavior.STATE_HIDDEN)
             else -> finish()
         }
     }

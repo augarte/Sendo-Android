@@ -47,12 +47,8 @@ class ExerciseChooserFragment(private val title: String, private var selectedExe
             override fun afterTextChanged(p0: Editable?) {
                 exerciseSelectedListener.onTitleChanged(p0.toString())
             }
-
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-            }
-
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-            }
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
         })
 
         search_view.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
