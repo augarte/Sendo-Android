@@ -8,9 +8,11 @@
 
     <dimen name="view_large_plus">240dp</dimen>
     <dimen name="view_large">160dp</dimen>
+    <dimen name="view_large_minus">120dp</dimen>
     <dimen name="view_medium_large">80dp</dimen>
     <dimen name="view_medium_plus">60dp</dimen>
     <dimen name="view_medium">40dp</dimen>
+    <dimen name="view_medium_minus">30dp</dimen>
     <dimen name="view_small_meduim">20dp</dimen>
     <dimen name="view_small_plus">15dp</dimen>
     <dimen name="view_small">10dp</dimen>

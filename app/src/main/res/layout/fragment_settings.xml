@@ -9,7 +9,6 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".activity.MainActivity">
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/main_settings"
         android:layout_width="match_parent"
@@ -24,7 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.3"/>
+            app:layout_constraintGuide_percent="0.35"/>
 
         <TextView
             android:id="@+id/progressTV"
@@ -40,7 +39,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@id/guideline"/>
 
-        <androidx.coordinatorlayout.widget.CoordinatorLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/workload_type_choose"
             android:layout_width="@dimen/view_medium_large"
             android:layout_height="wrap_content"
@@ -53,21 +52,26 @@
             app:layout_constraintStart_toStartOf="@id/guideline">
             <TextView
                 android:id="@+id/workload_type_chooseTV"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical|start"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:padding="@dimen/padding_small"
                 android:text="1RM"
+                android:textAlignment="center"
                 android:maxLength="4"
                 android:textColor="?attr/primaryText"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/workload_type_chooseBTN"/>
             <ImageView
+                android:id="@+id/workload_type_chooseBTN"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical|end"
+                android:layout_height="match_parent"
                 android:src="@drawable/ic_arrow_down"
-                android:tint="?attr/primaryText"/>
-        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+                android:tint="?attr/primaryText"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
             android:id="@+id/weightTV"
@@ -85,7 +89,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@id/guideline"/>
 
-        <androidx.coordinatorlayout.widget.CoordinatorLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/weight_type_choose"
             android:layout_width="@dimen/view_medium_large"
             android:layout_height="wrap_content"
@@ -98,21 +102,26 @@
             app:layout_constraintStart_toStartOf="@id/guideline">
             <TextView
                 android:id="@+id/weight_type_chooseTV"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical|start"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:padding="@dimen/padding_small"
                 android:text="KG"
+                android:textAlignment="center"
                 android:maxLength="4"
                 android:textColor="?attr/primaryText"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/weight_type_chooseBTN"/>
             <ImageView
+                android:id="@+id/weight_type_chooseBTN"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical|end"
+                android:layout_height="match_parent"
                 android:src="@drawable/ic_arrow_down"
-                android:tint="?attr/primaryText"/>
-        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+                android:tint="?attr/primaryText"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
             android:id="@+id/lengthTV"
@@ -129,7 +138,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@id/guideline"/>
 
-        <androidx.coordinatorlayout.widget.CoordinatorLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/length_type_choose"
             android:layout_width="@dimen/view_medium_large"
             android:layout_height="wrap_content"
@@ -142,24 +151,75 @@
             app:layout_constraintStart_toStartOf="@id/guideline">
             <TextView
                 android:id="@+id/length_type_chooseTV"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical|start"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:padding="@dimen/padding_small"
                 android:text="CM"
+                android:textAlignment="center"
                 android:maxLength="4"
                 android:textColor="?attr/primaryText"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/length_type_chooseBTN"/>
             <ImageView
+                android:id="@+id/length_type_chooseBTN"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical|end"
+                android:layout_height="match_parent"
                 android:src="@drawable/ic_arrow_down"
-                android:tint="?attr/primaryText"/>
-        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+                android:tint="?attr/primaryText"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <TextView
+            android:id="@+id/languageTV"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:layout_marginTop="@dimen/margin_small_plus"
+            android:padding="@dimen/padding_medium_small"
+            android:text="@string/sendo_language"
+            android:textColor="?attr/primaryText"
+            android:textSize="@dimen/text_large"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/lengthTV"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/guideline"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/language_choose"
+            android:layout_width="@dimen/view_large_minus"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:layout_marginStart="@dimen/margin_small_medium"
+            android:background="@drawable/selectable_background_border_primary"
+            android:gravity="center"
+            app:layout_constraintTop_toTopOf="@id/languageTV"
+            app:layout_constraintBottom_toBottomOf="@id/languageTV"
+            app:layout_constraintStart_toStartOf="@id/guideline">
+            <TextView
+                android:id="@+id/language_chooseTV"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:padding="@dimen/padding_small"
+                android:text="English"
+                android:textAlignment="center"
+                android:textColor="?attr/primaryText"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/language_chooseBTN"/>
+            <ImageView
+                android:id="@+id/language_chooseBTN"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_arrow_down"
+                android:tint="?attr/primaryText"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/secondary_settings"

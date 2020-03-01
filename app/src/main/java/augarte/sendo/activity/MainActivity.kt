@@ -51,12 +51,6 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         transaction.commit()
     }
 
-    fun changeTheme(themeId: Int){
-        nav_view.menu.getItem(0).isChecked = true
-        setTheme(themeId)
-        recreate()
-    }
-
     public override fun onStart() {
         super.onStart()
         user = auth.currentUser
@@ -120,7 +114,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             }
         }
 
-        if (replace)  {
+        if (replace) {
             val transaction = supportFragmentManager.beginTransaction()
             transaction.replace(R.id.main_frame, fragment)
             transaction.commit()
@@ -128,5 +122,15 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
 
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
+    }
+
+    fun changeTheme(themeId: Int) {
+        nav_view.menu.getItem(0).isChecked = true
+        setTheme(themeId)
+        recreate()
+    }
+
+    fun changeLanguage() {
+
     }
 }

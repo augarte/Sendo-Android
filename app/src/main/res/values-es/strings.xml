@@ -69,4 +69,5 @@
     <string name="sendo_no_exercise">No hay ningun ejercicio para mostrar</string>
     <string name="sendo_workload">Carga total</string>
     <string name="sendo_delete_measurement">Eliminar medida</string>
+    <string name="sendo_all">Todo</string>
 </resources>
