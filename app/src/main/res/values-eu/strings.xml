@@ -70,4 +70,6 @@
     <string name="sendo_workload">Karga totala</string>
     <string name="sendo_delete_measurement">Neurketa ezabatu</string>
     <string name="sendo_all">Guztiak</string>
+    <string name="sendo_language">Idioma</string>
+    <string name="sendo_fav">Favoritos</string>
 </resources>

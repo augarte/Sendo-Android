@@ -70,4 +70,6 @@
     <string name="sendo_workload">Carga total</string>
     <string name="sendo_delete_measurement">Eliminar medida</string>
     <string name="sendo_all">Todo</string>
+    <string name="sendo_language">Hizkuntza</string>
+    <string name="sendo_fav">Gogokoak</string>
 </resources>
