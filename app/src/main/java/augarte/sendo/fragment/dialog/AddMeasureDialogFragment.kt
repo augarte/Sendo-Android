@@ -1,4 +1,4 @@
-package augarte.sendo.fragment
+package augarte.sendo.fragment.dialog
 
 import android.app.AlertDialog
 import android.app.DatePickerDialog
@@ -19,6 +19,7 @@ import java.util.*
 import android.text.TextUtils
 import augarte.sendo.R
 import augarte.sendo.dataModel.MeasureType
+import augarte.sendo.fragment.MeasurementsFragment
 
 class AddMeasureDialogFragment(private val type: MeasureType, private val listener: MeasurementsFragment.OnDialogClickListener): DialogFragment(), DatePickerDialog.OnDateSetListener {
 

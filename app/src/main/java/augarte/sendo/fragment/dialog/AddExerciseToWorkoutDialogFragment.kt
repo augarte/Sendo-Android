@@ -1,4 +1,4 @@
-package augarte.sendo.fragment
+package augarte.sendo.fragment.dialog
 
 import android.app.AlertDialog
 import android.app.Dialog

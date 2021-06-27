@@ -1,4 +1,4 @@
-package augarte.sendo.fragment
+package augarte.sendo.fragment.dialog
 
 import android.app.AlertDialog
 import android.app.Dialog
@@ -10,7 +10,6 @@ import androidx.fragment.app.DialogFragment
 import augarte.sendo.R
 import augarte.sendo.activity.MainActivity
 import augarte.sendo.dataModel.Exercise
-import augarte.sendo.dataModel.ExerciseDay
 import augarte.sendo.utils.Utils
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy

@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import augarte.sendo.R
 import augarte.sendo.dataModel.Exercise
 import augarte.sendo.dataModel.ExerciseDay
-import augarte.sendo.fragment.AddExerciseToWorkoutDialogFragment
+import augarte.sendo.fragment.dialog.AddExerciseToWorkoutDialogFragment
 import augarte.sendo.utils.Utils
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy

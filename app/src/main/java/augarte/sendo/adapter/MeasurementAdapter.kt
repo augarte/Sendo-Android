@@ -11,12 +11,10 @@ import augarte.sendo.R
 import augarte.sendo.activity.MainActivity
 import augarte.sendo.dataModel.Measurement
 import augarte.sendo.database.DatabaseConstants
-import augarte.sendo.fragment.AddMeasureDialogFragment
 import augarte.sendo.fragment.MeasurementsFragment
-import augarte.sendo.fragment.ModifyMeasureDialogFragment
+import augarte.sendo.fragment.dialog.ModifyMeasureDialogFragment
 import augarte.sendo.utils.Utils
 import augarte.sendo.utils.toStringFormat
-import kotlinx.android.synthetic.main.fragment_measurements.*
 import kotlinx.android.synthetic.main.item_measurement.view.*
 
 class MeasurementAdapter(private val items : ArrayList<Measurement>) : RecyclerView.Adapter<MeasurementAdapter.ViewHolder>() {

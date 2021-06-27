@@ -14,7 +14,7 @@ import augarte.sendo.R
 import augarte.sendo.activity.MainActivity
 import augarte.sendo.dataModel.Exercise
 import augarte.sendo.database.DatabaseConstants
-import augarte.sendo.fragment.ExerciseInfoDialogFragment
+import augarte.sendo.fragment.dialog.ExerciseInfoDialogFragment
 import augarte.sendo.utils.Utils
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy

@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import augarte.sendo.R
 import augarte.sendo.activity.WorkoutDayActivity
 import augarte.sendo.dataModel.ExerciseDay
-import augarte.sendo.fragment.ExerciseInfoDialogFragment
+import augarte.sendo.fragment.dialog.ExerciseInfoDialogFragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import kotlinx.android.synthetic.main.item_exercise_day.view.*

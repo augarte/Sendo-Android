@@ -1,4 +1,4 @@
-package augarte.sendo.fragment
+package augarte.sendo.fragment.dialog
 
 import android.app.AlertDialog
 import android.app.Dialog
@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.fragment.app.DialogFragment
 import augarte.sendo.R
 import augarte.sendo.dataModel.Measurement
+import augarte.sendo.fragment.MeasurementsFragment
 import augarte.sendo.utils.Utils
 import augarte.sendo.utils.toStringFormat
 

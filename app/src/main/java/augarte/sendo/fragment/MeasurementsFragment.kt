@@ -18,13 +18,14 @@ import augarte.sendo.dataModel.DateType
 import augarte.sendo.dataModel.MeasureType
 import augarte.sendo.dataModel.Measurement
 import augarte.sendo.database.SelectTransactions
+import augarte.sendo.fragment.dialog.AddMeasureDialogFragment
 import kotlinx.android.synthetic.main.fragment_measurements.*
 import java.util.*
 import kotlin.collections.ArrayList
 
 class MeasurementsFragment : Fragment() {
 
-    private val today = Calendar.getInstance()
+    private var today = Calendar.getInstance()
     private var selectedMeasureType: Int = 0
     private var selectedDateType: Int = 0
 
@@ -123,36 +124,37 @@ class MeasurementsFragment : Fragment() {
     }
 
     private fun getMeasurementsByDateType(measureType: MeasureType, dateType: DateType): ArrayList<Measurement> {
+        today = Calendar.getInstance()
         val aux = today.clone() as Calendar
-        when {
-            dateType.code == "ALL" -> {
+        when (dateType.code) {
+            "ALL" -> {
                 return MainActivity.dbHandler.getMeasurement(SelectTransactions.SELECT_MEASUREMENT_BY_TYPE_ORDER_DATE, arrayOf(measureType.id.toString()))
             }
-            dateType.code == "1WE" -> {
+            "1WE" -> {
                 aux.add(Calendar.DATE,-7)
                 return MainActivity.dbHandler.getMeasurement(SelectTransactions.SELECT_MEASUREMENT_BY_TYPE_AND_DATES_ORDER_DATE, arrayOf(measureType.id.toString(), "${aux.time.time/1000}", "${today.time.time/1000}"))
             }
-            dateType.code == "3WE" -> {
+            "3WE" -> {
                 aux.add(Calendar.DATE,-21)
                 return MainActivity.dbHandler.getMeasurement(SelectTransactions.SELECT_MEASUREMENT_BY_TYPE_AND_DATES_ORDER_DATE, arrayOf(measureType.id.toString(), "${aux.time.time/1000}", "${today.time.time/1000}"))
             }
-            dateType.code == "1MO" -> {
+            "1MO" -> {
                 aux.add(Calendar.DATE,-30)
                 return MainActivity.dbHandler.getMeasurement(SelectTransactions.SELECT_MEASUREMENT_BY_TYPE_AND_DATES_ORDER_DATE, arrayOf(measureType.id.toString(), "${aux.time.time/1000}", "${today.time.time/1000}"))
             }
-            dateType.code == "2MO" -> {
+            "2MO" -> {
                 aux.add(Calendar.DATE,-60)
                 return MainActivity.dbHandler.getMeasurement(SelectTransactions.SELECT_MEASUREMENT_BY_TYPE_AND_DATES_ORDER_DATE, arrayOf(measureType.id.toString(), "${aux.time.time/1000}", "${today.time.time/1000}"))
             }
-            dateType.code == "3MO" -> {
+            "3MO" -> {
                 aux.add(Calendar.DATE,-90)
                 return MainActivity.dbHandler.getMeasurement(SelectTransactions.SELECT_MEASUREMENT_BY_TYPE_AND_DATES_ORDER_DATE, arrayOf(measureType.id.toString(), "${aux.time.time/1000}", "${today.time.time/1000}"))
             }
-            dateType.code == "6MO" -> {
+            "6MO" -> {
                 aux.add(Calendar.DATE,-180)
                 return MainActivity.dbHandler.getMeasurement(SelectTransactions.SELECT_MEASUREMENT_BY_TYPE_AND_DATES_ORDER_DATE, arrayOf(measureType.id.toString(), "${aux.time.time/1000}", "${today.time.time/1000}"))
             }
-            dateType.code == "1YR" -> {
+            "1YR" -> {
                 aux.add(Calendar.DATE,-365)
                 return MainActivity.dbHandler.getMeasurement(SelectTransactions.SELECT_MEASUREMENT_BY_TYPE_AND_DATES_ORDER_DATE, arrayOf(measureType.id.toString(), "${aux.time.time/1000}", "${today.time.time/1000}"))
             }
